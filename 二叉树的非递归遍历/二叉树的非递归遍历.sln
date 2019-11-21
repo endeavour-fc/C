@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "二叉树的非递归遍历", "二叉树的非递归遍历\二叉树的非递归遍历.vcxproj", "{8C343009-852C-44F6-9A9E-3A8034BAA95F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C343009-852C-44F6-9A9E-3A8034BAA95F}.Debug|x64.ActiveCfg = Debug|x64
+		{8C343009-852C-44F6-9A9E-3A8034BAA95F}.Debug|x64.Build.0 = Debug|x64
+		{8C343009-852C-44F6-9A9E-3A8034BAA95F}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C343009-852C-44F6-9A9E-3A8034BAA95F}.Debug|x86.Build.0 = Debug|Win32
+		{8C343009-852C-44F6-9A9E-3A8034BAA95F}.Release|x64.ActiveCfg = Release|x64
+		{8C343009-852C-44F6-9A9E-3A8034BAA95F}.Release|x64.Build.0 = Release|x64
+		{8C343009-852C-44F6-9A9E-3A8034BAA95F}.Release|x86.ActiveCfg = Release|Win32
+		{8C343009-852C-44F6-9A9E-3A8034BAA95F}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0451D543-D791-45DE-A5E2-E31A5C02B1C1}
+	EndGlobalSection
+EndGlobal

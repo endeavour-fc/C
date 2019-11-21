@@ -1,0 +1,5 @@
+﻿  work.cpp
+g:\code\c\work_8_27\work_8_27\work.cpp(16): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c\work_8_27\work_8_27\work.cpp(17): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c\work_8_27\work_8_27\work.cpp(21): warning C4018: “<”: 有符号/无符号不匹配
+  work_8_27.vcxproj -> G:\Code\C\work_8_27\Debug\work_8_27.exe
