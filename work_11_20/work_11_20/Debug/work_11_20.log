@@ -1,0 +1,7 @@
+﻿  work.cpp
+g:\code\c\work_11_20\work_11_20\work.cpp(8): error C2084: 函数“int add(int)”已有主体
+  g:\code\c\work_11_20\work_11_20\work.cpp(3): note: 参见“add”的前一个定义
+g:\code\c\work_11_20\work_11_20\work.cpp(13): error C2568: “<<”: 无法解析函数重载
+  g:\code\c\work_11_20\work_11_20\work.cpp(13): note: 可能是“int add(int)”
+g:\code\c\work_11_20\work_11_20\work.cpp(14): error C2568: “<<”: 无法解析函数重载
+  g:\code\c\work_11_20\work_11_20\work.cpp(14): note: 可能是“int add(int)”
