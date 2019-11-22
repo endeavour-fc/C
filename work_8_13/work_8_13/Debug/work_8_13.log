@@ -1,0 +1,3 @@
+﻿  work_8_13.cpp
+g:\code\c\work_8_13\work_8_13\work_8_13.cpp(77): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+  work_8_13.vcxproj -> G:\Code\C\work_8_13\Debug\work_8_13.exe
