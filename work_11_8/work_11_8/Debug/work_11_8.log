@@ -1,4 +1,0 @@
-﻿  work.cpp
-g:\code\c\work_11_8\work_11_8\work.cpp(58): warning C4477: “scanf”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“int”
-g:\code\c\work_11_8\work_11_8\work.cpp(65): warning C4715: “preorderTraversal”: 不是所有的控件路径都返回值
-  work_11_8.vcxproj -> G:\Code\C\work_11_8\Debug\work_11_8.exe
