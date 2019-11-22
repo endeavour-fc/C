@@ -1,0 +1,10 @@
+﻿  main.cpp
+  work.cpp
+g:\code\c\work_8_28\work_8_28\work.cpp(19): warning C4477: “scanf”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“short *”
+  g:\code\c\work_8_28\work_8_28\work.cpp(19): note: 请考虑在格式字符串中使用“%hd”
+g:\code\c\work_8_28\work_8_28\work.cpp(93): warning C4477: “scanf”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“short *”
+  g:\code\c\work_8_28\work_8_28\work.cpp(93): note: 请考虑在格式字符串中使用“%hd”
+g:\code\c\work_8_28\work_8_28\work.cpp(209): warning C4477: “scanf”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“short *”
+  g:\code\c\work_8_28\work_8_28\work.cpp(209): note: 请考虑在格式字符串中使用“%hd”
+  正在生成代码...
+  work_8_28.vcxproj -> G:\Code\C\work_8_28\Debug\work_8_28.exe
