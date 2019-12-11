@@ -1,2 +1,3 @@
 ﻿  static_practice.cpp
-  static的操作.vcxproj -> F:\vs2107程序\text6\析构函数\Debug\static的操作.exe
+  LINK : 没有找到 G:\Code\C++\析构函数\Debug\static的操作.exe 或上一个增量链接没有生成它；正在执行完全链接
+  static的操作.vcxproj -> G:\Code\C++\析构函数\Debug\static的操作.exe
