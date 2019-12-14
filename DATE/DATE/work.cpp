@@ -45,7 +45,20 @@ Date Date::operator+(int days)
 }
 Date Date::operator-(int days)
 {
-
+	Date temp = *this;
+	while (temp._day - days <= 0)
+	{
+		if (temp._month == 1)
+		{
+			temp._year--;
+			temp._month = 13;
+		}
+		temp._month--;
+		int mdays = GetMonth(temp._year, temp._month);
+		days -= temp._day;
+	}
+	temp._day = GetMonth(temp._year, temp._month) - days;
+	return temp;
 }
 int Date::operator-(const Date& d)
 {
@@ -53,7 +66,7 @@ int Date::operator-(const Date& d)
 }
 Date Date::operator++(int)
 {
-	return *this + 1;m[]
+	return *this + 1;
 }
 Date& Date::operator--()
 {
