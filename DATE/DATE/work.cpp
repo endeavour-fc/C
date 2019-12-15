@@ -68,9 +68,9 @@ Date Date::operator++(int)
 {
 	return *this + 1;
 }
-Date& Date::operator--()
+Date Date::operator--()
 {
-
+	return *this - 1;
 }
 Date Date::operator--(int)
 {

@@ -1,0 +1,7 @@
+﻿  work.cpp
+g:\code\c++\date\date\work.cpp(25): error C4716: “Date::operator+”: 必须返回一个值
+g:\code\c++\date\date\work.cpp(29): error C4716: “Date::operator-”: 必须返回一个值
+g:\code\c++\date\date\work.cpp(33): error C4716: “Date::operator-”: 必须返回一个值
+g:\code\c++\date\date\work.cpp(37): error C4716: “Date::operator++”: 必须返回一个值
+g:\code\c++\date\date\work.cpp(41): error C4716: “Date::operator--”: 必须返回一个值
+g:\code\c++\date\date\work.cpp(45): error C4716: “Date::operator--”: 必须返回一个值
