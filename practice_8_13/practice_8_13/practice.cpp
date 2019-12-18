@@ -544,12 +544,12 @@ class MyString
          char* str;
          int len;
  };
-int main()
-{
-     MyString s1("hhhhhh");
-     MyString s2("mmmmmm");
-     MyString s3;
-     s1 = (s1 + s2);
-     cout << s1.GetString() << endl;
-     return 0;
- }
+//int main()
+//{
+//     MyString s1("hhhhhh");
+//     MyString s2("mmmmmm");
+//     MyString s3;
+//     s1 = (s1 + s2);
+//     cout << s1.GetString() << endl;
+//     return 0;
+// }
