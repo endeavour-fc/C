@@ -1,0 +1,245 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : -42.873
+TNS   : -702.339
+
+Type  : Slow 1200mV 85C Model Setup 'rst'
+Slack : -39.659
+TNS   : -930.729
+
+Type  : Slow 1200mV 85C Model Setup 'date:U1|lcd_clk'
+Slack : -39.032
+TNS   : -218.489
+
+Type  : Slow 1200mV 85C Model Setup 'clk'
+Slack : -38.707
+TNS   : -2282.084
+
+Type  : Slow 1200mV 85C Model Setup 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : -29.628
+TNS   : -458.072
+
+Type  : Slow 1200mV 85C Model Setup 'date:U1|count_led[23]'
+Slack : -3.430
+TNS   : -30.505
+
+Type  : Slow 1200mV 85C Model Hold 'clk'
+Slack : -0.422
+TNS   : -0.677
+
+Type  : Slow 1200mV 85C Model Hold 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : 0.435
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : 0.436
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'date:U1|lcd_clk'
+Slack : 0.452
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'date:U1|count_led[23]'
+Slack : 0.465
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'rst'
+Slack : 0.473
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'clk'
+Slack : 0.055
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'clk'
+Slack : -0.118
+TNS   : -20.570
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -565.086
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'rst'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : -1.487
+TNS   : -154.648
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : -1.487
+TNS   : -75.837
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'date:U1|lcd_clk'
+Slack : -1.487
+TNS   : -71.376
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'date:U1|count_led[23]'
+Slack : -1.487
+TNS   : -19.331
+
+Type  : Slow 1200mV 0C Model Setup 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : -39.132
+TNS   : -642.445
+
+Type  : Slow 1200mV 0C Model Setup 'rst'
+Slack : -36.096
+TNS   : -846.661
+
+Type  : Slow 1200mV 0C Model Setup 'date:U1|lcd_clk'
+Slack : -35.503
+TNS   : -198.561
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : -35.229
+TNS   : -2087.262
+
+Type  : Slow 1200mV 0C Model Setup 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : -27.175
+TNS   : -418.777
+
+Type  : Slow 1200mV 0C Model Setup 'date:U1|count_led[23]'
+Slack : -3.232
+TNS   : -28.169
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : -0.388
+TNS   : -0.592
+
+Type  : Slow 1200mV 0C Model Hold 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : 0.385
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : 0.388
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'date:U1|lcd_clk'
+Slack : 0.401
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'date:U1|count_led[23]'
+Slack : 0.417
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'rst'
+Slack : 0.429
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'clk'
+Slack : 0.125
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'clk'
+Slack : -0.116
+TNS   : -20.129
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -565.086
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'rst'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : -1.487
+TNS   : -154.648
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : -1.487
+TNS   : -75.837
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'date:U1|lcd_clk'
+Slack : -1.487
+TNS   : -71.376
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'date:U1|count_led[23]'
+Slack : -1.487
+TNS   : -19.331
+
+Type  : Fast 1200mV 0C Model Setup 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : -17.874
+TNS   : -243.909
+
+Type  : Fast 1200mV 0C Model Setup 'rst'
+Slack : -16.765
+TNS   : -364.433
+
+Type  : Fast 1200mV 0C Model Setup 'date:U1|lcd_clk'
+Slack : -16.485
+TNS   : -78.643
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : -16.319
+TNS   : -791.766
+
+Type  : Fast 1200mV 0C Model Setup 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : -12.240
+TNS   : -170.661
+
+Type  : Fast 1200mV 0C Model Setup 'date:U1|count_led[23]'
+Slack : -0.935
+TNS   : -7.142
+
+Type  : Fast 1200mV 0C Model Hold 'clk'
+Slack : -0.348
+TNS   : -1.131
+
+Type  : Fast 1200mV 0C Model Hold 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : 0.176
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'rst'
+Slack : 0.177
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : 0.180
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'date:U1|lcd_clk'
+Slack : 0.186
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'date:U1|count_led[23]'
+Slack : 0.194
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'clk'
+Slack : -0.103
+TNS   : -18.443
+
+Type  : Fast 1200mV 0C Model Removal 'clk'
+Slack : -0.075
+TNS   : -13.330
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -405.760
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'rst'
+Slack : -3.000
+TNS   : -3.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'temp_disp:U2|ds18b20_dri:u1_ds18b20_dri|clk_1us'
+Slack : -1.000
+TNS   : -104.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'temp_disp:U2|seg_led:u_seg_led|dri_clk'
+Slack : -1.000
+TNS   : -51.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'date:U1|lcd_clk'
+Slack : -1.000
+TNS   : -48.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'date:U1|count_led[23]'
+Slack : -1.000
+TNS   : -13.000
+
+------------------------------------------------------------
