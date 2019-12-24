@@ -130,10 +130,10 @@ DataType Max(BSTree t)
 }
 
 
-int main()
-{
-	
-	
-	system("pause");
-	return 0;
-}
+//int main()
+//{
+//	
+//	
+//	system("pause");
+//	return 0;
+//}
