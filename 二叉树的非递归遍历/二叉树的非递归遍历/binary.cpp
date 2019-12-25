@@ -174,8 +174,8 @@ int main()
 	BinaryNode* root = createTree(arr);
 	Recursion(root);
 	printf("\n");
-	//Recur_Node(root);
-	//InOrderNode(root);
+	Recur_Node(root);
+	InOrderNode(root);
 	PostOrderNode(root);
 	Free_Binary(root);
 	
