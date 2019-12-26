@@ -83,10 +83,10 @@ ComplexListNode* CreatNode(ComplexListNode* pHead)
 	return Head;
 }
 
-void LinkNode(ComplexListNode* pHead, ComplexListNode* Head)
-{
-
-}
+//void LinkNode(ComplexListNode* pHead, ComplexListNode* Head)
+//{
+//
+//}
 
 int main()
 {
