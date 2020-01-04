@@ -3,23 +3,23 @@
 #include <string.h>
 #include <stdlib.h>
 #include<Windows.h>
-int main()
-{
-	int i, j, a = 0;
-	for (i = 0; i < 2; i++)
-	{
-		for (j = 0; j < 4; j++)
-		{
-			if (j % 2)
-				break;
-			a++;
-		}
-		a++;
-	}
-	printf("%d\n", a);
-	system("pause");
-	return 0;
-}
+//int main()
+//{
+//	int i, j, a = 0;
+//	for (i = 0; i < 2; i++)
+//	{
+//		for (j = 0; j < 4; j++)
+//		{
+//			if (j % 2)
+//				break;
+//			a++;
+//		}
+//		a++;
+//	}
+//	printf("%d\n", a);
+//	system("pause");
+//	return 0;
+//}
 
 struct ListNode {
 	int val;
