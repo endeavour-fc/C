@@ -376,18 +376,18 @@ int taddOK(int, int);
 
 
 /*Determine whether arguments can be added without overflow */
-int taddOK(int x, int y) {
-	int sum = x + y;
-
-
-	if (x < 0 && y < 0 && sum >= 0)
-		printf("负溢出");
-	else if (x >= 0 && y >= 0 && sum <= 0)
-		printf("正溢出");
-	else 
-		printf("没有溢出\n");
-	return sum;
-}
+//int taddOK(int x, int y) {
+//	int sum = x + y;
+//
+//
+//	if (x < 0 && y < 0 && sum >= 0)
+//		printf("负溢出");
+//	else if (x >= 0 && y >= 0 && sum <= 0)
+//		printf("正溢出");
+//	else 
+//		printf("没有溢出\n");
+//	return sum;
+//}
 
 
 
