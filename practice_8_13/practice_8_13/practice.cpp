@@ -452,40 +452,40 @@ int taddOK(int, int);
 
 
 
-//ListNode* partition(ListNode* pHead, int x)
-//{
-//	// write code here
-//	if (pHead == NULL)
-//		return NULL;
-//	ListNode* pPre = pHead;
-//	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
-//	ListNode* pCur = p;
-//	p->val = x;
-//	p->next = NULL;
-//	while (pPre != NULL)
-//	{
-//		ListNode*p2 = pPre;
-//		if (p->val>pPre->val)
-//		{
-//			ListNode* temp = p->next;
-//			p->next = p2;
-//			p2->next = temp;
-//		}
-//		else
-//		{
-//			p->next = pCur;
-//			pCur = pPre;
-//		}
-//		pPre = pPre->next;
-//	}
-//	if (pCur == p)
-//		return pCur->next;
-//	ListNode* temp = pCur;
-//	while (temp->next != p)
-//		temp = temp->next;
-//	temp->next = temp->next->next;
-//	return pCur;
-//}
+ListNode* partition(ListNode* pHead, int x)
+{
+	// write code here
+	if (pHead == NULL)
+		return NULL;
+	ListNode* pPre = pHead;
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	ListNode* pCur = p;
+	p->val = x;
+	p->next = NULL;
+	while (pPre != NULL)
+	{
+		ListNode*p2 = pPre;
+		if (p->val>pPre->val)
+		{
+			ListNode* temp = p->next;
+			p->next = p2;
+			p2->next = temp;
+		}
+		else
+		{
+			p->next = pCur;
+			pCur = pPre;
+		}
+		pPre = pPre->next;
+	}
+	if (pCur == p)
+		return pCur->next;
+	ListNode* temp = pCur;
+	while (temp->next != p)
+		temp = temp->next;
+	temp->next = temp->next->next;
+	return pCur;
+}
 //#include<iostream>
 //#include<string.h>
 //using namespace std;
