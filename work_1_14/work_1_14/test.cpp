@@ -71,6 +71,44 @@ void test(int* arr,int len)
 	Print_Stack(head2);
 
 }
+
+int GetRemove(ListNode* head)
+{
+	int result=Pop_Stack(head);
+	if (Empty_Stack(head))
+		return result;
+	int i = GetRemove(head);
+	ListNode* temp = GetNode(result);
+	Push_Stack(head, temp);
+	return i;
+}
+void Reverse(ListNode* head)
+{
+	if (Empty_Stack(head))
+		return;
+	int i = GetRemove(head);
+	Reverse(head);
+	ListNode* temp = GetNode(i);
+	Push_Stack(head, temp);
+}
+
+void test2(int* arr, int len)
+{
+	ListNode* head1 = NULL;
+//	ListNode* head2 = NULL;
+	head1 = (ListNode*)malloc(sizeof(ListNode));
+//	head2 = (ListNode*)malloc(sizeof(ListNode));
+	head1->next = NULL;
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = GetNode(arr[i]);
+		Push_Stack(head1, temp);
+	}
+	Print_Stack(head1);
+	Reverse(head1);
+	Print_Stack(head1);
+
+}
 void MySwap(int &a, int &b)
 {
 	int temp = a;
@@ -106,7 +144,7 @@ int main()
 {
 	int arr[] = { 1,2,3,4,5 };
 	int len = sizeof(arr) / sizeof(arr[0]);
-	test(arr,len);
+	test2(arr,len);
 
 	system("pause");
 	return 0;
