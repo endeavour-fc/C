@@ -39,6 +39,10 @@ int Pop_Stack(ListNode* head)
 	temp = NULL;
 	return a;
 }
+int Get_Peek(ListNode* head)
+{
+	return head->next->val;
+}
 void Print_Stack(ListNode* head)
 {
 	if (head == NULL)
@@ -91,6 +95,39 @@ void Reverse(ListNode* head)
 	ListNode* temp = GetNode(i);
 	Push_Stack(head, temp);
 }
+void test3(int* arr, int len)
+{
+	ListNode* stack = NULL;
+	ListNode* help = NULL;
+	stack = (ListNode*)malloc(sizeof(ListNode));
+	help = (ListNode*)malloc(sizeof(ListNode));
+	help->next = stack->next = NULL;
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = GetNode(arr[i]);
+		Push_Stack(stack, temp);
+	}
+	Print_Stack(stack);
+	while (!Empty_Stack(stack))
+	{
+		int val = Pop_Stack(stack);
+		ListNode* temp = GetNode(val);
+		while (!Empty_Stack(help) && Get_Peek(help) > val)
+		{
+			int a = Pop_Stack(help);
+			ListNode* tmp = GetNode(a);
+			Push_Stack(stack, tmp);
+		}
+		Push_Stack(help, temp);
+	}
+	while (!Empty_Stack(help))
+	{
+		int val = Pop_Stack(help);
+		ListNode* temp = GetNode(val);
+		Push_Stack(stack, temp);
+	}
+	Print_Stack(stack);
+}
 
 void test2(int* arr, int len)
 {
@@ -142,9 +179,9 @@ void test1()
 
 int main()
 {
-	int arr[] = { 1,2,3,4,5 };
+	int arr[] = { 1,3,2,5,4 };
 	int len = sizeof(arr) / sizeof(arr[0]);
-	test2(arr,len);
+	test3(arr,len);
 
 	system("pause");
 	return 0;
