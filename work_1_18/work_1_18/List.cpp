@@ -73,15 +73,69 @@ void test1(int* arr1, int len1,int* arr2,int len2)
 		}
 	}
 }
-
+void test3(ListNode* head, int k);
+void test2(int* arr,int len,int k)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	test3(head, k);
+	/*
+	Print_Node(head);
+	if (k > len)
+		return;
+	ListNode* pCur = head;
+	ListNode* pPre = head->next;
+	k = len - k;
+	while (k >0)
+	{
+		pCur = pCur->next;
+		pPre = pPre->next;
+		k--;
+	}
+	pCur->next = pPre->next;
+	free(pPre);
+	pPre = NULL;
+	Print_Node(head);*/
+}
+void test3(ListNode* head, int k)
+{
+	Print_Node(head);
+	ListNode* pCur = head;
+	ListNode* pPre = head;
+	while (k >0)
+	{
+		pPre = pPre->next;
+		if (pPre == NULL)
+		{
+			Print_Node(head);
+			return;
+		}
+		k--;
+	}
+	while (pPre->next != NULL)
+	{
+		pCur = pCur->next;
+		pPre = pPre->next;
+	}
+	ListNode* temp = pCur->next;
+	pCur->next = pCur->next->next;
+	free(temp);
+	temp = NULL;
+	Print_Node(head);
+}
 int main()
 {
 	int arr1[] = { 1,4,5,6 };
 	int len1 = sizeof(arr1) / sizeof(arr1[0]);
 
-	int arr2[] = {9};
-	int len2 = sizeof(arr2) / sizeof(arr2[0]);
-	test1(arr1, len1,arr2,len2);
+	//int arr2[] = {9};
+	//int len2 = sizeof(arr2) / sizeof(arr2[0]);
+	//test1(arr1, len1,arr2,len2);
+	test2(arr1, len1,5);
 	
 	system("pause");
 	return 0;
