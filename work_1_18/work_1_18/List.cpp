@@ -101,6 +101,61 @@ void test2(int* arr,int len,int k)
 	pPre = NULL;
 	Print_Node(head);*/
 }
+void test5(ListNode** head);
+
+void test4(int* arr, int len)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	if (head->next == NULL)
+		return;
+	Print_Node(head);
+	test5(&head);
+	//ListNode* pCur = head;
+	//ListNode* pPre = head->next->next;
+	//if (pPre == NULL)
+	//{
+	//	Print_Node(head);
+	//	return;
+	//}
+	//while (pPre != NULL)
+	//{
+	//	if (pPre->next == NULL)
+	//		break;
+	//	pPre = pPre->next->next;
+	//	pCur = pCur->next;
+
+	//}
+	//pCur->next = pCur->next->next;
+	Print_Node(head);
+
+}
+void test5(ListNode** head)
+{
+	if ((*head)->next == NULL || (*head)->next->next == NULL)
+	{
+		Print_Node(*head);
+		return;
+	}
+	ListNode* pPre = (*head)->next;
+	ListNode* pCur = (*head)->next;
+	ListNode* temp = NULL;
+	while (pPre != NULL)
+	{
+		pPre = pPre->next;
+		pCur->next = temp;
+		if (pPre == NULL)
+			break;
+		temp = pCur;
+		pCur = pPre;
+	}
+	(*head)->next = pCur;
+	Print_Node(*head);
+}
 void test3(ListNode* head, int k)
 {
 	Print_Node(head);
@@ -129,13 +184,13 @@ void test3(ListNode* head, int k)
 }
 int main()
 {
-	int arr1[] = { 1,4,5,6 };
+	int arr1[] = {1,2};
 	int len1 = sizeof(arr1) / sizeof(arr1[0]);
-
+	test4(arr1, len1);
 	//int arr2[] = {9};
 	//int len2 = sizeof(arr2) / sizeof(arr2[0]);
 	//test1(arr1, len1,arr2,len2);
-	test2(arr1, len1,5);
+	//test2(arr1, len1,5);
 	
 	system("pause");
 	return 0;
