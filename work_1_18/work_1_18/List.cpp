@@ -182,6 +182,35 @@ void test3(ListNode* head, int k)
 	temp = NULL;
 	Print_Node(head);
 }
+void test6(int* arr, int len, int k)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	Print_Node(head);
+	if (head->next == NULL)
+		return;
+	ListNode* pCur = head->next;
+	while (pCur->next != NULL)
+	{
+		ListNode* pPre = pCur;
+		int i = 0;
+		while (pPre->next != NULL)
+		{
+			if (i++ == 2)
+			{
+				ListNode* temp = pPre->next;
+				pPre->next = pPre->next->next;
+				free(temp);
+			}
+			pPre = pPre->next;
+		}
+	}
+	Print_Node(head);
+}
 int main()
 {
 	int arr1[] = {1,2};
