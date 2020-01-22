@@ -8,7 +8,35 @@ struct ListNode
 	int val;
 	ListNode* next;
 };
-
+ListNode* Init_Node()
+{
+	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+	temp->val = 0;
+	temp->next = NULL;
+	return temp;
+}
+ListNode* CreatNode(int a)
+{
+	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+	temp->val = a;
+	temp->next = NULL;
+	return temp;
+}
+void Insert_Head_List(ListNode* head, ListNode* inhl)
+{
+	if (head == NULL || inhl == NULL)
+		return;
+	inhl->next = head->next;
+	head->next = inhl;
+}
+void Print_Node(ListNode* head)
+{
+	if (head == NULL)
+		return;
+	for (ListNode* temp = head->next; temp != NULL; temp = temp->next)
+		printf("%d->", temp->val);
+	printf("\n");
+}
 ListNode* GetNode(int a)
 {
 	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
@@ -146,6 +174,73 @@ void test2(int* arr, int len)
 	Print_Stack(head1);
 
 }
+bool test5(int* arr, int len)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	ListNode* Stack = (ListNode*)malloc(sizeof(ListNode));
+	Stack->next = NULL;
+	ListNode* pPre = head->next;
+	ListNode* pCur = head->next;
+	while (pCur->next != NULL && pCur->next->next != NULL)
+	{
+		pPre = pPre->next;
+		pCur = pCur->next->next;
+	}
+	while (pPre != NULL)
+	{
+		ListNode* temp = GetNode(pPre->val);
+		Push_Stack(Stack, temp);
+		pPre = pPre->next;
+	}
+	while (!Empty_Stack(Stack))
+	{
+		if (Pop_Stack(Stack) != head->next->val)
+			return false;
+		head = head->next;
+	}
+	return true;
+
+}
+bool test6(int* arr, int len)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	ListNode* pPre = head->next;
+	ListNode* pCur = head->next;
+	while (pCur->next != NULL && pCur->next->next != NULL)
+	{
+		pPre = pPre->next;
+		pCur = pCur->next->next;
+	}
+	ListNode* temp = NULL;
+	pCur = pPre->next;
+	pPre->next = NULL;
+	while (pCur)
+	{
+		temp = pCur->next;
+		pCur->next = pPre;
+		pPre = pCur;
+		pCur = temp;
+	}
+	head = head->next;
+	while (head != NULL && pPre != NULL)
+	{
+		if (head->val != pPre->val)
+			return false;
+		head = head->next;
+		pPre = pPre->next;
+	}
+	return true;
+}
 void MySwap(int &a, int &b)
 {
 	int temp = a;
@@ -179,9 +274,9 @@ void test1()
 
 int main()
 {
-	int arr[] = { 1,3,2,5,4 };
+	int arr[] = { 1,2,3,1 };
 	int len = sizeof(arr) / sizeof(arr[0]);
-	test3(arr,len);
+	printf("%d\n", test6(arr, len));
 
 	system("pause");
 	return 0;
