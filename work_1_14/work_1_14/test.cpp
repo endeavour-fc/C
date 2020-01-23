@@ -241,6 +241,78 @@ bool test6(int* arr, int len)
 	}
 	return true;
 }
+void test7(int* arr, int len,int k)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	ListNode* First_head = NULL;
+	ListNode* First_tail = NULL;
+	ListNode* Last_head = NULL;
+	ListNode* Last_tail = NULL;
+	ListNode* Middle_head = NULL;
+	ListNode* Middle_tail = NULL;
+	ListNode* pPre = head->next;
+	while (pPre != NULL)
+	{
+		if (pPre->val < k)
+		{
+			if (First_head == NULL)
+			{
+				First_head = pPre;
+				First_tail = pPre;
+			}
+			else
+			{
+				First_tail->next = pPre;
+				First_tail = pPre;
+			}
+		}
+		else if (pPre->val > k)
+		{
+			if (Last_head == NULL)
+			{
+				Last_head = pPre;
+				Last_tail = pPre;
+			}
+			else
+			{
+				Last_tail->next = pPre;
+				Last_tail = pPre;
+			}
+		}
+		else
+		{
+			if (Middle_head == NULL)
+			{
+				Middle_head = pPre;
+				Middle_tail = pPre;
+			}
+			else
+			{
+				Middle_tail->next = pPre;
+				Middle_tail = pPre;
+			}
+		}
+		pPre = pPre->next;
+	}
+
+	if (First_tail != NULL)
+	{
+		First_tail->next = Middle_head;
+		Middle_tail = Middle_tail == NULL ? First_tail : Middle_tail;
+	}
+	if (Middle_tail)
+		Middle_tail->next = Last_head;
+	head->next = First_head != NULL ? First_head : Middle_head ? Middle_head : Last_head;
+	if (Last_head != NULL)
+		Last_tail->next = NULL;
+	Print_Node(head);
+	
+}
 void MySwap(int &a, int &b)
 {
 	int temp = a;
@@ -276,7 +348,8 @@ int main()
 {
 	int arr[] = { 1,2,3,1 };
 	int len = sizeof(arr) / sizeof(arr[0]);
-	printf("%d\n", test6(arr, len));
+	test7(arr, len, 5);
+	//printf("%d\n", test6(arr, len));
 
 	system("pause");
 	return 0;
