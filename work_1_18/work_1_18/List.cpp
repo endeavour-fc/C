@@ -103,18 +103,63 @@ void test2(int* arr,int len,int k)
 }
 void test5(ListNode** head);
 
-void test4(int* arr, int len)
+void test4(int* arr, int len, int* arr2, int len2)
 {
 	ListNode* head = Init_Node();
+	ListNode* head2 = Init_Node();
 	for (int i = 0; i < len; i++)
 	{
 		ListNode* temp = CreatNode(arr[i]);
 		Insert_Head_List(head, temp);
 	}
+	for (int i = 0; i < len2; i++)
+	{
+		ListNode* temp = CreatNode(arr2[i]);
+		Insert_Head_List(head2, temp);
+	}
 	if (head->next == NULL)
 		return;
 	Print_Node(head);
+	Print_Node(head2);
 	test5(&head);
+	test5(&head2);
+	ListNode* pPre = head->next;
+	ListNode* pCur = head2->next;
+	int k = 0;
+	while (pPre != NULL && pCur != NULL)
+	{
+		int temp = pPre->val + pCur->val;
+		
+		if (temp+k >= 10)
+			k = 1;
+		pCur->val=pPre->val = (temp + k) % 10;
+		if (pPre->next == NULL || pCur->next == NULL)
+		{
+			if (k)
+			{
+				break;
+			}
+		}
+		k = 0;
+		pPre = pPre->next;
+		pCur = pCur->next;
+	}
+	test5(&head);
+	test5(&head2);
+	if (k&&pPre->next==NULL&&pCur->next==NULL)
+	{
+		ListNode* temp = CreatNode(1);
+		Insert_Head_List(head, temp);
+	}
+	else if (k&&pPre->next == NULL)
+	{
+		pCur->next->val++;
+	}
+	else if (k&&pCur->next == NULL)
+	{
+		pPre->next->val++;
+	}
+
 	//ListNode* pCur = head;
 	//ListNode* pPre = head->next->next;
 	//if (pPre == NULL)
@@ -132,6 +177,7 @@ void test4(int* arr, int len)
 	//}
 	//pCur->next = pCur->next->next;
 	Print_Node(head);
+	Print_Node(head2);
 
 }
 void test5(ListNode** head)
@@ -156,6 +202,7 @@ void test5(ListNode** head)
 	(*head)->next = pCur;
 	Print_Node(*head);
 }
+
 void test3(ListNode* head, int k)
 {
 	Print_Node(head);
@@ -213,9 +260,12 @@ void test6(int* arr, int len, int k)
 }
 int main()
 {
-	int arr1[] = {1,2};
+	int arr1[] = {9,2,1};
 	int len1 = sizeof(arr1) / sizeof(arr1[0]);
-	test4(arr1, len1);
+
+	int arr2[] = { 9,2,3 };
+	int len2 = sizeof(arr2) / sizeof(arr2[0]);
+	test4(arr1, len1,arr2,len2);
 	//int arr2[] = {9};
 	//int len2 = sizeof(arr2) / sizeof(arr2[0]);
 	//test1(arr1, len1,arr2,len2);
