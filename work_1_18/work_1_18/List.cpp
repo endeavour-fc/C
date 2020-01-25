@@ -258,18 +258,70 @@ void test6(int* arr, int len, int k)
 	}
 	Print_Node(head);
 }
+void resign(ListNode* left, ListNode* start, ListNode* end, ListNode* right);
+
+void test7(int* arr, int len, int k)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	Print_Node(head);
+	if (k < 2)
+		return;
+	ListNode* pPre = head->next;
+	ListNode* pCur = NULL;
+	ListNode* temp = NULL;
+	ListNode* next = NULL;
+	int count = 1;
+	while (pPre != NULL)
+	{
+		next = pPre->next;
+		if (count == k)
+		{
+			pCur = temp == NULL ? head->next : temp->next;
+			head->next = temp == NULL ? pPre : head->next;
+			resign(temp, pCur, pPre, next);
+			temp = pCur;
+			count = 0;
+		}
+		count++;
+		pPre = next;
+	}
+	Print_Node(head);
+}
+void resign(ListNode* left, ListNode* start, ListNode* end, ListNode* right)
+{
+	ListNode* pPre = start;
+	ListNode* pCur = start->next;
+	ListNode* temp = NULL;
+	while (pPre != end)
+	{
+		temp = pCur->next;
+		pCur->next = pPre;
+		pPre = pCur;
+		pCur = temp;
+	}
+	if (left != NULL)
+	{
+		left->next = end;
+	}
+	start->next = right;
+}
 int main()
 {
-	int arr1[] = {9,2,1};
+	int arr1[] = {1,2,3,4,5,6,7,8,9};
 	int len1 = sizeof(arr1) / sizeof(arr1[0]);
 
 	int arr2[] = { 9,2,3 };
 	int len2 = sizeof(arr2) / sizeof(arr2[0]);
-	test4(arr1, len1,arr2,len2);
+	//test4(arr1, len1,arr2,len2);
 	//int arr2[] = {9};
 	//int len2 = sizeof(arr2) / sizeof(arr2[0]);
 	//test1(arr1, len1,arr2,len2);
-	//test2(arr1, len1,5);
+	test7(arr1, len1,3);
 	
 	system("pause");
 	return 0;
