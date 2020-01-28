@@ -362,10 +362,91 @@ void test8(int* arr, int len, int k)
 	}
 	Print_Node(head);
 }
+void test9(int* arr, int len, int k)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	Print_Node(head);
+	ListNode* pPre = head;
+	ListNode* pCur = head->next;
+	while (pCur != NULL)
+	{
+		if (pCur->val == k)
+		{
+			pPre->next = pCur->next;
+			pCur = pPre->next;
+		}
+		else
+		{
+			pPre = pPre->next;
+			pCur = pCur->next;
+		}
+	}
+	Print_Node(head);
+
+}
+ListNode* GetMinNode(ListNode* head);
+void test10(int* arr, int len)
+{
+	ListNode* head = Init_Node();
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	Print_Node(head);
+	ListNode* tail = NULL;
+	ListNode* smallPre = NULL;
+	ListNode* small = NULL;
+	ListNode* pPre = head->next;
+	while (pPre != NULL)
+	{
+		small = pPre;
+		smallPre = GetMinNode(pPre);
+		if (smallPre != NULL)
+		{
+			small = smallPre->next;
+			smallPre->next = small->next;
+		}
+		pPre = pPre == small ? pPre->next : pPre;
+		if (tail == NULL)
+		{
+			head->next = small;
+		}
+		else
+		{
+			tail->next = small;
+		}
+		tail = small;
+	}
+	Print_Node(head);
+}
+ListNode* GetMinNode(ListNode* head)
+{
+	ListNode* smallPre = NULL;
+	ListNode* small = head;
+	ListNode* pPre = head;
+	ListNode* pCur = head->next;
+	while (pCur != NULL)
+	{
+		if (pCur->val < small->val)
+		{
+			smallPre = pPre;
+			small = pCur;
+		}
+		pPre = pCur;
+		pCur = pCur->next;
+	}
+	return smallPre;
+}
 
 int main()
 {
-	int arr1[] = {1,2,2,2,2,2,2,2,3,3,4,4,5,6,7,8,9};
+	int arr1[] = {1,2,3,4,5,6,7,8,9};
 	int len1 = sizeof(arr1) / sizeof(arr1[0]);
 
 	int arr2[] = { 9,2,3 };
@@ -374,7 +455,7 @@ int main()
 	//int arr2[] = {9};
 	//int len2 = sizeof(arr2) / sizeof(arr2[0]);
 	//test1(arr1, len1,arr2,len2);
-	test8(arr1, len1,3);
+	test10(arr1, len1);
 	
 	system("pause");
 	return 0;
