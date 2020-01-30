@@ -444,6 +444,14 @@ ListNode* GetMinNode(ListNode* head)
 	return smallPre;
 }
 
+void RemoveNodeWire(ListNode* Node)
+{
+	if (Node == NULL&&Node->next==NULL)
+		return;
+	Node->val = Node->next->val;
+	Node->next = Node->next->next;
+}
+
 int main()
 {
 	int arr1[] = {1,2,3,4,5,6,7,8,9};
