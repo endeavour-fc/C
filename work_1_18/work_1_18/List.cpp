@@ -451,19 +451,64 @@ void RemoveNodeWire(ListNode* Node)
 	Node->val = Node->next->val;
 	Node->next = Node->next->next;
 }
-
+void test11(int* arr1, int len1, int* arr2, int len2)
+{
+	ListNode* head1 = Init_Node();
+	ListNode* head2 = Init_Node();
+	for (int i = 0; i < len1; i++)
+	{
+		ListNode* temp = CreatNode(arr1[i]);
+		Insert_Head_List(head1, temp);
+	}
+	Print_Node(head1);
+	for (int i = 0; i < len2; i++)
+	{
+		ListNode* temp = CreatNode(arr2[i]);
+		Insert_Head_List(head2, temp);
+	}
+	Print_Node(head2);
+	ListNode* head = Init_Node();
+	ListNode* pPre = head1->next;
+	ListNode* pCur = head2->next;
+	ListNode* next = head;
+	while (pPre != NULL && pCur != NULL)
+	{
+		if (pPre->val < pCur->val)
+		{
+			next->next = pCur;
+			pCur = pCur->next;
+		}
+		else
+		{
+			next->next = pPre;
+			pPre = pPre->next;
+		}
+		next = next->next;
+	}
+	while (pPre)
+	{
+		next->next = pPre;
+		pPre = pPre->next;
+	}
+	while (pCur)
+	{
+		next->next = pCur;
+		pCur = pCur->next;
+	}
+	Print_Node(head);
+}
 int main()
 {
 	int arr1[] = {1,2,3,4,5,6,7,8,9};
 	int len1 = sizeof(arr1) / sizeof(arr1[0]);
 
-	int arr2[] = { 9,2,3 };
+	int arr2[] = { 1,2,3 };
 	int len2 = sizeof(arr2) / sizeof(arr2[0]);
-	//test4(arr1, len1,arr2,len2);
+	test11(arr1, len1,arr2,len2);
 	//int arr2[] = {9};
 	//int len2 = sizeof(arr2) / sizeof(arr2[0]);
 	//test1(arr1, len1,arr2,len2);
-	test10(arr1, len1);
+	//test10(arr1, len1);
 	
 	system("pause");
 	return 0;
