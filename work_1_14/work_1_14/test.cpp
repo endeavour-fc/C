@@ -8,6 +8,12 @@ struct ListNode
 	int val;
 	ListNode* next;
 };
+struct BinTree
+{
+	BinTree* rchild;
+	BinTree* lchild;
+	char ch;
+};
 ListNode* Init_Node()
 {
 	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
@@ -342,14 +348,42 @@ void test1()
 	Swap(d, c);
 	cout << "d:" << d << "      c:" << c << endl;
 }
+BinTree* CreatTree(char* str)
+{
+	static int i = 0;
+	if (*(str + i) == '#' || *(str + i) == '\0')
+	{
+		if (*(str + i) == '\0')
+			return NULL;
+		i++;
+		return NULL;
+	}
+	BinTree* root = (BinTree*)malloc(sizeof(BinTree));
+	root->ch = *(str + i);
+	i++;
+	root->lchild = CreatTree(str);
+	root->rchild = CreatTree(str);
+	return root;
 
+}
+void Print_Tree(BinTree* root)
+{
+	if (root == NULL)
+		return;
+	printf("%c", root->ch);
 
+	Print_Tree(root->lchild);
+	Print_Tree(root->rchild);
+}
 int main()
 {
-	int arr[] = { 1,2,3,1 };
-	int len = sizeof(arr) / sizeof(arr[0]);
-	test7(arr, len, 5);
+	//int arr[] = { 1,2,3,1 };
+	//int len = sizeof(arr) / sizeof(arr[0]);
+	//test7(arr, len, 5);
 	//printf("%d\n", test6(arr, len));
+	char str[] = "ab##c##";
+	BinTree* root = CreatTree(str);
+	Print_Tree(root);
 
 	system("pause");
 	return 0;
