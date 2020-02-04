@@ -14,6 +14,11 @@ struct BinTree
 	BinTree* lchild;
 	char ch;
 };
+struct TreeNode
+{
+	BinTree* tree;
+	TreeNode* next;
+};
 ListNode* Init_Node()
 {
 	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
@@ -21,10 +26,24 @@ ListNode* Init_Node()
 	temp->next = NULL;
 	return temp;
 }
+TreeNode* InitTreeNode()
+{
+	TreeNode* temp = (TreeNode*)malloc(sizeof(TreeNode));
+	temp->next = NULL;
+	temp->tree = NULL;
+	return temp;
+}
 ListNode* CreatNode(int a)
 {
 	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
 	temp->val = a;
+	temp->next = NULL;
+	return temp;
+}
+TreeNode* CreatTreeeNode(BinTree* t)
+{
+	TreeNode* temp = (TreeNode*)malloc(sizeof(TreeNode));
+	temp->tree = t;
 	temp->next = NULL;
 	return temp;
 }
@@ -35,6 +54,7 @@ void Insert_Head_List(ListNode* head, ListNode* inhl)
 	inhl->next = head->next;
 	head->next = inhl;
 }
+
 void Print_Node(ListNode* head)
 {
 	if (head == NULL)
@@ -60,7 +80,19 @@ void Push_Stack(ListNode* head, ListNode* temp)
 		head->next = temp;
 	}
 }
+void PushStack(TreeNode* head, TreeNode* temp)
+{
+	if (head != NULL && temp != NULL)
+	{
+		temp->next = head->next;
+		head->next = temp;
+	}
+}
 bool Empty_Stack(ListNode* head)
+{
+	return head->next == NULL ? true : false;
+}
+bool EmptyStack(TreeNode* head)
 {
 	return head->next == NULL ? true : false;
 }
@@ -73,9 +105,22 @@ int Pop_Stack(ListNode* head)
 	temp = NULL;
 	return a;
 }
+BinTree* PopStack(TreeNode* head)
+{
+	TreeNode* temp = head->next;
+	head->next = head->next->next;
+	BinTree* a = temp->tree;
+	free(temp);
+	temp = NULL;
+	return a;
+}
 int Get_Peek(ListNode* head)
 {
 	return head->next->val;
+}
+BinTree* GetPeek(TreeNode* head)
+{
+	return head->next->tree;
 }
 void Print_Stack(ListNode* head)
 {
@@ -375,15 +420,85 @@ void Print_Tree(BinTree* root)
 	Print_Tree(root->lchild);
 	Print_Tree(root->rchild);
 }
+
+void FirstPrint(BinTree* root)
+{
+	TreeNode* head = InitTreeNode();
+	TreeNode* temp = CreatTreeeNode(root);
+	PushStack(head, temp);
+	while (!EmptyStack(head))
+	{
+		BinTree* temp = PopStack(head);
+		printf("%c ", temp->ch);
+		if (temp->rchild != NULL)
+		{
+			TreeNode* tmp = CreatTreeeNode(temp->rchild);
+			PushStack(head, tmp);
+		}
+		if (temp->lchild)
+		{
+			TreeNode* tmp = CreatTreeeNode(temp->lchild);
+			PushStack(head, tmp);
+		}
+	}
+}
+void MiddlePrint(BinTree* root)
+{
+	TreeNode* head = InitTreeNode();
+	while (!EmptyStack(head) || root != NULL)
+	{
+		while (root)
+		{
+			TreeNode* temp = CreatTreeeNode(root);
+			PushStack(head, temp);
+			root = root->lchild;
+		}
+		if (!EmptyStack(head))
+		{
+			root = PopStack(head);
+			printf("%c ", root->ch);
+			root = root->rchild;
+		}
+	}
+}
+void LastPrint(BinTree* root)
+{
+	TreeNode* head = InitTreeNode();
+	BinTree* pPre = NULL;
+	BinTree* pCur = NULL;
+	do
+	{
+		while (root)
+		{
+			TreeNode* temp = CreatTreeeNode(root);
+			PushStack(head, temp);
+			root = root->lchild;
+		}
+		pCur = GetPeek(head);
+		if (pCur->rchild == NULL || pPre == pCur->rchild)
+		{
+			PopStack(head);
+			printf("%c ", pCur->ch);
+			pPre = pCur;
+		}
+		else
+		{
+			root = pCur->rchild;
+		}
+	} while (!EmptyStack(head));
+}
 int main()
 {
 	//int arr[] = { 1,2,3,1 };
 	//int len = sizeof(arr) / sizeof(arr[0]);
 	//test7(arr, len, 5);
 	//printf("%d\n", test6(arr, len));
-	char str[] = "ab##c##";
+	char str[] = "abc###d##";
 	BinTree* root = CreatTree(str);
-	Print_Tree(root);
+	//Print_Tree(root);
+	//FirstPrint(root);
+	//MiddlePrint(root);
+	LastPrint(root);
 
 	system("pause");
 	return 0;
