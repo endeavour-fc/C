@@ -88,6 +88,15 @@ void PushStack(TreeNode* head, TreeNode* temp)
 		head->next = temp;
 	}
 }
+void PushQueue(TreeNode* head, TreeNode* temp)
+{
+	while (head->next != NULL)
+	{
+		head = head->next;
+	}
+	head->next = temp;
+	temp->next = NULL;
+}
 bool Empty_Stack(ListNode* head)
 {
 	return head->next == NULL ? true : false;
@@ -442,6 +451,28 @@ void FirstPrint(BinTree* root)
 		}
 	}
 }
+void LevePrint(BinTree* root)
+{
+	TreeNode* head = InitTreeNode();
+	TreeNode* temp = CreatTreeeNode(root);
+	PushQueue(head, temp);
+	while (!EmptyStack(head))
+	{
+		BinTree* temp = PopStack(head);
+		printf("%c ", temp->ch);
+		if (temp->lchild)
+		{
+			TreeNode* tmp = CreatTreeeNode(temp->lchild);
+			PushQueue(head, tmp);
+		}
+		if (temp->rchild != NULL)
+		{
+			TreeNode* tmp = CreatTreeeNode(temp->rchild);
+			PushQueue(head, tmp);
+		}
+	
+	}
+}
 void MiddlePrint(BinTree* root)
 {
 	TreeNode* head = InitTreeNode();
@@ -481,7 +512,7 @@ void LastPrint(BinTree* root)
 			printf("%c ", pCur->ch);
 			pPre = pCur;
 		}
-		else
+ 
 		{
 			root = pCur->rchild;
 		}
@@ -498,7 +529,8 @@ int main()
 	//Print_Tree(root);
 	//FirstPrint(root);
 	//MiddlePrint(root);
-	LastPrint(root);
+	//LastPrint(root);
+	LevePrint(root);
 
 	system("pause");
 	return 0;
