@@ -497,14 +497,71 @@ void test11(int* arr1, int len1, int* arr2, int len2)
 	}
 	Print_Node(head);
 }
+void test12(int* arr, int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+	int begin, end = 0;
+	for (int i = 0; i < len-1; i++)
+	{
+		if (arr[i] > arr[i + 1])
+		{
+			begin = i;
+			break;
+		}
+	}
+	for (int i = begin; i < len - 1; i++)
+	{
+		if (arr[i] < arr[i + 1])
+		{
+			end = i;
+			break;
+		}
+	}
+	while (begin < end)
+	{
+		int temp = arr[begin];
+		arr[begin] = arr[end];
+		arr[end] = temp;
+		end--;
+		begin++;
+	}
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+}
+void rotate(int* nums, int numsSize, int k) {
+	if (nums == NULL)
+		return;
+	for (int i = 0; i<k; i++)
+	{
+		int temp = nums[numsSize - 1];
+		for (int j = numsSize - 1; j>0; j--)
+		{
+			nums[j] = nums[j - 1];
+		}
+		nums[0] = temp;
+	}
+
+}
 int main()
 {
-	int arr1[] = {1,2,3,4,5,6,7,8,9};
+	int arr1[] = {1,2,5,4,3,6,7,8,9};
 	int len1 = sizeof(arr1) / sizeof(arr1[0]);
 
-	int arr2[] = { 1,2,3 };
+	int arr2[] = { 1,2,3,4,5,6,7 };
 	int len2 = sizeof(arr2) / sizeof(arr2[0]);
-	test11(arr1, len1,arr2,len2);
+	rotate(arr2, len2, 3);
+	for (int i = 0; i < len2; i++)
+	{
+		printf("%d ", arr2[i]);
+	}
+	//test12(arr1, len1);
+	//test11(arr1, len1,arr2,len2);
 	//int arr2[] = {9};
 	//int len2 = sizeof(arr2) / sizeof(arr2[0]);
 	//test1(arr1, len1,arr2,len2);
