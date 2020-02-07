@@ -548,18 +548,74 @@ void rotate(int* nums, int numsSize, int k) {
 	}
 
 }
+int searchInsert(int* nums, int numsSize, int target)
+{
+
+	if (nums[numsSize - 1]<target)
+		return numsSize;
+	if (nums[0]>target)
+		return 0;
+	int right = numsSize - 1;
+	int left = 0;
+	int mid = 0;
+	while (right >= left)
+	{
+		mid = (right + left) / 2;
+		if (nums[mid] == target)
+			return mid;
+		else if (nums[mid]>target)
+		{
+			right = mid - 1;
+		}
+		else
+		{
+			left = mid + 1;
+		}
+	}
+	for (int i = 0; i<numsSize; i++)
+		if (nums[i]>target)
+			return i - 1;
+}
+int lengthOfLastWord(char * s) {
+	if (*s == '\0')
+		return 0;
+	char* pPre = s;
+	int j = 0;
+	while (*pPre != '\0')
+	{
+		j++;
+		pPre++;
+	}
+	pPre--;
+	while (*pPre == ' ')
+	{
+		if (j <= 1)
+			return 0;
+		pPre--;
+		j--;
+	}
+	int i = 0;
+	while (*pPre != ' ')
+	{
+		pPre--;
+		i++;
+	}
+	return i;
+}
 int main()
 {
-	int arr1[] = {1,2,5,4,3,6,7,8,9};
-	int len1 = sizeof(arr1) / sizeof(arr1[0]);
+	char str[] = " ";
+	printf("%d", lengthOfLastWord(str));
+	//int arr1[] = {1,2,5,4,3,6,7,8,9};
+	//int len1 = sizeof(arr1) / sizeof(arr1[0]);
 
-	int arr2[] = { 1,2,3,4,5,6,7 };
-	int len2 = sizeof(arr2) / sizeof(arr2[0]);
-	rotate(arr2, len2, 3);
-	for (int i = 0; i < len2; i++)
-	{
-		printf("%d ", arr2[i]);
-	}
+	//int arr2[] = { 1,2,3,4,5,6,7 };
+	//int len2 = sizeof(arr2) / sizeof(arr2[0]);
+	//rotate(arr2, len2, 3);
+	//for (int i = 0; i < len2; i++)
+	//{
+	//	printf("%d ", arr2[i]);
+	//}
 	//test12(arr1, len1);
 	//test11(arr1, len1,arr2,len2);
 	//int arr2[] = {9};
