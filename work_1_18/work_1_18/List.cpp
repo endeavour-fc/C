@@ -602,6 +602,42 @@ int lengthOfLastWord(char * s) {
 	}
 	return i;
 }
+void sort(int* arr, int len)
+{
+	int* temp = (int*)malloc(sizeof(int)*len);
+	int i = 0;
+	int j = 0;
+	int k = 0;
+	for (i = 0; i < len; i++)
+	{
+		if (arr[i] >= 0)
+			break;
+	}
+	if (i != 0)
+	{
+		j = i - 1;
+		while (i < len || j >= 0)
+		{
+			if (arr[i] > -arr[j])
+			{
+				temp[k++] = arr[j--];
+			}
+			else
+			{
+				temp[k++] = arr[i++];
+			}
+		}
+		for (i = 0; i < len; i++)
+		{
+			arr[i] = temp[i];
+		}
+	}
+	for (i = 0; i < len; i++)
+	{
+		arr[i] = arr[i] * arr[i];
+	}
+	
+}
 int main()
 {
 	char str[] = " ";
