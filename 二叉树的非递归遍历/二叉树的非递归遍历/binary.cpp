@@ -90,7 +90,7 @@ void InOrderNode(BinaryNode* root)
 {
 	if (root == NULL)
 		return;
-	BinaryNode* p = NULL;
+//	BinaryNode* p = NULL;
 	ListNode* temp = Init_List();
 	//Push_Stack(temp, root);
 	while (root != NULL || temp->next != NULL)
@@ -169,13 +169,15 @@ void Free_Binary(BinaryNode* root)
 }
 int main()
 {
-	char arr[] = "abc##de##f##g#h##";
+	char arr[] = "ABC##D##E#F##";
 	BinaryNode* p = NULL;
 	BinaryNode* root = createTree(arr);
-	Recursion(root);
-	printf("\n");
+	//Recursion(root);
+	printf("前序遍历：");
 	Recur_Node(root);
+	printf("\n中序遍历：");
 	InOrderNode(root);
+	printf("\n后续遍历：");
 	PostOrderNode(root);
 	Free_Binary(root);
 	
