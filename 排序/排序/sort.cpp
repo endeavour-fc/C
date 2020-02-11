@@ -32,6 +32,7 @@ void SelectSort(int* arr, int len)
 		}
 	}
 }
+void Print(int* arr, int len);
 void InsertSort(int* arr, int len)
 {
 	int j = 0;
@@ -48,7 +49,7 @@ void ShellSort(int* arr, int len)
 {
 	int j = 0;
 	int temp = 0;
-	for (int statement = len / 2; statement > 0; statement /= 2)
+	for (int statement = len / 2; statement > 0; statement = statement/2)
 	{
 		for (int i = statement; i < len; i++)
 		{
@@ -56,8 +57,11 @@ void ShellSort(int* arr, int len)
 			for (j = i - statement; j >= 0 && temp < arr[j]; j -= statement)
 				arr[j + statement] = arr[j];
 			arr[j + statement] = temp;
+		//	Print(arr, len);
 		}
 	}
+	//Print(arr, len);
+
 }
 void QuickSort(int* arr, int start, int end)
 {
@@ -139,6 +143,7 @@ void Print(int* arr, int len)
 {
 	for (int i = 0; i < len; i++)
 		printf("%d", arr[i]);
+	printf("\n");
 }
 void HeapAdjust(int* arr, int index, int len)
 {
@@ -178,19 +183,19 @@ void HeapSort(int* arr, int len)
 
 int main()
 {
-	int arr[] = { 2,1,4,3,6,5,8,7,0,9 };
+	int arr[] = { 2,1,4,3,5,6 };
 	int len = sizeof(arr) / sizeof(arr[0]);
 	/*Print(arr, len);
-	printf("\n");
-	InsertSort(arr, len);*/
-	/*Print(arr, len);
-	printf("\n");
-	ShellSort(arr, len);*/
+	printf("\n");*/
+	//InsertSort(arr, len);
 	Print(arr, len);
 	printf("\n");
+	ShellSort(arr, len);
+	//Print(arr, len);
+	//printf("\n");
 	//QuickSort(arr, 0, len - 1);
 	//BubbingSort(arr, len);
-	SelectSort(arr, len);
+	//SelectSort(arr, len);
 	//Print(arr, len);
 	//printf("\n");
 	/*int* temp = (int*)malloc(sizeof(int)*len);
