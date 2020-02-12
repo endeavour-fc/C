@@ -86,6 +86,7 @@ void QuickSort(int* arr, int start, int end)
 			}
 		}
 		arr[i] = temp;
+		Print(arr, 8);
 		QuickSort(arr, start, i - 1);
 		QuickSort(arr, i + 1, end);
 	}
@@ -183,17 +184,17 @@ void HeapSort(int* arr, int len)
 
 int main()
 {
-	int arr[] = { 2,1,4,3,5,6 };
+	int arr[] = { 4,3,6,5,8,7,2,1 };
 	int len = sizeof(arr) / sizeof(arr[0]);
 	/*Print(arr, len);
 	printf("\n");*/
 	//InsertSort(arr, len);
-	Print(arr, len);
-	printf("\n");
-	ShellSort(arr, len);
 	//Print(arr, len);
 	//printf("\n");
-	//QuickSort(arr, 0, len - 1);
+	//ShellSort(arr, len);
+	//Print(arr, len);
+	//printf("\n");
+	QuickSort(arr, 0, len - 1);
 	//BubbingSort(arr, len);
 	//SelectSort(arr, len);
 	//Print(arr, len);
@@ -203,8 +204,8 @@ int main()
 	Print(arr, len);
 	printf("\n");*/
 	//HeapSort(arr, len);
-	Print(arr, len);
-	printf("\n");
+	//Print(arr, len);
+	//printf("\n");
 
 	system("pause");
 	return 0;
