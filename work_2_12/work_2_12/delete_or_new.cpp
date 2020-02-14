@@ -4,6 +4,31 @@
 #include <stdlib.h>
 #include<iostream>
 #include<list>
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+};
+int getnum(struct TreeNode* root)
+{
+	if (root == NULL)
+		return 0;
+	int l = getnum(root->left);
+	int r = getnum(root->right);
+	return r>l ? r + 1 : l + 1;
+}
+bool isBalanced(struct TreeNode* root) {
+	if (root == NULL)
+		return true;
+	int ld = getnum(root->left);
+	int rd = getnum(root->right);
+	if (ld - rd>1 || rd - ld>1)
+		return false;
+	bool flag1 = isBalanced(root->left);
+	bool flag2 = isBalanced(root->right);
+	return flag1 && flag2;
+
+}
 using namespace std;
 class test
 {
@@ -29,6 +54,12 @@ private:
 	int a;
 	int b;
 };
+template<class T1, class T2>
+
+
+template<typename T1, typename T2>
+
+template<class T1, typename T2>
 int main()
 {
 	/*test* t1 = new test(1,2);
