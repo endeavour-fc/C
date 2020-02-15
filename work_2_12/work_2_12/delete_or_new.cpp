@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include<iostream>
 #include<list>
+#include<string>
 struct TreeNode {
 	int val;
 	struct TreeNode *left;
@@ -54,43 +55,109 @@ private:
 	int a;
 	int b;
 };
-template<class T1, class T2>
+class String
+{
+public:
+	String(const char* temp)
+	{
+		this->len = strlen(temp);
+		str = new char[strlen(temp)*2 + 1];
+		this->capacity = this->len * 2 + 1;
+		strcpy(str, temp);
+	}
+	String()
+	{
+		this->len = 0;
+		str = new char[1];
+		*(this->str) = '\0';
+		this->capacity = 1;
+	}
+	String(String& another)
+	{
+		this->str = new char[another.len * 2 + 1];
+		this->len = another.len;
+		this->capacity = this->len * 2 + 1;
+		strcpy(str, another.str);
+	}
+	~String()
+	{}
+	String&operator+=(String& another)
+	{
+		if(this->len + another.len > this->capacity)
+		{
+			this->str = (char*)realloc(this->str, this->len + another.len + 10);
+			this->capacity = this->len + 1 + 10;
+		}
+		this->len = another.len+this->len;
+		strcat(this->str, another.str);
+		return *this;
+	}
+	String&operator+=(const char* temp)
+	{
+		if(this->len + strlen(temp) > this->capacity)
+		{
+			this->str = (char*)realloc(this->str, this->len + strlen(temp) + 10);
+			this->capacity = this->len + 1 + 10;
+		}
+		this->len += strlen(temp);
+		strcat(this->str, temp);
+		return *this;
+	}
+	String&operator+=(const char temp)
+	{
+		if(this->len + 1 > this->capacity)
+		{
+			this->str = (char*)realloc(this->str, this->len + 1 + 10);
+			this->capacity = this->len + 1 + 10;
+		}
+		this->str[len] = temp;
+		this->len += 1;
+		return *this;
+	}
+	friend istream& operator>>(istream& is, String& s1);
+	friend ostream& operator<<(ostream& os, String& s1);
+private:
+	char*str;
+	size_t len;
+	size_t capacity;
+};
+istream& operator>>(istream& is, String& s1)
+{
+	is >> s1.str;
+	int i = 0;
+	char* temp = s1.str;
+	while (*temp != '\n')
+	{
+		temp++;
+		i++;
+	}
+	if (s1.capacity >= i)
+	{
 
+	}
+	else
+	{
+		delete[] s1.str;
+		s1.str = NULL;
+		s1.len = i;
+		s1.str = new char[s1.len * 2 + 1];
+		s1.capacity = s1.len * 2 + 1;
+	}
+	return is;
+}
+ostream& operator<<(ostream& os, String& s1)
+{
+	for (size_t i = 0; i < s1.len; i++)
+	{
+		os << s1.str[i];
+	}
+	os << endl;
+	return os;
+}
 
-template<typename T1, typename T2>
-
-template<class T1, typename T2>
 int main()
 {
-	/*test* t1 = new test(1,2);
-	delete t1;*/
-	std::list<int> l1;                         // 构造空的l1
-	std::list<int> l2(4, 100);                 // l2中放4个值为100的元素
-	std::list<int> l3(l2.begin(), l2.end());  // 用l2的[begin(), end()）左闭右开的区间构造l3
-	std::list<int> l4(l3);                    // 用l3拷贝构造l4
-												  // 以数组为迭代器区间构造l5
-	int array[] = { 16,2,77,29 };
-	std::list<int> l5(array, array + sizeof(array) / sizeof(int));
-
-		// 用迭代器方式打印l5中的元素
-	for (std::list<int>::iterator it = l5.begin(); it != l5.end(); it++)
-		std::cout << *it << " ";
-	std::cout << endl;
-	// C++11范围for的方式遍历
-	for (auto& e : l5)
-		std::cout << e << " ";
-	std::cout << endl;
-
-	int array2[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
-	list<int> l(array2, array2 + sizeof(array2) / sizeof(array2[0]));
-	// 使用正向迭代器正向list中的元素
-	for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
-		cout << *it << " ";
-	cout << endl;
-	// 使用反向迭代器逆向打印list中的元素
-	for (list<int>::reverse_iterator it = l.rbegin(); it != l.rend(); ++it)
-		cout << *it << " ";
-	cout << endl;
+	String s1("abcd");	String s2(s1);	String s3;	s1 += "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";	s3 += "fhcvbvcb";	cout << s1 << s2<<s3;
 	system("pause");
 	return 0;
 }
