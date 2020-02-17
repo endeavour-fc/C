@@ -30,6 +30,30 @@ bool isBalanced(struct TreeNode* root) {
 	return flag1 && flag2;
 
 }
+struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p, struct TreeNode* q) {
+	if (root == NULL)
+		return root;
+	if (root == p || root == q)
+		return root;
+	struct TreeNode* r1 = lowestCommonAncestor(root->left, p, q);
+	struct TreeNode* r2 = lowestCommonAncestor(root->right, p, q);
+	if (r2 != NULL && r1 != NULL)
+	{
+		return root;
+	}
+	else if (r2 == NULL && r1 != NULL)
+	{
+		return r1;
+	}
+	else if (r1 == NULL && r2 != NULL)
+	{
+		return r2;
+	}
+	else
+	{
+		return NULL;
+	}
+}
 using namespace std;
 class test
 {
