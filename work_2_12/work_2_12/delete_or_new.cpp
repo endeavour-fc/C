@@ -97,13 +97,15 @@ public:
 		*(this->str) = '\0';
 		this->capacity = 1;
 	}
-	String(const String& another)
+	String(const String& another):str(nullptr)
 	{
 		this->str = new char[another.len * 2 + 1];
 		this->len = another.len;
 		this->capacity = another.capacity;
 		strncpy(str, another.str,this->len);
 		str[len + 1] = '\0';
+		//String s1(another.str);
+		//this->Swap(s1);
 	}
 	~String()
 	{
@@ -186,39 +188,101 @@ private:
 	size_t len;
 	size_t capacity;
 };
+//istream& operator>>(istream& is, String& s1)
+//{
+//	//is >> s1.str;
+//	char arr[100] = { 0 };
+//	is >> arr;
+//	int i = 0;
+//	char* temp = s1.str;
+//	for (i = 0; i < 100; i++)
+//	{
+//		if (arr[i] == '\0')
+//			break;
+//	}                                                                                     
+//	if (s1.capacity >= i)
+//	{
+//		s1.len = i;
+//		strncpy(s1.str, arr, i+1);
+//	}
+//	else
+//	{
+//		s1.str = (char*)malloc(i*2);
+//		s1.len = i;
+//		s1.capacity = i*2;
+//		strncpy(s1.str, arr, i+1);
+//	}
+//	return is;
+//}
 istream& operator>>(istream& is, String& s1)
 {
-	//is >> s1.str;
-	char arr[100] = { 0 };
-	is >> arr;
-	int i = 0;
-	char* temp = s1.str;
-	for (i = 0; i < 100; i++)
+	char* str1 = new char[10];
+	int count = 1;
+	int cpity = 10;
+	char* temp = str1;
+	while (((*temp = getchar()) == ' ') || (*temp == '\n'));
+	while (1)
 	{
-		if (arr[i] == '\0')
+
+		if(count>=cpity)
+		{
+			str1 = (char*)realloc(str1, cpity *= 2);
+			temp = str1 + count-1;
+		}
+		else if ((*temp == ' ') || *temp == '\n')
+		{
+			*temp = '\0';
 			break;
-	}                                                                                     
-	if (s1.capacity >= i)
-	{
-		s1.len = i;
-		strncpy(s1.str, arr, i);
+		}
+		*++temp = getchar();
+		count++;
 	}
-	else
-	{
-		s1.str = (char*)malloc(i*2);
-		s1.len = i;
-		s1.capacity = i*2;
-		strncpy(s1.str, arr, i);
-	}
+	s1.str = str1;
+	s1.capacity = cpity;
+	s1.len = count;
 	return is;
+	//static const size_t default_buf_size = 10;
+	//int capacity = default_buf_size;
+	//char *str = (char *)malloc(sizeof(char) * default_buf_size);
+	//char *buf = str;
+
+	//size_t count = 0;
+
+	////跳过字符串起始位置的空格或者换行
+	//while ((*buf = getchar()) == ' ' || (*buf == '\n'));
+
+	//for (;;)
+	//{
+	//	if (*buf == '\n' || *buf == ' ')
+	//	{
+	//		*buf = '\0';
+	//		break;
+	//	}
+	//	else if (count >= capacity)
+	//	{
+	//		capacity *= 2;
+	//		str = (char *)realloc(str, capacity);
+	//		//重新定位buf的位置
+	//		buf = str + count;
+	//	}
+	//	*++buf = getchar();
+	//	count++;
+	//}
+
+	//s1.str = str;
+	//s1.capacity = capacity;
+	//s1.len = count;
+	//return is;
+
 }
 ostream& operator<<(ostream& os, String& s1)
 {
-	for (size_t i = 0; i < s1.len; i++)
-	{
-		os << s1.str[i];
-	}
-	os << endl;
+	//for (size_t i = 0; i < s1.len; i++)
+	//{
+	//	os << s1.str[i];
+	//}
+	//os << endl;
+	os <<s1.str<< endl;
 	return os;
 }
 
