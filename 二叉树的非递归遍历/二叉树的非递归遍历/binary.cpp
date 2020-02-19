@@ -167,19 +167,103 @@ void Free_Binary(BinaryNode* root)
 	Free_Binary(root->rchild);
 	free(root);
 }
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     struct TreeNode *left;
+*     struct TreeNode *right;
+* };
+*/
+void find(struct BinaryNode* root, char* arr)
+{
+	if (root == NULL)
+		return;
+	if (arr[0] >= root->ch)
+	{
+		arr[0] = root->ch;
+	}
+	find(root->lchild, arr);
+	find(root->rchild, arr);
+	if (arr[0] <= root->ch&&arr[1]>root->ch)
+	{
+		arr[1] = root->ch;
+	}
+}
+
+char findSecondMinimumValue(struct BinaryNode* root) {
+	if (root == NULL)
+		return -1;
+	char arr[2] = { root->ch,root->ch };
+	find(root, arr);
+	return arr[1] == arr[0] ? -1 : arr[1];
+
+}
+int GetMax(BinaryNode* root)
+{
+	if (root->rchild == NULL)
+		return root->ch;
+	return GetMax(root->rchild);
+}
+int GetMin(struct BinaryNode* root)
+{
+	if (root->lchild == NULL)
+		return root->ch;
+	return GetMin(root->lchild);
+}
+void Get(struct BinaryNode* root, char* arr, int min)
+{
+	if (root == NULL)
+		return;
+	arr[root->ch - min]++;
+	Get(root->lchild, arr, min);
+	Get(root->rchild, arr, min);
+}
+/**
+* Note: The returned array must be malloced, assume caller calls free().
+*/
+char* findModex(struct BinaryNode* root, int* returnSize) {
+	int min = GetMin(root);
+	int max = GetMax(root);
+	char* arr = (char*)malloc(sizeof(char)*(max - min+1));
+	int i = 0;
+	for (i = 0; i <= max - min; i++)
+	{
+		arr[i] = 0;
+	}
+	int m = 0;
+	Get(root, arr, min);
+	*returnSize = 0;
+	for (i = 0; i<=max - min; i++)
+	{
+		if (arr[i]>m)
+		{
+			m = arr[i];
+		}
+	}
+	for (i = 0; i<=max - min; i++)
+	{
+		if (arr[i] == m)
+		{
+			arr[(*returnSize)++] = i + min;
+		}
+	}
+	return arr;
+}
 int main()
 {
-	char arr[] = "ABC##D##E#F##";
+	char arr[] = "22##55##7##";
 	BinaryNode* p = NULL;
 	BinaryNode* root = createTree(arr);
 	//Recursion(root);
 	printf("前序遍历：");
 	Recur_Node(root);
-	printf("\n中序遍历：");
-	InOrderNode(root);
-	printf("\n后续遍历：");
-	PostOrderNode(root);
-	Free_Binary(root);
+	printf("%c\n", findSecondMinimumValue(root));
+	//printf("\n中序遍历：");
+	//InOrderNode(root);
+	//printf("\n后续遍历：");
+	//PostOrderNode(root);
+	//Free_Binary(root);
 	
 	system("pause");
 	return 0;
