@@ -54,6 +54,49 @@ struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p,
 		return NULL;
 	}
 }
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     struct TreeNode *left;
+*     struct TreeNode *right;
+* };
+*/
+int Getnum(struct TreeNode* root)
+{
+	if (root == NULL)
+	{
+		return 0;
+	}
+	int lf = Getnum(root->left);
+	int rt = Getnum(root->right);
+	return lf>rt ? lf + 1 : rt + 1;
+}
+
+int diameterOfBinaryTree(struct TreeNode* root) {
+	if (root == NULL)
+		return 0;
+	int sum = Getnum(root->left) + Getnum(root->right);
+	int m1 = diameterOfBinaryTree(root->left);
+	int m2 = diameterOfBinaryTree(root->right);
+	if (sum>m1)
+	{
+		if (sum>m2)
+		{
+			return sum;
+		}
+		else
+			return m2;
+	}
+	else
+	{
+		if (m1>m2)
+		{
+			return m1;
+		}
+		return m2;
+	}
+}
 using namespace std;
 class test
 {
