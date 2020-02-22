@@ -139,6 +139,7 @@ void MergeSort(int arr[], int start, int end, int* temp)
 	MergeSort(arr, start, mid, temp);
 	MergeSort(arr, mid + 1, end, temp);
 	Merge(arr, start, mid, end, temp);
+	Print(arr, 8);
 }
 void Print(int* arr, int len)
 {
@@ -184,7 +185,7 @@ void HeapSort(int* arr, int len)
 
 int main()
 {
-	int arr[] = { 4,3,6,5,8,7,2,1 };
+	int arr[] = { 3,1,7,2,5,8,6,4 };
 	int len = sizeof(arr) / sizeof(arr[0]);
 	/*Print(arr, len);
 	printf("\n");*/
@@ -194,15 +195,15 @@ int main()
 	//ShellSort(arr, len);
 	//Print(arr, len);
 	//printf("\n");
-	QuickSort(arr, 0, len - 1);
+	//QuickSort(arr, 0, len - 1);
 	//BubbingSort(arr, len);
 	//SelectSort(arr, len);
 	//Print(arr, len);
 	//printf("\n");
-	/*int* temp = (int*)malloc(sizeof(int)*len);
+	int* temp = (int*)malloc(sizeof(int)*len);
 	MergeSort(arr, 0, len - 1, temp);
 	Print(arr, len);
-	printf("\n");*/
+	printf("\n");
 	//HeapSort(arr, len);
 	//Print(arr, len);
 	//printf("\n");
