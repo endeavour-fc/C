@@ -301,6 +301,44 @@ bool test6(int* arr, int len)
 	}
 	return true;
 }
+bool isPalindrome(int* arr, int len) {
+	ListNode* head = Init_Node();
+	
+	for (int i = 0; i < len; i++)
+	{
+		ListNode* temp = CreatNode(arr[i]);
+		Insert_Head_List(head, temp);
+	}
+	head = head->next;
+	struct ListNode* head1 = head;
+	struct ListNode* head2 = head;
+	while (head2&&head2->next)
+	{
+		head1 = head1->next;
+		head2 = head2->next->next;
+	}
+
+	struct ListNode* pPre = head;
+	struct ListNode* pCur = head->next;
+	struct ListNode* temp = NULL;
+	while (pPre != head1)
+	{
+		pPre->next = temp;
+		temp = pPre;
+		pPre = pCur;
+		pCur = pCur->next;
+	}
+	if (head2)
+		head1 = head1->next;
+	while (head1&&temp)
+	{
+		if (temp->val != head1->val)
+			return false;
+		temp = temp->next;
+		head1 = head1->next;
+	}
+	return true;
+}
 void test7(int* arr, int len,int k)
 {
 	ListNode* head = Init_Node();
@@ -520,17 +558,18 @@ void LastPrint(BinTree* root)
 }
 int main()
 {
-	//int arr[] = { 1,2,3,1 };
-	//int len = sizeof(arr) / sizeof(arr[0]);
+	int arr[] = { 1,2,2,1 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	isPalindrome(arr, len);
 	//test7(arr, len, 5);
 	//printf("%d\n", test6(arr, len));
-	char str[] = "abc###d##";
-	BinTree* root = CreatTree(str);
+	//char str[] = "abc###d##";
+	//BinTree* root = CreatTree(str);
 	//Print_Tree(root);
 	//FirstPrint(root);
 	//MiddlePrint(root);
 	//LastPrint(root);
-	LevePrint(root);
+	//LevePrint(root);
 
 	system("pause");
 	return 0;
