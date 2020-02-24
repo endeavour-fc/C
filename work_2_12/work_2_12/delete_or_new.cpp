@@ -389,7 +389,33 @@ ostream& operator<<(ostream& os, String& s1)
 	os <<s1.str<< endl;
 	return os;
 }
+void Shell_Sort(int arr[], int len)
+{
+	int temp = 0;
+	int j = 0;
+	int increase = 0;
+	for (increase = len / 2; increase > 0; increase /= 2)
+	{
+		for (int i = increase; i < len; i++)
+		{
+			temp = arr[i];
+			for (j = i - increase; j >= 0 && temp < arr[j]; j -= increase)
+				arr[j + increase] = arr[j];
+			arr[j + increase] = temp;
+		}
+	}
+}
 
+bool containsDuplicate(int* nums, int numsSize) {
+	Shell_Sort(nums, numsSize);
+
+	for (int i = 0; i<numsSize - 1; i++)
+	{
+		if (nums[i] == nums[i + 1])
+			return true;
+	}
+	return false;
+}
 int main()
 {
 	String s1;
