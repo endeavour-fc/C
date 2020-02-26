@@ -1,5 +1,6 @@
 #include<iostream>
 #include<list>
+#include<assert.h>
 using namespace std;
 
 namespace fc
@@ -19,25 +20,145 @@ namespace fc
 	public:
 		List_iterator():ptr(nullptr)
 		{}
+		List_iterator(ListNode<T> *p):ptr(p)
+		{}
+		~List_iterator()
+		{}
+	public:
+		T& operator*()
+		{
+			return ptr->val;
+		}
+		T* operator->()
+		{
+			return &**this;
+		}
+		List_iterator& operator++()
+		{
+			ptr = ptr->next;
+			return *this;
+		}
+		List_iterator operator++()
+		{
+			List_iterator temp = *this;
+			++*this;
+			return temp;
+		}
+		List_iterator& operator--()
+		{
+			ptr = ptr->pre;
+			return *this;
+		}
+		List_iterator operator--()
+		{
+			List_iterator temp = *this;
+			--*this;
+			return temp;
+		}
+		bool operator==(const List_iterator& p)
+		{
+			return ptr == p;
+		}
+		bool operator!=(const List_iterator& p)
+		{
+			return !(p == ptr);
+		}
+		ListNode<T>* MyNode()
+		{
+			return ptr;
+		}
 	private:
 		ListNode<T>* ptr;
 	};
 	template<typename T1>
 	class list
 	{
-		typedef ListNode<T> pNode;
+		typedef ListNode<T1> pNode;
 	public:
 		list():head(nullptr),size(0)
 		{}
-		size_t Get_size() const
-		{return this->size}
-	private:
-		pNode GetNode(T &val=T())
+		list(size_t n, const T1 &value = T1()) :head(GetNode()), size(0)
 		{
-			pNode n1 = new ListNode<T>(val);
+			while (n--)
+				push_back(value);
+		}
+		template<typename _It>
+		list(_It first, _It last) : head(GetNode()), size(0)
+		{
+			while (first != last)
+			{
+				push_back(*first);
+				first++;
+			}
+		}
+		list(const list<T1> &lt) :head(GetNode()), size(0)
+		{
+			list<T1> tmp(lt.begin(), lt.end());
+			swap(tmp);
+		}
+	public:
+		size_t Get_size() const
+		{
+			return this->size;
+		}
+		bool List_Empty() const
+		{
+			return !this->size;
+		}
+		void push_back(const T1 &val)
+		{
+			insert(end(), val);
+		}
+		void push_front(const T1 &val)
+		{
+			insert(begin(), val);
+		}
+		T1& front()
+		{
+			assert(!List_Empty());
+			return *begin();
+		}
+		const T1& front()const
+		{
+			assert(!List_Empty());
+			return *begin();
+		}
+
+		void swap(list<T1> & lt)
+		{
+			std::swap(head, lt.head);
+			std::swap(size, lt.size);
+		}
+	public:
+		List_iterator<T1> begin()
+		{
+			return List_iterator<T1>(head->next);
+		}
+		List_iterator<T1> end()
+		{
+			return List_iterator<T1>(head);
+		}
+		List_iterator<T1> insert(List_iterator<T1> pos, const T1 &val)
+		{
+			pNode _S = new ListNode<T1>(val);
+			pNode _P = pos.MyNode();
+
+			_S->next = _P;
+			_S->pre = _P->pre;
+			_S->pre->next = _S;
+			_P->pre = _S;
+
+			size++;
+			return List_iterator<T1>(_S);
+		}
+	private:
+		pNode GetNode(T1 &val=T1())
+		{
+			pNode n1 = new ListNode<T1>(val);
 			n1.val = val;
 			n1.pre = NULL;
 			n1.next = NULL;
+			return n1;
 		}
 	private:
 		ListNode<T1> *head;
