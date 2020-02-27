@@ -662,6 +662,29 @@ void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n) {
 	for (int i = 0; i<m + n; i++)
 		nums1[i] = temp[i];
 }
+int sum(int* arr, int l, int r)
+{
+	int sum = 0;
+	for (int i = l; i <= r; i++)
+	{
+		sum += arr[i];
+	}
+	return sum;
+}
+int pivotIndex(int* nums, int numsSize) {
+	int sum1 = 0;
+	int sum2 = 0;
+	if (numsSize <= 2)
+		return -1;
+	for (int i = 0; i<numsSize; i++)
+	{
+		sum1 = sum(nums, 0, i);
+		sum2 = sum(nums, i, numsSize - 1);
+		if (sum1 == sum2)
+			return i;
+	}
+	return -1;
+}
 int main()
 {
 	char str[] = " ";
