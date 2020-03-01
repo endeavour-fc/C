@@ -109,15 +109,53 @@ int boyerMoore(char* str1, char* str2)
 	}
 	return -1;
 }
+int* GetNext(char* str, int len)
+{
+	int* next = (int*)malloc(sizeof(int)*len);
+	int j = 0;
+	*next = { 0 };
+	for (int i = 2; i < len; i++)
+	{
+		while (j&&str[j] != str[i - 1])
+		{
+			j = next[j];
+		}
+		if (str[j] == str[i - 1])
+			j++;
+		next[i] = j;
+	}
+	return next;
+}
+int KMP(char* str1, char* str2)
+{
+	int len1 = strlen(str1);
+	int len2 = strlen(str2);
+	int* next = GetNext(str2,len2);
+	int j = 0;
+	for (int i = 0; i < len1; i++)
+	{
+		while (j > 0 && str1[i] != str2[j])
+		{
+			j = next[j];
+		}
+		if (str1[i] == str2[j])
+		{
+			j++;
+		}
+		if (j == len2)
+			return i - j + 1;
+	}
+	return -1;
+}
 int main()
 {
-	char arr1[] = "abcdededefgh";
-	char arr2[] = "def";
+	char arr1[] = "abcefdefdedefgh";
+	char arr2[] = "dedef";
 	char* p = arr1;
 	int i = 0;
 	printf("%s\n", arr1);
 	printf("%s\n", arr2);
-	if ((i = boyerMoore(arr1, arr2))!=-1)
+	if ((i = KMP(arr1, arr2))!=-1)
 	{
 		printf("%s\n", p+i);
 	}
