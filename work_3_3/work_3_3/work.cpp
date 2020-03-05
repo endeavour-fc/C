@@ -5,6 +5,7 @@
 #include<functional>
 #include <algorithm>
 using namespace std;
+int count1=0;
 void getstring(string::iterator it1, string::iterator it2)
 {
 	while (it1<it2)
@@ -63,14 +64,63 @@ int MoreThanHalfNum_Solution(vector<int> numbers) {
 		return 0;
 	return temp;
 }
+
+int fib(int n)
+{
+	count1++;
+	if (n == 0)
+		return 1;
+	if (n == 1)
+		return 2;
+	return fib(n - 1) + fib(n - 2);
+}
+
+
 int main()
 {
-	vector<int> arr = { 1,2,3,4,2,2,2, };
-	cout << MoreThanHalfNum_Solution(arr) << endl;
-
+	int v1 = 0;
+	int n = 0;
+	char temp = 0;
+	int flag = 0;
+	cin >> v1;
+	cin >> n;
+	string s1;
+	if (v1 < 0)
+	{
+		flag = 1;
+		v1 = -v1;
+	}
+	while (v1)
+	{
+		if (v1%n<10)
+			temp = v1 % n + '0';
+		else
+		{
+			temp = (v1%n - 10) + 'A';
+		}
+		v1 /= n;
+		s1.insert(s1.begin(), temp);
+	}
+	if (flag)
+	{
+		cout << "-" << s1 << endl;
+	}
+	else
+		cout << s1 << endl;
 	system("pause");
 	return 0;
 }
+
+//int main()
+//{
+//	//vector<int> arr = { 1,2,3,4,2,2,2, };
+//	//cout << MoreThanHalfNum_Solution(arr) << endl;
+//	fib(8);
+//	cout << count1 << endl;
+//
+//	system("pause");
+//	return 0;
+//}
 //int main()
 //{
 //	string s1;
