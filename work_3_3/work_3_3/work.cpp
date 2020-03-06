@@ -74,42 +74,81 @@ int fib(int n)
 		return 2;
 	return fib(n - 1) + fib(n - 2);
 }
-
-
 int main()
 {
-	int v1 = 0;
-	int n = 0;
-	char temp = 0;
-	int flag = 0;
-	cin >> v1;
-	cin >> n;
-	string s1;
-	if (v1 < 0)
+	string s1, s2;
+	getline(std::cin, s1);
+	getline(std::cin, s2);
+	int sum = 0;
+	string::iterator it1 = s1.begin();
+
+	while (it1 <= s1.end())
 	{
-		flag = 1;
-		v1 = -v1;
-	}
-	while (v1)
-	{
-		if (v1%n<10)
-			temp = v1 % n + '0';
-		else
+		s1.insert(it1, s2.begin(), s2.end());
+		string::iterator right = s1.end() - 1;
+		string::iterator left = s1.begin();
+		while (left<right&&*left == *right)
 		{
-			temp = (v1%n - 10) + 'A';
+			left++;
+			right--;
 		}
-		v1 /= n;
-		s1.insert(s1.begin(), temp);
+		if (left >= right)
+			++sum;
+		it1 = s1.erase(it1, it1 + s2.size());
+		if (it1 == s1.end())
+			break;
+		++it1;
 	}
-	if (flag)
-	{
-		cout << "-" << s1 << endl;
-	}
-	else
-		cout << s1 << endl;
+	cout << sum << endl;
 	system("pause");
 	return 0;
 }
+//int main()
+//{
+//	int x = 1;
+//	do
+//	{
+//		printf("%2d\n", x++);
+//	} while (x--);
+//
+//	system("pause");
+//	return 0;
+//}
+
+//int main()
+//{
+//	int v1 = 0;
+//	int n = 0;
+//	char temp = 0;
+//	int flag = 0;
+//	cin >> v1;
+//	cin >> n;
+//	string s1;
+//	if (v1 < 0)
+//	{
+//		flag = 1;
+//		v1 = -v1;
+//	}
+//	while (v1)
+//	{
+//		if (v1%n<10)
+//			temp = v1 % n + '0';
+//		else
+//		{
+//			temp = (v1%n - 10) + 'A';
+//		}
+//		v1 /= n;
+//		s1.insert(s1.begin(), temp);
+//	}
+//	if (flag)
+//	{
+//		cout << "-" << s1 << endl;
+//	}
+//	else
+//		cout << s1 << endl;
+//	system("pause");
+//	return 0;
+//}
 
 //int main()
 //{
