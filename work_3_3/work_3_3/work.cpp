@@ -4,6 +4,7 @@
 #include<vector>
 #include<functional>
 #include <algorithm>
+#include<stack>
 using namespace std;
 int count1=0;
 void getstring(string::iterator it1, string::iterator it2)
@@ -44,13 +45,60 @@ int StrToInt(string str) {
 		return 0 - sum;
 	return sum;
 }
+bool chkParenthesis(string A, int n) {
+	// write code here
+	stack<char> sta;
+	if (n % 2)
+		return false;
+	string::iterator it1 = A.begin();
+	while (it1 != A.end())
+	{
+		if (*it1 != '}' && *it1 != ']' && *it1 != ')'&&*it1 != '{' && *it1 != '[' && *it1 != '(')
+			return false;
+		if (sta.empty())
+		{
+			if (*it1 == '}' || *it1 == ']' || *it1 == ')')
+			{
+				return false;
+			}
+			sta.push(*it1++);
+		}
+		else
+		{
+			if (sta.top() == '('&&*it1 == ')')
+			{
+				sta.pop();
+				it1++;
+			}
+			else if (sta.top() == '{'&&*it1 == '}')
+			{
+				sta.pop();
+				it1++;
+			}
+			else if (sta.top() == '['&&*it1 == ']')
+			{
+				sta.pop();
+				it1++;
+			}
+			else
+			{
+				sta.push(*it1++);
+			}
+		}
+	}
+	if (sta.empty())
+		return true;
+	else
+		return false;
+}
 int main()
 {
 	//int a = 0123;
 	//int b = 123;
 	//printf("%o %o\n", a, b);
-	printf("%d\n", StrToInt("-2147483648"));
-	system("pause");
+	//printf("%d\n", StrToInt("-2147483648"));
+	//system("pause");
+	chkParenthesis("()()()()", 6);
 	return 0;
 }
 //int main()
