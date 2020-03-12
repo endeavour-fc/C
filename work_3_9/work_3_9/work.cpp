@@ -1,6 +1,6 @@
 #define  _CRT_SECURE_NO_WARNINGS 
 #include <stdio.h>
-#include <string.h>
+#include <string>
 #include <stdlib.h>
 #include<iostream>
 using namespace std;
@@ -45,12 +45,141 @@ private:
 	//static int a;
 
 };
+// static Safelevel GetPwdSecurityLevel(string pPasswordStr)
+//{
+//	string::iterator it = pPasswordStr.begin();
+//	int sum = 0;
+//	if (pPasswordStr.size() <= 4)
+//		sum += 5;
+//	else if (pPasswordStr.size() <= 7)
+//		sum += 10;
+//	else
+//		sum += 25;
+//	int num_flag = 0;
+//	int str[2] = { 0 };
+//	int symbol = 0;
+//	while (it != pPasswordStr.end())
+//	{
+//		if (*it >= 'a'&&*it <= 'z')
+//			str[0]++;
+//		else if (*it >= 'A'&&*it <= 'Z')
+//			str[1]++;
+//		else if (*it >= '0'&&*it <= '9')
+//			num_flag++;
+//		else
+//			symbol++;
+//		it++;
+//	}
+//	if (str[1] && str[0])
+//		sum += 20;
+//	else if (str[0] || str[1])
+//		sum += 10;
+//
+//	if (num_flag>1)
+//		sum += 20;
+//	else if (num_flag)
+//		sum += 10;
+//	if (symbol>1)
+//		sum += 25;
+//	else if (symbol)
+//		sum += 10;
+//	if (str[0] && str[1] && num_flag&&symbol)
+//		sum += 5;
+//	else if ((str[0] || str[1]) && num_flag&&symbol)
+//		sum += 3;
+//	else if ((str[0] || str[1]) && num_flag)
+//		sum += 2;
+//	if (sum >= 90)
+//		cout << "VERY_SECURE" << endl;
+//	else if (sum >= 80)
+//		cout << "SECURE" << endl;
+//	else if (sum >= 70)
+//		cout << "VERY_STRONG" << endl;
+//	else if (sum >= 60)
+//		cout << "STRONG" << endl;
+//	else if (sum >= 50)
+//		cout << "AVERAGE" << endl;
+//	else if (sum >= 25)
+//		cout << "WEAK" << endl;
+//	else
+//		cout << "VERY_WEAK" << endl;
+//
+//	return NULL;
+//}
 int main()
 {
-	cout << sizeof(A) << endl;
-
-	return 0;
+	int** arr[3][4] = { 0 };
+	cout << sizeof(arr) << endl;
 }
+//int main()
+//{
+//	string s1;
+//	getline(std::cin, s1);
+//	string::iterator it = s1.begin();
+//	int sum = 0;
+//	if (s1.size() <= 4)
+//		sum += 5;
+//	else if (s1.size() <= 7)
+//		sum += 10;
+//	else
+//		sum += 25;
+//	int num_flag = 0;
+//	int str[2] = { 0 };
+//	int symbol = 0;
+//	while (it != s1.end())
+//	{
+//		if (*it >= 'a'&&*it <= 'z')
+//			str[0]++;
+//		else if (*it >= 'A'&&*it <= 'Z')
+//			str[1]++;
+//		else if (*it >= '0'&&*it <= '9')
+//			num_flag++;
+//		else
+//			symbol++;
+//		it++;
+//	}
+//	if (str[1] && str[0])
+//		sum += 20;
+//	else if (str[0] || str[1])
+//		sum += 10;
+//
+//	if (num_flag>1)
+//		sum += 20;
+//	else if (num_flag)
+//		sum += 10;
+//	if (symbol>1)
+//		sum += 25;
+//	else if (symbol)
+//		sum += 10;
+//	if (str[0] && str[1] && num_flag&&symbol)
+//		sum += 5;
+//	else if ((str[0] || str[1]) && num_flag&&symbol)
+//		sum += 3;
+//	else if ((str[0] || str[1]) && num_flag)
+//		sum += 2;
+//	if (sum >= 90)
+//		cout << "VERY_SECURE" << endl;
+//	else if (sum >= 80)
+//		cout << "SECURE" << endl;
+//	else if (sum >= 70)
+//		cout << "VERY_STRONG" << endl;
+//	else if (sum >= 60)
+//		cout << "STRONG" << endl;
+//	else if (sum >= 50)
+//		cout << "AVERAGE" << endl;
+//	else if (sum >= 25)
+//		cout << "WEAK" << endl;
+//	else
+//		cout << "VERY_WEAK" << endl;
+//
+//	return 0;
+//}
+//int main()
+//{
+//	cout << sizeof(A) << endl;
+//
+//	return 0;
+//}
 //int getnum(int num1, int num2)
 //{
 //	if (num1 == 0 || num2 == 0)
