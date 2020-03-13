@@ -13,9 +13,13 @@ public:
 		m_c = c;
 		cout << "this is base" << endl;
 	}
-	void fun()
+	virtual void fun()
 	{
 		cout << "this is base" << endl;
+	}
+	void test()
+	{
+		fun();
 	}
 	int Geta()
 	{
@@ -32,7 +36,7 @@ private:
 class D: public Base
 {
 public:
-	void fun2()
+	void fun()
 	{
 		cout << "this is D" << endl;
 	}
@@ -45,6 +49,51 @@ private:
 	//static int a;
 
 };
+bool is_prime_number_or_not(int num)
+{
+	if (num == 1)
+		return false;
+	if (num == 2)
+		return true;
+	int i = sqrt(num);
+	while (i >= 2)
+	{
+		if (num%i == 0)
+			return false;
+		--i;
+	}
+	return true;
+}
+int main()
+{
+	int num = 0;
+	int n1 = 0;
+	int n2 = 0;
+	while (cin >> num)
+	{
+		int n1 = num / 2;
+		int n2 = num - n1;
+		while (1)
+		{
+			if (is_prime_number_or_not(n1) && is_prime_number_or_not(n2))
+			{
+				cout << n1 << endl;
+				cout << n2 << endl;
+				break;
+			}
+			n1--;
+			n2 = num - n1;
+		}
+	}
+	return 0;
+}
+//int main()
+//{
+//	D* p = new D;
+//	p->test();
+//
+//	return 0;
+//}
 // static Safelevel GetPwdSecurityLevel(string pPasswordStr)
 //{
 //	string::iterator it = pPasswordStr.begin();
@@ -106,11 +155,26 @@ private:
 //
 //	return NULL;
 //}
-int main()
-{
-	int** arr[3][4] = { 0 };
-	cout << sizeof(arr) << endl;
-}
+//int getLCA(int a, int b) {
+//	if (a == 0 || b == 0)
+//		return 0;
+//	if (a == b)
+//		return a;
+//
+//	int left = getLCA((a) / 2, b);
+//	int right = getLCA(a, (b) / 2);
+//	if (left)
+//		return left;
+//	if (right)
+//		return right;
+//	return 0;
+//
+//}
+//int main()
+//{
+//	//int** arr[3][4] = { 0 };
+//	cout <<getLCA(4,5) << endl;
+//}
 //int main()
 //{
 //	string s1;
