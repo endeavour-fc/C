@@ -49,44 +49,198 @@ private:
 	//static int a;
 
 };
-bool is_prime_number_or_not(int num)
+struct ListNode {
+	int val;
+	ListNode *next;
+	ListNode(int x) : val(x), next(NULL) {}
+};
+ListNode* change(ListNode* root)
 {
-	if (num == 1)
-		return false;
-	if (num == 2)
-		return true;
-	int i = sqrt(num);
-	while (i >= 2)
+	if (root == NULL || root->next == NULL)
+		return root;
+	ListNode* temp = NULL;
+	ListNode* pPre = root;
+	ListNode* pCur = root->next;
+	while (pPre)
 	{
-		if (num%i == 0)
-			return false;
-		--i;
+		pPre->next = temp;
+		temp = pPre;
+		pPre = pCur;
+		if (pCur == NULL)
+			return temp;
+		pCur = pCur->next;
 	}
-	return true;
+	return NULL;
+}
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+	if (!l1 && !l2)
+		return NULL;
+	if (!l1 || !l2)
+	{
+		return l1 ? l1 : l2;
+	}
+	ListNode* m1 = l1 = change(l1);
+	ListNode* m2 = l2 = change(l2);
+	int cn = 0;
+	int sum = 0;
+	int flag = 0;
+	ListNode* k = NULL;
+	while (l1&&l2)
+	{
+		sum = l1->val + l2->val + cn;
+		cn = 0;
+		if (sum >= 10)
+			cn = 1;
+		l1->val = sum % 10;
+		l2->val = sum % 10;
+		k = l1;
+		l1 = l1->next;
+		l2 = l2->next;
+	}
+	while (l1)
+	{
+		sum = l1->val + cn;
+		cn = 0;
+		if (sum >= 10)
+			cn = 1;
+		l1->val = sum % 10;
+		flag = 0;
+		k = l1;
+		l1 = l1->next;
+	}
+	while (l2)
+	{
+		sum = l2->val + cn;
+		cn = 0;
+		if (sum >= 10)
+			cn = 1;
+		l2->val = sum % 10;
+		k = l2;
+		l2 = l2->next;
+		flag = 1;
+	}
+	if (cin)
+	{
+		ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+		temp->val = 1;
+		temp->next = NULL;
+		k->next = temp;
+
+	}
+	if (flag)
+		return change(m2);
+	else
+		return change(m1);
+}
+ListNode* Init_Node()
+{
+	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+	temp->val = 0;
+	temp->next = NULL;
+	return temp;
+}
+ListNode* CreatNode(int a)
+{
+	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+	temp->val = a;
+	temp->next = NULL;
+	return temp;
+}
+void Insert_Head_List(ListNode* head, ListNode* inhl)
+{
+	if (head == NULL || inhl == NULL)
+		return;
+	inhl->next = head->next;
+	head->next = inhl;
+}
+void Print_Node(ListNode* head)
+{
+	if (head == NULL)
+		return;
+	for (ListNode* temp = head->next; temp != NULL; temp = temp->next)
+		printf("%d->", temp->val);
+	printf("\n");
+}
+struct K
+{
+	uint16_t a;
+	uint32_t b;
+	uint64_t c;
+};
+void fun(int& x, int& y)
+{
+	cout << x << endl;
+	cout << y << endl;
 }
 int main()
 {
-	int num = 0;
-	int n1 = 0;
-	int n2 = 0;
-	while (cin >> num)
-	{
-		int n1 = num / 2;
-		int n2 = num - n1;
-		while (1)
-		{
-			if (is_prime_number_or_not(n1) && is_prime_number_or_not(n2))
-			{
-				cout << n1 << endl;
-				cout << n2 << endl;
-				break;
-			}
-			n1--;
-			n2 = num - n1;
-		}
-	}
+	int i = 0;
+	fun(++i, i++);
+	//K t = {};
+	//uint64_t x = 0x00010001;
+	//memcpy(&t, &x, sizeof(uint64_t));
+	//printf("%11u,%11u,%11u",t.a,t.b,t.c);
 	return 0;
 }
+//int main()
+//{
+//	ListNode* head1 = Init_Node();
+//	ListNode* head2 = Init_Node();
+//	for (int i = 1; i <=5; i++)
+//	{
+//		ListNode* temp = CreatNode(i);
+//		Insert_Head_List(head1, temp);
+//	}
+//	for (int i = 1; i <= 5; i++)
+//	{
+//		ListNode* temp = CreatNode(i);
+//		Insert_Head_List(head2, temp);
+//	}
+//	Print_Node(head1);
+//	Print_Node(head2);
+//	ListNode* head = addTwoNumbers(head1, head2);
+//	Print_Node(head);
+//
+//	return 0;
+//}
+//bool is_prime_number_or_not(int num)
+//{
+//	if (num == 1)
+//		return false;
+//	if (num == 2)
+//		return true;
+//	int i = sqrt(num);
+//	while (i >= 2)
+//	{
+//		if (num%i == 0)
+//			return false;
+//		--i;
+//	}
+//	return true;
+//}
+//int main()
+//{
+//	int num = 0;
+//	int n1 = 0;
+//	int n2 = 0;
+//	while (cin >> num)
+//	{
+//		int n1 = num / 2;
+//		int n2 = num - n1;
+//		while (1)
+//		{
+//			if (is_prime_number_or_not(n1) && is_prime_number_or_not(n2))
+//			{
+//				cout << n1 << endl;
+//				cout << n2 << endl;
+//				break;
+//			}
+//			n1--;
+//			n2 = num - n1;
+//		}
+//	}
+//	return 0;
+//}
 //int main()
 //{
 //	D* p = new D;
