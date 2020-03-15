@@ -1,2 +1,2 @@
 ﻿  work.cpp
-g:\code\c++\work_3_9\work_3_9\work.cpp(178): error C2664: “void fun(int &,int &)”: 无法将参数 2 从“int”转换为“int &”
+  work_3_9.vcxproj -> G:\Code\C++\work_3_9\Debug\work_3_9.exe

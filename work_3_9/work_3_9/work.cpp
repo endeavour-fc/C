@@ -172,16 +172,52 @@ void fun(int& x, int& y)
 	cout << x << endl;
 	cout << y << endl;
 }
+bool isPalindrome(string s) {
+	string::iterator it1 = s.begin();
+	string::iterator it2 = s.end() - 1;
+	while (it1<it2)
+	{
+		while (it2 != it1)
+		{
+			if ((*it1 >= 'a'&&*it1 <= 'z') || (*it1 >= 'A'&&*it1 <= 'Z') || (*it1 >= '0'&&*it1 <= '9'))
+				break;
+			it1++;
+		}
+		if (it2 == it1)
+			return true;
+		while (it2 != it1)
+		{
+			if ((*it2 >= 'a'&&*it2 <= 'z') || (*it2 >= 'A'&&*it2 <= 'Z') || (*it2 >= '0'&&*it2 <= '9'))
+				break;
+			it2--;
+		}
+		if (it2 == it1)
+			return true;
+		if (*it1 == *it2 || (*it1 + 32) == *it2 || (*it2 + 32) == *it1)
+			;
+		else
+			return false;
+		it1++;
+		it2--;
+	}
+	return true;
+}
 int main()
 {
-	int i = 0;
-	fun(++i, i++);
-	//K t = {};
-	//uint64_t x = 0x00010001;
-	//memcpy(&t, &x, sizeof(uint64_t));
-	//printf("%11u,%11u,%11u",t.a,t.b,t.c);
+	string s1("0P");
+	cout << isPalindrome(s1) << endl;
 	return 0;
 }
+//int main()
+//{
+//	int i = 0;
+//	fun(++i, i++);
+//	//K t = {};
+//	//uint64_t x = 0x00010001;
+//	//memcpy(&t, &x, sizeof(uint64_t));
+//	//printf("%11u,%11u,%11u",t.a,t.b,t.c);
+//	return 0;
+//}
 //int main()
 //{
 //	ListNode* head1 = Init_Node();
