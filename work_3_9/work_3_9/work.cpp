@@ -3,6 +3,11 @@
 #include <string>
 #include <stdlib.h>
 #include<iostream>
+#include<vector>
+#include<cmath>
+#include<set>
+#include<math.h>
+#include<queue>
 using namespace std;
 class Base
 {
@@ -202,12 +207,87 @@ bool isPalindrome(string s) {
 	}
 	return true;
 }
+vector<int> GetNum(int num)
+{
+	int temp = sqrt(num);
+	vector<int> v1;
+	for (int i = 2; i <= temp; i++)
+	{
+		if (num%i == 0)
+			v1.push_back(i);
+		if (num / i != i)
+			v1.push_back(num / i);
+	}
+	return v1;
+}
+string countAndSay(int n) {
+	queue<char> que;
+	string str("1");
+	int i = 1;
+	while (i != n)
+	{
+		string temp;
+		string::iterator it = str.begin();
+		while (it != str.end())
+		{
+			while (it != str.end()&&(que.empty() || *it == que.back()))
+			{
+				que.push(*it);
+				it++;
+			}
+			char ch = que.size() +'0';
+			temp+=ch;
+			temp+=que.front();
+			while (!que.empty())
+			{
+				que.pop();
+			}
+		}
+		str = temp;
+		i++;
+	}
+	return str;
+}
 int main()
 {
-	string s1("0P");
-	cout << isPalindrome(s1) << endl;
+	cout << countAndSay(3) << endl;
 	return 0;
 }
+//int main()
+//{
+//	int n1, n2;
+//	while (cin >> n1 >> n2)
+//	{
+//		vector<int> v(n2 + 1, 0);
+//		v[n1] = 1;
+//		for (int i = n1; i<n2 + 1; i++)
+//		{
+//			if (v[i] == 0)
+//				continue;
+//			vector<int> temp = GetNum(i);
+//			for (int j = 0; j<temp.size(); j++)
+//			{
+//				if (temp[j] + i <= n2 && v[i + temp[j]])
+//				{
+//					v[i + temp[j]] = min(v[i + temp[j]], v[i] + 1);
+//				}
+//				else if (temp[j] + i <= n2)
+//					v[i + temp[j]] = v[i] + 1;
+//			}
+//		}
+//		if (v[n2])
+//			cout << v[n2] - 1 << endl;
+//		else
+//			cout << -1 << endl;
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	string s1("0P");
+//	cout << isPalindrome(s1) << endl;
+//	return 0;
+//}
 //int main()
 //{
 //	int i = 0;
