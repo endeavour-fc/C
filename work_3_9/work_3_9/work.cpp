@@ -248,11 +248,114 @@ string countAndSay(int n) {
 	}
 	return str;
 }
+void GetLuck(vector<int> arr, int len, int* sum)
+{
+	if (len == 0)
+		return;
+	int s = 0;
+	int x = 1;
+	for (int i = 0; i<len; i++)
+	{
+		s += arr[i];
+		x *= arr[i];
+		vector<int> v = arr;
+		v.erase(v.begin() + i);
+		GetLuck(v, len - 1, sum);
+	}
+	if (s > x)
+		*sum += 1;
+
+}
+int findMinimum(int n, vector<int> left, vector<int> right) {
+	// write code here
+	int sum = 0;
+	int max = 0;
+	vector<int>::iterator it = left.begin();
+	for (int i = 0; i<n; i++)
+	{
+		if (left[i]>right[i])
+		{
+			sum += left[i];
+			if (left[i]>max)
+				max = left[i];
+		}
+		else
+		{
+			sum += right[i];
+			if (right[i]>max)
+				max = right[i];
+		}
+	}
+	sum -= max;
+	sum += 2;
+	return sum;
+}
 int main()
 {
-	cout << countAndSay(3) << endl;
+	vector<int> arr1 = { 0,7,1,6 };
+	vector<int> arr2 = { 1,5,0,6 };
+	cout << findMinimum(4,arr1, arr2)<<endl;
 	return 0;
 }
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	int a[10] = { 0 };
+//	for (int i = 0; i < n; i++)
+//	{
+//		cin >> a[i];
+//	}
+//	vector<int> arr(a, a + n);
+//	int sum = 0;
+//	for (int i = 0; i<n; i++)
+//	{
+//		for (int j = 0; j<n-i; j++)
+//		{
+//			vector<int> v = arr;
+//			v.erase(v.begin() + j, v.begin() + j + i);
+//			int s = 0;
+//			int x = 1;
+//			for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
+//			{
+//				s += *it;
+//				x *= (*it);
+//			}
+//			if (s>x)
+//			{
+//				(sum) += 1;
+//				break;
+//			}
+//		}
+//	}
+//	//GetLuck(arr,n,&sum);
+//	cout << sum << endl;
+//
+//
+//	return 0;
+//}
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	int a[10] = { 0 };
+//	for (int i = 0; i < n; i++)
+//	{
+//		cin >> a[i];
+//	}
+//	vector<int> arr(a,a+n);
+//	int sum = 0;
+//	GetLuck(arr, n, &sum);
+//	cout << sum << endl;
+//
+//
+//	return 0;
+//}
+//int main()
+//{
+//	cout << countAndSay(3) << endl;
+//	return 0;
+//}
 //int main()
 //{
 //	int n1, n2;
