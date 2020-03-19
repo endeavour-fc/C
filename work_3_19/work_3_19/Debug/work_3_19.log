@@ -1,0 +1,5 @@
+﻿  work.cpp
+g:\code\c++\work_3_19\work_3_19\work.cpp(23): warning C4018: “>”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(34): warning C4018: “>”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(47): warning C4018: “>”: 有符号/无符号不匹配
+  work_3_19.vcxproj -> G:\Code\C++\work_3_19\Debug\work_3_19.exe

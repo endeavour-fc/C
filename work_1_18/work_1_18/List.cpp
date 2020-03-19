@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <iostream>
 struct ListNode
 {
 	int val;
@@ -389,6 +389,7 @@ void test9(int* arr, int len, int k)
 	Print_Node(head);
 
 }
+
 ListNode* GetMinNode(ListNode* head);
 void test10(int* arr, int len)
 {
@@ -685,10 +686,85 @@ int pivotIndex(int* nums, int numsSize) {
 	}
 	return -1;
 }
+struct ListNode* reverseListX(struct ListNode* head, struct ListNode* end)
+{
+
+	if (head == end)
+		return head;
+	struct ListNode* pPre = end;
+	struct ListNode* pCur = head;
+	struct ListNode* temp = head->next;
+	while (pCur != end)
+	{
+		pCur->next = pPre;
+
+		pPre = pCur;
+		pCur = temp;
+		if (temp == end)
+		{
+
+			return pPre;
+		}
+		temp = temp->next;
+	}
+	return pPre;
+}
+
+struct ListNode* reverseBetween(struct ListNode* head, int m, int n) {
+	if (head == NULL || head->next == NULL)
+		return head;
+	struct ListNode* p1 = head;
+	struct ListNode* p2 = head;
+	int i = 1;
+	int flag = 0;
+	if (m <= 1)
+		flag = 1;
+	while (p1 != NULL && i++ <= m - 1)
+		p1 = p1->next;
+	if (p1 == NULL)
+		return head;
+	i = 0;
+	while (p2 != NULL && i++ != n)
+		p2 = p2->next;
+
+	if (flag == 0)
+		p1->next = reverseListX(p1->next, p2);
+	else
+		return reverseListX(p1, p2);
+
+	return p1;
+
+}
+bool containsNearbyAlmostDuplicate(int* nums, int numsSize, int k, int t)
+{
+	if (k == 0)
+		return false;
+	for (int i = 0; i<numsSize - k; i++)
+	{
+		for (int j = i + 1; j<numsSize; j++)
+		{
+			if (j - i <= k && abs(nums[i] - nums[j]) <= t)
+				return true;
+		}
+	}
+	return false;
+}
 int main()
 {
-	char str[] = " ";
-	printf("%d", lengthOfLastWord(str));
+	int num[] = { 2,2 };
+	std::cout << containsNearbyAlmostDuplicate(num, 2, 3, 0) << std::endl;
+	//ListNode* head = Init_Node();
+	//{
+	//	ListNode* temp = CreatNode(3);
+	//	Insert_Head_List(head, temp);
+	//	temp = CreatNode(5);
+	//	Insert_Head_List(head, temp);
+	//}
+	//head = head->next;
+	//Print_Node(head);
+	//Print_Node(reverseBetween(head,1,2));
+	//char str[] = " ";
+	//printf("%d", lengthOfLastWord(str));
 	//int arr1[] = {1,2,5,4,3,6,7,8,9};
 	//int len1 = sizeof(arr1) / sizeof(arr1[0]);
 

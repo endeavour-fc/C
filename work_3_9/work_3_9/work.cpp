@@ -16,10 +16,11 @@ public:
 	{
 		m_a = a;
 		m_c = c;
-		cout << "this is base" << endl;
+		//cout << "this is base" << endl;
 	}
-	virtual void fun()
+	void fun()
 	{
+		//delete this;
 		cout << "this is base" << endl;
 	}
 	void test()
@@ -41,8 +42,9 @@ private:
 class D: public Base
 {
 public:
-	void fun()
+	virtual void fun()
 	{
+		//delete this;
 		cout << "this is D" << endl;
 	}
 private:
@@ -54,6 +56,31 @@ private:
 	//static int a;
 
 };
+static int a = 0;
+void  fun()
+{
+	static int a = 4;
+}
+void ch(char* arr)
+{
+	if (*arr)
+	{
+		ch(++arr);
+		printf("%c", *arr);
+	}
+}
+int main()
+{
+	Base *p = new D;
+	p->fun();
+	int i = 0;
+	printf("%d%d", ++i, ++i);
+	cout << endl;
+	char arr[] = "Geneius";
+	ch(arr);
+	//cout << a << endl;
+	return 0;
+}
 struct ListNode {
 	int val;
 	ListNode *next;
@@ -290,13 +317,13 @@ int findMinimum(int n, vector<int> left, vector<int> right) {
 	sum += 2;
 	return sum;
 }
-int main()
-{
-	vector<int> arr1 = { 0,7,1,6 };
-	vector<int> arr2 = { 1,5,0,6 };
-	cout << findMinimum(4,arr1, arr2)<<endl;
-	return 0;
-}
+//int main()
+//{
+//	vector<int> arr1 = { 0,7,1,6 };
+//	vector<int> arr2 = { 1,5,0,6 };
+//	cout << findMinimum(4,arr1, arr2)<<endl;
+//	return 0;
+//}
 //int main()
 //{
 //	int n = 0;
@@ -719,5 +746,89 @@ int main()
 //		}
 //	}
 //	system("pause");
+//	return 0;
+//}
+int lengthOfLongestSubstring(string s) {
+	string::iterator it1 = s.begin();
+	while (it1 != s.end() - 1)
+	{
+		if (*it1 == *(it1 + 1))
+			it1=s.erase(it1++);
+		else
+			it1++;
+	}
+	int len = 0;
+	int flag = 0;
+	it1 = s.begin();
+	string::iterator it2 = s.begin() + 1;
+	while (it1 != s.end() - 1)
+	{
+		while (it2 != s.end())
+		{
+			if (*it1 == *it2)
+			{
+				int temp = it2 - it1-1;
+				if (temp>len)
+					len = temp;
+				break;
+			}
+			it2++;
+		}
+		if (it2 == s.end())
+		{
+			int temp = s.end() - it1;
+			if (temp>len)
+				len = temp;
+			break;
+		}
+		it1++;
+		it2 = it1+1;
+	}
+	return len;
+
+}
+//int main()
+//{
+//	string s("abcabcbb");
+//	cout << lengthOfLongestSubstring(s) << endl;
+//
+//	return 0;
+//}
+vector<int> GetNum1(int num)
+{
+	vector<int> arr;
+	for (int i = 2; i <= sqrt(num); i++)
+	{
+		if (num%i == 0)
+		{
+			arr.push_back(i);
+			if (i*i != num)
+			{
+				arr.push_back(num / i);
+			}
+		}
+	}
+	return arr;
+}
+//int main()
+//{
+//	int n = 0;
+//	while (cin >> n)
+//	{
+//		int count = 0;
+//		for (int i = 2; i <= n; i++)
+//		{
+//			vector<int> arr = GetNum1(i);
+//			int sum = 0;
+//			if (!arr.empty())
+//			{
+//				for (vector<int>::iterator it = arr.begin(); it != arr.end(); it++)
+//					sum += *it;
+//			}
+//			if (sum + 1 == i)
+//				count++;
+//		}
+//		cout << count << endl;
+//	}
 //	return 0;
 //}
