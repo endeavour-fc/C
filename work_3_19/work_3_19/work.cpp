@@ -1,6 +1,8 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<cmath>
+#include<functional>
 using namespace std;
 
 int lengthOfLongestSubstring(string s) {
@@ -289,7 +291,23 @@ int trailingZeroes(int n) {
 	return count;
 
 }
-
+int max(int a, int b)
+{
+	return a > b ? a : b;
+}
+int maxProfit(vector<int>& prices)
+{
+	if (prices.size() == 0)
+		return 0;
+	int m1 = 0;
+	int m2 = INT_MIN;
+	for (int i = 0; i<prices.size(); i++)
+	{
+		m1 = max(m1, m2 + prices[i]);
+		m2 = max(m2, -prices[i]);
+	}
+	return m1;
+}
 
 int main()
 {
