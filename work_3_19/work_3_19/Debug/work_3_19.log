@@ -1,5 +1,12 @@
 ﻿  work.cpp
-g:\code\c++\work_3_19\work_3_19\work.cpp(18): warning C4018: “>”: 有符号/无符号不匹配
-g:\code\c++\work_3_19\work_3_19\work.cpp(29): warning C4018: “>”: 有符号/无符号不匹配
-g:\code\c++\work_3_19\work_3_19\work.cpp(42): warning C4018: “>”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(20): warning C4018: “>”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(31): warning C4018: “>”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(44): warning C4018: “>”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(304): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(380): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(396): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(447): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(464): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(582): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_19\work_3_19\work.cpp(584): warning C4018: “<”: 有符号/无符号不匹配
   work_3_19.vcxproj -> G:\Code\C++\work_3_19\Debug\work_3_19.exe

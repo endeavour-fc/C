@@ -309,65 +309,313 @@ int maxProfit(vector<int>& prices)
 	return m1;
 }
 
-int main()
-{
-	string s1;
-	string s2;
+//int main()
+//{
+//	string s1;
+//	string s2;
+//
+//	while (getline(cin, s1) && getline(cin, s2))
+//	{
+//		int flag = 0;
+//		string::iterator it1 = s1.begin();
+//		string::iterator it2 = s2.begin();
+//		while (it1 != s1.end() && it2 != s2.end())
+//		{
+//			if (*it1 == *it2 || *it1 == '?')
+//			{
+//				it1++;
+//				it2++;
+//			}
+//			else if (*it1 == '*')
+//			{
+//				while (*it1++ == '*')
+//					;
+//				if (*it1 == '?')
+//				{
+//					if (s1.end() - it1 == 1)
+//					{
+//						flag = 0;
+//						break;
+//					}
+//					else
+//					{
+//						*it1++;
+//						while (it2 != s2.end() && *it1 != *it2)
+//						{
+//							it2++;
+//						}
+//						if (it2 != s2.end())
+//						{
+//							it1++;
+//							it2++;
+//						}
+//					}
+//				}
+//				while (it2 != s2.end() && *it1 != *it2)
+//				{
+//					it2++;
+//				}
+//			}
+//			else
+//			{
+//				flag = 1;
+//				break;
+//			}
+//		}
+//		if (flag)
+//			cout << "false" << endl;
+//		else if (flag == 0)
+//			cout << "true" << endl;
+//
+//	}
+//
+//	return 0;
+//}
 
-	while (getline(cin, s1) && getline(cin, s2))
+int* GetNext1(string& str)
+{
+	int* next = (int*)malloc(sizeof(int)*str.size());
+	int j = 0;
+	*next = { 0 };
+	for (int i = 2; i < str.size(); i++)
 	{
-		int flag = 0;
-		string::iterator it1 = s1.begin();
-		string::iterator it2 = s2.begin();
-		while (it1 != s1.end() && it2 != s2.end())
+		while (j&&str[j] != str[i - 1])
 		{
-			if (*it1 == *it2 || *it1 == '?')
+			j = next[j];
+		}
+		if (str[j] == str[i - 1])
+			j++;
+		next[i] = j;
+	}
+	return next;
+}
+bool KMP1(string& str1, string& str2)
+{
+	int* next = GetNext1(str2);
+	int j = 0;
+	for (int i = 0; i < str1.size(); i++)
+	{
+		while (j > 0 && str1[i] != str2[j])
+		{
+			j = next[j];
+		}
+		if (j>0&&str1[i] == str2[j])
+		{
+			j++;
+		}
+		if (j == str2.size())
+			return true;
+	}
+	return false;
+}
+bool Brute_Force(string Long_String, string Short_String)
+{
+	string::iterator p1 = Long_String.begin();
+	string::iterator p2 = Long_String.begin();
+	string::iterator pPre = p1;
+	string::iterator pCur = p2;
+
+	while (p1!= Long_String.end())
+	{
+		while (pCur!= Short_String.end())
+		{
+			if (*pPre == *pCur)
 			{
-				it1++;
-				it2++;
-			}
-			else if (*it1 == '*')
-			{
-				while (*it1++ == '*')
-					;
-				if (*it1 == '?')
-				{
-					if (s1.end() - it1 == 1)
-					{
-						flag = 0;
-						break;
-					}
-					else
-					{
-						*it1++;
-						while (it2 != s2.end() && *it1 != *it2)
-						{
-							it2++;
-						}
-						if (it2 != s2.end())
-						{
-							it1++;
-							it2++;
-						}
-					}
-				}
-				while (it2 != s2.end() && *it1 != *it2)
-				{
-					it2++;
-				}
+				pPre++;
+				pCur++;
 			}
 			else
 			{
-				flag = 1;
 				break;
 			}
 		}
-		if (flag)
-			cout << "false" << endl;
-		else if (flag == 0)
-			cout << "true" << endl;
-
+		if (pCur != Short_String.end())
+			break;
+		p1++;
+		pPre = p1;
+		pCur = p2;
 	}
+	if (pCur!= Short_String.end())
+		return true;
+	else
+		return false;
+}
+int* getNexts(string pattern)
+{
+	int* next = new int[pattern.length()];
+	int j = 0;
+	for (int i = 2; i < pattern.length(); i++) {
+		while (j != 0 && pattern[j] != pattern[i - 1]) {
+			//从next[i+1]的求解回溯到 next[j]
+			j = next[j];
+		}
+		if (pattern[j] == pattern[i - 1]) {
+			j++;
+		}
+		next[i] = j;
+	}
+	return next;
+}
+bool kmp(string str, string pattern) {
+	//预处理，生成next数组
+	int* next = getNexts(pattern);
+	int j = 0;
+	//主循环，遍历主串字符
+	for (int i = 0; i < str.length(); i++) {
+		while (j > 0 && str[i] != pattern[j]) {
+			//遇到坏字符时，查询next数组并改变模式串的起点
+			j = next[j];
+		}
+		if (str[i] == pattern[j]) {
+			j++;
+		}
+		if (j == pattern.length()) {
+			//匹配成功，返回下标
+			return true;
+		}
+	}
+	return false;
+}
+
+
+//int main()
+//{
+//	string s1;
+//	string s2;
+//	while (cin >> s2 >> s1)
+//	{
+//		string ret;
+//		int i = 0;
+//		string::iterator it2 = s2.begin();
+//		string temp;
+//		while (it2 != s2.end())
+//		{
+//			temp.push_back(*it2);
+//			if (kmp(s1, temp))
+//			{
+//				if (temp.size()>ret.size())
+//				{
+//					ret = temp;
+//				}
+//			}
+//			else
+//			{
+//				temp.erase(temp.begin());
+//			}
+//
+//			it2++;
+//		}
+//		cout << ret << endl;
+//
+//	}
+//
+//	return 0;
+//}
+
+//int main()
+//{
+//	string s1;
+//	string s2;
+//	while (cin >> s2 >> s1)
+//	{
+//		string ret;
+//		int i = 0;
+//		string::iterator it2 = s2.begin();
+//		string::iterator it1 = s1.begin();
+//
+//		while (it1 != s1.end())
+//		{
+//			string temp;
+//			while (it2 != s2.end() && *it1 != *it2)
+//			{
+//				++it2;
+//			}
+//			if (it2 == s2.end())
+//			{
+//				it1++;
+//				it2 = s2.begin();
+//				continue;
+//			}
+//			while (it1 != s1.end() && it2 != s2.end() && *it1 == *it2)
+//			{
+//				temp.push_back(*it1);
+//				it1++;
+//				it2++;
+//			}
+//			if (temp.size()>ret.size())
+//			{
+//				ret = temp;
+//			}
+//			if (it1 == s1.end())
+//				break;
+//			i++;
+//			it1 = s1.begin() + i;
+//			it2 = s2.begin();
+//		}
+//		cout << ret << endl;
+//
+//	}
+//
+//	return 0;
+//}
+
+bool fun(int n)
+{
+	int sum = 0;
+	for (int i = 1; sum < n; i += 2)
+		sum += i;
+	return n == sum;
+}
+
+//int main()
+//{
+//
+//	cout << fun(484) << endl;
+//	system("pause");
+//	return 0;
+//}
+string FindSameString(string& s1, string& s2)
+{
+	vector<vector<int>> arr(s1.size(), vector<int>(s2.size(),0));
+	int pos = 0;
+	int len = 0;
+	for (int i = 0; i < s1.size(); i++)
+	{
+		for (int j = 0; j < s2.size(); j++)
+		{
+			if (s1[i] == s2[j])
+			{
+				if (i == 0 || j == 0)
+					arr[i][j] = 1;
+				else
+					arr[i][j] = arr[i - 1][j - 1] + 1;
+			}
+			else
+			{
+				arr[i][j] = 0;
+			}
+			if (arr[i][j] > len)
+			{
+				len = arr[i][j];
+				pos = i - len+1;
+			}
+		}
+	}
+	return s1.substr(pos, len);
+}
+
+int main()
+{
+	string s1, s2;
+	while (cin >> s1 >> s2)
+	{
+		if (s1.size() < s2.size())
+		{
+			swap(s1, s2);
+		}
+		cout << FindSameString(s1, s2) << endl;
+	}
+
 
 	return 0;
 }
