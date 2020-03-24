@@ -604,16 +604,127 @@ string FindSameString(string& s1, string& s2)
 	return s1.substr(pos, len);
 }
 
+//int main()
+//{
+//	string s1, s2;
+//	while (cin >> s1 >> s2)
+//	{
+//		if (s1.size() < s2.size())
+//		{
+//			swap(s1, s2);
+//		}
+//		cout << FindSameString(s1, s2) << endl;
+//	}
+//
+//
+//	return 0;
+//}
+//int main()
+//{
+//	int n = 0;
+//	while (cin >> n)
+//	{
+//		vector<vector<int>> v;
+//		vector<int> m;
+//		for (int i = 0; i<n; i++)
+//		{
+//			int temp = 0;
+//			vector<int> k;
+//			cin >> temp;
+//			int p = 0;
+//			cin >> p;
+//			m.push_back(p);
+//			for (int j = 0; j<temp * 2; j++)
+//			{
+//				int tmp;
+//				cin >> tmp;
+//				k.push_back(tmp);
+//			}
+//			v.push_back(k);
+//		}
+//		vector<vector<int>>::iterator it1 = v.begin();
+//		vector<int>::iterator it2 = m.begin();
+//		while (it1 != v.end() && it2 != m.end())
+//		{
+//			vector<int> temp;
+//			*it2 = *it2%((*it1).size() / 2);
+//			for (int i = *it2; i > 0; i--)
+//			{
+//				for (int j = 0; j < (*it1).size() / 2; j++)
+//				{
+//					temp.push_back((*it1)[j]);
+//					temp.push_back((*it1)[j + (*it1).size() / 2]);
+//				}
+//				*it1 = temp;
+//				temp.clear();
+//			}
+//			it1++;
+//			it2++;
+//		}
+//		for (int i = 0; i < v.size(); i++)
+//		{
+//			for (int j = 0; j < v[i].size(); j++)
+//			{
+//				cout << v[i][j];
+//				if (j != v[i].size - 1)
+//					cout << " ";
+//			}
+//			cout << endl;
+//		}
+//	}
+//
+//
+//	return 0;
+//}
+
 int main()
 {
-	string s1, s2;
-	while (cin >> s1 >> s2)
+	int num = 0;
+	while (cin >> num)
 	{
-		if (s1.size() < s2.size())
+		string s;
+		cin >> s;
+		int start = 0;
+		int end = num<4 ? num - 1 : 3;
+		int begin = 0;
+		string::iterator it = s.begin();
+		while (it != s.end())
 		{
-			swap(s1, s2);
+			if (*it == 'U')
+			{
+				if (start == 0)
+				{
+					end = num - 1;
+					begin = num - 4<0 ? 0 : num - 4;
+				}
+				else if (start == begin)
+				{
+					begin--;
+					end--;
+				}
+				start = (start - 1 + num) % num;
+			}
+			else
+			{
+				if (start == num - 1)
+				{
+					end = num<4 ? num - 1 : 3;
+					begin = 0;
+				}
+				else if (start == end)
+				{
+					begin++;
+					end++;
+				}
+				start = (start + 1 + num) % num;
+			}
+			it++;
 		}
-		cout << FindSameString(s1, s2) << endl;
+
+		for (int i = begin + 1; i <= end + 1; i++)
+			cout << i << " ";
+		cout << endl;
+		cout << start+1 << endl;
 	}
 
 
