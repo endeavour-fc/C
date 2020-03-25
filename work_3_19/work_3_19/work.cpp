@@ -677,55 +677,100 @@ string FindSameString(string& s1, string& s2)
 //	return 0;
 //}
 
+//int main()
+//{
+//	int num = 0;
+//	while (cin >> num)
+//	{
+//		string s;
+//		cin >> s;
+//		int start = 0;
+//		int end = num<4 ? num - 1 : 3;
+//		int begin = 0;
+//		string::iterator it = s.begin();
+//		while (it != s.end())
+//		{
+//			if (*it == 'U')
+//			{
+//				if (start == 0)
+//				{
+//					end = num - 1;
+//					begin = num - 4<0 ? 0 : num - 4;
+//				}
+//				else if (start == begin)
+//				{
+//					begin--;
+//					end--;
+//				}
+//				start = (start - 1 + num) % num;
+//			}
+//			else
+//			{
+//				if (start == num - 1)
+//				{
+//					end = num<4 ? num - 1 : 3;
+//					begin = 0;
+//				}
+//				else if (start == end)
+//				{
+//					begin++;
+//					end++;
+//				}
+//				start = (start + 1 + num) % num;
+//			}
+//			it++;
+//		}
+//
+//		for (int i = begin + 1; i <= end + 1; i++)
+//			cout << i << " ";
+//		cout << endl;
+//		cout << start+1 << endl;
+//	}
+//
+//
+//	return 0;
+//}
+
+int gcd(int a, int b)
+{
+	int temp;
+	while (b)
+	{
+		temp = b;
+		b = a % b;
+		a = temp;
+	}
+	return a;
+}
 int main()
 {
 	int num = 0;
 	while (cin >> num)
 	{
-		string s;
-		cin >> s;
-		int start = 0;
-		int end = num<4 ? num - 1 : 3;
-		int begin = 0;
-		string::iterator it = s.begin();
-		while (it != s.end())
+		int attack = 0;
+		cin >> attack;
+		vector<int> v;
+		for (int i = 0; i<num; i++)
 		{
-			if (*it == 'U')
+			int temp = 0;
+			cin >> temp;
+			v.push_back(temp);
+		}
+		for (int i = 0; i<num; i++)
+		{
+			if (v[i]>attack)
 			{
-				if (start == 0)
-				{
-					end = num - 1;
-					begin = num - 4<0 ? 0 : num - 4;
-				}
-				else if (start == begin)
-				{
-					begin--;
-					end--;
-				}
-				start = (start - 1 + num) % num;
+				int temp = gcd(v[i], attack);
+				attack += temp;
 			}
 			else
 			{
-				if (start == num - 1)
-				{
-					end = num<4 ? num - 1 : 3;
-					begin = 0;
-				}
-				else if (start == end)
-				{
-					begin++;
-					end++;
-				}
-				start = (start + 1 + num) % num;
+				attack += v[i];
 			}
-			it++;
 		}
-
-		for (int i = begin + 1; i <= end + 1; i++)
-			cout << i << " ";
-		cout << endl;
-		cout << start+1 << endl;
+		cout << attack << endl;
 	}
+
 
 
 	return 0;
