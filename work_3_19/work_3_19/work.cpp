@@ -730,7 +730,15 @@ string FindSameString(string& s1, string& s2)
 //
 //	return 0;
 //}
-
+int getMost(vector<vector<int> > board) {
+	// write code here
+	for (int i = 1; i<board.size(); i++)
+		for (int j = 1; j<board[0].size(); j++)
+		{
+			board[i][j] += max(board[i][j - 1], board[i - 1][j]);
+		}
+	return board[board.size() - 1][board[0].size() - 1];
+}
 int gcd(int a, int b)
 {
 	int temp;
