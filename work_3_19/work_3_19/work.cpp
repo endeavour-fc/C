@@ -750,36 +750,92 @@ int gcd(int a, int b)
 	}
 	return a;
 }
+//int main()
+//{
+//	int num = 0;
+//	while (cin >> num)
+//	{
+//		int attack = 0;
+//		cin >> attack;
+//		vector<int> v;
+//		for (int i = 0; i<num; i++)
+//		{
+//			int temp = 0;
+//			cin >> temp;
+//			v.push_back(temp);
+//		}
+//		for (int i = 0; i<num; i++)
+//		{
+//			if (v[i]>attack)
+//			{
+//				int temp = gcd(v[i], attack);
+//				attack += temp;
+//			}
+//			else
+//			{
+//				attack += v[i];
+//			}
+//		}
+//		cout << attack << endl;
+//	}
+//
+//
+//
+//	return 0;
+//}
+int min(int a, int b)
+{
+	return a > b ? b : a;
+}
+
 int main()
 {
-	int num = 0;
-	while (cin >> num)
-	{
-		int attack = 0;
-		cin >> attack;
-		vector<int> v;
-		for (int i = 0; i<num; i++)
-		{
-			int temp = 0;
-			cin >> temp;
-			v.push_back(temp);
-		}
-		for (int i = 0; i<num; i++)
-		{
-			if (v[i]>attack)
-			{
-				int temp = gcd(v[i], attack);
-				attack += temp;
-			}
-			else
-			{
-				attack += v[i];
-			}
-		}
-		cout << attack << endl;
-	}
-
-
-
+	cout << trailingZeroes(10000) << endl;
+	while (1);
 	return 0;
 }
+//int main()
+//{
+//	int N, M;
+//	while (cin >> N >> M)
+//	{
+//		vector<vector<int>> arr(N, vector<int>(M, 0));
+//		for (int i = 0; i<N; i++)
+//			for (int j = 0; j<M; j++)
+//				cin >> arr[i][j];
+//		vector<vector<int>> v(N, vector<int>(M, 9999));
+//		v[0][0] = 0;
+//		for (int i = 0; i<N; i++)
+//			for (int j = 0; j<M; j++)
+//			{
+//				if (arr[i][j] == 1 || (i == 0 && j == 0))
+//					continue;
+//				if (i == 0)
+//				{
+//					v[i][j] = v[i][j - 1] + 1;
+//				}
+//				else if (j == 0)
+//				{
+//					v[i][j] = v[i - 1][j] + 1;
+//				}
+//				else
+//				{
+//					v[i][j] = min(v[i][j - 1], v[i - 1][j]) + 1;
+//				}
+//			}
+//		int temp = 0;
+//		for (int i = 0; i<N; i++)
+//			for (int j = 0; j<M; j++)
+//			{
+//				if (v[i][j] == temp)
+//				{
+//					cout << "(" << i << "," << j << ")" << endl;
+//					temp++;
+//				}
+//				
+//			}
+//	}
+//
+//
+//	return 0;
+//}
