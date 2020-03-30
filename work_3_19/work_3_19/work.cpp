@@ -787,13 +787,77 @@ int min(int a, int b)
 {
 	return a > b ? b : a;
 }
+int jumpFloorII(int number) {
 
-int main()
+	vector<int> v(number + 1, 0);
+	v[0] = 1;
+	for (int i = 1; i<=number; i++)
+	{
+		int sum = 0;
+		for (int j = i; j >= 0; j--)
+			sum += v[j];
+		v[i] = sum;
+	}
+	return v[number];
+}
+int sum_vector(vector<double>& s1)
 {
-	cout << trailingZeroes(10000) << endl;
-	while (1);
+	vector<double>::reverse_iterator it1 = s1.rbegin();
+	while (it1 != s1.rend())
+	{
+		*it1 = (*it1)*3.14*2;
+		it1++;
+	}
+
+
 	return 0;
 }
+int main()
+{
+	string s1, s2;
+	while (cin >> s2 >> s1)
+	{
+		vector<double> v;
+		vector<double> v2;
+		for (int i = 0; i<s1.size(); i++)
+		{
+			v.push_back((s1[i] - '0'));
+		}
+		for (int i = 0; i<s2.size(); i++)
+		{
+			v2.push_back((s2[i] - '0'));
+		}
+		sum_vector(v);
+		if (v.size()>v2.size())
+			cout << "YES" << endl;
+		else if (v.size()<v2.size())
+			cout << "NO" << endl;
+		else
+		{
+			int i = 0;
+			for (i = 0; i<s1.size(); i++)
+			{
+				if (v[i]<v2[i])
+				{
+					cout << "NO" << endl;
+					break;
+				}
+			}
+			if (i == s1.size())
+				cout << "YES" << endl;
+		}
+	}
+
+
+	return 0;
+}
+//int main()
+//{
+//	cout << jumpFloorII(2) << endl;
+//
+//	system("pause");
+//	return 0;
+//}
 //int main()
 //{
 //	int N, M;
