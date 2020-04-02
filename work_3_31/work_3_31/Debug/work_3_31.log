@@ -1,2 +1,5 @@
 ﻿  work.cpp
+g:\code\c++\work_3_31\work_3_31\work.cpp(47): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(49): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(109): warning C4102: “http”: 未引用的标签
   work_3_31.vcxproj -> G:\Code\C++\work_3_31\Debug\work_3_31.exe
