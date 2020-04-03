@@ -2,6 +2,35 @@
 #include<vector>
 #include<string>
 using namespace std;
+class Base
+{
+public:
+	virtual void show()
+	{
+		cout << "Base:....." << endl;
+	}
+
+};
+class D :public Base
+{
+public:
+	virtual void show()
+	{
+		cout << "D:........" << endl;
+	}
+};
+int main()
+{
+	Base* b = new D;
+	//b->show();
+	Base b1;
+	//b1.show();
+	D b2;
+	//b2.show();
+	system("pause");
+	return 0;
+}
+
 int ADD(int num1, int num2)
 {
 	while (num2)
@@ -104,21 +133,50 @@ int getFirstUnFormedNum(vector<int> arr, int len) {
 	}
 		return sum + 1;
 }
-int main()
-{
-	http://www.taobao.com
-	vector<int> v = { 3,1,2 ,5,6};
-	cout << getFirstUnFormedNum(v, v.size()) << endl;
-	//string s("cbbd");
-	//cout << longestPalindrome(s) << endl;
-	//vector<int> v{ 1,2,3,4 };
-	//oddInOddEvenInEven(v, v.size());
-	//int num1 = 0;
-	//int num2 = 0;
-	//while (cin >> num1 >> num2)
-	//{
-	//	cout << ADD(num1, num2) << endl;
-	//}
-	system("pause");
-	return 0;
-}
+//int main()
+//{
+//	int num = 0;
+//	while (cin >> num)
+//	{
+//		vector<int> v;
+//		for (int i = 2; i <= (int)sqrt(num); i++)
+//		{
+//			if (num == 1)
+//				break;
+//			if (num%i == 0)
+//			{
+//				while (num%i == 0)
+//				{
+//					v.push_back(i);
+//					num /= i;
+//				}
+//			}
+//			if (num == 1)
+//				break;
+//		}
+//		if (num > 1)
+//			v.push_back(num);
+//		cout << v[v.size() - 1] << endl;
+//
+//	}
+//
+//	return 0;
+//}
+//int main()
+//{
+//	http://www.taobao.com
+//	vector<int> v = { 3,1,2 ,5,6};
+//	cout << getFirstUnFormedNum(v, v.size()) << endl;
+//	//string s("cbbd");
+//	//cout << longestPalindrome(s) << endl;
+//	//vector<int> v{ 1,2,3,4 };
+//	//oddInOddEvenInEven(v, v.size());
+//	//int num1 = 0;
+//	//int num2 = 0;
+//	//while (cin >> num1 >> num2)
+//	//{
+//	//	cout << ADD(num1, num2) << endl;
+//	//}
+//	system("pause");
+//	return 0;
+//}
