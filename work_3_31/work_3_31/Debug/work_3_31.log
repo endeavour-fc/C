@@ -1,4 +1,10 @@
 ﻿  work.cpp
-g:\code\c++\work_3_31\work_3_31\work.cpp(76): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\work_3_31\work_3_31\work.cpp(78): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(77): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(79): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(193): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(219): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(252): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(257): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(259): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(265): warning C4018: “<”: 有符号/无符号不匹配
   work_3_31.vcxproj -> G:\Code\C++\work_3_31\Debug\work_3_31.exe

@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<stack>
 using namespace std;
 class Base
 {
@@ -19,17 +20,17 @@ public:
 		cout << "D:........" << endl;
 	}
 };
-int main()
-{
-	Base* b = new D;
-	//b->show();
-	Base b1;
-	//b1.show();
-	D b2;
-	//b2.show();
-	system("pause");
-	return 0;
-}
+//int main()
+//{
+//	Base* b = new D;
+//	//b->show();
+//	Base b1;
+//	//b1.show();
+//	D b2;
+//	//b2.show();
+//	system("pause");
+//	return 0;
+//}
 
 int ADD(int num1, int num2)
 {
@@ -180,3 +181,103 @@ int getFirstUnFormedNum(vector<int> arr, int len) {
 //	system("pause");
 //	return 0;
 //}
+
+int max(int a, int b)
+{
+	return a>b ? a : b;
+}
+int largestRectangleArea(vector<int>& heights) {
+	stack<int> stack;
+	stack.push(-1);
+	int area = 0;
+	for (int i = 0; i<heights.size(); i++)
+	{
+		while (stack.top() != -1 && heights[i]<=heights[stack.top()])
+		{
+			int temp = stack.top();
+			stack.pop();
+			area = max(area, heights[temp] * (i - stack.top() - 1));
+		}
+		stack.push(i);
+	}
+	if (stack.top() != -1)
+	{
+		while (stack.top() != -1)
+		{
+			int temp = stack.top();
+			stack.pop();
+			area = max(area, heights[temp] * (heights.size()+1 - stack.top() - 1));
+		}
+		return area;
+	}
+	return area;
+}
+int numDecodings(string s) {
+	if (s == "0")
+		return 0;
+	vector<int> v(s.size() + 1, 1);
+	for (int i = 1; i<s.size(); i++)
+	{
+		if (s[i] == '0')
+		{
+			if (s[i - 1] == '1' || s[i - 1] == '2')
+			{
+				v[i + 1] = v[i - 1];
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		else
+		{
+			if (s[i - 1] == '1' || (s[i - 1] == '2'&&s[i] <= '6'))
+				v[i + 1] = v[i - 1] + v[i];
+			else
+			{
+				if (i == 1 && s[i - 1] == '0')
+					v[i+1] = 0;
+				else
+					v[i + 1] = v[i];
+			}
+		}
+	}
+	return v[v.size() - 1];
+}
+int min(int a, int b)
+{
+	return a > b ? b : a;
+}
+int minimumTotal(vector<vector<int>>& triangle) {
+	for (int i = 1; i<triangle.size(); i++)
+	{
+		triangle[i][0] += triangle[i - 1][0];
+		triangle[i][triangle[i].size() - 1] += triangle[i - 1][triangle[i - 1].size() - 1];
+	}
+	for (int i = 2; i<triangle.size(); i++)
+	{
+		for (int j = 1; j<triangle[i].size() - 1; j++)
+		{
+			triangle[i][j] += min(triangle[i - 1][j], triangle[i - 1][j - 1]);
+		}
+	}
+	int min = 999999999;
+	for (int i = 0; i<triangle[triangle.size() - 1].size(); i++)
+	{
+		if (min>triangle[triangle.size() - 1][i])
+		{
+			min = triangle[triangle.size() - 1][i];
+		}
+	}
+	return min;
+}
+int main()
+{
+	vector<vector<int>> v = { {2},{3, 4},{6, 5, 7},{4, 1, 8, 3} };
+	//string s = "01";
+	cout << minimumTotal(v) << endl;
+
+	system("pause");
+
+	return 0;
+}
