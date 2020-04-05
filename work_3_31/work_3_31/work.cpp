@@ -2,6 +2,7 @@
 #include<vector>
 #include<string>
 #include<stack>
+#include<set>
 using namespace std;
 class Base
 {
@@ -271,11 +272,31 @@ int minimumTotal(vector<vector<int>>& triangle) {
 	}
 	return min;
 }
+bool wordBreak(string s, vector<string>& wordDict) {
+	set<string> words;
+	for (int i = 0; i<wordDict.size(); i++) {
+		words.insert(wordDict[i]);
+	}
+	vector<bool> dp(s.length() + 1);
+	dp[0] = true;
+	for (int i = 1; i <= s.length(); i++) {
+		for (int j = 0; j < i; j++) {
+			if (dp[j] && words.find(s.substr(j, i)) != words.end()) {
+				dp[i] = true;
+				break;
+			}
+		}
+	}
+	return dp[s.length()];
+}
 int main()
 {
-	vector<vector<int>> v = { {2},{3, 4},{6, 5, 7},{4, 1, 8, 3} };
+	string s = "catsandog";
+	vector<string> wordDict = { "cats", "dog", "sand", "and", "cat" };
+	//vector< vector< vector< int > > > vecInt(10, vector< vector< int > >(10, vector< int >(10, 10)));
+	//vector<vector<int>> v = { {2},{3, 4},{6, 5, 7},{4, 1, 8, 3} };
 	//string s = "01";
-	cout << minimumTotal(v) << endl;
+	cout << wordBreak(s,wordDict) << endl;
 
 	system("pause");
 
