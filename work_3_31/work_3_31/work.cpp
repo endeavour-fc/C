@@ -245,33 +245,33 @@ int numDecodings(string s) {
 	}
 	return v[v.size() - 1];
 }
-int min(int a, int b)
-{
-	return a > b ? b : a;
-}
-int minimumTotal(vector<vector<int>>& triangle) {
-	for (int i = 1; i<triangle.size(); i++)
-	{
-		triangle[i][0] += triangle[i - 1][0];
-		triangle[i][triangle[i].size() - 1] += triangle[i - 1][triangle[i - 1].size() - 1];
-	}
-	for (int i = 2; i<triangle.size(); i++)
-	{
-		for (int j = 1; j<triangle[i].size() - 1; j++)
-		{
-			triangle[i][j] += min(triangle[i - 1][j], triangle[i - 1][j - 1]);
-		}
-	}
-	int min = 999999999;
-	for (int i = 0; i<triangle[triangle.size() - 1].size(); i++)
-	{
-		if (min>triangle[triangle.size() - 1][i])
-		{
-			min = triangle[triangle.size() - 1][i];
-		}
-	}
-	return min;
-}
+//int min(int a, int b)
+//{
+//	return a > b ? b : a;
+//}
+//int minimumTotal(vector<vector<int>>& triangle) {
+//	for (int i = 1; i<triangle.size(); i++)
+//	{
+//		triangle[i][0] += triangle[i - 1][0];
+//		triangle[i][triangle[i].size() - 1] += triangle[i - 1][triangle[i - 1].size() - 1];
+//	}
+//	for (int i = 2; i<triangle.size(); i++)
+//	{
+//		for (int j = 1; j<triangle[i].size() - 1; j++)
+//		{
+//			triangle[i][j] += min(triangle[i - 1][j], triangle[i - 1][j - 1]);
+//		}
+//	}
+//	int min = 999999999;
+//	for (int i = 0; i<triangle[triangle.size() - 1].size(); i++)
+//	{
+//		if (min>triangle[triangle.size() - 1][i])
+//		{
+//			min = triangle[triangle.size() - 1][i];
+//		}
+//	}
+//	return min;
+//}
 bool wordBreak(string s, vector<string>& wordDict) {
 	set<string> words;
 	for (int i = 0; i<wordDict.size(); i++) {
@@ -289,14 +289,78 @@ bool wordBreak(string s, vector<string>& wordDict) {
 	}
 	return dp[s.length()];
 }
+char min(char a, char b)
+{
+	return a>b ? b : a;
+}
+int maximalSquare(vector<vector<char>>& matrix) {
+	if (matrix.size() == 0)
+		return 0;
+	char max = '0';
+	for (int i = 0; i<matrix.size(); i++)
+	{
+		for (int j = 0; j<matrix[0].size(); j++)
+		{
+			if (matrix[i][j] == '0')
+				continue;
+			if (i == 0 || j == 0)
+			{
+
+				if (matrix[i][j]>max)
+					max = matrix[i][j];
+				continue;
+			}
+
+			if (matrix[i - 1][j - 1] != '0'&&matrix[i - 1][j] >= matrix[i - 1][j - 1] && matrix[i - 1][j - 1] <= matrix[i][j - 1])
+			{
+				matrix[i][j] = matrix[i - 1][j - 1] + 1;
+				if (matrix[i][j]>max)
+					max = matrix[i][j];
+			}
+			else if (matrix[i - 1][j - 1] != '0'&&matrix[i - 1][j] != '0'&&matrix[i][j - 1] != '0')
+			{
+				matrix[i][j] = min(matrix[i - 1][j], matrix[i][j - 1] != '0') + 1+'0';
+				if (matrix[i][j]>max)
+					max = matrix[i][j];
+			}
+			else
+			{
+				if (matrix[i][j]>max)
+					max = matrix[i][j];
+			}
+		}
+	}
+	return (max - '0')*(max - '0');
+}
+vector<int> countBits(int num) {
+	vector<int> v(num + 1, 0);
+	if (num == 0)
+		return v;
+
+	int i = 0;
+	int n = 1;
+	while (n <= num)
+	{
+		while (i<n&&i + n <= num)
+		{
+			v[i + n] = v[i] + 1;
+			i++;
+		}
+		i = 0;
+		n <<= 1;
+	}
+	return v;
+}
 int main()
 {
-	string s = "catsandog";
-	vector<string> wordDict = { "cats", "dog", "sand", "and", "cat" };
+	vector<vector<char>> v = { {'0', '0', '0', '1'},{'1', '1', '0', '1'},{'1', '1', '1', '1'},{'0', '1', '1', '1'},{ '0', '1', '1', '1' } };
+
+	//string s = "catsandog";
+	//vector<string> wordDict = { "cats", "dog", "sand", "and", "cat" };
 	//vector< vector< vector< int > > > vecInt(10, vector< vector< int > >(10, vector< int >(10, 10)));
 	//vector<vector<int>> v = { {2},{3, 4},{6, 5, 7},{4, 1, 8, 3} };
 	//string s = "01";
-	cout << wordBreak(s,wordDict) << endl;
+	cout << maximalSquare(v) << endl;
 
 	system("pause");
 
