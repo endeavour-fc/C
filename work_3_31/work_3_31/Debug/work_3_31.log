@@ -7,4 +7,6 @@ g:\code\c++\work_3_31\work_3_31\work.cpp(277): warning C4018: “<”: 有符号
 g:\code\c++\work_3_31\work_3_31\work.cpp(282): warning C4018: “<=”: 有符号/无符号不匹配
 g:\code\c++\work_3_31\work_3_31\work.cpp(300): warning C4018: “<”: 有符号/无符号不匹配
 g:\code\c++\work_3_31\work_3_31\work.cpp(302): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(356): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(358): warning C4018: “<”: 有符号/无符号不匹配
   work_3_31.vcxproj -> G:\Code\C++\work_3_31\Debug\work_3_31.exe

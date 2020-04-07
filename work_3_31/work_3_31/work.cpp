@@ -351,16 +351,50 @@ vector<int> countBits(int num) {
 	}
 	return v;
 }
+bool isSubsequence(string s, string t) {
+	vector<vector<int>>v(s.size(), vector<int>(t.size(), 1));
+	for (int i = 0; i<s.size(); i++)
+	{
+		for (int j = 0; j<t.size(); j++)
+		{
+			if (i == 0)
+			{
+				if (s[i] == t[j])
+				{
+					v[i][j] = 0;
+					break;
+				}
+				else
+				{
+					v[i][j] = 0;
+				}
+				continue;
+			}
+			if (v[i - 1][j] && s[i] == t[j])
+			{
+				if(i!=s.size()-1||j!=t.size()-1)
+				v[i][j] = 0;
+				break;
+			}
+			else
+			{
+				v[i][j] = 0;
+			}
+		}
+	}
+	return v[s.size() - 1][t.size() - 1];
+}
 int main()
 {
-	vector<vector<char>> v = { {'0', '0', '0', '1'},{'1', '1', '0', '1'},{'1', '1', '1', '1'},{'0', '1', '1', '1'},{ '0', '1', '1', '1' } };
-
+	//vector<vector<char>> v = { {'0', '0', '0', '1'},{'1', '1', '0', '1'},{'1', '1', '1', '1'},{'0', '1', '1', '1'},{ '0', '1', '1', '1' } };
+	string s1 = "abc";
+	string s2 = "ahbgdc";
 	//string s = "catsandog";
 	//vector<string> wordDict = { "cats", "dog", "sand", "and", "cat" };
 	//vector< vector< vector< int > > > vecInt(10, vector< vector< int > >(10, vector< int >(10, 10)));
 	//vector<vector<int>> v = { {2},{3, 4},{6, 5, 7},{4, 1, 8, 3} };
 	//string s = "01";
-	cout << maximalSquare(v) << endl;
+	cout << isSubsequence(s1,s2) << endl;
 
 	system("pause");
 
