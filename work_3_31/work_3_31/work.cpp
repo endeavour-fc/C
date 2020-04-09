@@ -384,17 +384,153 @@ bool isSubsequence(string s, string t) {
 	}
 	return v[s.size() - 1][t.size() - 1];
 }
+int nthUglyNumber(int n)
+{
+	if (n == 0)
+		return 0;
+	int* arr = new int[n];
+	arr[0] = 1;
+	int p2 = 0;
+	int p3 = 0;
+	int p5 = 0;
+	int i;
+	for (i = 1; i<n; i++)
+	{
+		int ugly = min(arr[p2] * 2, min(arr[p3] * 3, arr[p5] * 5));
+		arr[i] = ugly;
+		if (ugly == arr[p2] * 2)
+			++p2;
+		if (ugly == arr[p3] * 3)
+			++p3;
+		if (ugly == arr[p5] * 5)
+			++p5;
+	}
+	return arr[i - 1];
+}
+int robmax(vector<int>& nums, int begin, int end)
+{
+	int a1 = 0;
+	int a2 = 0;
+	int a3 = 0;
+	for (int i = begin; i<end; i++)
+	{
+		a1 = max(a2, a3 + nums[i]);
+		a3 = a2;
+		a2 = a1;
+	}
+	return a1;
+}
+int rob(vector<int>& nums) {
+	if (nums.size() == 0)
+		return 0;
+	if (nums.size() == 1)
+		return nums[0];
+	return max(robmax(nums, 0, nums.size() - 1), robmax(nums, 1, nums.size()));
+}
+int maxArea(vector<int>& height) {
+	int max = 0;
+	int it1 = 0;
+	int it2 = height.size() - 1;
+	while (it1<it2)
+	{
+		int temp = 0;
+		if (height[it1]<height[it2])
+		{
+			temp=height[it1] * (it2 - it1);
+			it1++;
+		}
+		else
+		{
+			temp = height[it2] * (it2 - it1);
+				it2--;
+		}
+		if (temp > max)
+			max = temp;
+	}
+	return max;
+}
+int searchleft(vector<int>& nums, int target, int left, int right)
+{
+	while (left <= right)
+	{
+		int mid = (left + right) / 2;
+		if (nums[mid] == target && (mid - 1 < 0 || nums[mid - 1] != target))
+		{
+			return mid;
+		}
+		else if (nums[mid] >= target)
+		{
+			right = mid - 1;
+		}
+		else
+		{
+			left = mid + 1;
+		}
+
+	}
+	return -1;
+}
+int searchright(vector<int>& nums, int target, int left, int right)
+{
+	while (left <= right)
+	{
+		int mid = (left + right) / 2;
+		if (nums[mid] == target && (mid + 1 >= nums.size() || nums[mid + 1] != target))
+		{
+			return mid;
+		}
+		else if (nums[mid]>target)
+		{
+			right = mid - 1;
+		}
+		else
+		{
+			left = mid + 1;
+		}
+
+	}
+	return -1;
+}
+vector<int> searchRange(vector<int>& nums, int target) {
+	int left = 0;
+	int right = nums.size() - 1;
+	vector<int> v(2, -1);
+	v[0] = searchleft(nums, target, 0, nums.size() - 1);
+	v[1] = searchright(nums, target, 0, nums.size() - 1);
+	return v;
+}
+bool canJump(vector<int>& nums) {
+	vector<int> v(nums.size(), 0);
+	v[0] = 1;
+	for (int i = 0; i<nums.size(); i++)
+	{
+		if (v[i])
+		{
+			for (int j = i + 1; j <= nums[i] + i && j<nums.size(); j++)
+			{
+				v[j] += 1;
+			}
+		}
+	}
+	return v[nums.size() - 1];
+}
 int main()
 {
+	vector<int> v = { 3,2,1,0,4 };
+	cout << canJump(v) << endl;
+	//vector<int> a = searchRange(v,8);
+	//for (int i = 0; i < a.size(); i++)
+	//	cout << a[i]<<" ";
+	//cout << endl;
 	//vector<vector<char>> v = { {'0', '0', '0', '1'},{'1', '1', '0', '1'},{'1', '1', '1', '1'},{'0', '1', '1', '1'},{ '0', '1', '1', '1' } };
-	string s1 = "abc";
-	string s2 = "ahbgdc";
+	//string s1 = "abc";
+	//string s2 = "ahbgdc";
 	//string s = "catsandog";
 	//vector<string> wordDict = { "cats", "dog", "sand", "and", "cat" };
 	//vector< vector< vector< int > > > vecInt(10, vector< vector< int > >(10, vector< int >(10, 10)));
 	//vector<vector<int>> v = { {2},{3, 4},{6, 5, 7},{4, 1, 8, 3} };
 	//string s = "01";
-	cout << isSubsequence(s1,s2) << endl;
+	//cout << isSubsequence(s1,s2) << endl;
 
 	system("pause");
 
