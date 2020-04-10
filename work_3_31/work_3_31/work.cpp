@@ -514,10 +514,49 @@ bool canJump(vector<int>& nums) {
 	}
 	return v[nums.size() - 1];
 }
+int coinChange(vector<int>& coins, int amount) {
+	if (amount == 0)
+		return 0;
+	vector<int> v(amount + 1, INT_MAX);
+	v[0] = 0;
+
+	for (int i = 0; i<amount; i++)
+	{
+		if (v[i] == INT_MAX)
+			continue;
+		for (int j = 0; j<coins.size(); j++)
+		{
+			if (coins[j]== 2147483647 ||(i + coins[j])>amount)
+				continue;
+			if (v[i + coins[j]] > v[i])
+				v[i + coins[j]] = v[i] + 1;
+		}
+	}
+	if (v[amount] == INT_MAX)
+		return -1;
+	return v[amount];
+}
+int integerBreak(int n) {
+	if (n<4)
+		return n - 1;
+	vector<int> v(4, 1);
+	v[2] = 2;
+	v[3] = 3;
+	for (int i = 4; i<=n; i++)
+	{
+		int max1 = 0;
+		for (int j = 1; j <= i / 2; j++)
+		{
+			max1 = max(v[j] * v[i - j], max1);
+		}
+		v.push_back(max1);
+	}
+	return v[n];
+}
 int main()
 {
-	vector<int> v = { 3,2,1,0,4 };
-	cout << canJump(v) << endl;
+	//vector<int> v = { 1,2,5};
+	cout << integerBreak(10) << endl;
 	//vector<int> a = searchRange(v,8);
 	//for (int i = 0; i < a.size(); i++)
 	//	cout << a[i]<<" ";
