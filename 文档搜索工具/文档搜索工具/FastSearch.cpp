@@ -1,7 +1,5 @@
-#include"Common.h"
 #include"sysutil.h"
-#include"sqlite3.h"
-#pragma comment(lib,"./sqlite3.lib")
+
 void test()
 {
 	sqlite3 *db;
