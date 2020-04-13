@@ -562,10 +562,30 @@ int findDuplicate(vector<int>& nums)
 		swap(nums[0], nums[nums[0]]);
 	}
 }
+vector<int> findDuplicates(vector<int>& nums) {
+	vector<int> v;
+	for (int i = 0; i<nums.size(); i++)
+	{
+		if (i + 1 == nums[i])
+			continue;
+		while (nums[i] != nums[nums[i] - 1])
+			swap(nums[i], nums[nums[i] - 1]);
+	}
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (i + 1 != nums[i])
+			v.push_back(nums[i]);
+	}
+
+	return v;
+}
 int main()
 {
-	//vector<int> v = { 1,2,5};
-	cout << integerBreak(10) << endl;
+	vector<int> v = { 4,3,2,7,8,2,3,1 };
+	vector<int> arr=findDuplicates(v);
+	for (int i = 0; i < arr.size(); i++)
+		cout << arr[i] << " ";
+	cout << endl;
 	//vector<int> a = searchRange(v,8);
 	//for (int i = 0; i < a.size(); i++)
 	//	cout << a[i]<<" ";

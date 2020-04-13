@@ -13,4 +13,7 @@ g:\code\c++\work_3_31\work_3_31\work.cpp(478): warning C4018: “>=”: 有符�
 g:\code\c++\work_3_31\work_3_31\work.cpp(505): warning C4018: “<”: 有符号/无符号不匹配
 g:\code\c++\work_3_31\work_3_31\work.cpp(509): warning C4018: “<”: 有符号/无符号不匹配
 g:\code\c++\work_3_31\work_3_31\work.cpp(527): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(567): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(574): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(586): warning C4018: “<”: 有符号/无符号不匹配
   work_3_31.vcxproj -> G:\Code\C++\work_3_31\Debug\work_3_31.exe
