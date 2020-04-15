@@ -579,13 +579,46 @@ vector<int> findDuplicates(vector<int>& nums) {
 
 	return v;
 }
+int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+	if (k <= 1)
+		return 0;
+	int pos = 1;
+	int left = 0;
+	int ret = 0;
+	for (int right = 0; right<nums.size(); right++)
+	{
+		pos *= nums[right];
+		while (pos >= k)
+			pos /= nums[left++];
+		ret += right - left + 1;
+	}
+	return ret;
+}
+int max(double a, double b)
+{
+	return a>b ? a : b;
+}
+double findMaxAverage(vector<int>& nums, int k) {
+	if (nums.size() == 1)
+		return nums[0];
+
+	for (int i = 1; i<nums.size(); i++)
+		nums[i] += nums[i - 1];
+	double ret = nums[k-1] * 1.0 / k;
+	for (int i = k; i<nums.size(); i++)
+	{
+		ret = max(ret, (nums[i] - nums[i - k])*1.0 / k);
+	}
+	return ret;
+}
 int main()
 {
-	vector<int> v = { 4,3,2,7,8,2,3,1 };
-	vector<int> arr=findDuplicates(v);
-	for (int i = 0; i < arr.size(); i++)
-		cout << arr[i] << " ";
-	cout << endl;
+	vector<int> v = { 1,12,-5,-6,50,3 };
+	cout << findMaxAverage(v, 4) << endl;
+	//vector<int> arr=findDuplicates(v);
+	//for (int i = 0; i < arr.size(); i++)
+	//	cout << arr[i] << " ";
+	//cout << endl;
 	//vector<int> a = searchRange(v,8);
 	//for (int i = 0; i < a.size(); i++)
 	//	cout << a[i]<<" ";
