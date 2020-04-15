@@ -3,6 +3,7 @@
 #include<string>
 #include<stack>
 #include<set>
+#include<cmath>
 using namespace std;
 class Base
 {
@@ -289,7 +290,7 @@ bool wordBreak(string s, vector<string>& wordDict) {
 	}
 	return dp[s.length()];
 }
-char min(char a, char b)
+int min(int a, int b)
 {
 	return a>b ? b : a;
 }
@@ -611,10 +612,45 @@ double findMaxAverage(vector<int>& nums, int k) {
 	}
 	return ret;
 }
+int numSquares(int n) {
+	vector<int> v(n, 0);
+	for (int i = 0; i<n; i++)
+	{
+		if (i + 1 == (int)sqrt(i + 1)*(int)sqrt(i + 1))
+		{
+			v[i] = 1;
+			continue;
+		}
+		int min1 = INT_MAX;
+		for (int j = i - 1; j >= i / 2; j--)
+		{
+			min1 = min(min1, v[j] + v[i - j-1]);
+		}
+		v[i] = min1;
+	}
+	return v[n - 1];
+}
+int lengthOfLIS(vector<int>& nums) {
+	vector<int> v(nums.size(), 0);
+	v[0] = 1;
+	int ret = 1;
+	for (int i = 1; i<nums.size(); ++i)
+	{
+		int temp = 0;
+		for (int j = 0; j<i; ++j)
+		{
+			if (nums[i]>nums[j])
+				temp = max(temp, v[j]);
+		}
+		v[i] = temp + 1;
+		ret = max(ret, v[i]);
+	}
+	return ret;
+}
 int main()
 {
-	vector<int> v = { 1,12,-5,-6,50,3 };
-	cout << findMaxAverage(v, 4) << endl;
+	vector<int> v = { 10,9,2,5,3,7,101,18 };
+	cout << lengthOfLIS(v) << endl;
 	//vector<int> arr=findDuplicates(v);
 	//for (int i = 0; i < arr.size(); i++)
 	//	cout << arr[i] << " ";
