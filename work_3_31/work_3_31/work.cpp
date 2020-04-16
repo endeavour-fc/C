@@ -647,10 +647,55 @@ int lengthOfLIS(vector<int>& nums) {
 	}
 	return ret;
 }
+bool circularArrayLoop(vector<int>& nums) {
+	if (nums.size() == 0)
+		return false;
+	int flag = 0;
+	int len = nums.size();
+	if (nums[0]<0)
+		flag = 1;
+	int i = 0;
+	while (0 != (i + nums[i] + len) % len)
+	{
+		if (i == (i + nums[i] + len) % len)
+			return false;
+		if (flag&&nums[(i + nums[i] + len) % len]>0)
+			return false;
+		if (flag == 0 && nums[(i + nums[i] + len) % len]<0)
+			return false;
+		i = (i + nums[i] + len) % len;
+	}
+	return true;
+}
+vector<int> addToArrayForm(vector<int>& A, int K) {
+	int cina = 0;
+	for (int i = A.size() - 1; i >= 0; i--)
+	{
+		if (i == 0 && K>9)
+		{
+			A.insert(A.begin(), 0);
+			i++;
+		}
+		if (K == 0 && cina == 0)
+			break;
+		int temp = A[i] + K % 10 + cina;
+		cina = 0;
+		A[i] = temp % 10;
+		K /= 10;
+		if (temp>9)
+			cina = 1;
+	}
+	if (cina)
+	{
+		A.insert(A.begin(), 1);
+	}
+	return A;
+}
 int main()
 {
-	vector<int> v = { 10,9,2,5,3,7,101,18 };
-	cout << lengthOfLIS(v) << endl;
+	vector<int> v = { 0 };
+	addToArrayForm(v, 23);
+	//cout << circularArrayLoop(v) << endl;
 	//vector<int> arr=findDuplicates(v);
 	//for (int i = 0; i < arr.size(); i++)
 	//	cout << arr[i] << " ";
