@@ -691,10 +691,40 @@ vector<int> addToArrayForm(vector<int>& A, int K) {
 	}
 	return A;
 }
+int getnum(int num)
+{
+	int sum = 0;
+	while (num)
+	{
+		sum += num % 10;
+		num /= 10;
+	}
+	if (sum == 15)
+		return 1;
+	return 0;
+}
+vector<vector<int>> transpose(vector<vector<int>>& A) {
+	vector<vector<int>> v(A[0].size(), vector<int>(A.size(), 0));
+	for (int i = 0; i<A.size(); i++)
+	{
+		for (int j = 0; j<A[i].size(); j++)
+		{
+			v[j][i] = A[i][j];
+		}
+	}
+	return v;
+}
 int main()
 {
-	vector<int> v = { 0 };
-	addToArrayForm(v, 23);
+	vector<vector<int>> v = { {1,2,3},{4,5,6},{7,8,9} };
+	transpose(v);
+	//for (int i = 200; i <= 300; i++)
+	//{
+	//	if (getnum(i))
+	//		printf("%d ", i);
+	//}
+	//vector<int> v = { 0 };
+	//addToArrayForm(v, 23);
 	//cout << circularArrayLoop(v) << endl;
 	//vector<int> arr=findDuplicates(v);
 	//for (int i = 0; i < arr.size(); i++)
