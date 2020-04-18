@@ -714,10 +714,47 @@ vector<vector<int>> transpose(vector<vector<int>>& A) {
 	}
 	return v;
 }
+void gameOfLife(vector<vector<int>>& board) {
+	int arr[] = { 0,1,-1 };
+	for (int i = 0; i<board.size(); i++)
+	{
+		for (int j = 0; j<board[0].size(); j++)
+		{
+			int sum = 0;
+			for (int a = 0; a<3; a++)
+			{
+				for (int b = 0; b<3; b++)
+				{
+					if (!(a == 0 && b == 0))
+					{
+						int r = i + arr[a];
+						int l = j + arr[b];
+						if ((r<board.size() && r >= 0) && (l<board[0].size() && l >= 0) && abs(board[r][l]) == 1)
+							sum++;
+					}
+				}
+			}
+			if (board[i][j] == 1 && (sum<2 || sum>3))
+				board[i][j] = -1;
+			if (board[i][j] == 0 && (sum == 3))
+				board[i][j] = 2;
+		}
+	}
+	for (int i = 0; i<board.size(); i++)
+	{
+		for (int j = 0; j<board[0].size(); j++)
+		{
+			if (board[i][j]>0)
+				board[i][j] = 1;
+			else
+				board[i][j] = 0;
+		}
+	}
+}
 int main()
 {
-	vector<vector<int>> v = { {1,2,3},{4,5,6},{7,8,9} };
-	transpose(v);
+	vector<vector<int>> v = { {0,1,0},{0,0,1},{1,1,1},{0,0,0} };
+	gameOfLife(v);
 	//for (int i = 200; i <= 300; i++)
 	//{
 	//	if (getnum(i))
