@@ -9,6 +9,11 @@
 #pragma comment(lib,"./sqlite3.lib")
 #define DOC_DB "doc.db"
 #define DOC_TABLE "doc.tb"
-#define SQL_BUFFER_SIZE 1000
+#define SQL_BUFFER_SIZE 256
+#define MAX_TITLE_BUFFER 128
+#include<thread>
+#include<chrono>
+#include<windows.h>
+#include<algorithm>
 using namespace std;
 
