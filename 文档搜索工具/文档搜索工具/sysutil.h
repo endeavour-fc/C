@@ -30,8 +30,7 @@ inline static void __TraceDebug(const char* filename, int line,
 {
 #ifdef __TRACE__
 	//输出调用函数的信息
-	fprintf(stdout, "[TRACE]
-		[%s:%d : %s]:",GetFileName(filename).c_str(), line, function);
+	fprintf(stdout, "[TRACE][%s:%d : %s]:",GetFileName(filename).c_str(), line, function);
 		//输出用户打的trace信息
 		va_list args;
 	va_start(args, format);
