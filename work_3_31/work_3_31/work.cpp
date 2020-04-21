@@ -4,6 +4,8 @@
 #include<stack>
 #include<set>
 #include<cmath>
+#include<functional>
+#include <algorithm>
 using namespace std;
 class Base
 {
@@ -751,37 +753,97 @@ void gameOfLife(vector<vector<int>>& board) {
 		}
 	}
 }
+typedef struct ListNode
+{
+	int price;
+	int run;
+}ListNode;
+//int main()
+//{
+//	int B, N;
+//	N = 0;
+//	cin >> B >> N;
+//	vector<ListNode> dp(N, ListNode());//初始化N个节点空间
+//	for (int i = 0; i < N; i++)
+//	{
+//		cin >> dp[i].price >> dp[i].run;
+//	}
+//	//sort(dp.begin(), dp.end());//默认升序
+//							   //此时得到的向量空间就是升序的
+//	int count = 0;
+//	vector<ListNode>::iterator it = dp.begin();
+//	//关键优惠劵给哪个牛，应该是最大优惠的那个牛即礼物临届最贵的牛
+//	while (it != dp.end() && N > 0)
+//	{
+//		N -= ((*it).price + (*it).run);
+//		count++;
+//		it++;
+//	}
+//	if (it == dp.end())
+//	{
+//		cout << "最大奶牛数" << count << endl;
+//	}
+//	else if (N + (*it).price / 2 >= (*(it + 1)).price + (*(it + 1)).run)
+//	{
+//		count++;
+//	}
+//	cout << "最大奶牛数" << count << endl;
+//	system("pause");
+//	return 0;
+//}
+//int main()
+//{
+//	vector<vector<int>> v = { {0,1,0},{0,0,1},{1,1,1},{0,0,0} };
+//	gameOfLife(v);
+//	//for (int i = 200; i <= 300; i++)
+//	//{
+//	//	if (getnum(i))
+//	//		printf("%d ", i);
+//	//}
+//	//vector<int> v = { 0 };
+//	//addToArrayForm(v, 23);
+//	//cout << circularArrayLoop(v) << endl;
+//	//vector<int> arr=findDuplicates(v);
+//	//for (int i = 0; i < arr.size(); i++)
+//	//	cout << arr[i] << " ";
+//	//cout << endl;
+//	//vector<int> a = searchRange(v,8);
+//	//for (int i = 0; i < a.size(); i++)
+//	//	cout << a[i]<<" ";
+//	//cout << endl;
+//	//vector<vector<char>> v = { {'0', '0', '0', '1'},{'1', '1', '0', '1'},{'1', '1', '1', '1'},{'0', '1', '1', '1'},{ '0', '1', '1', '1' } };
+//	//string s1 = "abc";
+//	//string s2 = "ahbgdc";
+//	//string s = "catsandog";
+//	//vector<string> wordDict = { "cats", "dog", "sand", "and", "cat" };
+//	//vector< vector< vector< int > > > vecInt(10, vector< vector< int > >(10, vector< int >(10, 10)));
+//	//vector<vector<int>> v = { {2},{3, 4},{6, 5, 7},{4, 1, 8, 3} };
+//	//string s = "01";
+//	//cout << isSubsequence(s1,s2) << endl;
+//
+//	system("pause");
+//
+//	return 0;
+//}
+int findContentChildren(vector<int>& g, vector<int>& s) {
+	sort(g.begin(), g.end());
+	sort(s.begin(), s.end());
+	int i = 0;
+	int j = 0;
+	while (i<g.size() && j<s.size())
+	{
+		if (s[j] >= g[i])
+		{
+			j++;
+		}
+		i++;
+	}
+	return j;
+}
 int main()
 {
-	vector<vector<int>> v = { {0,1,0},{0,0,1},{1,1,1},{0,0,0} };
-	gameOfLife(v);
-	//for (int i = 200; i <= 300; i++)
-	//{
-	//	if (getnum(i))
-	//		printf("%d ", i);
-	//}
-	//vector<int> v = { 0 };
-	//addToArrayForm(v, 23);
-	//cout << circularArrayLoop(v) << endl;
-	//vector<int> arr=findDuplicates(v);
-	//for (int i = 0; i < arr.size(); i++)
-	//	cout << arr[i] << " ";
-	//cout << endl;
-	//vector<int> a = searchRange(v,8);
-	//for (int i = 0; i < a.size(); i++)
-	//	cout << a[i]<<" ";
-	//cout << endl;
-	//vector<vector<char>> v = { {'0', '0', '0', '1'},{'1', '1', '0', '1'},{'1', '1', '1', '1'},{'0', '1', '1', '1'},{ '0', '1', '1', '1' } };
-	//string s1 = "abc";
-	//string s2 = "ahbgdc";
-	//string s = "catsandog";
-	//vector<string> wordDict = { "cats", "dog", "sand", "and", "cat" };
-	//vector< vector< vector< int > > > vecInt(10, vector< vector< int > >(10, vector< int >(10, 10)));
-	//vector<vector<int>> v = { {2},{3, 4},{6, 5, 7},{4, 1, 8, 3} };
-	//string s = "01";
-	//cout << isSubsequence(s1,s2) << endl;
-
-	system("pause");
-
+	vector<int> v1 = { 10,9,8,7};
+	vector<int> v2 = { 5,6,7,8 };
+	findContentChildren(v1, v2);
 	return 0;
 }
