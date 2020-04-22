@@ -840,6 +840,71 @@ int findContentChildren(vector<int>& g, vector<int>& s) {
 	}
 	return j;
 }
+bool lemonadeChange(vector<int>& bills) {
+	int five = 0;
+	int ten = 0;
+	for (int i = 0; i<bills.size(); i++)
+	{
+		if (bills[i] == 5)
+		{
+			five++;
+		}
+		else if (bills[i] == 10)
+		{
+			if (five == 0)
+				return false;
+			five--;
+			ten++;
+		}
+		else
+		{
+			if (five&&ten)
+			{
+				five--;
+				ten--;
+			}
+			else if (five >= 3)
+			{
+				five -= 3;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+bool isMatch(string s, string p) {
+	vector<vector<int>> v(s.size() + 1, vector<int>(p.size() + 1, 0));
+	v[0][0] = 1;
+	for (int i = 1; i <= p.size(); i++)
+	{
+		if (i == 1)
+			continue;
+		v[0][i] = v[0][i - 2] && (p[i - 1] == '*');
+	}
+	for (int i = 1; i <= s.size(); i++)
+		for (int j = 1; j <= p.size(); j++)
+		{
+			if (s[i - 1] == p[j - 1] || p[j - 1] == '.')
+				v[i][j] = v[i - 1][j - 1];
+			else if (p[j - 1] == '*')
+			{
+				if (j<2)
+					continue;
+				if (p[j - 2] == '.' || p[j - 2] == s[i - 1])
+				{
+					v[i][j] = v[i - 1][j] || v[i][j - 1] || v[i][j - 2];
+				}
+				else if (p[j - 2] != '.'&&p[j - 2] != s[i - 1])
+				{
+					v[i][j] = v[i][j - 2];
+				}
+			}
+		}
+	return v[s.size()][p.size()];
+}
 int main()
 {
 	vector<int> v1 = { 10,9,8,7};
