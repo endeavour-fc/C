@@ -905,10 +905,44 @@ bool isMatch(string s, string p) {
 		}
 	return v[s.size()][p.size()];
 }
+void get(vector<int>& temp, int target, int pos, vector<int> v);
+
+	vector<vector<int>> ret;
+	vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+		if (candidates.size() == 0)
+			return ret;
+		vector<int> v;
+		sort(candidates.begin(), candidates.end());
+		get(candidates, target, 0, v);
+		return ret;
+
+	}
+	void get(vector<int>& temp, int target, int pos, vector<int> v)
+	{
+		if (target == 0)
+		{
+			ret.push_back(v);
+			return;
+		}
+		if (target>0)
+		{
+			for (int i = pos; i<temp.size(); i++)
+			{
+				if (!v.empty() && v.back()>temp[i])
+					continue;
+				if (i>pos&&temp[i] == temp[i - 1])
+					continue;
+				v.push_back(temp[i]);
+				get(temp, target - temp[i], i+1, v);
+				v.pop_back();
+			}
+		}
+	}
 int main()
 {
-	vector<int> v1 = { 10,9,8,7};
+	vector<int> v1 = { 10,1,2,7,6,1,5 };
 	vector<int> v2 = { 5,6,7,8 };
-	findContentChildren(v1, v2);
+	combinationSum2(v1, 8);
+	//findContentChildren(v1, v2);
 	return 0;
 }
