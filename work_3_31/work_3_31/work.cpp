@@ -905,44 +905,124 @@ bool isMatch(string s, string p) {
 		}
 	return v[s.size()][p.size()];
 }
-void get(vector<int>& temp, int target, int pos, vector<int> v);
-
-	vector<vector<int>> ret;
-	vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-		if (candidates.size() == 0)
-			return ret;
-		vector<int> v;
-		sort(candidates.begin(), candidates.end());
-		get(candidates, target, 0, v);
-		return ret;
-
-	}
-	void get(vector<int>& temp, int target, int pos, vector<int> v)
+//void get(vector<int>& temp, int target, int pos, vector<int> v);
+//
+//	vector<vector<int>> ret;
+//	vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+//		if (candidates.size() == 0)
+//			return ret;
+//		vector<int> v;
+//		sort(candidates.begin(), candidates.end());
+//		get(candidates, target, 0, v);
+//		return ret;
+//
+//	}
+//	void get(vector<int>& temp, int target, int pos, vector<int> v)
+//	{
+//		if (target == 0)
+//		{
+//			ret.push_back(v);
+//			return;
+//		}
+//		if (target>0)
+//		{
+//			for (int i = pos; i<temp.size(); i++)
+//			{
+//				if (!v.empty() && v.back()>temp[i])
+//					continue;
+//				if (i>pos&&temp[i] == temp[i - 1])
+//					continue;
+//				v.push_back(temp[i]);
+//				get(temp, target - temp[i], i+1, v);
+//				v.pop_back();
+//			}
+//		}
+//	}
+	//vector<vector<int>> ret;
+	//vector<vector<int>> subsets(vector<int>& nums) {
+	//	vector<int> v;
+	//	get(nums, v, 0);
+	//	return ret;
+	//}
+	//void get(vector<int>& temp, vector<int> v, int pos)
+	//{
+	//	if (pos <= temp.size())
+	//	{
+	//		ret.push_back(v);
+	//		for (int i = 0; i<temp.size(); ++i)
+	//		{
+	//			if (!v.empty() && v.back()>temp[i])
+	//				continue;
+	//			if (find(v.begin(), v.end(), temp[i]) != v.end())
+	//				continue;
+	//			v.push_back(temp[i]);
+	//			get(temp, v, pos + 1);
+	//			v.pop_back();
+	//		}
+	//	}
+	//}
+//vector<vector<int>> ret;
+//vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+//	vector<int> v;
+//	vector<bool> bl(nums.size(), false);//保存已经访问过的变量位置
+//	sort(nums.begin(), nums.end());
+//	get(nums, v, 0, bl);
+//	return ret;
+//}
+//void get(vector<int>& nums, vector<int> v, int pos, vector<bool> bl)
+//{
+//	ret.push_back(v);
+//	if (v.size() < nums.size())//当数组大小与所给的数组大小相等时，停止回溯
+//	{
+//		for (int i = pos; i<nums.size(); ++i)
+//		{
+//			if (bl[i])
+//				continue;
+//			if (i>0 && nums[i] == nums[i - 1] && !bl[i - 1])//bl[i-1]可以不加！
+//				continue;
+//			bl[i] = true;
+//			v.push_back(nums[i]);
+//			get(nums, v, i + 1, bl);//典型的回溯套路
+//			bl[i] = false;
+//			v.pop_back();
+//		}
+//	}
+//}
+vector<int> decompressRLElist(vector<int>& nums) {
+	int i = 0;
+	vector<int> v;
+	while (i<nums.size())
 	{
-		if (target == 0)
+		int num = nums[i];
+		i++;
+		for (int j = 0; j<num; j++)
+			v.push_back(nums[i]);
+		i++;
+	}
+	return v;
+}
+int numJewelsInStones(string J, string S) {
+	int ret = 0;
+	for (string::iterator it = J.begin(); it<J.end(); it++)
+	{
+		int i = 0;
+		string::iterator temp = S.begin();
+		while ((temp = find(temp, S.end(), *it)) != S.end())
 		{
-			ret.push_back(v);
-			return;
-		}
-		if (target>0)
-		{
-			for (int i = pos; i<temp.size(); i++)
-			{
-				if (!v.empty() && v.back()>temp[i])
-					continue;
-				if (i>pos&&temp[i] == temp[i - 1])
-					continue;
-				v.push_back(temp[i]);
-				get(temp, target - temp[i], i+1, v);
-				v.pop_back();
-			}
+			temp++;
+			ret++;
 		}
 	}
+	return ret;
+}
 int main()
 {
-	vector<int> v1 = { 10,1,2,7,6,1,5 };
+	vector<int> v1 = { 1,2,3,4 };
 	vector<int> v2 = { 5,6,7,8 };
-	combinationSum2(v1, 8);
+	//decompressRLElist(v1);
+	cout << numJewelsInStones("aA","aAAbbbb") << endl;
+	//combinationSum2(v1, 8);
 	//findContentChildren(v1, v2);
+	system("pause");
 	return 0;
 }
