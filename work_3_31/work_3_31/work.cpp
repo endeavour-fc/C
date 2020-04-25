@@ -1015,14 +1015,54 @@ int numJewelsInStones(string J, string S) {
 	}
 	return ret;
 }
+struct TreeNode {
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+TreeNode* ret(vector<int>& nums, int left, int right)
+{
+	if (left >= right)
+		return NULL;
+	int mid = (left + right) / 2;
+	TreeNode* temp = new TreeNode(nums[mid]);
+	temp->left=ret(nums, left, mid - 1);
+	temp->right=ret(nums, mid + 1, right);
+	return temp;
+}
+TreeNode* sortedArrayToBST(vector<int>& nums) {
+	return ret(nums, 0, nums.size() - 1);
+}
+
 int main()
 {
-	vector<int> v1 = { 1,2,3,4 };
-	vector<int> v2 = { 5,6,7,8 };
-	//decompressRLElist(v1);
-	cout << numJewelsInStones("aA","aAAbbbb") << endl;
-	//combinationSum2(v1, 8);
-	//findContentChildren(v1, v2);
-	system("pause");
-	return 0;
+	string s;
+	while (getline(cin, s))
+	{
+		if (s == "")
+			continue;
+		for (string::iterator it = s.begin(); it != s.end(); it++)
+		{
+			for (string::iterator i = it + 1; i != s.end();)
+			{
+				if (*it == *i)
+					s.erase(i++);
+				else
+					i++;
+			}
+		}
+		cout << s << endl;
+	}
 }
+//int main()
+//{
+//	vector<int> v1 = { 1,2,3,4 };
+//	vector<int> v2 = { 5,6,7,8 };
+//	//decompressRLElist(v1);
+//	cout << numJewelsInStones("aA","aAAbbbb") << endl;
+//	//combinationSum2(v1, 8);
+//	//findContentChildren(v1, v2);
+//	system("pause");
+//	return 0;
+//}
