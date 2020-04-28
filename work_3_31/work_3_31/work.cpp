@@ -12,7 +12,7 @@ class Base
 public:
 	virtual void show()
 	{
-		cout << "Base:....." << endl;
+		std::cout << "Base:....." << endl;
 	}
 
 };
@@ -1035,34 +1035,55 @@ TreeNode* sortedArrayToBST(vector<int>& nums) {
 	return ret(nums, 0, nums.size() - 1);
 }
 
-int main()
-{
-	string s;
-	while (getline(cin, s))
-	{
-		if (s == "")
-			continue;
-		for (string::iterator it = s.begin(); it != s.end(); it++)
-		{
-			for (string::iterator i = it + 1; i != s.end();)
-			{
-				if (*it == *i)
-					s.erase(i++);
-				else
-					i++;
-			}
-		}
-		cout << s << endl;
-	}
-}
 //int main()
 //{
-//	vector<int> v1 = { 1,2,3,4 };
-//	vector<int> v2 = { 5,6,7,8 };
-//	//decompressRLElist(v1);
-//	cout << numJewelsInStones("aA","aAAbbbb") << endl;
-//	//combinationSum2(v1, 8);
-//	//findContentChildren(v1, v2);
-//	system("pause");
-//	return 0;
+//	string s;
+//	while (getline(cin, s))
+//	{
+//		if (s == "")
+//			continue;
+//		for (string::iterator it = s.begin(); it != s.end(); it++)
+//		{
+//			for (string::iterator i = it + 1; i != s.end();)
+//			{
+//				if (*it == *i)
+//					s.erase(i++);
+//				else
+//					i++;
+//			}
+//		}
+//		cout << s << endl;
+//	}
 //}
+
+int countSquares(vector<vector<int>>& matrix) {
+	int ret = 0;
+	for (int i = 0; i<matrix.size(); i++)
+	{
+		for (int j = 0; j<matrix[i].size(); j++)
+		{
+			if (matrix[i][j])
+				++ret;
+			else
+				continue;
+			if (i == 0 || j == 0)
+				continue;
+			matrix[i][j] = max(matrix[i][j], min(matrix[i - 1][j], min(matrix[i][j - 1], matrix[i - 1][j - 1]))+1);
+			ret += (matrix[i][j] - 1);
+		}
+	}
+	return ret;
+}
+int main()
+{
+	vector<int> v1 = { 1,2,3,4 };
+	vector<int> v2 = { 5,6,7,8 };
+	vector<vector<int>> v = { {0,1,1,1},{1,1,1,1},{0,1,1,1 } };
+	countSquares(v);
+	//decompressRLElist(v1);
+	//cout << numJewelsInStones("aA","aAAbbbb") << endl;
+	//combinationSum2(v1, 8);
+	//findContentChildren(v1, v2);
+	system("pause");
+	return 0;
+}
