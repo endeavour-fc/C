@@ -1074,12 +1074,29 @@ int countSquares(vector<vector<int>>& matrix) {
 	}
 	return ret;
 }
+int countSubstrings(string s) {
+	vector<vector<bool>> v(s.size(), vector<bool>(s.size(), false));
+	int ret = 0;
+	for (int i = 0; i<s.size(); i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			if (s[i] == s[j] && (i - j<2 || v[i - 1][j + 1]))
+			{
+				v[i][j] = true;
+				ret++;
+			}
+		}
+	}
+	return ret;
+}
 int main()
 {
-	vector<int> v1 = { 1,2,3,4 };
-	vector<int> v2 = { 5,6,7,8 };
-	vector<vector<int>> v = { {0,1,1,1},{1,1,1,1},{0,1,1,1 } };
-	countSquares(v);
+	countSubstrings("aaa");
+	//vector<int> v1 = { 1,2,3,4 };
+	//vector<int> v2 = { 5,6,7,8 };
+	//vector<vector<int>> v = { {0,1,1,1},{1,1,1,1},{0,1,1,1 } };
+	//countSquares(v);
 	//decompressRLElist(v1);
 	//cout << numJewelsInStones("aA","aAAbbbb") << endl;
 	//combinationSum2(v1, 8);
