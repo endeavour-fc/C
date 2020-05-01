@@ -36,5 +36,8 @@ g:\code\c++\work_3_31\work_3_31\work.cpp(994): warning C4018: “<”: 有符号
 g:\code\c++\work_3_31\work_3_31\work.cpp(1061): warning C4018: “<”: 有符号/无符号不匹配
 g:\code\c++\work_3_31\work_3_31\work.cpp(1063): warning C4018: “<”: 有符号/无符号不匹配
 g:\code\c++\work_3_31\work_3_31\work.cpp(1080): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\work_3_31\work_3_31\work.cpp(1086): warning C4553: “==”: 未使用表达式结果；是否打算使用“=”?
+g:\code\c++\work_3_31\work_3_31\work.cpp(1096): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(1098): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(1115): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\work_3_31\work_3_31\work.cpp(1117): warning C4018: “<=”: 有符号/无符号不匹配
   work_3_31.vcxproj -> G:\Code\C++\work_3_31\Debug\work_3_31.exe
