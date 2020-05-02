@@ -1128,6 +1128,56 @@ int longestCommonSubsequence(string text1, string text2) {
 	}
 	return v[text1.size()][text2.size()];
 }
+int combinationSum4(vector<int>& nums, int target) {
+	vector<unsigned int> v(target + 1, 0);
+	v[0] = 1;
+	for (int i = 1; i<v.size(); i++)
+	{
+		for (int j = 0; j<nums.size(); j++)
+		{
+			if (i - nums[j] >= 0)
+			{
+				v[i] += v[i - nums[j]];
+			}
+		}
+	}
+	return v[target];
+}
+vector<vector<string>> ret;
+vector<vector<string>> partition(string s) {
+	vector<string> temp;
+	get(s, temp, 0);
+	return ret;
+}
+void get(string& s, vector<string> temp, int pos)
+{
+	if (pos == s.size())
+	{
+		ret.push_back(temp);
+		return;
+	}
+	for (int i = pos; i<s.size(); i++)
+	{
+		if (!palindrome(s.substr(pos, i - pos + 1)))
+			continue;
+		temp.push_back(s.substr(pos, i - pos + 1));
+		get(s, temp, i + 1);
+		temp.pop_back();
+	}
+}
+bool palindrome(string s)
+{
+	string::iterator it1 = s.begin();
+	string::iterator it2 = s.end() - 1;
+	while (it1<it2)
+	{
+		if (*it1 != *it2)
+			return false;
+		it1++;
+		it2--;
+	}
+	return true;
+}
 int main()
 {
 	cout << longestCommonSubsequence("abcde", "ace");
