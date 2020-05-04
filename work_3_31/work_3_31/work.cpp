@@ -1178,27 +1178,49 @@ bool palindrome(string s)
 	}
 	return true;
 }
-int guessNumber(int n) {
-	int left = 1;
-	int right = n;
-
-	while (left <= right)
+//int guessNumber(int n) {
+//	int left = 1;
+//	int right = n;
+//
+//	while (left <= right)
+//	{
+//		unsigned int mid = left + (right - left) / 2;
+//		if (guess(mid) == 1)
+//		{
+//			left = mid + 1;
+//		}
+//		else if (guess(mid) == -1)
+//		{
+//			right = mid - 1;
+//		}
+//		else
+//		{
+//			return mid;
+//		}
+//	}
+//	return 0;
+//}
+int longestPalindromeSubseq(string s) {
+	vector<vector<int>> v(s.size(), vector<int>(s.size(), 0));
+	for (int i = 0; i<s.size(); i++)
 	{
-		unsigned int mid = left + (right - left) / 2;
-		if (guess(mid) == 1)
+		v[i][i] = 1;
+	}
+	for (int i = s.size() - 1; i >= 0; i--)
+	{
+		for (int j = i + 1; j<s.size(); j++)
 		{
-			left = mid + 1;
-		}
-		else if (guess(mid) == -1)
-		{
-			right = mid - 1;
-		}
-		else
-		{
-			return mid;
+			if (s[i] == s[j])
+			{
+				v[i][j] = v[i + 1][j - 1] + 2;
+			}
+			else
+			{
+				v[i][j] = max(v[i + 1][j], v[i][j - 1]);
+			}
 		}
 	}
-	return 0;
+	return v[0][s.size() - 1];
 }
 int main()
 {
