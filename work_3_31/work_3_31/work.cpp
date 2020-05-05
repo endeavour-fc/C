@@ -1128,6 +1128,19 @@ int longestCommonSubsequence(string text1, string text2) {
 	}
 	return v[text1.size()][text2.size()];
 }
+bool palindrome(string s)
+{
+	string::iterator it1 = s.begin();
+	string::iterator it2 = s.end() - 1;
+	while (it1<it2)
+	{
+		if (*it1 != *it2)
+			return false;
+		it1++;
+		it2--;
+	}
+	return true;
+}
 int combinationSum4(vector<int>& nums, int target) {
 	vector<unsigned int> v(target + 1, 0);
 	v[0] = 1;
@@ -1143,41 +1156,31 @@ int combinationSum4(vector<int>& nums, int target) {
 	}
 	return v[target];
 }
-vector<vector<string>> ret;
-vector<vector<string>> partition(string s) {
-	vector<string> temp;
-	get(s, temp, 0);
-	return ret;
-}
-void get(string& s, vector<string> temp, int pos)
+vector<vector<string>> ret1;
+void get1(string& s, vector<string> temp, int pos)
 {
 	if (pos == s.size())
 	{
-		ret.push_back(temp);
+		ret1.push_back(temp);
 		return;
 	}
-	for (int i = pos; i<s.size(); i++)
+	for (int i = pos; i < s.size(); i++)
 	{
 		if (!palindrome(s.substr(pos, i - pos + 1)))
 			continue;
 		temp.push_back(s.substr(pos, i - pos + 1));
-		get(s, temp, i + 1);
+		get1(s, temp, i + 1);
 		temp.pop_back();
 	}
 }
-bool palindrome(string s)
-{
-	string::iterator it1 = s.begin();
-	string::iterator it2 = s.end() - 1;
-	while (it1<it2)
-	{
-		if (*it1 != *it2)
-			return false;
-		it1++;
-		it2--;
-	}
-	return true;
+
+vector<vector<string>> partition(string s) {
+	vector<string> temp;
+	get1(s, temp, 0);
+	return ret1;
 }
+
+
 //int guessNumber(int n) {
 //	int left = 1;
 //	int right = n;
@@ -1222,9 +1225,52 @@ int longestPalindromeSubseq(string s) {
 	}
 	return v[0][s.size() - 1];
 }
+int* GetNext(string s)
+{
+	int i = 0;
+	int j = -1;
+	int* next = new int[s.size()];
+	next[0] = -1;
+	while (i < s.size())
+	{
+		if (j == -1 || s[i] == s[j])
+		{
+			i++;
+			j++;
+			next[i] = j;
+		}
+		else
+		{
+			j = next[j];
+		}
+	}
+	return next;
+}
+int KMP1(string s1, string s2)
+{
+	int i = 0;
+	int j = 0;
+	int* next = GetNext(s2);
+	while (i < s1.size() && j < s2.size())
+	{
+		if (j == -1 || s1[i] == s2[j])
+		{
+			i++;
+			j++;
+		}
+		else
+		{
+			j = next[j];
+		}
+	}
+	if (j == s2.size())
+		return i - j;
+	return -1;
+}
 int main()
 {
-	cout << longestCommonSubsequence("abcde", "ace");
+	cout << KMP1("abcdabcdfabcdeabcd", "abcdfabcde") << endl;
+	//cout << longestCommonSubsequence("abcde", "ace");
 	//countSubstrings("aaa");
 	//vector<int> v1 = { 1,2,3,4 };
 	//vector<int> v2 = { 5,6,7,8 };
