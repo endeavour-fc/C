@@ -1267,9 +1267,43 @@ int KMP1(string s1, string s2)
 		return i - j;
 	return -1;
 }
+int minFallingPathSum(vector<vector<int>>& A) {
+	int ret = INT_MAX;
+	if (A.size() == 1)
+	{
+		for (int i = 0; i<A[0].size(); i++)
+			ret = min(ret, A[0][i]);
+		return ret;
+	}
+	for (int i = 1; i<A.size(); i++)
+	{
+		for (int j = 0; j<A[0].size(); j++)
+		{
+			if (j == 0)
+			{
+				A[i][j] += min(A[i - 1][j], A[i - 1][j + 1]);
+			}
+			else if (j == A[0].size() - 1)
+			{
+				A[i][j] += min(A[i - 1][j], A[i - 1][j - 1]);
+			}
+			else
+			{
+				A[i][j] += min(A[i - 1][j], min(A[i - 1][j - 1], A[i - 1][j + 1]));
+			}
+			if (i == A.size() - 1)
+			{
+				ret = min(ret, A[i][j]);
+			}
+		}
+	}
+	return ret;
+}
 int main()
 {
-	cout << KMP1("abcdabcdfabcdeabcd", "abcdfabcde") << endl;
+	vector<vector<int>> A = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
+	cout<<minFallingPathSum(A)<<endl;
+	//cout << KMP1("abcdabcdfabcdeabcd", "abcdfabcde") << endl;
 	//cout << longestCommonSubsequence("abcde", "ace");
 	//countSubstrings("aaa");
 	//vector<int> v1 = { 1,2,3,4 };
