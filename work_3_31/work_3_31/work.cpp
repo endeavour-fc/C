@@ -1337,6 +1337,35 @@ public:
 	{
 		return root == nullptr;
 	}
+	void AddNode(T val)
+	{
+		root=add(root, val);
+	}
+	int GetMIN()
+	{
+		if (root == nullptr)
+			return INT_MIN;
+		return Min(root);
+	}
+	int GetMAX()
+	{
+		if (root == nullptr)
+			return INT_MAX;
+		return MAX(root);
+	}
+private:
+	int Min(AVLNode<T>* node)
+	{
+		if (node->lchild == nullptr)
+			return node->val;
+		return Min(node->lchild);
+	}
+	int MAX(AVLNode<T>* node)
+	{
+		if (node->rchild == nullptr)
+			return node->val;
+		return MAX(node->rchild);
+	}
 	AVLNode<T>* add(AVLNode<T>*& node, T val)
 	{
 		if (node == nullptr) {
@@ -1371,15 +1400,14 @@ public:
 		}
 		return node;
 	}
-private:
 	AVLNode<T> * leftRotate(AVLNode<T>*& node)
 	{
 		AVLNode<T>* t1 = node->rchild;
 		AVLNode<T>* t2 = t1->lchild;
 		t1->lchild = node;
 		node->rchild = t2;
-		t1->height = max(GetHeight(t1->lchild), GetHeight(t1->rchild)) + 1;
 		node->height = max(GetHeight(node->lchild), GetHeight(node->rchild)) + 1;
+		t1->height = max(GetHeight(t1->lchild), GetHeight(t1->rchild)) + 1;
 		return t1;
 	}
 	AVLNode<T>* rightRotate(AVLNode<T>*& node)
@@ -1389,8 +1417,8 @@ private:
 		x->rchild = node;
 		node->lchild = t3;
 		//¸üÐÂheight
-		x->height = max(GetHeight(x->lchild), GetHeight(x->rchild)) + 1;
 		node->height = max(GetHeight(node->lchild), GetHeight(node->rchild)) + 1;
+		x->height = max(GetHeight(x->lchild), GetHeight(x->rchild)) + 1;
 		return x;
 	}
 
@@ -1420,7 +1448,14 @@ private:
 
 int main()
 {
-
+	AVLTree<int> A;
+	for (int i = 0; i < 3; i++)
+	{
+		A.AddNode(i);
+	}
+	cout << A.GetMAX() << endl;
+	cout << A.GetMIN() << endl;
+	
 	//vector<vector<int>> A = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
 	//cout<<minFallingPathSum(A)<<endl;
 	//cout << KMP1("abcdabcdfabcdeabcd", "abcdfabcde") << endl;
