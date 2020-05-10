@@ -1345,25 +1345,55 @@ public:
 	{
 		if (root == nullptr)
 			return INT_MIN;
-		return Min(root);
+		return Min(root)->val;
 	}
 	int GetMAX()
 	{
 		if (root == nullptr)
 			return INT_MAX;
-		return MAX(root);
+		return MAX(root)->val;
+	}
+	void RemoveMIN()
+	{
+		RemoveMin(root);
+	}
+	void RemoveMAX()
+	{
+		RemoveMax(root);
 	}
 private:
-	int Min(AVLNode<T>* node)
+	AVLNode<T>*& RemoveMin(AVLNode<T>*& node)
 	{
-		if (node->lchild == nullptr)
-			return node->val;
-		return Min(node->lchild);
+		if (node->lchild==nullptr)
+		{
+			node = node->rchild;
+			this->size--;
+			return node;
+		}
+		node->lchild = RemoveMin(node->lchild);
+		return node;
 	}
-	int MAX(AVLNode<T>* node)
+	AVLNode<T>*& RemoveMax(AVLNode<T>*& node)
 	{
 		if (node->rchild == nullptr)
-			return node->val;
+		{
+			node = node->lchild;
+			this->size--;
+			return node;
+		}
+		node->rchild = RemoveMin(node->rchild);
+		return node;
+	}
+	AVLNode<T>*& Min(AVLNode<T>*& node)
+	{
+		if (node->lchild == nullptr)
+			return node;
+		return Min(node->lchild);
+	}
+	AVLNode<T>*& MAX(AVLNode<T>*& node)
+	{
+		if (node->rchild == nullptr)
+			return node;
 		return MAX(node->rchild);
 	}
 	AVLNode<T>* add(AVLNode<T>*& node, T val)
@@ -1453,8 +1483,10 @@ int main()
 	{
 		A.AddNode(i);
 	}
+	//cout << A.GetMAX() << endl;
 	cout << A.GetMAX() << endl;
-	cout << A.GetMIN() << endl;
+	A.RemoveMAX();
+	cout << A.GetMAX() << endl;
 	
 	//vector<vector<int>> A = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
 	//cout<<minFallingPathSum(A)<<endl;
