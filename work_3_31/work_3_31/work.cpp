@@ -1362,6 +1362,73 @@ public:
 		RemoveMax(root);
 	}
 private:
+	AVLNode<T>* Remove(AVLNode<T>*& node, T value)
+	{
+		if (node == nullptr)
+			return nullptr;
+		AVLNode<T>* retnode;
+		if (node->val > value)
+		{
+			node->lchild = Remove(node->lchild, value);
+			retnode = node;
+		}
+		else if (node->val < value)
+		{
+			node->rchild = Remove(node->rchild, value);
+			retnode = node;
+		}
+		else
+		{
+			if (node->lchild == nullptr)
+			{
+				AVLNode<T>* right = node->rchild;
+				node->rchild = nullptr;
+				size--;
+				retnode = right;
+			}
+			else if (node->rchild == nullptr)
+			{
+				AVLNode<T>* left = node->lchild;
+				node->lchild = nullptr;
+				size--;
+				retnode = left;
+			}
+			else
+			{
+				AVLNode<T>* removenode = MIN(node->rchild);
+				removenode->rchild = Remove(node->rchild, removenode->val);
+				removenode->lchild = node->lchild;
+				node->lchild = node->rchild = nullptr;
+				retnode = removenode;
+			}
+			if (retNode == null)
+				return null;
+			//维护平衡
+			//更新height
+			retnode->height = 1 + 1 + max(GetHeight(retnode->lchild), GetHeight(retnode->rchild));;
+			//计算平衡因子
+			int balanceFactor = GetBalanceFactor(retnode);
+			if (balanceFactor > 1 && GetBalanceFactor(retnode->lchild) >= 0) {
+				//右旋LL
+				return rightRotate(retNode);
+			}
+			if (balanceFactor < -1 && GetBalanceFactor(retnode->rchild) <= 0) {
+				//左旋RR
+				return leftRotate(retNode);
+			}
+			//LR
+			if (balanceFactor > 1 && GetBalanceFactor(retnode->lchild) < 0) {
+				node.left = leftRotate(retnode->lchild);
+				return rightRotate(retnode);
+			}
+			//RL
+			if (balanceFactor < -1 && GetBalanceFactor(retnode->rchild) > 0) {
+				node.right = rightRotate(retnode->rchild);
+				return leftRotate(retnode);
+			}
+			return retnode;
+		}
+	}
 	AVLNode<T>*& RemoveMin(AVLNode<T>*& node)
 	{
 		if (node->lchild==nullptr)
