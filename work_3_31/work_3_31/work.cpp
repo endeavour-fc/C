@@ -1543,6 +1543,30 @@ private:
 
 };
 
+int maxScore(vector<int>& cardPoints, int k) {
+	int sum = 0;
+	int sum1 = 0;
+	int max1 = INT_MIN;
+	for (int i = 0; i<cardPoints.size(); i++)
+	{
+		if (i >= cardPoints.size() - k)
+		{
+			sum += cardPoints[i];
+			sum1 += cardPoints[i];
+		}
+		else
+		{
+			sum += cardPoints[i];
+		}
+	}
+	max1 = sum1;
+	for (int i = cardPoints.size() - k; i<cardPoints.size(); i++)
+	{
+		sum1 += cardPoints[i - cardPoints.size() + k] - cardPoints[i];
+		max1 = max(sum1, max1);
+	}
+	return max1;
+}
 int main()
 {
 	AVLTree<int> A;
