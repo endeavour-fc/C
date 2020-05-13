@@ -1567,6 +1567,32 @@ int maxScore(vector<int>& cardPoints, int k) {
 	}
 	return max1;
 }
+class Solution_letterCombinations {
+public:
+	vector<string> ret;
+	vector<string> letterCombinations(string digits) {
+		if (digits.empty())
+			return ret;
+		vector<string> dic = { "abc","def","ghi","jkl","mno","pqrs","tuv","wxyz" };
+		string str;
+		get(digits, dic, 0, str);
+		return ret;
+	}
+	void get(string digits, vector<string> dic, int pos, string str)
+	{
+		if (str.size() == digits.size())
+		{
+			ret.push_back(str);
+			return;
+		}
+		for (int i = 0; i<dic[digits[pos] - '0' - 2].size(); i++)
+		{
+			str += dic[digits[pos] - '0' - 2][i];
+			get(digits, dic, pos + 1, str);
+			str.pop_back();
+		}
+	}
+};
 int main()
 {
 	AVLTree<int> A;
