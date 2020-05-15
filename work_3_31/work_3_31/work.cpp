@@ -1593,6 +1593,50 @@ public:
 		}
 	}
 };
+class Solution_findRepeatNumber {
+public:
+	int findRepeatNumber(vector<int>& nums) {
+		for (int i = 0; i<nums.size(); i++)
+		{
+			while (i != nums[i])
+			{
+				if (nums[i] == nums[nums[i]])
+					return nums[i];
+				swap(nums[i], nums[nums[i]]);
+			}
+		}
+		return 0;
+	}
+};
+class Solution_generateParenthesis {
+public:
+	vector<string> ret;
+	vector<string> generateParenthesis(int n) {
+		string str;
+		get(str, n, 0, 0);
+		return ret;
+	}
+	void get(string str, int n, int left, int right)
+	{
+		if (str.size() == n * 2)
+		{
+			ret.push_back(str);
+			return;
+		}
+		if (left<n)
+		{
+			str += '(';
+			get(str, n, left + 1, right);
+			str.pop_back();
+		}
+		if (right<left)
+		{
+			str += ')';
+			get(str, n, left, right + 1);
+			str.pop_back();
+		}
+	}
+};
 int main()
 {
 	AVLTree<int> A;
