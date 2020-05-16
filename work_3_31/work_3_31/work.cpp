@@ -1361,6 +1361,10 @@ public:
 	{
 		RemoveMax(root);
 	}
+	void Remove(T value)
+	{
+		root=Remove(root, value);
+	}
 private:
 	AVLNode<T>* Remove(AVLNode<T>*& node, T value)
 	{
@@ -1405,7 +1409,7 @@ private:
 				return null;
 			//维护平衡
 			//更新height
-			retnode->height = 1 + 1 + max(GetHeight(retnode->lchild), GetHeight(retnode->rchild));;
+			retnode->height = 1 + max(GetHeight(retnode->lchild), GetHeight(retnode->rchild));
 			//计算平衡因子
 			int balanceFactor = GetBalanceFactor(retnode);
 			if (balanceFactor > 1 && GetBalanceFactor(retnode->lchild) >= 0) {
@@ -1635,6 +1639,44 @@ public:
 			get(str, n, left, right + 1);
 			str.pop_back();
 		}
+	}
+};
+class Solution_checkSubarraySum {
+public:
+	bool checkSubarraySum(vector<int>& nums, int k) {
+		if (nums.size()<2)
+			return false;
+		for (int i = 1; i<nums.size(); i++)
+		{
+			nums[i] += nums[i - 1];
+		}
+
+		for (int i = 1; i<nums.size(); i++)
+		{
+			if (k == 0)
+			{
+				if (nums[i] == 0)
+					return true;
+				if (i>1 && nums[i] == nums[i - 2])
+					return true;
+			}
+			else
+			{
+				if (nums[i] % k == 0)
+				{
+					return true;
+				}
+				else
+				{
+					for (int j = i - 2; j >= 0; j--)
+					{
+						if ((nums[i] - nums[j]) % k == 0)
+							return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 };
 int main()
