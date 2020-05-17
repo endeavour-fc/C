@@ -6,6 +6,8 @@
 #include<cmath>
 #include<functional>
 #include <algorithm>
+#include<map>
+
 using namespace std;
 class Base
 {
@@ -1677,6 +1679,30 @@ public:
 			}
 		}
 		return false;
+	}
+};
+class Solution_topKFrequent {
+public:
+	static bool cmp(pair<string, int> s1, pair<string, int> s2)
+	{
+		if (s1.second == s2.second)
+			return s1.first<s2.first;
+		return s1.second>s2.second;
+	}
+	vector<string> topKFrequent(vector<string>& words, int k) {
+		map<string, int> mp;
+		vector<string> ret;
+		vector<pair<string, int>> temp;
+		for (const auto& e : words)
+			++(mp[e]);
+		for (map<string, int>::iterator it = mp.begin(); it != mp.end(); it++)
+			temp.push_back(pair<string, int>(it->first, it->second));
+		sort(temp.begin(), temp.end(), cmp);
+		if (words.size()>k)
+			temp.erase(temp.begin() + k, temp.end());
+		for (const auto& e : temp)
+			ret.push_back(e.first);
+		return ret;
 	}
 };
 int main()
