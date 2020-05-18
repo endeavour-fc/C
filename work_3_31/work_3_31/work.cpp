@@ -1705,6 +1705,34 @@ public:
 		return ret;
 	}
 };
+class Solution_permutation {
+public:
+	vector<string> ret;
+	vector<string> permutation(string S) {
+		vector<bool> bl(S.size(), false);
+		string temp;
+		get(S, bl, temp);
+		return ret;
+	}
+	void get(string S, vector<bool> bl, string temp)
+	{
+		if (temp.size() == S.size())
+		{
+			ret.push_back(temp);
+			return;
+		}
+		for (int i = 0; i<S.size(); i++)
+		{
+			if (bl[i])
+				continue;
+			bl[i] = true;
+			temp += S[i];
+			get(S, bl, temp);
+			temp.pop_back();
+			bl[i] = false;
+		}
+	}
+};
 int main()
 {
 	AVLTree<int> A;
