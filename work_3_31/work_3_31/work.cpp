@@ -1733,6 +1733,32 @@ public:
 		}
 	}
 };
+class Solution_constructMaximumBinaryTree {
+public:
+	int getMax(vector<int>& nums, int left, int right)
+	{
+		int max = left;
+		for (int i = left; i <= right; i++)
+		{
+			if (nums[max]<nums[i])
+				max = i;
+		}
+		return max;
+	}
+	TreeNode* GetTree(vector<int>& nums, int left, int right)
+	{
+		if (left>right)
+			return NULL;
+		int n = getMax(nums, left, right);
+		TreeNode* root = new TreeNode(nums[n]);
+		root->left = GetTree(nums, left, n - 1);
+		root->right = GetTree(nums, n + 1, right);
+		return root;
+	}
+	TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+		return GetTree(nums, 0, nums.size() - 1);
+	}
+};
 int main()
 {
 	AVLTree<int> A;
