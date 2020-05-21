@@ -111,6 +111,25 @@ private:
 		s->lchild = p;
 		p->parent = s;
 	}
+	void RightRotate(RBTreeNode<T>*& t, RBTreeNode<T>*& p)
+	{
+		RBTreeNode<T>* s = p->lchild;
+		p->lchild = s->rchild;
+		if (s->rchild != NUL)
+			s->rchild->parent=p;
+		if (p->parent == NUL)
+			t = s;
+		else if (p == p->parent->lchild)
+		{
+			p->parent->lchild = s;
+		}
+		else
+		{
+			p->parent->rchild = s;
+		}
+		s->rchild = p;
+		p->parent = s;
+	}
 private:
 	RBTreeNode<T>*  NUL;
 	RBTreeNode<T>*	root;
