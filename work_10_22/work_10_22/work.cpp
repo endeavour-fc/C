@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<iostream>
+#include<string>
+using namespace std;
+
 typedef struct {
 	int* data;
 	int top;
@@ -85,22 +89,52 @@ void minStackFree(MinStack* obj) {
 	free(obj->min);
 	free(obj);
 }
-
-
+void Swapstr(string::iterator it1, string::iterator it2)
+{
+	for (; it1 < it2; it1++, it2--)
+	{
+		swap(*it1, *it2);
+	}
+}
+string reverseWords(string s) {
+	Swapstr(s.begin(), s.end() - 1);
+	string::iterator it1 = s.begin();
+	string::iterator it2;
+	while (it1 != s.end())
+	{
+		while (it1 != s.end() && *it1 == ' ')
+			it1++;
+		if (it1 == s.end())
+			return s;
+		it2 = it1;
+		while (it2 != s.end() && *it2 != ' ')
+			it2++;
+		Swapstr(it1, it2-1);
+		it1 = it2;
+	}
+	return s;
+}
 int main()
 {
-	MinStack* temp = minStackCreate();
-	minStackPush(temp, -2);
-	minStackPush(temp, 0);
-	minStackPush(temp, -3);
-	int val = minStackGetMin(temp);
-	printf("%d ", val);
-	minStackPop(temp);
-	val = minStackTop(temp);
-	printf("%d ", val);
-	val = minStackGetMin(temp);
-	printf("%d ", val);
-
+	cout << reverseWords("the sky is blue") << endl;
 	system("pause");
 	return 0;
 }
+
+//int main()
+//{
+//	MinStack* temp = minStackCreate();
+//	minStackPush(temp, -2);
+//	minStackPush(temp, 0);
+//	minStackPush(temp, -3);
+//	int val = minStackGetMin(temp);
+//	printf("%d ", val);
+//	minStackPop(temp);
+//	val = minStackTop(temp);
+//	printf("%d ", val);
+//	val = minStackGetMin(temp);
+//	printf("%d ", val);
+//
+//	system("pause");
+//	return 0;
+//}
