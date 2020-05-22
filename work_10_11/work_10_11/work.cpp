@@ -86,6 +86,53 @@ private:
 		make_balance(t, s);
 		return true;
 	}
+	void make_balance(RBTreeNode<T>*& t, RBTreeNode<T>*& x)
+	{
+		while (x->parent->color == Red)
+		{
+			RBTreeNode<T>* s;
+			if (x->parent == x->parent->parent->lchild)
+			{
+				s = x->parent->parent->rchild;
+				if (s->color == Red)
+				{
+					s->color = Black;
+					x->parent->color = Black;
+					x->parent->parent = Red;
+					x = x->parent->parent;
+					continue;
+				}
+				else if (x == x->parent->rchild)
+				{
+					x = x->parent;
+					LeftRotate(t, x);
+				}
+				x->parent->color = Black;
+				x->parent->parent->color = Red;
+				RightRotate(t, x->parent->parent);
+			}
+			else
+			{
+				s = x->parent->parent->lchild;
+				if (s->color == Red)
+				{
+					s->color = Black;
+					x->parent->color = Black;
+					x->parent->parent = Red;
+					x = x->parent->parent;
+					continue;
+				}
+				else if (x == x->parent->lchild)
+				{
+					x = x->parent;
+					RightRotate(t, x);
+				}
+				x->parent->color = Black;
+				x->parent->parent->color = Red;
+				LeftRotate(t, x->parent->parent);
+			}
+		}
+	}
 	RBTreeNode<T>* BuyNode(const T& val=T())
 	{
 		RBTreeNode<T>* temp = new RBTreeNode<T>(val);
