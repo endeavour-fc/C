@@ -1759,17 +1759,86 @@ public:
 		return GetTree(nums, 0, nums.size() - 1);
 	}
 };
+int findMaxLength(vector<int>& nums) {
+	map<int, int> mp{ { 0,-1 } };
+	int retlen = 0;
+	int count1 = 0;
+	for (int i = 0; i<nums.size(); i++)
+	{
+		count1 += (nums[i] ? 1 : -1);
+		if (mp.count(count1))
+		{
+			retlen = max(retlen, i - mp[count1]);
+		}
+		else
+		{
+			mp[count1] = i;
+		}
+	}
+	return retlen;
+}
+vector<vector<int>> fourSum(vector<int>& nums, int target) {
+	vector<vector<int>> ret;
+	if (nums.size()<4)
+		return ret;
+	sort(nums.begin(), nums.end());
+	vector<int> v;
+	for (int i = 0; i <= nums.size() - 4; ++i)
+	{
+		if (i>0 && nums[i] == nums[i - 1])
+			continue;
+		for (int j = i + 1; j <= nums.size() - 3; ++j)
+		{
+			if (j>i + 1 && nums[j] == nums[j - 1])
+			{
+				continue;
+			}
+			int left = j + 1;
+			int right = nums.size() - 1;
+			while (left<right)
+			{
+				if (nums[i] + nums[j] + nums[left] + nums[right]<target)
+				{
+					++left;
+				}
+				else if (nums[i] + nums[j] + nums[left] + nums[right]>target)
+				{
+					--right;
+				}
+				else
+				{
+					v.push_back(nums[i]);
+					v.push_back(nums[j]);
+					v.push_back(nums[left]);
+					v.push_back(nums[right]);
+					ret.push_back(v);
+					v.clear();
+					while (left<right&&nums[left] == nums[left + 1])
+						++left;
+					while (left<right&&nums[right] == nums[right - 1])
+						--right;
+					++left;
+					--right;
+				}
+			}
+		}
+	}
+	return ret;
+}
 int main()
 {
-	AVLTree<int> A;
-	for (int i = 0; i < 3; i++)
-	{
-		A.AddNode(i);
-	}
+	vector<int> v = { 1,0,-1,0,-2,2 };
+	fourSum(v, 0);
+	//cout << findMaxLength(v) << endl;
+	//AVLTree<int> A;
+	//for (int i = 0; i < 3; i++)
+	//{
+	//	A.AddNode(i);
+	//}
+	////cout << A.GetMAX() << endl;
 	//cout << A.GetMAX() << endl;
-	cout << A.GetMAX() << endl;
-	A.RemoveMAX();
-	cout << A.GetMAX() << endl;
+	//A.RemoveMAX();
+	//cout << A.GetMAX() << endl;
 	
 	//vector<vector<int>> A = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
 	//cout<<minFallingPathSum(A)<<endl;
