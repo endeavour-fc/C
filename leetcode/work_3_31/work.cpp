@@ -1388,6 +1388,7 @@ private:
 			if (node->lchild == nullptr)
 			{
 				AVLNode<T>* right = node->rchild;
+				delete node->rchild;
 				node->rchild = nullptr;
 				size--;
 				retnode = right;
@@ -1395,6 +1396,7 @@ private:
 			else if (node->rchild == nullptr)
 			{
 				AVLNode<T>* left = node->lchild;
+				delete node->lchild;
 				node->lchild = nullptr;
 				size--;
 				retnode = left;
@@ -1414,11 +1416,11 @@ private:
 			retnode->height = 1 + max(GetHeight(retnode->lchild), GetHeight(retnode->rchild));
 			//计算平衡因子
 			int balanceFactor = GetBalanceFactor(retnode);
-			if (balanceFactor > 1 && GetBalanceFactor(retnode->lchild) >= 0) {
+			if (balanceFactor > 1 && GetBalanceFactor(retnode->lchild) > 0) {
 				//右旋LL
 				return rightRotate(retNode);
 			}
-			if (balanceFactor < -1 && GetBalanceFactor(retnode->rchild) <= 0) {
+			if (balanceFactor < -1 && GetBalanceFactor(retnode->rchild) < 0) {
 				//左旋RR
 				return leftRotate(retNode);
 			}
@@ -1822,6 +1824,21 @@ vector<vector<int>> fourSum(vector<int>& nums, int target) {
 				}
 			}
 		}
+	}
+	return ret;
+}
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+	map<string, vector<string>> mp;
+	vector<vector<string>> ret;
+	for (int i = 0; i<strs.size(); i++)
+	{
+		string temp = strs[i];
+		sort(temp.begin(), temp.end());
+		mp[temp].push_back(strs[i]);
+	}
+	for (pair<string, vector<string>> e : mp)
+	{
+		ret.push_back(e.second);
 	}
 	return ret;
 }
