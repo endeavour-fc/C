@@ -53,29 +53,82 @@ private:
 template<typename T>
 class AVLTree
 {
+public:
+	void InsertNode(T& x)
+	{
+		insert(root, x);
+	}
+	AVLTree()
+	{
+		root = nullptr;
+	}
 private:
 	AVLNode<T> * root;
 private:
 
-	AVLNode<T>* RotateR(AVLNode<T>*& p)
+	void RotateR(AVLNode<T>*& p)
 	{
 		AVLNode<T>* s = p;
 		p = p->rchild;
 		s->rchild = p->lchild;
 		p->lchild = s;
-		s->flag_bl = (s->rchild->flag_bl - s->lchild->flag_bl);
-		p->flag_bl = (p->rchild->flag_bl - p->lchild->flag_bl);
-		return p;
+		p->flag_bl = s->flag_bl = 0;
+
 	}
-	AVLNode<T>* RotateL(AVLNode<T>*& p)
+	void RotateL(AVLNode<T>*& p)
 	{
 		AVLNode<T>* s = p;
 		p = p->lchild;
 		s->lchild = p->rchild;
 		p->rchild = s;
-		s->flag_bl = (s->rchild->flag_bl - s->lchild->flag_bl);
-		p->flag_bl = (p->rchild->flag_bl - p->lchild->flag_bl);
-		return p;
+		p->flag_bl = s->flag_bl = 0;
+
+	}
+	void RotateLR(AVLNode<T> *&ptr)
+	{
+		AVLNode<T> *subL = ptr->lchild;
+		AVLNode<T> *subR = ptr;
+		ptr = subL->rchild;
+		//先左转
+		subL->rchild = ptr->lchild;
+		ptr->lchild = subL;
+		//subL bf
+		if (ptr->flag_bl == 1)
+			subL->flag_bl = -1;
+		else
+			subL->flag_bl = 0;
+		//后右转
+		subR->lchild = ptr->rchild;
+		ptr->rchild = subR;
+		//subR bf
+		if (ptr->flag_bl == -1)
+			subR->flag_bl = 1;
+		else
+			subR->flag_bl = 0;
+		ptr->flag_bl = 0;
+	}
+	void RotateRL(AVLNode<T> *&ptr)
+	{
+		AVLNode<T> *subL = ptr;
+		AVLNode<T> *subR = ptr->rchild;
+		ptr = subR->lchild;
+		//先右转
+		subR->lchild = ptr->rchild;
+		ptr->rchild = subR;
+		//subR bf
+		if (ptr->flag_bl >= 0)
+			subR->flag_bl = 0;
+		else
+			subR->flag_bl = 1;
+		//后左转
+		subL->rchild = ptr->lchild;
+		ptr->lchild = subL;
+		//subL bf
+		if (ptr->flag_bl <= 0)
+			subL->flag_bl = 0;
+		else
+			subL->flag_bl = -1;
+		ptr->flag_bl = 0;
 	}
 	bool insert(AVLNode<T>*& t, T& x)
 	{
@@ -118,28 +171,26 @@ private:
 				s = pre;
 			else
 			{
-				if (pre->flag_bl > 1)
+				if (pre->flag_bl > 0)
 				{
 					if (s->flag_bl > 0)
 					{
-						pre=RotateR(pre);
+						RotateR(pre);
 					}
 					else
 					{
-						pre->rchild = RotateL(pre->rchild);
-						pre=RotateR(pre);
+						RotateLR(pre);
 					}
 				}
 				else
 				{
 					if (s->flag_bl < 0)
 					{
-						pre = RotateL(pre);
+						RotateL(pre);
 					}
 					else
 					{
-						pre->lchild = RotateR(pre->lchild);
-						pre = RotateL(pre);
+						RotateRL(pre);
 					}
 				}
 				break;
@@ -152,8 +203,8 @@ private:
 		}
 		else
 		{
-			AVLNode<T>* temp = stack.top();
-			if (temp->val > pre)
+			AVLNode<T>* temp = sta.top();
+			if (temp->val > pre->val)
 				temp->lchild = pre;
 			else
 				temp->rchild = pre;
@@ -161,3 +212,13 @@ private:
 		return true;
 	}
 };
+
+int main()
+{
+	AVLTree<int> t;
+	for (int i = 0; i < 5; i++)
+		t.InsertNode(i);
+
+	system("pause");
+	return 0;
+}
