@@ -1842,6 +1842,50 @@ vector<vector<string>> groupAnagrams(vector<string>& strs) {
 	}
 	return ret;
 }
+class Solution_pairSums {
+public:
+	vector<vector<int>> pairSums(vector<int>& nums, int target) {
+		map<int, int> mp;
+		vector<vector<int>> ret;
+		for (int i = 0; i<nums.size(); ++i)
+		{
+			if (mp[target - nums[i]])
+			{
+				--mp[target - nums[i]];
+				ret.push_back({ target - nums[i],nums[i] });
+			}
+			else
+				++mp[nums[i]];
+		}
+		return ret;
+	}
+};
+class Solution_findFrequentTreeSum {
+public:
+	vector<int> ret;
+	int flag;
+	map<int, int> mp;
+	vector<int> findFrequentTreeSum(TreeNode* root) {
+		flag = 0;
+		get(root);
+		for (auto& x : mp)
+		{
+			if (x.second == flag)
+				ret.push_back(x.first);
+		}
+		return ret;
+	}
+	int get(TreeNode* root)
+	{
+		if (root == NULL)
+			return 0;
+		root->val += get(root->left) + get(root->right);
+		++mp[root->val];
+		if (mp[root->val]>flag)
+			flag = mp[root->val];
+		return root->val;
+	}
+};
 int main()
 {
 	vector<int> v = { 1,0,-1,0,-2,2 };
