@@ -1,2 +1,4 @@
 ﻿  work.cpp
-  work_8_31.vcxproj -> G:\Code\C\work_8_31\Debug\work_8_31.exe
+g:\code\c++\work_8_31\work_8_31\work.cpp(36): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+g:\code\c++\work_8_31\work_8_31\work.cpp(76): warning C4018: “<”: 有符号/无符号不匹配
+  work_8_31.vcxproj -> G:\Code\C++\work_8_31\Debug\work_8_31.exe
