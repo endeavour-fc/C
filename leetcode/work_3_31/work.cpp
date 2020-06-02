@@ -1901,10 +1901,28 @@ public:
 		return v;
 	}
 };
+int lengthOfLongestSubstring(string s) {
+	map<char, int> mp;
+	int ret = 0;
+	int temp = 0;
+	int j = 0;
+	for (int i = 0; i<s.size(); ++i)
+	{
+		if (mp.count(s[i]))
+			j = mp[s[i]];
+		else
+			j = -1;
+		mp[s[i]] = i;
+		temp = temp<i - j ? temp + 1 : i - j;
+		ret = max(ret, temp);
+	}
+	return ret;
+}
 int main()
 {
-	vector<int> v = { 1,0,-1,0,-2,2 };
-	fourSum(v, 0);
+	cout << lengthOfLongestSubstring("abccdefa") << endl;
+	//vector<int> v = { 1,0,-1,0,-2,2 };
+	//fourSum(v, 0);
 	//cout << findMaxLength(v) << endl;
 	//AVLTree<int> A;
 	//for (int i = 0; i < 3; i++)
