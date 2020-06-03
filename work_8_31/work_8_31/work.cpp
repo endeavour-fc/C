@@ -4,6 +4,7 @@
 #include<functional>
 #include <algorithm>
 
+#include<string>
 using namespace std;
 
 bool duplicate(int numbers[], int length, int* duplication)
@@ -65,7 +66,65 @@ void ret(vector<unsigned int>& v, int num)
 	ret(v,num / temp);
 }
 
+int getnum(int n)
+{
+	if (n<3)
+		return 1;
+	int n1 = 1;
+	int n2 = 1;
+	int n3 = n1 + n2;
+	for (int i = 3; i <= n; i++)
+	{
+		n1 = n2;
+		n2 = n3;
+		n3 = (n1 + n2) % 1000000;
+	}
+	return n3;
+}
 
+int main()
+{
+
+	int N = 0;
+	char a;
+	while (cin >> N)
+	{
+		//
+		vector<string> v;
+		for (int i = 0; i<N; ++i)
+		{
+			cin.get();
+			string temp;
+			getline(std::cin, temp);
+			v.push_back(temp);
+		}
+		for (int i = 0; i < N; ++i)
+		{
+			if (v[i].find(' ') != string::npos || v[i].find(',') != string::npos)
+			{
+				cout << "\"" << v[i] << "\"";
+			}
+			else
+			{
+				cout << v[i];
+			}
+			if (i<N - 1)
+				cout << ", ";
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
+//int main()
+//{
+//	int n = 0;
+//	while (cin >> n)
+//	{
+//		cout << getnum(n) << endl;
+//	}
+//	return 0;
+//}
 //int main()
 //{
 //	unsigned int num = 0;
