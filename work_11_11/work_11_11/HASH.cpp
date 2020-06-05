@@ -1,7 +1,7 @@
 #define  _CRT_SECURE_NO_WARNINGS 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include<iostream>
+#include<string>
+using namespace std;
 #define DataType int
 //struct ListNode
 //{
@@ -309,22 +309,55 @@ int insert_new_element(int new_element)
 
 ////////////////////////////////////////////////
 
+
+
 int main()
-
 {
-
-	hash_table[P] = { NULL }; //
-
-	int array[] = { 1,8,15,22,29,36,43,50,58,66,63,16,103,77,5,153,145,356,51,68,705,453 };
-
-	for (int i = 0; i < sizeof(array) / sizeof(int); i++)
-
+	string str;
+	string ori;
+	size_t count = 0;
+	while (cin >> str >> ori)
 	{
-
-		insert_new_element(array[i]);
-
+		auto it = str.begin();
+		auto it1 = ori.begin();
+		while (it != str.end())
+		{
+			if (*it == *it1)
+			{
+				it1++;
+				it++;
+			}
+			else
+			{
+				it++;
+				it1 = ori.begin();
+			}
+			if (it1 == ori.end())
+			{
+				count++;
+				it1 = ori.begin();
+			}
+		}
+		cout << count << endl;
 	}
-
 	return 0;
-
 }
+//int main()
+//
+//{
+//
+//	hash_table[P] = { NULL }; //
+//
+//	int array[] = { 1,8,15,22,29,36,43,50,58,66,63,16,103,77,5,153,145,356,51,68,705,453 };
+//
+//	for (int i = 0; i < sizeof(array) / sizeof(int); i++)
+//
+//	{
+//
+//		insert_new_element(array[i]);
+//
+//	}
+//
+//	return 0;
+//
+//}
