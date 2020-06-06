@@ -1,4 +1,6 @@
 #include<iostream>
+#include<string>
+#include<unordered_set>
 using namespace std;
 enum Color
 {
@@ -181,3 +183,85 @@ private:
 	RBTreeNode<T>*  NUL;
 	RBTreeNode<T>*	root;
 };
+
+
+int dp[25][25];
+
+long long solve(string pre, string post, int n) {
+	long long sum = 1, num = 0;
+	size_t k = 0;
+	pre.erase(pre.begin());//忽略根节点
+	post.pop_back();//忽略根节点
+	while (k < pre.size())
+	{
+		for (size_t i = 0; i < post.size(); i++)
+		{
+			if (post[i] == pre[k])
+			{//前序后序相遇，找到了一颗子树
+				sum *= solve(pre.substr(k, i - k + 1), post.substr(k, i - k + 1), n);
+				num++;
+				k = i + 1;
+				break;
+			}
+		}
+	}
+	return sum * dp[n][num];
+}
+
+int main() {
+	dp[0][0] = 1;
+	for (int i = 1; i < 25; i++)
+	{
+		dp[i][0] = 0;
+		for (int j = 0; j < i; j++)
+		{
+			if (j == 0)
+			{
+				dp[i][j] = dp[i - 1][j];
+				continue;
+			}
+			dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+		}
+		dp[i][i] = 1;
+	}
+	int n = 0;
+	string s1, s2;
+	while (cin >> n && n) {
+		cin >> s1 >> s2;
+		cout << solve(s1, s2, n) << endl;
+	}
+}
+int max(int a, int b)
+{
+	return a>b ? a : b;
+}
+bool wordBreak(string s, unordered_set<string> &dict) {
+	int max_len = 0;
+	if (s.empty()) {
+		return false;
+	}
+	if (dict.empty()) {
+		return false;
+	}
+
+	for (const auto& e : dict)
+	{
+		max_len = max(e.size(), max_len);
+	}
+	vector<bool> bl(s.size() + 1, false);
+	bl[0] = true;
+	for (int i = 1; i <= s.size(); ++i)
+	{
+		for (int j = i - 1; j >= 0; --j)
+		{
+			if (i - j>max_len)
+				break;
+			if (bl[j] && dict.find(s.substr(j, i - j)) != dict.end())
+			{
+				bl[i] = true;
+				break;
+			}
+		}
+	}
+	return bl[s.size()];
+}
