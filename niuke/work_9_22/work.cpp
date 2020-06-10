@@ -32,6 +32,32 @@ int findnum(int arr[], int len)
 	return result;
 }
 
+int main()
+{
+	string s1, s2;
+	while (cin >> s1 >> s2)
+	{
+		sort(s1.begin(), s1.end());
+		sort(s2.begin(), s2.end());
+		vector<vector<int>> v(s1.size()+1,vector<int>(s2.size()+1,0));
+		int ret = 0;
+		for (int i = 1; i <= s1.size(); ++i)
+		{
+			for (int j = 1; j <= s2.size(); ++j)
+			{
+				if (s1[i-1] == s2[j-1])
+					v[i][j] = max(v[i - 1][j - 1] + 1, v[i][j - 1]);
+				else
+					v[i][j] = min(v[i][j-1],v[i-1][j]);
+				ret = max(ret, v[i][j]);
+			}
+		}
+		cout << ret << endl;
+		
+	}
+
+	return 0;
+}
 
 //int main()
 //{
@@ -56,7 +82,7 @@ int getnum(vector<vector<int>> ret)
 	}
 	return ret[ret.size() - 1][ret[0].size() - 1];
 }
-int main()
+int main04()
 {
 	int n, m, k;
 	while (cin >> n >> m >> k)
@@ -195,6 +221,24 @@ int main01()
 			ret = (ret>temp ? ret : temp);
 		}
 		cout << ret << endl;
+	}
+
+	return 0;
+}
+
+int cuopai()
+{
+	long long arr[21] = { 0 };
+	int n = 0;
+	arr[2] = 1;
+	arr[3] = 2;
+	for (int i = 4; i<21; ++i)
+	{
+		arr[i] = (i - 1)*(arr[i - 1] + arr[i - 2]);
+	}
+	while (cin >> n)
+	{
+		cout << arr[n] << endl;
 	}
 
 	return 0;

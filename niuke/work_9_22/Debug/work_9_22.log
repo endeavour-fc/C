@@ -1,5 +1,10 @@
 ﻿  work.cpp
-g:\code\c++\work_9_22\work_9_22\work.cpp(94): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\work_9_22\work_9_22\work.cpp(161): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\work_9_22\work_9_22\work.cpp(175): warning C4101: “name”: 未引用的局部变量
-  work_9_22.vcxproj -> G:\Code\C++\work_9_22\Debug\work_9_22.exe
+g:\code\c++\niuke\work_9_22\work.cpp(44): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(46): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(99): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(101): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(108): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\c++\niuke\work_9_22\work.cpp(126): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(193): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(207): warning C4101: “name”: 未引用的局部变量
+  work_9_22.vcxproj -> G:\Code\C++\niuke\Debug\work_9_22.exe
