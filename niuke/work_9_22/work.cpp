@@ -3,7 +3,57 @@
 #include<string>
 #include <algorithm>
 #include<vector>
+#include<stack>
+#include <sstream>
 using namespace std;
+
+
+
+int main()
+{
+	int n = 0;
+	while (cin >> n)
+	{
+		stack<string> st;
+		string temp;
+		for (int i = 0; i<n; ++i)
+		{
+			//cin.get();
+			cin >> temp;
+			if (temp == "+" || temp == "-" || temp == "*" || temp == "/")
+			{
+				int a[2] = {0};
+				//int b = 0;
+				for (int j = 0; j < 2; ++j)
+				{
+					stringstream ss;
+					ss <<st.top();
+					ss >> a[j];
+					st.pop();
+				}
+				switch (temp.front())
+				{
+				case '+':
+					a[0] += a[1]; break;
+				case '-':
+					a[1] -= a[0]; break;
+				case '*':
+					a[0] *= a[1]; break;
+				case'/':
+					a[1] /= a[0]; break;
+				default:
+					break;
+				}
+				stringstream ss;
+				ss << a[0];
+				ss >> temp;
+			}
+			st.push(temp);
+		}
+		cout << st.top() << endl;
+	}
+
+}
 
 int findnum(int arr[], int len)
 {
@@ -32,7 +82,7 @@ int findnum(int arr[], int len)
 	return result;
 }
 
-int main()
+int main06()
 {
 	string s1, s2;
 	while (cin >> s1 >> s2)
