@@ -7,9 +7,44 @@
 #include <sstream>
 using namespace std;
 
-
-
+int min(int a, int b)
+{
+	return a>b ? b : a;
+}
+int retnum(vector<string>& v, vector<vector<int>>& ret,int re,int lo, vector<vector<bool>>& bl)
+{
+	if (bl[re][lo])
+		return 9999999;
+	if (v[re ][lo] == '#')
+		return 9999999;
+	if (re == 9 && lo == 8)
+		return 1;
+	bl[re][lo] = true;
+	if (v[re][lo-1] != '#')
+		ret[re][lo] = min(retnum(v, ret, re, lo -1,bl) + 1, ret[re][lo]);
+	if (v[re+1][lo] != '#')
+		ret[re][lo] = min(retnum(v, ret, re +1, lo,bl) + 1, ret[re][lo]);
+	if (v[re][lo+1] != '#')
+		ret[re][lo] = min(retnum(v, ret, re , lo+1,bl) + 1, ret[re][lo]);
+	return ret[re][lo];
+}
 int main()
+{
+	while (1)
+	{
+		vector<string> v(10);
+		for (int i = 0; i<10; ++i)
+			cin >> v[i];
+		vector<vector<int>> ret(10, vector<int>(10, 0));
+		vector<vector<bool>> bl(10, vector<bool>(10, false));
+
+		//ret[10][9] = 1;
+		cout << retnum(v,ret,0,1,bl) -1<< endl;
+	}
+	return 0;
+}
+
+int main07()
 {
 	int n = 0;
 	while (cin >> n)
@@ -52,7 +87,7 @@ int main()
 		}
 		cout << st.top() << endl;
 	}
-
+	return 0;
 }
 
 int findnum(int arr[], int len)
