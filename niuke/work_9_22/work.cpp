@@ -143,7 +143,10 @@ int main06()
 
 	return 0;
 }
-
+int maximum(int a, int b) {
+	int key = (int)((((long)a - (long)b) >> 63) & 1);
+	return (key ^ 1) * a + key * b;
+}
 //int main()
 //{
 //	int arr[] = { 1,1,1,2,2,2,3,3,3,4,4,4,5,6,6,6 };
