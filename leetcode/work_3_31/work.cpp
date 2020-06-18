@@ -1930,6 +1930,20 @@ public:
 		return ' ';
 	}
 };
+class Solution_cuttingRope {
+public:
+	int cuttingRope(int n) {
+		vector<int> v(n + 1, 1);
+		for (int i = 2; i <= n; ++i)
+		{
+			for (int j = i - 1; j >= i / 2; --j)
+			{
+				v[i] = max(v[i], max(j, v[j])*max(i - j, v[i - j]));
+			}
+		}
+		return v[n];
+	}
+};
 int main()
 {
 	cout << lengthOfLongestSubstring("abccdefa") << endl;
