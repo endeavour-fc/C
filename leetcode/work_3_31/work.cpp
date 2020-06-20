@@ -1944,6 +1944,29 @@ public:
 		return v[n];
 	}
 };
+class Solution_twoSum {
+public:
+	vector<int> twoSum(vector<int>& nums, int target) {
+		int right = nums.size() - 1;
+		int left = 0;
+		vector<int> ret;
+		while (left<right)
+		{
+			if (nums[right] + nums[left]<target)
+				++left;
+			else if (nums[right] + nums[left]>target)
+				--right;
+			else
+			{
+				ret.push_back(nums[right]);
+				ret.push_back(nums[left]);
+				return ret;
+			}
+		}
+		return ret;
+
+	}
+};
 int main()
 {
 	cout << lengthOfLongestSubstring("abccdefa") << endl;
