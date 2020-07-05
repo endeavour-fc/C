@@ -755,11 +755,11 @@ void gameOfLife(vector<vector<int>>& board) {
 		}
 	}
 }
-typedef struct ListNode
-{
-	int price;
-	int run;
-}ListNode;
+//typedef struct ListNode
+//{
+//	int price;
+//	int run;
+//}ListNode;
 //int main()
 //{
 //	int B, N;
@@ -1965,6 +1965,39 @@ public:
 		}
 		return ret;
 
+	}
+};
+
+ struct ListNode
+ {
+    int val;
+	ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+class Solution_getIntersectionNode {
+public:
+	ListNode * getIntersectionNode(ListNode *headA, ListNode *headB) {
+		if (headA == NULL || headB == NULL)
+			return NULL;
+		ListNode* temp1 = headA;
+		ListNode* temp2 = headB;
+		int flag = 0;
+		while (temp1 != temp2)
+		{
+			temp1 = temp1->next;
+			temp2 = temp2->next;
+			if (temp2 == NULL)
+			{
+				temp2 = headA;
+				++flag;
+			}
+			if (temp1 == NULL)
+				temp1 = headB;
+			if (flag>1)
+				return NULL;
+		}
+		return temp1;
 	}
 };
 int main()
