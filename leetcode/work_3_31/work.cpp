@@ -2000,6 +2000,24 @@ public:
 		return temp1;
 	}
 };
+class Solution_lowestCommonAncestor {
+public:
+	TreeNode * lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+		if (root == NULL)
+			return NULL;
+		TreeNode* t1 = lowestCommonAncestor(root->left, p, q);
+		TreeNode* t2 = lowestCommonAncestor(root->right, p, q);
+		if (root == p || root == q)
+			return root;
+
+		if (t1 == NULL && t2 == NULL)
+			return NULL;
+		else if (t1&&t2)
+			return root;
+		else
+			return t1 ? t1 : t2;
+	}
+};
 int main()
 {
 	cout << lengthOfLongestSubstring("abccdefa") << endl;
