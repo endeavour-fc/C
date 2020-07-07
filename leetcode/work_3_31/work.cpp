@@ -2018,6 +2018,18 @@ public:
 			return t1 ? t1 : t2;
 	}
 };
+class Solution_getSum {
+public:
+	int getSum(int a, int b) {
+		while (b)
+		{
+			int temp = a ^ b;
+			b = (unsigned int)(a&b) << 1;
+			a = temp;
+		}
+		return a;
+	}
+};
 int main()
 {
 	cout << lengthOfLongestSubstring("abccdefa") << endl;
