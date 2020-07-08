@@ -2030,6 +2030,44 @@ public:
 		return a;
 	}
 };
+class Solution_largestDivisibleSubset {
+public:
+	vector<int> largestDivisibleSubset(vector<int>& nums) {
+		vector<int> v(nums.size(), 0);
+		if (nums.size() == 0)
+		{
+			v.clear();
+			return v;
+		}
+		sort(nums.begin(), nums.end());
+		int Max = 0;
+		int index = 0;
+		for (int i = 1; i<nums.size(); ++i)
+		{
+			for (int j = i - 1; j >= 0; --j)
+			{
+				if (nums[i] % nums[j] == 0)
+					v[i] = max(v[i], v[j] + 1);
+				if (v[i]>Max)
+				{
+					Max = v[i];
+					index = i;
+				}
+			}
+		}
+		vector<int> ret;
+		for (int i = index; i >= 0; --i)
+		{
+			if (nums[index] % nums[i] == 0 && v[i] == Max)
+			{
+				ret.push_back(nums[i]);
+				index = i;
+				--Max;
+			}
+		}
+		return ret;
+	}
+};
 int main()
 {
 	cout << lengthOfLongestSubstring("abccdefa") << endl;
