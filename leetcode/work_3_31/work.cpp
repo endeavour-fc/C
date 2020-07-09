@@ -2068,6 +2068,16 @@ public:
 		return ret;
 	}
 };
+class Solution_maxProduct {
+public:
+	int maxProduct(vector<int>& nums) {
+		make_heap(nums.begin(), nums.end());
+		int a = nums.front();
+		pop_heap(nums.begin(), nums.end());
+		int b = nums.front();
+		return (a - 1)*(b - 1);
+	}
+};
 int main()
 {
 	cout << lengthOfLongestSubstring("abccdefa") << endl;
