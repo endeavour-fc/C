@@ -66,4 +66,9 @@ g:\code\c++\leetcode\work_3_31\work.cpp(1833): warning C4018: “<”: 有符号
 g:\code\c++\leetcode\work_3_31\work.cpp(1850): warning C4018: “<”: 有符号/无符号不匹配
 g:\code\c++\leetcode\work_3_31\work.cpp(1893): warning C4018: “<”: 有符号/无符号不匹配
 g:\code\c++\leetcode\work_3_31\work.cpp(1909): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode\work_3_31\work.cpp(1925): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode\work_3_31\work.cpp(1927): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode\work_3_31\work.cpp(2045): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode\work_3_31\work.cpp(2085): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode\work_3_31\work.cpp(2105): warning C4018: “<”: 有符号/无符号不匹配
   work_3_31.vcxproj -> G:\Code\C++\leetcode\Debug\work_3_31.exe

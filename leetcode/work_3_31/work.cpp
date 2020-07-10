@@ -2078,9 +2078,42 @@ public:
 		return (a - 1)*(b - 1);
 	}
 };
+int findNumberOfLIS(vector<int>& nums) {
+	vector<int> v(nums.size(), 1);
+	vector<int> ret(nums.size(), 1);
+	int Max = 1;
+	for (int i = 1; i<nums.size(); ++i)
+	{
+		for (int j = i - 1; j >= 0; --j)
+		{
+			if (nums[i]>nums[j])
+			{
+				if (v[i]<v[j] + 1)
+				{
+					v[i] = v[j] + 1;
+					ret[i] = ret[j];
+				}
+				else if (v[i] == v[j] + 1)
+				{
+					ret[i] += ret[j];
+				}
+			}
+		}
+		Max = max(Max, v[i]);
+	}
+	int res = 0;
+	for (int i = 0; i<nums.size(); ++i)
+	{
+		if (v[i] == Max)
+			res += ret[i];
+	}
+	return res;
+}
 int main()
 {
-	cout << lengthOfLongestSubstring("abccdefa") << endl;
+	vector<int> v = { 1,3,5,4,7 };
+	cout << findNumberOfLIS(v) << endl;
+	//cout << lengthOfLongestSubstring("abccdefa") << endl;
 	//vector<int> v = { 1,0,-1,0,-2,2 };
 	//fourSum(v, 0);
 	//cout << findMaxLength(v) << endl;
