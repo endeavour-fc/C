@@ -2109,10 +2109,75 @@ int findNumberOfLIS(vector<int>& nums) {
 	}
 	return res;
 }
+class Solution_alphabetBoardPath {
+public:
+	string alphabetBoardPath(string target) {
+		string ret;
+		int startx = 0;
+		int starty = 0;
+		int x = 0;
+		int y = 0;
+		for (int i = 0; i<target.size(); ++i)
+		{
+			x = (target[i] - 'a') % 5;
+			y = (target[i] - 'a') / 5;
+			int posx = x - startx;
+			int posy = y - starty;
+			if (y == 5)
+			{
+				while (posx<0)
+				{
+					ret += 'L';
+					++posx;
+				}
+				while (posy>0)
+				{
+					ret += 'D';
+					--posy;
+				}
+			}
+			else
+			{
+				while (posy)
+				{
+					if (posy>0)
+					{
+						--posy;
+						ret += 'D';
+					}
+					else
+					{
+						++posy;
+						ret += 'U';
+					}
+				}
+				while (posx)
+				{
+					if (posx>0)
+					{
+						--posx;
+						ret += 'R';
+					}
+					else
+					{
+						++posx;
+						ret += 'L';
+					}
+				}
+			}
+			ret += '!';
+			startx = x;
+			starty = y;
+		}
+		return ret;
+	}
+};
 int main()
 {
 	vector<int> v = { 1,3,5,4,7 };
-	cout << findNumberOfLIS(v) << endl;
+	string s = "z";
+	cout << alphabetBoardPath(s) << endl;
+	//cout << findNumberOfLIS(v) << endl;
 	//cout << lengthOfLongestSubstring("abccdefa") << endl;
 	//vector<int> v = { 1,0,-1,0,-2,2 };
 	//fourSum(v, 0);
