@@ -7,6 +7,7 @@
 #include<functional>
 #include <algorithm>
 #include<map>
+#include<unordered_map>
 
 using namespace std;
 class Base
@@ -2172,11 +2173,73 @@ public:
 		return ret;
 	}
 };
+class Solution {
+public:
+	int subarraysDivByK(vector<int>& A, int K) {
+		int sum = 0;
+		unordered_map<int, int> mp = { { 0,1 } };
+		int ret = 0;
+		int num = 0;
+		for (int i = 0; i<A.size(); ++i)
+		{
+			sum += A[i];
+			num = (sum%K + K) % K;
+			if (mp.count(num))
+			{
+				ret += mp[num];
+			}
+			++mp[num];
+		}
+		return ret;
+	}
+};
+int longestStrChain(vector<string>& words) {
+	vector<int> v(words.size(), 1);
+	int Max = 1;
+	map<string, int> mp;
+	for (int i = 0; i<words.size(); ++i)
+	{
+		sort(words[i].begin(), words[i].end());
+		mp[words[i]] = 1;
+	}
+	for (int i = 0; i<words.size(); ++i)
+	{
+		map<string, int>::iterator it = mp.find(words[i].substr(0, words[i].size()-1));
+		if (it != mp.end())
+		{
+			mp[words[i]] = max(mp[words[i]], (*it).second + 1);
+			Max = max(Max, mp[words[i]]);
+		}
+	}
+	return Max;
+}
+class Solution_getFolderNames {
+public:
+	vector<string> getFolderNames(vector<string>& names) {
+		map<string, int> mp;
+		for (int i = 0; i<names.size(); ++i)
+		{
+			if (mp.count(names[i]))
+			{
+				int flag = ++mp[names[i]];
+				string temp = names[i];
+				while (mp.count(temp))
+				{
+					temp = names[i] + "(" + to_string(flag++) + ")";
+				}
+				names[i] = temp;
+			}
+			++mp[names[i]];
+		}
+		return names;
+	}
+};
 int main()
 {
-	vector<int> v = { 1,3,5,4,7 };
+	vector<string> v = { "a", "b", "ba", "bca", "bda", "bdca" };
 	string s = "z";
-	cout << alphabetBoardPath(s) << endl;
+	cout << longestStrChain(v) << endl;
+	//cout << alphabetBoardPath(s) << endl;
 	//cout << findNumberOfLIS(v) << endl;
 	//cout << lengthOfLongestSubstring("abccdefa") << endl;
 	//vector<int> v = { 1,0,-1,0,-2,2 };
