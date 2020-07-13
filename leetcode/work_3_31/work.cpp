@@ -2234,6 +2234,28 @@ public:
 		return names;
 	}
 };
+class Solution_topKFrequent {
+public:
+	static bool cmp(pair<int, int>& p1, pair<int, int>& p2)
+	{
+		return p1.second>p2.second;
+	}
+	vector<int> topKFrequent(vector<int>& nums, int k) {
+		map<int, int> mp;
+		for (int i = 0; i<nums.size(); ++i)
+		{
+			++mp[nums[i]];
+		}
+		vector<pair<int, int>> res(mp.begin(), mp.end());
+		sort(res.begin(), res.end(), cmp);
+		vector<int> ret;
+		for (int i = 0; i<k; ++i)
+		{
+			ret.push_back(res[i].first);
+		}
+		return ret;
+	}
+};
 int main()
 {
 	vector<string> v = { "a", "b", "ba", "bca", "bda", "bdca" };
