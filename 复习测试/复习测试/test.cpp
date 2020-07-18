@@ -5,6 +5,10 @@ using namespace std;
 class A
 {
 public:
+	A()
+	{
+		funA();
+	}
 	virtual void  funA()
 	{
 		cout << "A::A" << endl;
@@ -22,6 +26,10 @@ public:
 class B:public A
 {
 public:
+	B()
+	{
+		funA();
+	}
 	virtual void funA()
 	{
 		cout << "B::A" << endl;
@@ -31,6 +39,15 @@ public:
 		cout << "B::B" << endl;
 	}
 };
+
+int main()
+{
+	A* p = new B;
+	p->funB();
+
+	system("pause");
+	return 0;
+}
 void Quick_Sort(int arr[], int left, int right)
 {
 	int i = left;
@@ -603,17 +620,17 @@ void RBTree<Type>::RightRotate(RBTreeNode<Type> *&t, RBTreeNode<Type> *p)
 }
 
 
-void main()
-{
-	vector<int> iv{ 10, 7, 8, 15, 5, 6, 11 };
-	//vector<int> iv {10, 7, 8};
-	RBTree<int> rb;
-	for (const auto &e : iv)
-		rb.Insert(e);
-
-	rb.Remove(10);
-
-}
+//void main()
+//{
+//	vector<int> iv{ 10, 7, 8, 15, 5, 6, 11 };
+//	//vector<int> iv {10, 7, 8};
+//	RBTree<int> rb;
+//	for (const auto &e : iv)
+//		rb.Insert(e);
+//
+//	rb.Remove(10);
+//
+//}
 //int main()
 //{
 //	int arr[] = { 2,1,4,0,6,7,9,3,8,5 };
