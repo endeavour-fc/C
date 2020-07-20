@@ -1,2 +1,5 @@
 ﻿  test.cpp
+g:\code\c++\复习测试\复习测试\test.cpp(655): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\复习测试\复习测试\test.cpp(657): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\复习测试\复习测试\test.cpp(678): warning C4018: “<”: 有符号/无符号不匹配
   复习测试.vcxproj -> G:\Code\C++\复习测试\Debug\复习测试.exe

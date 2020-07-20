@@ -1,5 +1,7 @@
 #include<iostream>
 #include<vector>
+#include<queue>
+#include<cmath>
 using namespace std;
 
 class A
@@ -40,14 +42,14 @@ public:
 	}
 };
 
-int main()
-{
-	A* p = new B;
-	p->funB();
-
-	system("pause");
-	return 0;
-}
+//int main()
+//{
+//	A* p = new B;
+//	p->funB();
+//
+//	system("pause");
+//	return 0;
+//}
 void Quick_Sort(int arr[], int left, int right)
 {
 	int i = left;
@@ -644,3 +646,55 @@ void RBTree<Type>::RightRotate(RBTreeNode<Type> *&t, RBTreeNode<Type> *p)
 //	system("pause");
 //	return 0;
 //}
+
+
+int orangesRotting(vector<vector<int>>& grid) {
+	queue<pair<int, int>> que;
+	int arr[3] = { -1,0,1 };
+	int count = 0;
+	for (int i = 0; i<grid.size(); ++i)
+	{
+		for (int j = 0; j<grid[0].size(); ++j)
+		{
+			if (grid[i][j] == 1)
+				++count;
+			if (grid[i][j] == 2)
+				que.push({ i,j });
+		}
+	}
+	int ret = 0;
+	while (count&&!que.empty())
+	{
+		++ret;
+		int n = que.size();
+		for (int i = 0; i<n; ++i)
+		{
+			pair<int, int> temp = que.front();
+			que.pop();
+			for (int j = 0; j<3; ++j)
+			{
+				for (int k = 0; k<3; ++k)
+				{
+					if (arr[j] + temp.first<grid.size() && arr[j] + temp.first >= 0 && arr[k] + temp.second >= 0 && arr[k] + temp.second<grid[0].size() && grid[arr[j] + temp.first][arr[k] + temp.second] == 1&&abs(arr[j])!=abs(arr[k]))
+					{
+						que.push({ arr[j] + temp.first,arr[k] + temp.second });
+						grid[arr[j] + temp.first][arr[k] + temp.second] = 2;
+						--count;
+					}
+				}
+			}
+		}
+	}
+	if (count)
+		return -1;
+	return ret;
+}
+
+int main()
+{
+	vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
+	cout << orangesRotting(v) << endl;
+
+	system("pause");
+	return 0;
+}
