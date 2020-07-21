@@ -689,7 +689,49 @@ int orangesRotting(vector<vector<int>>& grid) {
 		return -1;
 	return ret;
 }
-
+int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+	//set<string> st(wordList.begin(),wordList.end());
+	if (find(wordList.begin(), wordList.end(), endWord) == wordList.end())
+		return 0;
+	queue<string> que;
+	vector<bool> bl(wordList.size(), 0);
+	que.push(beginWord);
+	int count = 0;
+	while (!que.empty())
+	{
+		++count;
+		int size = que.size();
+		for (int i = 0; i<size; ++i)
+		{
+			string temp = que.front();
+			que.pop();
+			for (int j = 0; j<wordList.size(); ++j)
+			{
+				if (bl[j])
+					continue;
+				if (!is_similar(wordList[j], temp))
+					continue;
+				if (wordList[j] == endWord)
+					return count + 1;
+				que.push(wordList[j]);
+				bl[j] = true;
+			}
+		}
+	}
+	return 0;
+}
+bool is_similar(string& s1, string& s2)
+{
+	int flag = 0;
+	for (int i = 0; i<s1.size(); ++i)
+	{
+		if (s1[i] != s2[i])
+			++flag;
+		if (flag>1)
+			return false;
+	}
+	return flag == 1;
+}
 int main()
 {
 	vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
