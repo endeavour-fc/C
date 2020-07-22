@@ -4,6 +4,17 @@
 #include<cmath>
 using namespace std;
 
+
+
+struct TreeNode 
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ };
+
+
 class A
 {
 public:
@@ -732,6 +743,38 @@ bool is_similar(string& s1, string& s2)
 	}
 	return flag == 1;
 }
+
+
+class Solution_buildTree {
+public:
+	TreeNode * buildTree(vector<int>& preorder, vector<int>& inorder)
+	{
+		if (preorder.empty() || inorder.empty())
+			return NULL;
+
+		return get(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
+	}
+	TreeNode* get(vector<int>& preorder, int pre_begin, int pre_end, vector<int>& inorder, int in_begin, int in_end)
+	{
+		if (pre_begin>pre_end || in_begin>in_end)
+			return NULL;
+		TreeNode* root = new TreeNode(preorder[pre_begin]);
+		int pos = 0;
+		for (int i = in_begin; i <= in_end; ++i)
+		{
+			if (inorder[i] == root->val)
+			{
+				root->left = get(preorder, pre_begin + 1, i - in_begin + pre_begin, inorder, in_begin, i - 1);
+				root->right = get(preorder, i - in_begin + pre_begin + 1, pre_end, inorder, i + 1, in_end);
+				break;
+			}
+		}
+		return root;
+	}
+};
+
+
+
 int main()
 {
 	vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
