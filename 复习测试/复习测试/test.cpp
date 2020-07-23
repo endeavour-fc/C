@@ -24,15 +24,22 @@ public:
 	}
 	virtual void  funA()
 	{
-		cout << "A::A" << endl;
+		cout << "A::funA()" << endl;
+		funB();
 	}
 	virtual void funB()
 	{
-		cout << "A::B" << endl;
+		cout << "A::funB()" << endl;
 	}
 	void funC()
 	{
-		cout << "A::C" << endl;
+		cout << "A::funC()" << endl;
+		funA();
+	}
+	~A()
+	{
+		cout << "A::~A()" << endl;
+		funA();
 	}
 };
 
@@ -45,22 +52,28 @@ public:
 	}
 	virtual void funA()
 	{
-		cout << "B::A" << endl;
+		cout << "B::funA()" << endl;
 	}
 	virtual void  funB()
 	{
-		cout << "B::B" << endl;
+		cout << "B::funB()" << endl;
+	}
+	~B()
+	{
+		cout << "B::~B()" << endl;
+		funA();
 	}
 };
 
-//int main()
-//{
-//	A* p = new B;
-//	p->funB();
-//
-//	system("pause");
-//	return 0;
-//}
+int main()
+{
+	A* p = new B;
+	cout << "+++++++++++++++++++" << endl;
+	p->funC();
+	delete p;
+	//system("pause");
+	return 0;
+}
 void Quick_Sort(int arr[], int left, int right)
 {
 	int i = left;
@@ -700,6 +713,19 @@ int orangesRotting(vector<vector<int>>& grid) {
 		return -1;
 	return ret;
 }
+
+bool is_similar(string& s1, string& s2)
+{
+	int flag = 0;
+	for (int i = 0; i<s1.size(); ++i)
+	{
+		if (s1[i] != s2[i])
+			++flag;
+		if (flag>1)
+			return false;
+	}
+	return flag == 1;
+}
 int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
 	//set<string> st(wordList.begin(),wordList.end());
 	if (find(wordList.begin(), wordList.end(), endWord) == wordList.end())
@@ -731,18 +757,7 @@ int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
 	}
 	return 0;
 }
-bool is_similar(string& s1, string& s2)
-{
-	int flag = 0;
-	for (int i = 0; i<s1.size(); ++i)
-	{
-		if (s1[i] != s2[i])
-			++flag;
-		if (flag>1)
-			return false;
-	}
-	return flag == 1;
-}
+
 
 
 class Solution_buildTree {
@@ -773,13 +788,35 @@ public:
 	}
 };
 
+class Solution_buildTree2 {
+public:
+	TreeNode * buildTree(vector<int>& inorder, vector<int>& postorder) {
+		if (inorder.empty() || postorder.empty())
+			return NULL;
+		return get(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
+	}
+	TreeNode* get(vector<int>& inorder, int in_begin, int in_end, vector<int>& postorder, int pos_begin, int pos_end)
+	{
+		if (in_begin>in_end || pos_begin>pos_end)
+			return NULL;
+		int i = 0;
+		for (i = in_begin; i <= in_end; ++i)
+		{
+			if (inorder[i] == postorder[pos_end])
+				break;
+		}
+		TreeNode* root = new TreeNode(inorder[i]);
+		root->left = get(inorder, in_begin, i - 1, postorder, pos_begin, i - in_begin + pos_begin - 1);
+		root->right = get(inorder, i + 1, in_end, postorder, i - in_begin + pos_begin, pos_end - 1);
+		return root;
+	}
+};
 
-
-int main()
-{
-	vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
-	cout << orangesRotting(v) << endl;
-
-	system("pause");
-	return 0;
-}
+//int main()
+//{
+//	vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
+//	cout << orangesRotting(v) << endl;
+//
+//	system("pause");
+//	return 0;
+//}
