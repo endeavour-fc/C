@@ -1,0 +1,4 @@
+﻿  DocFastSearchTool.cpp
+c:\users\a\desktop\c语言资料\文件搜索\docfastsearchtool\docfastsearchtool\sysutil.h(58): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(182): note: 参见“strerror”的声明
+  DocFastSearchTool.vcxproj -> C:\Users\A\Desktop\C语言资料\文件搜索\DocFastSearchTool\Debug\DocFastSearchTool.exe
