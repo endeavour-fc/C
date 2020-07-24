@@ -6,7 +6,12 @@
 #include<iostream>
 #include<vector>
 using namespace std;
-
+struct TreeNode {
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
 int main01()
 {
 	int m = 0;
@@ -148,6 +153,26 @@ int cuttingRope2(int n) {
 	}
 	return ret * n % 1000000007;
 }
+class Solution_isBalanced {
+public:
+	int get(TreeNode* root)
+	{
+		if (root == NULL)
+			return 0;
+		int num1 = get(root->left);
+		int num2 = get(root->right);
+		return num1>num2 ? num1 + 1 : num2 + 1;
+	}
+	bool isBalanced(TreeNode* root) {
+		if (root == NULL)
+			return true;
+		if (abs(get(root->left) - get(root->right))>1)
+		{
+			return false;
+		}
+		return isBalanced(root->left) && isBalanced(root->right);
+	}
+};
 int main()
 {
 	cout << cuttingRope(120) << endl;
