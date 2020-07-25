@@ -8,6 +8,7 @@
 #include <algorithm>
 #include<map>
 #include<unordered_map>
+#include<queue>
 
 using namespace std;
 class Base
@@ -2234,7 +2235,7 @@ public:
 		return names;
 	}
 };
-class Solution_topKFrequent {
+class Solution_topKFrequent1 {
 public:
 	static bool cmp(pair<int, int>& p1, pair<int, int>& p2)
 	{
@@ -2256,11 +2257,112 @@ public:
 		return ret;
 	}
 };
+class Solution_missingNumber {
+public:
+	int missingNumber(vector<int>& nums) {
+		int left = 0;
+		int right = nums.size() - 1;
+		int mid = (left + right) / 2;
+		while (left <= right)
+		{
+			mid = (left + right) / 2;
+			if (nums[mid] == mid)
+				left = mid + 1;
+			else
+				right = mid - 1;
+		}
+		return left;
+	}
+};
+class Solution_updateMatrix {
+public:
+	vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
+		for (int i = 0; i<matrix.size(); ++i)
+		{
+			for (int j = 0; j<matrix[0].size(); ++j)
+			{
+				if (matrix[i][j] == 0)
+					continue;
+				else
+				{
+					vector<vector<bool>> v(matrix.size(), vector<bool>(matrix[0].size(), 0));
+					queue<pair<int, int>> que;
+					que.push({ i,j });
+					v[i][j] = 1;
+					while (!que.empty())
+					{
+						pair<int, int> temp = que.front();
+						que.pop();
+						if (matrix[temp.first][temp.second] == 0)
+						{
+							matrix[i][j] = abs(i - temp.first) + abs(j - temp.second);
+							break;
+						}
+						if (temp.first<matrix.size() - 1 && v[temp.first + 1][temp.second] == 0)
+						{
+							v[temp.first + 1][temp.second] = 1;
+							que.push({ temp.first + 1,temp.second });
+						}
+						if (temp.first>0 && v[temp.first - 1][temp.second] == 0)
+						{
+							v[temp.first - 1][temp.second] = 1;
+							que.push({ temp.first - 1,temp.second });
+						}
+						if (temp.second<matrix.size() - 1 && v[temp.first][temp.second + 1] == 0)
+						{
+							v[temp.first][temp.second + 1] = 1;
+							que.push({ temp.first,temp.second + 1 });
+						}
+						if (temp.second>0 && v[temp.first][temp.second - 1] == 0)
+						{
+							v[temp.first][temp.second - 1] = 1;
+							que.push({ temp.first,temp.second - 1 });
+						}
+					}
+				}
+			}
+		}
+		return matrix;
+	}
+};
+static constexpr int dirs[4][2] = { { -1, 0 },{ 1, 0 },{ 0, -1 },{ 0, 1 } };
+	vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
+		vector<vector<int>> ret(matrix.size(), vector<int>(matrix[0].size(), 0));
+		queue<pair<int, int>> que;
+		for (int i = 0; i<matrix.size(); ++i)
+		{
+			for (int j = 0; j<matrix[0].size(); ++j)
+			{
+				if (matrix[i][j] == 0)
+					que.push({ i,j });
+			}
+		}
+		while (!que.empty())
+		{
+			pair<int ,int> temp = que.front();
+			int i = temp.first;
+			int j = temp.second;
+			que.pop();
+			for (int n = 0; n<4; ++n)
+			{
+				int ni = dirs[n][0] + i;
+				int nj = dirs[n][1] + j;
+				if (ni<matrix.size() && nj<matrix[0].size() && ni >= 0 && nj >= 0 && matrix[ni][nj] && ret[ni][nj] == 0)
+				{
+					ret[ni][nj] = ret[i][j] + 1;
+					que.push({ ni,nj });
+				}
+			}
+		}
+		return ret;
+	}
 int main()
 {
-	vector<string> v = { "a", "b", "ba", "bca", "bda", "bdca" };
-	string s = "z";
-	cout << longestStrChain(v) << endl;
+	vector<vector<int>> v{ {0},{0},{0} };
+	updateMatrix(v);
+	//vector<string> v = { "a", "b", "ba", "bca", "bda", "bdca" };
+	//string s = "z";
+	//cout << longestStrChain(v) << endl;
 	//cout << alphabetBoardPath(s) << endl;
 	//cout << findNumberOfLIS(v) << endl;
 	//cout << lengthOfLongestSubstring("abccdefa") << endl;
