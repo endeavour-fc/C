@@ -28,7 +28,7 @@ int retnum(vector<string>& v, vector<vector<int>>& ret,int re,int lo, vector<vec
 		ret[re][lo] = min(retnum(v, ret, re , lo+1,bl) + 1, ret[re][lo]);
 	return ret[re][lo];
 }
-int main()
+int main11()
 {
 	while (1)
 	{
@@ -330,4 +330,90 @@ int cuopai()
 	}
 
 	return 0;
+}
+
+bool get(vector<int>& v, vector<bool>& bl, int ret, int flag)
+{
+	if (flag == 4)
+		return ret == 24;
+	for (int i = 0; i<4; ++i)
+	{
+		if (bl[i])
+			continue;
+		bl[i] = 1;
+		flag += 1;
+		if (get(v, bl, ret + v[i], flag) || get(v, bl, ret - v[i], flag) || get(v, bl, ret*v[i], flag))
+			return true;
+		if (ret || get(v, bl, ret / v[i], flag))
+			return true;
+		bl[i] = 0;
+		flag -= 1;
+	}
+	return false;
+}
+
+int main12()
+{
+	while (1)
+	{
+		vector<int> v;
+		for (int i = 0; i<4; ++i)
+		{
+			int temp = 0;
+			cin >> temp;
+			v.push_back(temp);
+		}
+		vector<bool> bl(4, 0);
+		bool res = false;
+		int flag = 1;
+		for (int i = 0; i<4; ++i)
+		{
+			bl[i] = 1;
+			res = get(v, bl, v[i], flag);
+			bl[i] = 0;
+			if (res)
+				break;
+		}
+		if (res)
+			cout << "true" << endl;
+		else
+			cout << "false" << endl;
+	}
+}
+
+int shortestPathBinaryMatrix(vector<vector<int>>& grid)
+{
+	if (grid[0][0] == 1)
+		return -1;
+	if (grid.size() == 1)
+	{
+		return grid[0][0] == 1 ? -1 : 1;
+	}
+	vector<vector<int>> v(grid.size(), vector<int>(grid[0].size(), 99999999));
+	v[0][0] = 1;
+	//v[grid.size()-1][grid.size()-1]=-1;
+	for (int i = 1; i<grid.size(); ++i)
+	{
+		v[i][0] = !grid[i][0] && v[i - 1][0] != 99999999 ? v[i - 1][0] + 1 : 99999999;
+		v[0][i] = !grid[0][i] && v[0][i - 1] != 99999999 ? v[0][i - 1] + 1 : 99999999;
+	}
+	for (int i = 1; i<grid.size(); ++i)
+	{
+		for (int j = 1; j<grid.size(); ++j)
+		{
+			if (grid[i][j] == 1)
+				continue;
+			v[i][j] = min(v[i - 1][j - 1], min(v[i][j - 1], v[i - 1][j])) + 1;
+		}
+	}
+	return v[grid.size() - 1][grid.size() - 1] >= 99999999 ? -1 : v[grid.size() - 1][grid.size() - 1];
+}
+
+int main()
+{
+	vector<vector<int>> v{ {0, 0, 1, 0, 0, 0, 0},{0, 1, 0, 0, 0, 0, 1},{0, 0, 1, 0, 1, 0, 0},{0, 0, 0, 1, 1, 1, 0},{1, 0, 0, 1, 1, 0, 0},{1, 1, 1, 1, 1, 0, 1},{0, 0, 1, 0, 0, 0, 0} };
+	cout << shortestPathBinaryMatrix(v) << endl;
+
+	return 0;
+
 }

@@ -1,10 +1,14 @@
 ﻿  work.cpp
 g:\code\c++\niuke\work_9_22\work.cpp(129): warning C4018: “<=”: 有符号/无符号不匹配
 g:\code\c++\niuke\work_9_22\work.cpp(131): warning C4018: “<=”: 有符号/无符号不匹配
-g:\code\c++\niuke\work_9_22\work.cpp(184): warning C4018: “<=”: 有符号/无符号不匹配
-g:\code\c++\niuke\work_9_22\work.cpp(186): warning C4018: “<=”: 有符号/无符号不匹配
-g:\code\c++\niuke\work_9_22\work.cpp(193): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-g:\code\c++\niuke\work_9_22\work.cpp(211): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\niuke\work_9_22\work.cpp(278): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\niuke\work_9_22\work.cpp(292): warning C4101: “name”: 未引用的局部变量
+g:\code\c++\niuke\work_9_22\work.cpp(147): warning C4293: “>>”: Shift 计数为负或过大，其行为未定义
+g:\code\c++\niuke\work_9_22\work.cpp(187): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(189): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(196): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\c++\niuke\work_9_22\work.cpp(214): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(281): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(295): warning C4101: “name”: 未引用的局部变量
+g:\code\c++\niuke\work_9_22\work.cpp(395): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(400): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\niuke\work_9_22\work.cpp(402): warning C4018: “<”: 有符号/无符号不匹配
   work_9_22.vcxproj -> G:\Code\C++\niuke\Debug\work_9_22.exe
