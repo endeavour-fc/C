@@ -5,6 +5,7 @@
 #include<time.h>
 #include<iostream>
 #include<vector>
+#include<queue>
 using namespace std;
 struct TreeNode {
 	int val;
@@ -171,6 +172,42 @@ public:
 			return false;
 		}
 		return isBalanced(root->left) && isBalanced(root->right);
+	}
+};
+class Solution_shortestPathBinaryMatrix {
+public:
+	int next[8][2] = { { 1,0 },{ 0,1 },{ -1,0 },{ 0,-1 },{ 1,1 },{ -1,1 },{ 1,-1 },{ -1,-1 } };
+	int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
+		if (grid[0][0] || grid[grid.size() - 1][grid[0].size() - 1])
+			return -1;
+		queue<pair<int, int>> que;
+		int ret = 1;
+		que.push({ 0,0 });
+		while (!que.empty())
+		{
+			int size = que.size();
+			while (size--)
+			{
+				auto e = que.front();
+				int i = e.first;
+				int j = e.second;
+				que.pop();
+				if (i == grid.size() - 1 && j == grid[0].size() - 1)
+					return ret;
+				for (int k = 0; k<8; ++k)
+				{
+					int m_i = i + next[k][0];
+					int m_j = j + next[k][1];
+					if (m_i >= 0 && m_i<grid.size() && m_j >= 0 && m_j<grid[0].size() && grid[m_i][m_j] == 0)
+					{
+						que.push({ m_i,m_j });
+						grid[m_i][m_j] = 3;
+					}
+				}
+			}
+			++ret;
+		}
+		return -1;
 	}
 };
 int main()
