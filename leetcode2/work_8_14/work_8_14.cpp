@@ -6,6 +6,8 @@
 #include<iostream>
 #include<vector>
 #include<queue>
+#include<map>
+#include<set>
 using namespace std;
 struct TreeNode {
 	int val;
@@ -208,6 +210,25 @@ public:
 			++ret;
 		}
 		return -1;
+	}
+};
+class Solution_uniqueOccurrences {
+public:
+	bool uniqueOccurrences(vector<int>& arr) {
+		map<int, int> mp;
+		set<int> st;
+		for (int i = 0; i<arr.size(); ++i)
+		{
+			++mp[arr[i]];
+		}
+		for (auto& e : mp)
+		{
+			if (st.count(e.second))
+				return false;
+			else
+				st.insert(e.second);
+		}
+		return true;
 	}
 };
 int main()
