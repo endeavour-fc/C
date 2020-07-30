@@ -8,12 +8,13 @@
 #include<queue>
 #include<map>
 #include<set>
+#include<stack>
 using namespace std;
 struct TreeNode {
 	int val;
 	TreeNode *left;
 	TreeNode *right;
-	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+	TreeNode(int x=0) : val(x), left(NULL), right(NULL) {}
 };
 int main01()
 {
@@ -231,6 +232,69 @@ public:
 		return true;
 	}
 };
+class Solution_solve {
+public:
+	void dfs(vector<vector<char>>& board, int i, int j)
+	{
+		if (i<0 || j<0 || i >= board.size() || j >= board[0].size())
+			return;
+		if (board[i][j] == 'O')
+			board[i][j] = '#';
+		else
+			return;
+		dfs(board, i + 1, j);
+		dfs(board, i, j + 1);
+		dfs(board, i - 1, j);
+		dfs(board, i, j - 1);
+	}
+	void solve(vector<vector<char>>& board) {
+
+		for (int i = 0; i<board.size(); ++i)
+		{
+			for (int j = 0; j<board[0].size(); ++j)
+			{
+				if ((i == 0 || j == 0 || i == board.size() - 1 || j == board[0].size() - 1) && board[i][j] == 'O')
+					dfs(board, i, j);
+			}
+		}
+		for (int i = 0; i<board.size(); ++i)
+		{
+			for (int j = 0; j<board[0].size(); ++j)
+			{
+				if (board[i][j] == '#')
+					board[i][j] = 'O';
+				else if (board[i][j] == 'O')
+					board[i][j] = 'X';
+
+			}
+		}
+	}
+};
+class Solution_flatten {
+public:
+	void flatten(TreeNode* root) {
+		if (root == NULL)
+			return;
+		TreeNode* head = new TreeNode;
+		TreeNode* temp = head;
+		stack<TreeNode*> st;
+		st.push(root);
+		while (!st.empty())
+		{
+			head->right = st.top();
+			head->left = NULL;
+			st.pop();
+			head = head->right;
+			if (head->right)
+				st.push(head->right);
+			if (head->left)
+				st.push(head->left);
+		}
+		head->left = NULL;
+		delete temp;
+	}
+};
+
 int main()
 {
 	cout << cuttingRope(120) << endl;
