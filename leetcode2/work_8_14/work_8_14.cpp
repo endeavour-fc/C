@@ -294,7 +294,32 @@ public:
 		delete temp;
 	}
 };
-
+class Solution_findPaths {
+public:
+	int arr[4][2] = { { 0,1 },{ 1,0 },{ 0,-1 },{ -1,0 } };
+	int findPaths(int m, int n, int N, int i, int j) {
+		vector<vector<vector<int>>> v(N + 1, (vector<vector<int>>(m, vector<int>(n, 0))));
+		for (int k = 1; k <= N; ++k)
+		{
+			for (int ki = 0; ki<m; ++ki)
+			{
+				for (int kj = 0; kj<n; ++kj)
+				{
+					for (int c = 0; c<4; ++c)
+					{
+						int m_i = ki + arr[c][0];
+						int m_j = kj + arr[c][1];
+						if (m_i<0 || m_j<0 || m_j >= n || m_i >= m)
+							++v[k][ki][kj];
+						else
+							v[k][ki][kj] = (v[k - 1][m_i][m_j] + v[k][ki][kj]) % 1000000007;
+					}
+				}
+			}
+		}
+		return v[N][i][j];
+	}
+};
 int main()
 {
 	cout << cuttingRope(120) << endl;
