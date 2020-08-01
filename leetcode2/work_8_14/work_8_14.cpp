@@ -320,6 +320,38 @@ public:
 		return v[N][i][j];
 	}
 };
+
+class Solution_minCut {
+public:
+	int minCut(string s) {
+		vector<int> v;
+		for (int i = 0; i<s.size() + 1; ++i)
+		{
+			v.push_back(i - 1);
+		}
+		for (int i = 1; i<s.size() + 1; ++i)
+		{
+			for (int j = 0; j<i; ++j)
+			{
+				if (get(s, j, i - 1))
+				{
+					v[i] = min(v[i], v[j] + 1);
+				}
+			}
+		}
+		return v[s.size()];
+	}
+	bool get(string& s, int start, int end)
+	{
+		while (start<end)
+		{
+			if (s[start++] != s[end--])
+				return false;
+		}
+		return true;
+	}
+};
+
 int main()
 {
 	cout << cuttingRope(120) << endl;
