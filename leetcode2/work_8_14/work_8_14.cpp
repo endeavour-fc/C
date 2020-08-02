@@ -352,9 +352,50 @@ public:
 	}
 };
 
+
+class Solution_maxDistance {
+public:
+	int arr[4][2] = { { 1,0 },{ 0,1 },{ -1,0 },{ 0,-1 } };
+	int maxDistance(vector<vector<int>>& grid) {
+		queue<pair<int, int>> que;
+		for (int i = 0; i<grid.size(); ++i)
+		{
+			for (int j = 0; j<grid[0].size(); ++j)
+			{
+				if (grid[i][j] == 1)
+					que.push({ i,j });
+			}
+		}
+		int ret = 0;
+		int flag = 0;
+		pair<int, int> temp;
+		while (!que.empty())
+		{
+			temp = que.front();
+			que.pop();
+			//auto[i, j] = temp;
+			int i = temp.first;
+			int j = temp.second;
+			for (int k = 0; k<4; ++k)
+			{
+				int _i = i + arr[k][0];
+				int _j = j + arr[k][1];
+				if (_i<0 || _i >= grid.size() || _j<0 || _j >= grid[0].size() || grid[_i][_j])
+					continue;
+				grid[_i][_j] = grid[i][j] + 1;
+				que.push({ _i,_j });
+				flag = 1;
+			}
+		}
+		if (flag == 0)
+			return -1;
+		return grid[temp.first][temp.second];
+	}
+};
 int main()
 {
-	cout << cuttingRope(120) << endl;
+	vector<vector<int>> v = { {1, 0, 1},{0, 0, 0},{1, 0, 1 } };
+	//cout << Solution_maxDistance::maxDistance(v) << endl;
 
 	system("pause");
 	return 0;

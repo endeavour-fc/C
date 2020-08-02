@@ -1,2 +1,14 @@
 ﻿  work_8_14.cpp
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(204): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(221): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(239): warning C4018: “>=”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(252): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(254): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(260): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(262): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(328): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(332): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(361): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(363): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\leetcode2\work_8_14\work_8_14.cpp(383): warning C4018: “>=”: 有符号/无符号不匹配
   work_8_14.vcxproj -> G:\Code\C++\leetcode2\Debug\work_8_14.exe
