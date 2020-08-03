@@ -811,7 +811,37 @@ public:
 		return root;
 	}
 };
+class Singleton1 {
 
+private:
+	static Singleton1* instance;
+
+private:
+	Singleton1() {
+	}
+
+public:
+	static Singleton1* getInstance() {
+		return instance;
+	}
+};
+Singleton1* Singleton1::instance  = new Singleton1();
+
+class Singleton2 {
+
+private:
+	static Singleton2* instance;
+
+private:
+	Singleton2() {
+	}
+
+public:
+	static Singleton2* getInstance() {
+		return instance;
+	}
+};
+Singleton2* Singleton2::instance = new Singleton2();
 //int main()
 //{
 //	vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
