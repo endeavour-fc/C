@@ -842,6 +842,30 @@ public:
 	}
 };
 Singleton2* Singleton2::instance = new Singleton2();
+
+class Solution_eraseOverlapIntervals {
+public:
+	static bool cmp(vector<int>& v1, vector<int>& v2)
+	{
+		return v2[1] >= v1[1];
+	}
+	int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+		if (intervals.size() == 0)
+			return 0;
+		sort(intervals.begin(), intervals.end(), cmp);
+		int pre = 0;
+		int ret = 1;
+		for (int i = 1; i<intervals.size(); ++i)
+		{
+			if (intervals[pre][1] <= intervals[i][0])
+			{
+				++ret;
+				pre = i;
+			}
+		}
+		return intervals.size() - ret;
+	}
+};
 //int main()
 //{
 //	vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
