@@ -408,7 +408,39 @@ int shortestPathBinaryMatrix(vector<vector<int>>& grid)
 	}
 	return v[grid.size() - 1][grid.size() - 1] >= 99999999 ? -1 : v[grid.size() - 1][grid.size() - 1];
 }
+class Solution_numDistinct {
+public:
+	/**
+	*
+	* @param S string×Ö·û´®
+	* @param T string×Ö·û´®
+	* @return intÕûÐÍ
+	*/
+	int numDistinct(string S, string T) {
+		// write code here
+		if (S.size() < T.size()) return 0;
+		if (T.empty()) return 1;
 
+		vector<vector<int>> v(S.size() + 1, vector<int>(T.size() + 1, 0));
+		v[0][0] = 1;
+		for (int i = 1; i <= S.size(); ++i)
+		{
+			v[i][0] = 1;
+			for (int j = 1; j <= T.size(); ++j)
+			{
+				if (S[i - 1] == T[j - 1])
+				{
+					v[i][j] = v[i - 1][j] + v[i - 1][j - 1];
+				}
+				else
+				{
+					v[i][j] = v[i - 1][j];
+				}
+			}
+		}
+		return v[S.size()][T.size()];
+	}
+};
 int main()
 {
 	vector<vector<int>> v{ {0, 0, 1, 0, 0, 0, 0},{0, 1, 0, 0, 0, 0, 1},{0, 0, 1, 0, 1, 0, 0},{0, 0, 0, 1, 1, 1, 0},{1, 0, 0, 1, 1, 0, 0},{1, 1, 1, 1, 1, 0, 1},{0, 0, 1, 0, 0, 0, 0} };
