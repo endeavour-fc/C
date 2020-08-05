@@ -392,7 +392,7 @@ public:
 		return grid[temp.first][temp.second];
 	}
 };
-class Solution {
+class Solution_minDistance {
 public:
 	int minDistance(string word1, string word2) {
 		vector<vector<int>> v(word1.size() + 1, vector<int>(word2.size() + 1, 0));
@@ -413,6 +413,52 @@ public:
 		return v[word1.size()][word2.size()];
 	}
 };
+class Solution_numIslands {
+public:
+	int arr[4][2] = { { 1,0 },{ 0,1 },{ -1,0 },{ 0,-1 } };
+
+	int get(vector<vector<char>>& grid, int i, int j)
+	{
+		++grid[i][j];
+		for (int k = 0; k<4; ++k)
+		{
+			int m_i = i + arr[k][0];
+			int m_j = j + arr[k][1];
+			if (m_i<0 || m_j<0 || m_i >= grid.size() || m_j >= grid[0].size() || grid[m_i][m_j] != '1')
+				continue;
+
+			get(grid, m_i, m_j);
+		}
+		return 1;
+	}
+
+	int numIslands(vector<vector<char>>& grid) {
+		//stack<pair<int,int>> sta;
+		int ret = 0;
+		for (int i = 0; i<grid.size(); ++i)
+		{
+			for (int j = 0; j<grid[0].size(); ++j)
+			{
+				if (grid[i][j] == '1')
+					ret += get(grid, i, j);
+				//sta.push({i,j});
+
+			}
+		}
+		/*   int ret=0;
+		while(!sta.empty())
+		{
+		auto[i,j]=sta.top();
+		sta.pop();
+		if(grid[i][j]!='1')
+		continue;
+		ret+=get(grid,i,j);
+
+		}*/
+		return ret;
+	}
+};
+
 int main()
 {
 	vector<vector<int>> v = { {1, 0, 1},{0, 0, 0},{1, 0, 1 } };
