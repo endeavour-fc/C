@@ -2,6 +2,7 @@
 #include<vector>
 #include<queue>
 #include<cmath>
+#include<set>
 using namespace std;
 
 
@@ -65,15 +66,15 @@ public:
 	}
 };
 
-int main()
-{
-	A* p = new B;
-	cout << "+++++++++++++++++++" << endl;
-	p->funC();
-	delete p;
-	//system("pause");
-	return 0;
-}
+//int main()
+//{
+//	A* p = new B;
+//	cout << "+++++++++++++++++++" << endl;
+//	p->funC();
+//	delete p;
+//	//system("pause");
+//	return 0;
+//}
 void Quick_Sort(int arr[], int left, int right)
 {
 	int i = left;
@@ -866,11 +867,15 @@ public:
 		return intervals.size() - ret;
 	}
 };
-//int main()
-//{
-//	vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
-//	cout << orangesRotting(v) << endl;
-//
-//	system("pause");
-//	return 0;
-//}
+int main()
+{
+	//vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
+	//cout << orangesRotting(v) << endl;
+	set<int> st{ 2,1,4,3,5,8,6,7,9 };
+	for (auto& e : st)
+		cout << e << endl;
+
+
+	system("pause");
+	return 0;
+}

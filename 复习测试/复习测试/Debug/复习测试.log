@@ -1,7 +1,8 @@
 ﻿  test.cpp
-g:\code\c++\复习测试\复习测试\test.cpp(679): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\复习测试\复习测试\test.cpp(681): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\复习测试\复习测试\test.cpp(702): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\复习测试\复习测试\test.cpp(720): warning C4018: “<”: 有符号/无符号不匹配
-g:\code\c++\复习测试\复习测试\test.cpp(745): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\复习测试\复习测试\test.cpp(680): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\复习测试\复习测试\test.cpp(682): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\复习测试\复习测试\test.cpp(703): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\复习测试\复习测试\test.cpp(721): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\复习测试\复习测试\test.cpp(746): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\复习测试\复习测试\test.cpp(859): warning C4018: “<”: 有符号/无符号不匹配
   复习测试.vcxproj -> G:\Code\C++\复习测试\Debug\复习测试.exe
