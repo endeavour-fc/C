@@ -867,13 +867,46 @@ public:
 		return intervals.size() - ret;
 	}
 };
+
+//È«´íÎ»ÅÅÁĞ
+int findDerangement(int n)
+{
+	if (n <= 1)
+		return 0;
+	if (n == 2)
+		return 1;
+	int dp1 = 0;
+	int dp2 = 1;
+	for (int i = 3; i <= n; ++i)
+	{
+		swap(dp1, dp2);
+		dp2 = (i - 1)*(dp1 + dp2);
+	}
+	return dp2;
+}
+int getvalue(int num)
+{
+	if (num == 1) return 0;
+	else if (num == 2) return 1;
+	else {
+		int f1 = 0;
+		int f2 = 1;
+		for (int i = 3; i <= num; i++) {
+			int temp = f2;
+			f2 = (i - 1) * (f1 + f2);
+			f1 = temp;
+		}
+		return f2;
+	}
+}
 int main()
 {
 	//vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
 	//cout << orangesRotting(v) << endl;
-	set<int> st{ 2,1,4,3,5,8,6,7,9 };
-	for (auto& e : st)
-		cout << e << endl;
+	//set<int> st{ 2,1,4,3,5,8,6,7,9 };
+	//for (auto& e : st)
+	//	cout << e << endl;
+	cout << findDerangement(4) << endl;
 
 
 	system("pause");
