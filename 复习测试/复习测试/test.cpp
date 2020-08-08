@@ -899,6 +899,44 @@ int getvalue(int num)
 		return f2;
 	}
 }
+//int backPackII(int m, vector<int> &A, vector<int> &V) {
+//	// write your code here
+//	vector<int> dp(m + 1, 0);
+//	for (int i = 1; i <= m; ++i)
+//	{
+//		for (int j = 0; j<A.size(); ++j)
+//		{
+//			if (i<A[j])
+//			{
+//				dp[i] = max(dp[i],dp[i-1]);
+//			}
+//			else
+//			{
+//				dp[i] = max(dp[i], V[j]);
+//				dp[i] = max(dp[i - A[j]] + dp[A[j]], dp[i]);
+//			}
+//		}
+//	}
+//	return dp[m];
+//}
+int backPackII(int m, vector<int> &A, vector<int> &V) {
+	// write your code here
+	vector<vector<int>> dp(A.size() + 1, vector<int>(m + 1, 0));
+	for (int i = 1; i <= A.size(); ++i)
+	{
+		for (int j = 1; j <= m; ++j)
+		{
+			if (A[i - 1]>j)
+				dp[i][j] = dp[i - 1][j];
+			else
+			{
+
+				dp[i][j] = max(dp[i - 1][j - A[i - 1]] + V[i - 1], dp[i - 1][j]);
+			}
+		}
+	}
+	return dp[A.size()][m];
+}
 int main()
 {
 	//vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
@@ -906,7 +944,9 @@ int main()
 	//set<int> st{ 2,1,4,3,5,8,6,7,9 };
 	//for (auto& e : st)
 	//	cout << e << endl;
-	cout << findDerangement(4) << endl;
+	vector<int> A = { 2, 3, 5, 7 };
+	vector<int> V = { 1, 5, 2, 4 };
+	cout << backPackII(10,A,V) << endl;
 
 
 	system("pause");
