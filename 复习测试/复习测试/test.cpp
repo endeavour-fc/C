@@ -3,6 +3,8 @@
 #include<queue>
 #include<cmath>
 #include<set>
+#include <algorithm>
+#include<string>
 using namespace std;
 
 
@@ -937,18 +939,259 @@ int backPackII(int m, vector<int> &A, vector<int> &V) {
 	}
 	return dp[A.size()][m];
 }
+//int main()
+//{
+//	//vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
+//	//cout << orangesRotting(v) << endl;
+//	//set<int> st{ 2,1,4,3,5,8,6,7,9 };
+//	//for (auto& e : st)
+//	//	cout << e << endl;
+//	vector<int> A = { 2, 3, 5, 7 };
+//	vector<int> V = { 1, 5, 2, 4 };
+//	cout << backPackII(10,A,V) << endl;
+//
+//
+//	system("pause");
+//	return 0;
+//}
+
+void get(vector<vector<int>>& v, vector<pair<int, int>>& ret, vector<pair<int, int>>& temp, int i, int j, int n, int& max)
+{
+	if (n<0)
+		return;
+	if (v[i][j] == 0)
+		return;
+	if (i == 0 && j == v[0].size() - 1)
+	{
+		if (max<n)
+		{
+			max = n;
+			ret = temp;
+		}
+		return;
+	}
+	if (i + 1<v.size() && v[i + 1][j])
+	{
+		temp.push_back({ i + 1,j });
+		get(v, ret, temp, i + 1, j, n, max);
+		temp.pop_back();
+	}
+	if (j + 1<v[0].size() && v[i][j + 1])
+	{
+		temp.push_back({ i,j + 1 });
+		get(v, ret, temp, i, j + 1, n - 1, max);
+		temp.pop_back();
+	}
+	if (j - 1 >= 0 && v[i][j - 1])
+	{
+		temp.push_back({ i,j - 1 });
+		get(v, ret, temp, i, j - 1, n - 1, max);
+		temp.pop_back();
+	}
+	if (i - 1 >= 0 && v[i - 1][j])
+	{
+		temp.push_back({ i - 1,j });
+		get(v, ret, temp, i - 1, j, n - 3, max);
+		temp.pop_back();
+	}
+}
+
+//int main()
+//{
+//	int raw, col = 0;
+//	int n = 0;
+//	cin >> raw >> col >> n;
+//	vector<vector<int>> v(raw, vector<int>(col, 0));
+//	vector<pair<int, int>> ret;
+//	//pair<int, int> ret;
+//	for (int i = 0; i<raw; ++i)
+//	{
+//		for (int j = 0; j<col; ++j)
+//		{
+//			cin >> v[i][j];
+//		}
+//	}
+//	int max = -1;
+//	vector<pair<int, int>> temp;
+//	temp.push_back({ 0,0 });
+//	get(v, ret, temp, 0, 0, n, max);
+//	if (ret.size())
+//	{
+//		for (int i = 0; i<ret.size(); ++i)
+//		{
+//			cout << "[" << ret[i].first << "," << ret[i].second << "]";
+//			if (i != ret.size() - 1)
+//				cout << ",";
+//		}
+//	}
+//	else
+//		cout << "Can not escape!";
+//	cout << endl;
+//	return 0;
+//}
+
+int get(int num)
+{
+	int ret = 0;
+	for (int i = 5; i <= num; i += 5)
+	{
+		int temp = i;
+		while (temp % 5 == 0)
+		{
+			temp /= 5;
+			++ret;
+		}
+	}
+	return ret;
+}
+//int main()
+//{
+//	int num = 0;
+//	while (cin >> num)
+//	{
+//		cout << get(num) << endl;
+//	}
+//
+//	return 0;
+//}
+
+bool compare(pair<int, int> p1, pair<int, int> p2)
+{
+	return p1.first<p2.first;
+}
+
+//int main()
+//{
+//	int n, m = 0;
+//	while (cin >> n >> m)
+//	{
+//		vector<int> v(n, 0);
+//		for (int i = 0; i<n; ++i)
+//			cin >> v[i];
+//		vector<pair<int, int>> p(m, { 0,0 });
+//		for (int i = 0; i<m; ++i)
+//		{
+//			cin >> p[i].first >> p[i].second;
+//		}
+//		sort(p.begin(), p.end(), compare);
+//		int ret = 0;
+//		int flag = m;
+//		vector<bool> bl(m+1, false);
+//		for (int i = 0; i<n; ++i)
+//		{
+//			int temp = 0;
+//			for (int j = 0; j<m; ++j)
+//			{
+//				if (bl[j])
+//					continue;
+//				if (v[i]<p[j].first)
+//					break;
+//				if (temp < p[j].second)
+//				{
+//					temp = p[j].second;
+//					flag = j;
+//				}
+//			}
+//			ret += temp;
+//			bl[flag] = 1;
+//			flag = m;
+//		}
+//		cout << ret << endl;
+//	}
+//	return 0;
+//}
+
+//约瑟夫环
+int fun(int m, int k, int i) {
+
+	if (i == 1)
+		return (m + k - 1) % m;
+	else
+		return (fun(m - 1, k, i - 1) + k) % m;
+
+}
+//int main()
+//{
+//
+//	for (int i = 1; i <= 10; i++)
+//		printf("第%2d次出环：%2d\n", i, fun(10, 3, i));
+//	return 0;
+//}
+
+void Inversion(string& str, int i, int j)
+{
+	while (i<j)
+	{
+		swap(str[i++], str[j--]);
+	}
+}
+
+//int main()
+//{
+//	string str;
+//	while (getline(cin, str))
+//	{
+//		Inversion(str, 0, str.size() - 1);
+//		int i = 0;
+//		int j = 0;
+//		while (i<str.size())
+//		{
+//			while (i<str.size() && str[i] != ' ')
+//				++i;
+//			Inversion(str, j, i - 1);
+//			while (i<str.size() && str[i] == ' ')
+//				++i;
+//			j = i;
+//		}
+//		//Inversion(str, i, j - 1);
+//		//Inversion(str, 0, str.size() - 1);
+//		cout << str << endl;
+//	}
+//
+//	return 0;
+//}
+class Solution_maxEvents {
+public:
+	static bool cmp(vector<int>& v1, vector<int>& v2)
+	{
+		return v1[1]<v2[1];
+	}
+
+	int maxEvents(vector<vector<int>>& events) {
+		sort(events.begin(), events.end(), cmp);
+		int pre = 0;
+		int count = 0;
+		for (int i = 1; i<events.size(); ++i)
+		{
+			if (events[pre][0]<events[i][0])
+			{
+				if (events[pre][1] <= events[i][0])
+				{
+					++count;
+					pre = i;
+				}
+			}
+		}
+		return count;
+	}
+};
+class Solution_smallestRangeII {
+public:
+	int smallestRangeII(vector<int>& A, int K) {
+		sort(A.begin(), A.end());
+		int ret = A[A.size() - 1] - A[0];
+		for (int i = 0; i<A.size() - 1; ++i)
+		{
+			int hight = max(A[A.size() - 1] - K, A[i] + K);
+			int low = min(A[0] + K, A[i + 1] - K);
+			ret = min(ret, hight - low);
+		}
+		return ret;
+	}
+};
 int main()
 {
-	//vector<vector<int>> v = { {2,1,1},{0,1,1},{1,0,1} };
-	//cout << orangesRotting(v) << endl;
-	//set<int> st{ 2,1,4,3,5,8,6,7,9 };
-	//for (auto& e : st)
-	//	cout << e << endl;
-	vector<int> A = { 2, 3, 5, 7 };
-	vector<int> V = { 1, 5, 2, 4 };
-	cout << backPackII(10,A,V) << endl;
 
 
-	system("pause");
 	return 0;
 }
