@@ -458,6 +458,61 @@ public:
 		return ret;
 	}
 };
+class Solution_spiralOrder {
+public:
+	vector<int> spiralOrder(vector<vector<int>>& matrix) {
+		if (matrix.size() == 0)
+		{
+			vector<int> v;
+			return v;
+		}
+		vector<int> v(matrix.size()*matrix[0].size(), 0);
+		int index = 0;
+		int right = matrix[0].size() - 1;
+		int left = 0;
+		int front = 0;
+		int back = matrix.size() - 1;
+
+		while (left <= right && front <= back)
+		{
+			for (int col = left; col <= right; ++col)
+				v[index++] = matrix[front][col];
+			for (int row = front + 1; row <= back; ++row)
+				v[index++] = matrix[row][right];
+
+			if (left<right&&front<back)
+			{
+				for (int col = right - 1; col >= left; --col)
+					v[index++] = matrix[back][col];
+				for (int row = back - 1; row>front; --row)
+					v[index++] = matrix[row][left];
+			}
+			++left;
+			--right;
+			++front;
+			--back;
+		}
+		return v;
+
+	}
+};
+class Solution_rotate {
+public:
+	void rotate(vector<vector<int>>& matrix) {
+		int n = matrix.size() - 1;
+		for (int i = 0; i <= n / 2; ++i)
+		{
+			for (int j = i; j<n - i; ++j)
+			{
+				int temp = matrix[i][j];
+				matrix[i][j] = matrix[n - j][i];
+				matrix[n - j][i] = matrix[n - i][n - j];
+				matrix[n - i][n - j] = matrix[j][n - i];
+				matrix[j][n - i] = temp;
+			}
+		}
+	}
+};
 
 int main()
 {
