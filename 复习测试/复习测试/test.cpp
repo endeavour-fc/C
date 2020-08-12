@@ -5,6 +5,7 @@
 #include<set>
 #include <algorithm>
 #include<string>
+#include<list>
 using namespace std;
 
 
@@ -1189,9 +1190,484 @@ public:
 		return ret;
 	}
 };
+
+
+
+class Product
+{
+public:
+	virtual ~Product() = 0;
+protected:
+	Product();
+private:
+};
+class ConcreteProduct :public Product
+{
+public:
+	~ConcreteProduct();
+	ConcreteProduct();
+protected:
+private:
+};
+
+
+Product::Product()
+{}
+Product::~Product()
+{}
+ConcreteProduct::ConcreteProduct()
+{
+	cout << "ConcreteProduct...." << endl;
+}
+ConcreteProduct::~ConcreteProduct()
+{}
+
+class Product;
+
+class Factory
+{
+public:
+	virtual ~Factory() = 0;
+	virtual Product* CreateProduct() = 0;
+protected:
+	Factory();
+private:
+};
+class ConcreteFactory :public Factory
+{
+public:
+	~ConcreteFactory();
+	ConcreteFactory();
+	Product* CreateProduct();
+protected:
+private:
+};
+
+Factory::Factory()
+{
+}
+Factory::~Factory()
+{
+}
+ConcreteFactory::ConcreteFactory()
+{
+	cout << "ConcreteFactory....." << endl;
+}
+ConcreteFactory::~ConcreteFactory()
+{
+}
+Product* ConcreteFactory::CreateProduct()
+{
+	return new ConcreteProduct();
+}
+
+//int main(int argc, char* argv[])
+//{
+//	Factory* fac = new ConcreteFactory();
+//	Product* p = fac->CreateProduct();
+//	return 0;
+//}
+
+void Reverse(string &str, int start, int end) {
+	while (start < end) {
+		char temp = str[start];
+		str[start] = str[end];
+		str[end] = temp;
+		start++;
+		end--;
+	}
+}
+string ReverseSentence(string str) {
+	//先局部逆置，在整体逆置
+	if (str.size() == 0) {
+		return str;
+	}
+	int i = 0;
+	int j = i;
+	int len = str.size();
+	while (i < len) {
+		while (i < len && !isspace(str[i])) i++; //让i一直往后走，碰到第一个空格
+		Reverse(str, j, i - 1); //逆置当前有效子串，我们采用闭区间
+		while (i < len && isspace(str[i])) i++; //过滤所有空格，指向下一个有效子串的开始
+			j = i; //保存起始位置
+	}
+	Reverse(str, 0, i - 1); //最后在整体逆置
+	return str;
+}
+
+
+
+//int main()
+//{
+//	string str("my name is jane");
+//	cout << ReverseSentence(str);
+//
+//	return 0;
+//}
+
+//template<typename T>
+//bool isArray(T)
+//{
+//	return false;
+//}
+
+//template<typename T>
+//bool isArray(T[])
+//{
+//	return true;
+//}
+//
+//template<typename T>
+//void copy(T[] src, T[] dest)
+//{
+//	for (int i = 0; i < src.size(); i++)
+//	{
+//		if (isArray(src[i])) //判断是否成员是数组
+//		{
+//			dest[i] = new T[src[i].size()];//将这个子数组插入到复制对象中
+//			copy(src[i], dest[i]);//对对象子数组进行递归复制
+//		}
+//		else
+//		{
+//			dest[i] = src[i];//若不成员不是数组，则直接复制
+//		}
+//	}
+//}
+//int main()
+//{
+//	vector<int> v;
+//	//int *arr = new int[v.size()];
+//
+//	//int a[] = { 1,2 };
+//	//int b = 0;
+//	//cout << isArray(a) << endl;
+//	//cout << isArray(b) << endl;
+//	return 0;
+//}
+
+int main5555()
+{
+	int n = 0;
+	while (cin >> n)
+	{
+		int col, row = 0;
+		cin >> col >> row;
+		vector<vector<int>> v(col, vector<int>(row, 0));
+		vector<vector<bool>> bl(col, vector<bool>(row, 0));
+		for (int i = 0; i<col; ++i)
+		{
+			for (int j = 0; j<row; ++j)
+				cin >> v[i][j];
+		}
+		queue<pair<int, int>> que;
+		int flag = 0;
+		que.push({ 0,0 });
+		bl[0][0] = true;
+		while (!que.empty())
+		{
+			int i = que.front().first;
+			int j = que.front().second;
+			if (i == col - 1 && j == row - 1)
+			{
+				if (v[i][j] == 1)
+					flag = 1;
+				break;
+			}
+			que.pop();
+			if (i + n<col && !bl[i + n][j] && v[i + n][j])
+			{
+				que.push({ i + n,j });
+				bl[i + n][j] = true;
+			}
+			if (i - n >= 0 && !bl[i - n][j] && v[i - n][j])
+			{
+				que.push({ i - n,j });
+				bl[i - n][j] = true;
+			}
+			if (j + n<row && !bl[i][j + n] && v[i][j + n])
+			{
+				que.push({ i,j + n });
+				bl[i][j + n] = true;
+			}
+			if (j - n >= 0 && !bl[i][j - n] && v[i][j - n])
+			{
+				que.push({ i,j - n });
+				bl[i][j - n] = true;;
+			}
+		}
+		if (flag == 0)
+			cout << 0 << endl;
+		else
+			cout << 1 << endl;
+	}
+
+	return 0;
+}
+
+
 int main()
 {
+	string s;
+	while (getline(cin, s))
+	{
+		vector<int> v;
+		for (int i = 0; i<s.size(); ++i)
+		{
+			if (s[i] = '2')
+			{
+				v.push_back(20);
+			}
+			if (s[i] == '5')
+			{
+				v.push_back(5);
+			}
+			if (s[i] == '1')
+			{
+				v.push_back(10);
+			}
+		}
+		int n5 = 0;
+		int n10 = 0;
+		int n20 = 0;
+		int ret = 0;
+		for (int i = 0; i<v.size(); ++i)
+		{
+			if (v[i] == 5)
+			{
+				++n5;
+				++ret;
+			}
+			if (v[i] == 10)
+			{
+				if (n5)
+				{
+					--n5;
+					++n10;
+					++ret;
+				}
+				else
+				{
+					break;
+				}
+			}
+			if (v[i] == 20)
+			{
+				int temp = 20;
+				if (n10)
+				{
+					--n10;
+					temp -= 10;
+				}
+				while (temp&&n5)
+				{
+					--n5;
+					temp -= 5;
+				}
+				if (temp == 0)
+				{
+					++n20;
+					++ret;
+				}
+			}
+		}
+		if (ret == v.size())
+		{
+			cout << "true" << "," << v.size() << endl;
+		}
+		else
+		{
+			cout << "false" << "," << ret + 1 << endl;
+		}
+	}
+
+	return 0;
+}
 
 
+typedef string State;
+class Observer;
+class Subject
+{
+public:
+	virtual ~Subject();
+	virtual void Attach(Observer* obv);
+	virtual void Detach(Observer* obv);
+	virtual void Notify();
+	virtual void SetState(const State& st) = 0;
+	virtual State GetState() = 0;
+protected:
+	Subject();
+private:
+	list<Observer* >* _obvs;
+};
+class ConcreteSubject :public Subject
+{
+public:
+	ConcreteSubject();
+	~ConcreteSubject();
+	State GetState();
+	void SetState(const State& st);
+protected:
+
+private:
+	State _st;
+};
+
+Subject::Subject()
+{
+	//****在模板的使用之前一定要 new，创建
+	_obvs = new list<Observer*>;
+}
+Subject::~Subject()
+{
+
+}
+void Subject::Attach(Observer* obv)
+{
+
+	_obvs->push_front(obv);
+}
+void Subject::Detach(Observer* obv)
+{
+	if (obv != NULL)
+		_obvs->remove(obv);
+}
+void Subject::Notify()
+{
+	list<Observer*>::iterator it;
+	it = _obvs->begin();
+	for (; it != _obvs->end(); it++)
+	{
+		//关于模板和 iterator 的用法
+		(*it)->Update(this);
+	}
+}
+ConcreteSubject::ConcreteSubject()
+{
+	_st = '\0';
+}
+ConcreteSubject::~ConcreteSubject()
+{
+
+}
+State ConcreteSubject::GetState()
+{
+	return _st;
+}
+void ConcreteSubject::SetState(const State& st)
+{
+	_st = st;
+}
+
+class Observer
+{
+public:
+	virtual ~Observer();
+	virtual void Update(Subject* sub) = 0;
+	virtual void PrintInfo() = 0;
+protected:
+	Observer();
+	State _st;
+private:
+};
+class ConcreteObserverA :public Observer
+{
+public:
+	virtual Subject* GetSubject();
+
+	ConcreteObserverA(Subject* sub);
+	virtual ~ConcreteObserverA();
+	//传入 Subject 作为参数，这样可以让一个 View 属于多个的 Subject。
+	void Update(Subject* sub);
+	void PrintInfo();
+protected:
+private:
+	Subject * _sub;
+};
+class ConcreteObserverB :public Observer
+{
+public:
+	virtual Subject* GetSubject();
+	ConcreteObserverB(Subject* sub);
+
+	virtual ~ConcreteObserverB();
+	//传入 Subject 作为参数，这样可以让一个 View 属于多个的 Subject。
+	void Update(Subject* sub);
+	void PrintInfo();
+protected:
+private:
+	Subject * _sub;
+};
+
+Observer::Observer()
+{
+	_st = '\0';
+}
+Observer::~Observer()
+{
+}
+ConcreteObserverA::ConcreteObserverA(Subject* sub)
+{
+	_sub = sub;
+	_sub->Attach(this);
+}
+ConcreteObserverA::~ConcreteObserverA()
+{
+
+	_sub->Detach(this);
+	if (_sub != 0)
+	{
+		delete _sub;
+	}
+}
+Subject* ConcreteObserverA::GetSubject()
+{
+	return _sub;
+}
+void ConcreteObserverA::PrintInfo()
+{
+	cout << "ConcreteObserverA observer...."<<_sub->GetState()<<endl;
+}
+void ConcreteObserverA::Update(Subject* sub)
+{
+	_st = sub->GetState();
+	PrintInfo();
+}
+ConcreteObserverB::ConcreteObserverB(Subject* sub)
+{
+	_sub = sub;
+	_sub->Attach(this);
+}
+ConcreteObserverB::~ConcreteObserverB()
+{
+	_sub->Detach(this);
+	if (_sub != 0)
+	{
+		delete _sub;
+	}
+}
+Subject* ConcreteObserverB::GetSubject()
+{
+	return _sub;
+}
+void ConcreteObserverB::PrintInfo()
+{
+	cout << "ConcreteObserverB observer...."<<_sub->GetState()<<endl;
+}
+void ConcreteObserverB::Update(Subject* sub)
+{
+	_st = sub->GetState();
+	PrintInfo();
+}
+
+int main(int argc, char* argv[])
+{
+	ConcreteSubject* sub = new ConcreteSubject();
+	Observer* o1 = new ConcreteObserverA(sub);
+	Observer* o2 = new ConcreteObserverB(sub);
+	sub->SetState("old");
+	sub->Notify();
+	sub->SetState("new"); //也可以由 Observer 调用
+	sub->Notify();
 	return 0;
 }
