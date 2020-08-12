@@ -2,6 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<cmath>
+#include<set>
+#include <algorithm>
+#include<string>
+using namespace std;
 
 void bubblesort(int* p,int len)
 {
@@ -77,20 +85,160 @@ void ShellSort(int *arr, int size)
 	}
 }
 
+int main01()
+{
+	string s;
+	while (getline(cin, s))
+	{
+		vector<int> v;
+		for (int i = 0; i<s.size(); ++i)
+		{
+			if (s[i] == '2')
+			{
+				v.push_back(20);
+			}
+			if (s[i] == '5')
+			{
+				v.push_back(5);
+			}
+			if (s[i] == '1')
+			{
+				v.push_back(10);
+			}
+		}
+		int n5 = 0;
+		int n10 = 0;
+		int n20 = 0;
+		int ret = 0;
+		for (int i = 0; i<v.size(); ++i)
+		{
+			if (v[i] == 5)
+			{
+				++n5;
+				++ret;
+			}
+			if (v[i] == 10)
+			{
+				if (n5)
+				{
+					--n5;
+					++n10;
+					++ret;
+				}
+				else
+				{
+					break;
+				}
+			}
+			if (v[i] == 20)
+			{
+				int temp = 20;
+				if (n10)
+				{
+					--n10;
+					temp -= 10;
+				}
+				while (temp&&n5)
+				{
+					--n5;
+					temp -= 5;
+				}
+				if (temp == 0)
+				{
+					++n20;
+					++ret;
+				}
+			}
+		}
+		if (ret == v.size())
+		{
+			cout << "true" << "," << v.size() << endl;
+		}
+		else
+		{
+			cout << "false" << "," << ret + 1 << endl;
+		}
+	}
 
+	return 0;
+}
+
+//int main()
+//{
+//	int arr[] = { 2,4,1,7,5,9,6 };
+//	int len = sizeof(arr) / sizeof(arr[0]);
+//	//bubblesort(arr, len);
+//	//selectsort(arr, len);
+//	//insertsort(arr, len);
+//	ShellSort(arr, len);
+//
+//	for (int i = 0; i < len; i++)
+//		printf("%d\n", arr[i]);
+//	
+//	system("pause");
+//	return 0;
+//}
 
 int main()
 {
-	int arr[] = { 2,4,1,7,5,9,6 };
-	int len = sizeof(arr) / sizeof(arr[0]);
-	//bubblesort(arr, len);
-	//selectsort(arr, len);
-	//insertsort(arr, len);
-	ShellSort(arr, len);
+	string str;
+	while (cin >> str)
+	{
+		int n = 0;
+		int count = 0;
+		while (str.back() != ',')
+		{
+			n += (str.back() - '0')*pow(10, count++);
+			str.pop_back();
+		}
+		str.pop_back();
+		vector<string> v(n, "");
+		int left = 0;
+		int right = n - 1;
+		int flag = 1;
+		int i = 0;
+		for (; i<str.size() - 1; )
+		{
+			if (flag)
+			{
+				v[left++].push_back(str[i]);
+				v[right--].push_back(str[i + 1]);
+				if (left == right)
+				{
+					i += 2;
+					if (i<str.size())
+						v[left].push_back(str[i]);
+					flag = 0;
+					--left;
+					++right;
+					++i;
+				}
+				else
+				{
+					i += 2;
+				}
+			}
+			else
+			{
+				v[left--].push_back(str[i]);
+				v[right++].push_back(str[i + 1]);
+				if (left<0 || right >= n)
+				{
+					left = 1;
+					right = n - 2;
+					flag = 1;
+					i += 2;
+				}
+				else
+				{
+					i += 2;
+				}
+			}
+		}
+		for (int i = 0; i<v.size(); ++i)
+			cout << v[i];
+		cout << endl;
+	}
 
-	for (int i = 0; i < len; i++)
-		printf("%d\n", arr[i]);
-	
-	system("pause");
 	return 0;
 }

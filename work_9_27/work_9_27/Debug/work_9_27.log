@@ -1,2 +1,8 @@
 ﻿  work.cpp
-  work_9_27.vcxproj -> G:\Code\C\work_9_27\Debug\work_9_27.exe
+g:\code\c++\work_9_27\work_9_27\work.cpp(94): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_27\work_9_27\work.cpp(113): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_27\work_9_27\work.cpp(191): warning C4244: “+=”: 从“double”转换到“int”，可能丢失数据
+g:\code\c++\work_9_27\work_9_27\work.cpp(200): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_27\work_9_27\work.cpp(209): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_27\work_9_27\work.cpp(238): warning C4018: “<”: 有符号/无符号不匹配
+  work_9_27.vcxproj -> G:\Code\C++\work_9_27\Debug\work_9_27.exe
