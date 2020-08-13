@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<iostream>
+#include<list>
+#include<vector>
+#include<string>
+using namespace std;
 
 typedef struct {
 	int* data;
@@ -143,20 +148,238 @@ void myQueueFree(MyQueue* obj) {
 }
 
 
+//typedef string State;
+//class Observer;
+//class ConcreteObserverA;
+//class ConcreteObserverB;
+//class Subject
+//{
+//public:
+//	virtual ~Subject();
+//	virtual void Attach(Observer* obv);
+//	virtual void Detach(Observer* obv);
+//	virtual void Notify();
+//	virtual void SetState(const State& st) = 0;
+//	virtual State GetState() = 0;
+//protected:
+//	Subject();
+//private:
+//	list<Observer* >* _obvs;
+//};
+//class ConcreteSubject :public Subject
+//{
+//public:
+//	ConcreteSubject();
+//	~ConcreteSubject();
+//	State GetState();
+//	void SetState(const State& st);
+//protected:
+//
+//private:
+//	State _st;
+//};
+//
+//Subject::Subject()
+//{
+//	//****在模板的使用之前一定要 new，创建
+//	_obvs = new list<Observer*>;
+//}
+//Subject::~Subject()
+//{
+//
+//}
+//void Subject::Attach(Observer* obv)
+//{
+//
+//	_obvs->push_front(obv);
+//}
+//void Subject::Detach(Observer* obv)
+//{
+//	if (obv != NULL)
+//		_obvs->remove(obv);
+//}
+//void Subject::Notify()
+//{
+//	list<Observer*>::iterator it;
+//	it = _obvs->begin();
+//	for (; it != _obvs->end(); it++)
+//	{
+//		//关于模板和 iterator 的用法
+//		(*it)->Update(this);
+//	}
+//}
+//ConcreteSubject::ConcreteSubject()
+//{
+//	_st = '\0';
+//}
+//ConcreteSubject::~ConcreteSubject()
+//{
+//
+//}
+//State ConcreteSubject::GetState()
+//{
+//	return _st;
+//}
+//void ConcreteSubject::SetState(const State& st)
+//{
+//	_st = st;
+//}
+//
+//class Observer
+//{
+//public:
+//	virtual ~Observer();
+//	virtual void Update(Subject* sub) = 0;
+//	virtual void PrintInfo() = 0;
+//protected:
+//	Observer();
+//	State _st;
+//private:
+//};
+//class ConcreteObserverA :public Observer
+//{
+//public:
+//	virtual Subject* GetSubject();
+//
+//	ConcreteObserverA(Subject* sub);
+//	virtual ~ConcreteObserverA();
+//	//传入 Subject 作为参数，这样可以让一个 View 属于多个的 Subject。
+//	void Update(Subject* sub);
+//	void PrintInfo();
+//protected:
+//private:
+//	Subject * _sub;
+//};
+//class ConcreteObserverB :public Observer
+//{
+//public:
+//	virtual Subject* GetSubject();
+//	ConcreteObserverB(Subject* sub);
+//
+//	virtual ~ConcreteObserverB();
+//	//传入 Subject 作为参数，这样可以让一个 View 属于多个的 Subject。
+//	void Update(Subject* sub);
+//	void PrintInfo();
+//protected:
+//private:
+//	Subject * _sub;
+//};
+//
+//Observer::Observer()
+//{
+//	_st = '\0';
+//}
+//Observer::~Observer()
+//{
+//}
+//ConcreteObserverA::ConcreteObserverA(Subject* sub)
+//{
+//	_sub = sub;
+//	_sub->Attach(this);
+//}
+//ConcreteObserverA::~ConcreteObserverA()
+//{
+//	_sub->Detach(this);
+//	if (_sub != 0)
+//	{
+//		delete _sub;
+//	}
+//}
+//Subject* ConcreteObserverA::GetSubject()
+//{
+//	return _sub;
+//}
+//void ConcreteObserverA::PrintInfo()
+//{
+//	cout << "ConcreteObserverA observer...." << _sub->GetState() << endl;
+//}
+//void ConcreteObserverA::Update(Subject* sub)
+//{
+//	_st = sub->GetState();
+//	PrintInfo();
+//}
+//ConcreteObserverB::ConcreteObserverB(Subject* sub)
+//{
+//	_sub = sub;
+//	_sub->Attach(this);
+//}
+//ConcreteObserverB::~ConcreteObserverB()
+//{
+//	_sub->Detach(this);
+//	if (_sub != 0)
+//	{
+//		delete _sub;
+//	}
+//}
+//Subject* ConcreteObserverB::GetSubject()
+//{
+//	return _sub;
+//}
+//void ConcreteObserverB::PrintInfo()
+//{
+//	cout << "ConcreteObserverB observer...." << _sub->GetState() << endl;
+//}
+//void ConcreteObserverB::Update(Subject* sub)
+//{
+//	_st = sub->GetState();
+//	PrintInfo();
+//}
+vector<int> sort11(int* a, int aLen, int* b, int bLen) {
+	// write code here
+	vector<int> v;
+	int ai = 0;
+	//int bi=0;
+	bLen--;
+	while (ai<aLen&&bLen >= 0)
+	{
+		if (a[ai] < b[bLen - 1])
+			v.push_back(a[ai++]);
+		else
+			v.push_back(b[bLen--]);
+	}
+	while (ai<aLen)
+		v.push_back(a[ai++]);
+	while (bLen>=0)
+		v.push_back(b[bLen--]);
+	return v;
+}
+int match_str_in_sentence(string s, string x) {
+	// write code here
+	int i = 0;
+	int j = 0;
+	int ret = 1;
+	while (i<s.size())
+	{
+		while (i<s.size() && s[i] != ' ')
+			++i;
+		string temp = s.substr(j, i - j + 1);
+		if (temp.find(x) != string::npos)
+			return ret;
+		while (i<s.size() && s[i] == ' ')
+			++i;
+		j = i;
+		++ret;
+	}
+	return -1;
+}
 int main()
 {
-	int val = 0;
-	MyQueue* temp = myQueueCreate();
-	myQueuePush(temp,1);
-	myQueuePush(temp, 2);
-	val=myQueuePeek(temp);
-	printf("%d ", val);
-	val = myQueuePop(temp);
-	printf("%d ", val);
-	val=myQueueEmpty(temp);
-	printf("%d ", val);
-
+	int a[] = { 1,2,3 };
+	int b[] = { 6,5,4 };
+	//vector<int> v = sort11(a, 3, b, 3);
+	cout << match_str_in_sentence("this is an easy problem.", "eas") << endl;
 
 	system("pause");
 	return 0;
 }
+//int main(int argc, char* argv[])
+//{
+//	ConcreteSubject* sub = new ConcreteSubject();
+//	Observer* o1 = new ConcreteObserverA(sub);
+//	Observer* o2 = new ConcreteObserverB(sub);
+//	sub->SetState("old");
+//	sub->Notify();
+//	sub->SetState("new"); //也可以由 Observer 调用
+//	sub->Notify();
+//	return 0;
+//}
