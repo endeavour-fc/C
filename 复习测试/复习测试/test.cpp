@@ -1405,7 +1405,7 @@ int main5555()
 }
 
 
-int main()
+int main11()
 {
 	string s;
 	while (getline(cin, s))
@@ -1486,6 +1486,8 @@ int main()
 
 typedef string State;
 class Observer;
+class ConcreteObserverA;
+class ConcreteObserverB;
 class Subject
 {
 public:
@@ -1613,7 +1615,6 @@ ConcreteObserverA::ConcreteObserverA(Subject* sub)
 }
 ConcreteObserverA::~ConcreteObserverA()
 {
-
 	_sub->Detach(this);
 	if (_sub != 0)
 	{
@@ -1660,14 +1661,185 @@ void ConcreteObserverB::Update(Subject* sub)
 	PrintInfo();
 }
 
+//int main(int argc, char* argv[])
+//{
+//	ConcreteSubject* sub = new ConcreteSubject();
+//	Observer* o1 = new ConcreteObserverA(sub);
+//	Observer* o2 = new ConcreteObserverB(sub);
+//	sub->SetState("old");
+//	sub->Notify();
+//	sub->SetState("new"); //也可以由 Observer 调用
+//	sub->Notify();
+//	return 0;
+//}
+
+
+
+
+
+class AbstractProductA
+{
+public:
+	virtual ~AbstractProductA();
+protected:
+	AbstractProductA();
+private:
+};
+class AbstractProductB
+{
+public:
+	virtual ~AbstractProductB();
+protected:
+	AbstractProductB();
+private:
+};
+class ProductA1 :public AbstractProductA
+{
+public:
+	ProductA1();
+	~ProductA1();
+protected:
+private:
+};
+class ProductA2 :public AbstractProductA
+{
+public:
+	ProductA2();
+	~ProductA2();
+protected:
+private:
+};
+class ProductB1 :public AbstractProductB
+{
+public:
+	ProductB1();
+	~ProductB1();
+protected:
+private:
+};
+class ProductB2 :public AbstractProductB
+{
+public:
+	ProductB2();
+	~ProductB2();
+protected:
+private:
+};
+AbstractProductA::AbstractProductA()
+{
+}
+AbstractProductA::~AbstractProductA()
+{
+}
+AbstractProductB::AbstractProductB()
+{
+}
+AbstractProductB::~AbstractProductB()
+{
+}
+ProductA1::ProductA1()
+{
+	cout << "ProductA1..." << endl;
+}
+ProductA1::~ProductA1()
+{
+}
+ProductA2::ProductA2()
+{
+	cout << "ProductA2..." << endl;
+}
+ProductA2::~ProductA2()
+{
+}
+ProductB1::ProductB1()
+{
+	cout << "ProductB1..." << endl;
+}
+ProductB1::~ProductB1()
+{
+}
+ProductB2::ProductB2()
+{
+	cout << "ProductB2..." << endl;
+}
+ProductB2::~ProductB2()
+{
+}
+class AbstractProductA;
+class AbstractProductB;
+class AbstractFactory
+{
+public:
+	virtual ~AbstractFactory();
+	virtual AbstractProductA* CreateProductA() = 0;
+	virtual AbstractProductB* CreateProductB() = 0;
+protected:
+	AbstractFactory();
+private:
+};
+class ConcreteFactory1 :public AbstractFactory
+{
+public:
+	ConcreteFactory1();
+	~ConcreteFactory1();
+	AbstractProductA* CreateProductA();
+	AbstractProductB* CreateProductB();
+protected:
+private:
+};
+class ConcreteFactory2 :public AbstractFactory
+{
+public:
+	ConcreteFactory2();
+	~ConcreteFactory2();
+	AbstractProductA* CreateProductA();
+	AbstractProductB* CreateProductB();
+protected:
+private:
+};
+
+AbstractFactory::AbstractFactory()
+{
+}
+AbstractFactory::~AbstractFactory()
+{
+}
+ConcreteFactory1::ConcreteFactory1()
+{
+}
+ConcreteFactory1::~ConcreteFactory1()
+{
+}
+AbstractProductA* ConcreteFactory1::CreateProductA()
+{
+	return new ProductA1();
+}
+AbstractProductB* ConcreteFactory1::CreateProductB()
+{
+	return new ProductB1();
+}
+ConcreteFactory2::ConcreteFactory2()
+{
+}
+ConcreteFactory2::~ConcreteFactory2()
+{
+}
+AbstractProductA* ConcreteFactory2::CreateProductA()
+{
+	return new ProductA2();
+}
+AbstractProductB* ConcreteFactory2::CreateProductB()
+{
+	return new ProductB2();
+}
+
 int main(int argc, char* argv[])
 {
-	ConcreteSubject* sub = new ConcreteSubject();
-	Observer* o1 = new ConcreteObserverA(sub);
-	Observer* o2 = new ConcreteObserverB(sub);
-	sub->SetState("old");
-	sub->Notify();
-	sub->SetState("new"); //也可以由 Observer 调用
-	sub->Notify();
+	AbstractFactory* cf1 = new ConcreteFactory1();
+	cf1->CreateProductA();
+	cf1->CreateProductB();
+	AbstractFactory* cf2 = new ConcreteFactory2();
+	cf2->CreateProductA();
+	cf2->CreateProductB();
 	return 0;
 }
