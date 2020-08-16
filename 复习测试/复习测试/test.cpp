@@ -6,6 +6,7 @@
 #include <algorithm>
 #include<string>
 #include<list>
+#include<unordered_map>
 using namespace std;
 
 
@@ -1832,6 +1833,40 @@ AbstractProductB* ConcreteFactory2::CreateProductB()
 {
 	return new ProductB2();
 }
+
+class Node {
+public:
+	int val;
+	Node* next;
+	Node* random;
+
+	Node(int _val) {
+		val = _val;
+		next = NULL;
+		random = NULL;
+	}
+};
+
+class Solution {
+public:
+	Node * copyRandomList(Node* head) {
+		unordered_map<Node*, Node*> mp;
+		Node* pPre = head;
+		while (pPre)
+		{
+			mp[pPre] = new Node(pPre->val);
+			pPre = pPre->next;
+		}
+		pPre = head;
+		while (pPre)
+		{
+			mp[pPre]->next = mp[pPre->next];
+			mp[pPre]->random = mp[pPre->random];
+			pPre = pPre->next;
+		}
+		return mp[head];
+	}
+};
 
 int main(int argc, char* argv[])
 {
