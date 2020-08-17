@@ -179,7 +179,7 @@ int main01()
 //	return 0;
 //}
 
-int main()
+int main04()
 {
 	string str;
 	while (cin >> str)
@@ -240,5 +240,56 @@ int main()
 		cout << endl;
 	}
 
+	return 0;
+}
+
+int str_wild_compare(string w1, string s2) {
+	// write code here
+	vector<vector<int>> v(w1.size() + 1, vector<int>(s2.size() + 1, 0));
+	v[0][0] = 1;
+	for (int i = 1; i <= s2.size(); ++i)
+	{
+		v[0][i] = v[0][i - 1] && w1[i - 1] == '*';
+	}
+	for (int i = 1; i <= w1.size(); ++i)
+	{
+		for (int j = 1; j <= s2.size(); ++j)
+		{
+			if (w1[i - 1] == '*')
+			{
+				v[i][j] = v[i][j - 1] || v[i - 1][j];
+			}
+			else if (w1[i - 1] == '?' || w1[i - 1] == s2[j - 1])
+			{
+				v[i][j] = v[i - 1][j - 1];
+			}
+		}
+	}
+	return v[w1.size()][s2.size()];
+}
+bool isMatch(string s, string p) {
+	vector<vector<int>> v(s.size() + 1, vector<int>(p.size() + 1, 0));
+	v[0][0] = 1;
+	for (int i = 1; i <= p.size(); i++)
+	{
+		v[0][i] = v[0][i - 1] && (p[i - 1] == '*');
+	}
+	for (int i = 1; i <= s.size(); i++)
+		for (int j = 1; j <= p.size(); j++)
+		{
+			if (s[i - 1] == p[j - 1] || p[j - 1] == '?')
+				v[i][j] = v[i - 1][j - 1];
+			else if (p[j - 1] == '*')
+			{
+				v[i][j] = v[i - 1][j] || v[i][j - 1];
+			}
+		}
+	return v[s.size()][p.size()];
+}
+int main()
+{
+	cout << str_wild_compare("/et?/*", "/etc/passwd") << endl;
+
+	system("pause");
 	return 0;
 }
