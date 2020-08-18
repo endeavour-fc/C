@@ -2356,6 +2356,34 @@ static constexpr int dirs[4][2] = { { -1, 0 },{ 1, 0 },{ 0, -1 },{ 0, 1 } };
 		}
 		return ret;
 	}
+
+	class Solution_getTree {
+	public:
+		ListNode * getMedium(ListNode* begin, ListNode* end)
+		{
+			ListNode* fast = begin;
+			ListNode* slow = begin;
+			while (fast != end && fast->next != end)
+			{
+				slow = slow->next;
+				fast = fast->next->next;
+			}
+			return slow;
+		}
+		TreeNode* getTree(ListNode* begin, ListNode*end)
+		{
+			if (begin == end)
+				return NULL;
+			ListNode* mid = getMedium(begin, end);
+			TreeNode* root = new TreeNode(mid->val);
+			root->left = getTree(begin, mid);
+			root->right = getTree(mid->next, end);
+			return root;
+		}
+		TreeNode* sortedListToBST(ListNode* head) {
+			return getTree(head, NULL);
+		}
+	};
 int main()
 {
 	vector<vector<int>> v{ {0},{0},{0} };
