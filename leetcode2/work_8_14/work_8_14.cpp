@@ -514,6 +514,30 @@ public:
 	}
 };
 
+class Solution_searchMatrix {
+public:
+	bool searchMatrix(vector<vector<int>>& matrix, int target) {
+		if (matrix.size() == 0)
+			return false;
+		int m = matrix.size();
+		int n = matrix[0].size();
+		int left = 0;
+		int right = m * n - 1;
+		while (left <= right)
+		{
+			int mid = (right - left) / 2 + left;
+			int num = matrix[mid / n][mid%n];
+			if (num>target)
+				right = mid - 1;
+			else if (num<target)
+				left = mid + 1;
+			else
+				return true;
+		}
+		return false;
+	}
+};
+
 int main()
 {
 	vector<vector<int>> v = { {1, 0, 1},{0, 0, 0},{1, 0, 1 } };
