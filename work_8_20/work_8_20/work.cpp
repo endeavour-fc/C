@@ -3,7 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include<time.h>
-
+#include<iostream>
+#include<vector>
+using namespace std;
 
 int main01()
 {
@@ -70,10 +72,40 @@ void getnum()
 
 }
 
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+	vector<int> v;
+	if (matrix.size() == 0)
+		return v;
+	int left = 0;
+	int right = matrix[0].size() - 1;
+	int top = 0;
+	int bottom = matrix.size() - 1;
+	while (left <= right && top <= bottom)
+	{
+		for (int i = left; i <= right; ++i)
+			v.push_back(matrix[top][i]);
+		for (int i = top + 1; i <= bottom; ++i)
+			v.push_back(matrix[i][right]);
+		if (left<right&&top<bottom)
+		{
+			for (int i = right - 1; i >= left; --i)
+				v.push_back(matrix[bottom][i]);
+			for (int i = bottom - 1; i>top; --i)
+				v.push_back(matrix[i][left]);
+		}
+		++left;
+		--right;
+		++top;
+		--bottom;
+	}
+	return v;
 
+}
 int main()
 {
-	getnum();
+	vector<vector<int>> v = { {1, 2, 3, 4},{5, 6, 7, 8},{9, 10, 11, 12} };
+	spiralOrder(v);
+	//getnum();
 	system("pause");
 	return 0;
 }
