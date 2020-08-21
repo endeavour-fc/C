@@ -286,9 +286,40 @@ bool isMatch(string s, string p) {
 		}
 	return v[s.size()][p.size()];
 }
+vector<int> getLeastNumbers(vector<int>& arr, int k) {
+	vector<int> v;
+	if (arr.size() == 0 || k == 0)
+		return v;
+
+	make_heap(arr.begin(), arr.end(), greater<int>());
+	auto it = arr.end();
+	while (k--)
+	{
+		v.push_back(arr[0]);
+		pop_heap(arr.begin(), it--, greater<int>());
+	}
+	return v;
+}
+class Solution_findMaxAverage {
+public:
+	double findMaxAverage(vector<int>& nums, int k) {
+		int num = 0;
+		for (int i = 0; i<k; ++i)
+			num += nums[i];
+		int ret = num;
+		for (int i = k; i<nums.size(); ++i)
+		{
+			num = num - nums[i - k] + nums[i];
+			ret = max(num, ret);
+		}
+		return (ret - 0.0) / k;
+	}
+};
 int main()
 {
-	cout << str_wild_compare("/et?/*", "/etc/passwd") << endl;
+	vector<int> v = { 3, 2, 1 };
+	getLeastNumbers(v, 2);
+	//cout << str_wild_compare("/et?/*", "/etc/passwd") << endl;
 
 	system("pause");
 	return 0;
