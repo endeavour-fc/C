@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<iostream>
+#include<string>
+#include<vector>
+#include<set>
+#include<stack>
+using namespace std;
 
 typedef struct Node
 {
@@ -150,37 +156,122 @@ struct Node* reverseList(struct Node* head) {
 }
 
 
+//int main()
+//{
+//	Node* head = NULL;
+//	int a = 0;
+//	int input = 0;
+//	do
+//	{
+//		printf("请输入一个非-1的数\n");
+//		scanf("%d", &input);
+//		creat_node(&head, input);
+//	} while (input != -1);
+//
+//	head= reverseList(head);
+//	print_node(head);
+//
+//	//print_node(head);
+//	//printf("\n");
+//	//printf("请输入一删除的数\n");
+//	//scanf("%d", &a);
+//	//dele_node(&head, a);
+//	//print_node(head);
+//
+//	//printf("\n");
+//	//printf("请输入一增加的数\n");
+//	//scanf("%d", &a);
+//	//add_node(&head, a);
+//	//print_node(head);
+//
+//
+//	des_node(&head);
+//
+//	system("pause");
+//	return 0;
+//}
+
+//int main()
+//{
+//	string s;
+//	while (cin >> s)
+//	{
+//		set<pair<int, int>> v;
+//		v.insert({ 0,0 });
+//		int i = 0;
+//		int pos_i = 0;
+//		int pos_j = 0;
+//		for (; i<s.size(); ++i)
+//		{
+//			if (s[i] == 'N')
+//			{
+//				pos_i -= 1;
+//			}
+//			else if (s[i] == 'S')
+//			{
+//				pos_i += 1;
+//			}
+//			else if (s[i] == 'E')
+//			{
+//				pos_j += 1;
+//			}
+//			else
+//			{
+//				pos_j -= 1;
+//			}
+//
+//			if (v.find({ pos_i,pos_j }) == v.end())
+//			{
+//				v.insert({ pos_i,pos_j });
+//			}
+//			else
+//				break;
+//		}
+//		if (i != s.size())
+//			cout << "True" << endl;
+//		else
+//			cout << "False" << endl;
+//	}
+//
+//	return 0;
+//}
 int main()
 {
-	Node* head = NULL;
-	int a = 0;
-	int input = 0;
-	do
+	string s;
+	while (cin >> s)
 	{
-		printf("请输入一个非-1的数\n");
-		scanf("%d", &input);
-		creat_node(&head, input);
-	} while (input != -1);
+		stack<char> sta;
+		int i = 0;
+		for (i = 0; i<s.size(); ++i)
+		{
+			if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+			{
+				sta.push(s[i]);
+			}
+			else
+			{
+				if (!sta.empty())
+				{
+					if (sta.top() == '('&&s[i] == ')')
+						sta.pop();
+					else if (sta.top() == '{'&&s[i] == '}')
+						sta.pop();
+					else if (sta.top() == '['&&s[i] == ']')
+						sta.pop();
+					else
+						break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		if (i == s.size() && sta.empty())
+			cout << "True" << endl;
+		else
+			cout << "False" << endl;
+	}
 
-	head= reverseList(head);
-	print_node(head);
-
-	//print_node(head);
-	//printf("\n");
-	//printf("请输入一删除的数\n");
-	//scanf("%d", &a);
-	//dele_node(&head, a);
-	//print_node(head);
-
-	//printf("\n");
-	//printf("请输入一增加的数\n");
-	//scanf("%d", &a);
-	//add_node(&head, a);
-	//print_node(head);
-
-
-	des_node(&head);
-
-	system("pause");
 	return 0;
 }
