@@ -1,5 +1,6 @@
 #include<iostream> 
 #include<string> 
+#include<vector>
 using namespace std;
 class MyData 
 {     public:
@@ -71,18 +72,73 @@ class CGoods
          float total_price;
   
  };
- int main()
- {
-   //  MyData d1,d2;
-   CGoods g1,g2;
-   g1.RegisterGoods("abc",15,12.4);
-  cout<< g1.GetName()<<endl;
-  cout<< g1.GetCount()<<endl;
-  cout<< g1.GetPrice()<<endl;
-  cout << g1.GetPrice() << endl;
-  g1.SetName("bcd");
-  cout << g1.GetName() << endl;
-     return 0;
- }
+ //int main()
+ //{
+ //  //  MyData d1,d2;
+ //  CGoods g1,g2;
+ //  g1.RegisterGoods("abc",15,12.4);
+ // cout<< g1.GetName()<<endl;
+ // cout<< g1.GetCount()<<endl;
+ // cout<< g1.GetPrice()<<endl;
+ // cout << g1.GetPrice() << endl;
+ // g1.SetName("bcd");
+ // cout << g1.GetName() << endl;
+ //    return 0;
+ //}
+int min(int a, int b)
+{
+	return a > b ? b : a;
+}
+int minSubArrayLen(int s, vector<int>& nums) {
+	for (int i = 1; i<nums.size(); ++i)
+		nums[i] += nums[i - 1];
+	int ret = INT_MAX;
+	nums.insert(nums.begin(), 0);
+	for (int i = 1; i<nums.size(); ++i)
+	{
+		for (int j = 0; j<i; ++j)
+		{
+			if (nums[i] - nums[j] >= s)
+			{
+				ret = min(ret, i - j);
+			}
+		}
+	}
+	return ret == INT_MAX ? 0 : ret;
+}
 
-                                                                        
+//int main()
+//{
+//	vector<int> v{ 1,2,3,4,5};
+//	cout<<minSubArrayLen(11, v)<<endl;
+//
+//	system("pause");
+//	return 0;
+//}
+void stringtonum(string str)
+{
+	vector<string> v;
+	int begin = 0;
+	int end = 0;
+	while (begin < str.size())
+	{
+		end = str.find(' ',begin);
+		v.push_back(str.substr(begin, end - begin));
+		if (end == -1)
+			break;
+		begin = end + 1;
+	}
+
+	for (auto& e : v)
+	{
+		cout << e << endl;
+	}
+}
+int main()
+{
+
+	stringtonum("12 13 15 27 18 30");
+
+	system("pause");
+	return 0;
+}
