@@ -2,6 +2,7 @@
 #include<string> 
 #include<vector>
 using namespace std;
+#define x        ((x>> 1) & 0x55555555) | ((x << 1) & 0xaaaaaaaa);x = ((x >> 2) & 0x33333333) | ((x << 2) & 0xcccccccc);x = ((x >> 4) & 0x0f0f0f0f) | ((x << 4) & 0xf0f0f0f0);x = ((x >> 8) & 0x00ff00ff) | ((x << 8) & 0xff00ff00);x = ((x >> 16) & 0x0000ffff) | ((x << 16) & 0xffff0000);
 class MyData 
 {     public:
        int  GetData()
@@ -134,11 +135,65 @@ void stringtonum(string str)
 		cout << e << endl;
 	}
 }
+//int main()
+//{
+//
+//	stringtonum("12 13 15 27 18 30");
+//
+//	system("pause");
+//	return 0;
+//}
+bool isequal(vector<int>& v)
+{
+	for (int i = 1; i<v.size(); ++i)
+	{
+		if (v[i] != v[i - 1])
+			return false;
+	}
+	return true;
+}
+int getmax(vector<int>& v)
+{
+	int max = 0;
+	int ret = 0;
+	for (int i = 0; i<v.size(); ++i)
+	{
+		if (v[i]>max)
+		{
+			max = v[i];
+			ret = i;
+		}
+	}
+	return ret;
+}
+void addone(vector<int>& v, int flag)
+{
+	for (int i = 0; i<v.size(); ++i)
+	{
+		if (i != flag)
+		{
+			++v[i];
+		}
+	}
+}
+
 int main()
 {
+	int n = 0;
+	while (cin >> n)
+	{
+		vector<int> v(n, 0);
+		for (int i = 0; i<n; ++i)
+			cin >> v[i];
+		int num = 0;
+		while (!isequal(v))
+		{
+			int flag = getmax(v);
+			addone(v, flag);
+			++num;
+		}
+		cout << num << endl;
+	}
 
-	stringtonum("12 13 15 27 18 30");
-
-	system("pause");
 	return 0;
 }
