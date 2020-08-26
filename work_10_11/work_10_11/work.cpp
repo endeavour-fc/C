@@ -208,7 +208,7 @@ long long solve(string pre, string post, int n) {
 	return sum * dp[n][num];
 }
 
-int main() {
+int main01() {
 	dp[0][0] = 1;
 	for (int i = 1; i < 25; i++)
 	{
@@ -264,4 +264,17 @@ bool wordBreak(string s, unordered_set<string> &dict) {
 		}
 	}
 	return bl[s.size()];
+}
+int fun()
+{
+	return 1;
+}
+int main()
+{
+	//int& a = fun();
+	int&& b = fun();
+	int&& c = 1;
+	//int& d = 1;
+
+	return 0;
 }
