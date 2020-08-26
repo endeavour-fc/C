@@ -151,12 +151,10 @@ void DataManager::DeleteDoc(const string &path, string doc)
 	m_dbmgr.ExecuteSql(sql);
 
 	//递归删除子目录
-	//C:\Users\baoso\Desktop\55班\test\阶段性考试试卷\my_dir
+
 	string doc_path = path;
 	doc_path += "\\";
-	//C:\Users\baoso\Desktop\55班\test\阶段性考试试卷\my_dir\
-	doc_path += doc;
-	//C:\Users\baoso\Desktop\55班\test\阶段性考试试卷\my_dir\AA
+
 	sprintf(sql, "delete from %s where doc_path like '%s%%'", DOC_TABLE, doc_path.c_str());
 	m_dbmgr.ExecuteSql(sql);
 }
@@ -203,8 +201,6 @@ void DataManager::Search(const string &key, vector<pair<string, string>> &doc_pa
 void DataManager::SplitHightLight(const string &str, const string &key, 
 								  string &prefix, string &hightlight, string &suffix)
 {
-	//str = "123比特科技,让就业更简单666"; 
-	//key = "就业";
 
 	string strlower = str;
 	string keylower = key;
@@ -222,9 +218,7 @@ void DataManager::SplitHightLight(const string &str, const string &key,
 	}
 
 	//2 拼音全拼搜索，如果能匹配，则需要匹配分离的汉字和拼音
-	//str = "123比特科技,abc,让就业更简单666"; 
-	//str_pinyin = "123bitekeji,abc,rangjiuyegengjiandan666"
-	//key_pinyin = "jiuye"
+
 
 	string str_pinyin = ChineseConvertPinYinAllSpell(strlower);
 	string key_pinyin = ChineseConvertPinYinAllSpell(keylower);
@@ -271,7 +265,44 @@ void DataManager::SplitHightLight(const string &str, const string &key,
 	}
 
 	//3 首字母搜索 如果能匹配，则需要匹配分离汉字和首字母
-	//留给同学们自行完成
+	string str_initials = ChineseConvertPinYinInitials(strlower);
+	string key_initials = ChineseConvertPinYinInitials(keylower);
+	pos = str_initials.find(key_initials);
+	if (pos != string::npos)
+	{
+		size_t str_index = 0;
+		size_t initials_index = 0;
+		size_t highlight_index = 0;
+		size_t highlight_len = 0;
+		while (str_index < strlower.size())
+		{
+			if (initials_index == pos)
+			{
+				highlight_index = str_index;
+			}
+			if (initials_index >= pos + key_initials.size())
+			{
+				highlight_len = str_index - highlight_index;
+				break;
+			}
+			if (strlower[str_index] >= 0 && strlower[str_index] <= 127)
+			{
+				//是一个字符
+				++str_index;
+				++initials_index;
+			}
+			else
+			{
+				//是一个汉字
+				str_index += 2;
+				initials_index++;
+			}
+		}
+		prefix = str.substr(0, highlight_index);
+		hightlight = str.substr(highlight_index, highlight_len);
+		suffix = str.substr(highlight_index + highlight_len, string::npos);
+		return;
+	}
 
 
 	//搜索失败，按照不高亮处理

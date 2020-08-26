@@ -4,7 +4,7 @@
 #include"Sysutil.h"
 #include"DataManager.h"
 
-//单件模式
+//单例模式
 class ScanManager
 {
 public:

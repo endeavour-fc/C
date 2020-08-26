@@ -118,7 +118,6 @@ bool DirectoryWatch(const string &path)
 
 void DirectoryList(const string &path, vector<string> &subfile, vector<string> &subdir)
 {
-	//"C:\\Users\\baoso\\Desktop\\55°à\\test\\½×¶ÎÐÔ¿¼ÊÔÊÔ¾í\\*.*";
 	string _path = path;
 	_path += "\\*.*";  //Í¨Åä·û  * £¿%
 
