@@ -392,3 +392,57 @@ int main()
 
 	return 0;
 }
+
+class Solution_longestPalindrome {
+public:
+	int longestPalindrome(string s) {
+		int arr[256] = { 0 };
+		for (int i = 0; i<s.size(); ++i)
+		{
+			++arr[s[i]];
+		}
+		int ret = 0;
+		for (int i = 0; i<256; ++i)
+		{
+			ret += (arr[i] / 2) * 2;
+			if (ret % 2 == 0 && arr[i] % 2 == 1)
+				++ret;
+		}
+		return ret;
+	}
+};
+
+class Solution_findContinuousSequence {
+public:
+	vector<vector<int>> findContinuousSequence(int target) {
+		vector<vector<int>> v;
+		int i = 1;
+		int j = 1;
+		int sum = 0;
+		while (i <= target / 2 + 1)
+		{
+			if (sum<target)
+			{
+				sum += j;
+				++j;
+			}
+			else if (sum>target)
+			{
+				sum -= i;
+				++i;
+			}
+			else
+			{
+				vector<int> temp;
+				for (int k = i; k<j; ++k)
+					temp.push_back(k);
+				v.push_back(temp);
+				sum += j;
+				sum -= i;
+				++i;
+				++j;
+			}
+		}
+		return v;
+	}
+};
