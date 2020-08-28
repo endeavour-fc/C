@@ -446,3 +446,27 @@ public:
 		return v;
 	}
 };
+
+class Solution_compressString {
+public:
+	string compressString(string S) {
+		if (S.size() == 0)
+			return S;
+		string ret;
+		int count = 1;
+		for (int i = 1; i<S.size(); ++i)
+		{
+			if (S[i] == S[i - 1])
+				++count;
+			else
+			{
+				ret += S[i - 1];
+				ret += to_string(count);
+				count = 1;
+			}
+		}
+		ret += S[S.size() - 1];
+		ret += to_string(count);
+		return ret.size()<S.size() ? ret : S;
+	}
+};
