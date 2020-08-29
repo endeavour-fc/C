@@ -470,3 +470,56 @@ public:
 		return ret.size()<S.size() ? ret : S;
 	}
 };
+
+class Solution_canPermutePalindrome {
+public:
+	bool canPermutePalindrome(string s) {
+		char arr[256] = { 0 };
+		for (int i = 0; i<s.size(); ++i)
+		{
+			++arr[s[i]];
+		}
+		int ret = 0;
+		for (int i = 0; i<256; ++i)
+		{
+			if (arr[i] % 2)
+				++ret;
+		}
+		return ret <= 1;
+	}
+};
+
+class Solution_search {
+public:
+	int search(vector<int>& nums, int target) {
+		return findright(nums, target) - findleft(nums, target) + 1;
+	}
+	int findleft(vector<int>& nums, int target)
+	{
+		int left = 0;
+		int right = nums.size() - 1;
+		while (left <= right)
+		{
+			int mid = left + (right - left) / 2;
+			if (nums[mid]<target)
+				left = mid + 1;
+			else
+				right = mid - 1;
+		}
+		return left;
+	}
+	int findright(vector<int>& nums, int target)
+	{
+		int left = 0;
+		int right = nums.size() - 1;
+		while (left <= right)
+		{
+			int mid = left + (right - left) / 2;
+			if (nums[mid] <= target)
+				left = mid + 1;
+			else
+				right = mid - 1;
+		}
+		return right;
+	}
+};
