@@ -3,6 +3,7 @@
 #include<vector>
 #include<stdio.h>
 #include<stack>
+#include<unordered_map>
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable:4996)
 using namespace std;
@@ -302,96 +303,96 @@ void reverseString(string &s)
 		swap(s[i], s[j]);
 	}
 }
-int main()
-{
-	string str;
-	stack<char> st;
-	while (cin >> str)
-	{
-		//cout << str << endl;
-		if (str == "=")
-		{
-			string strnum1;
-			string strnum2;
-			char ch = '+';
-			while (!st.empty()&&st.top()<='9'&&st.top()>='0')
-			{
-				strnum1 += st.top();
-				st.pop();
-			}
-			if (!st.empty())
-			{
-				ch = st.top();
-				st.pop();
-			}
-			while (!st.empty())
-			{
-				strnum2 += st.top();
-				st.pop();
-			}
-			if (strnum1.size() && strnum2.size())
-			{
-				reverseString(strnum1);
-				reverseString(strnum2);
-				int num1 = atoi(strnum2.c_str());
-				int num2 = atoi(strnum1.c_str());
-				if (ch == '+')
-					cout << num1 + num2 << endl;
-				else if (ch == '-')
-					cout << num1 - num2 << endl;
-				else if (ch == '*')
-					cout << num1 * num2 << endl;
-				else if (ch == '/')
-				{
-					if (num2 == 0)
-						cout << "err" << endl;
-					else
-						cout << num1 / num2 << endl;
-				}
-				else
-					cout << "err" << endl;
-			}
-		}
-		else if (!st.empty()&&(str == "+" || str == "-" || str == "*" || str == "/"))
-		{
-			st.push(str[0]);
-		}
-		else if (!st.empty()&&str == "<-")
-		{
-			st.pop();
-		}
-		else if (str == "ce")
-		{
-			stack<char> temp;
-			swap(temp, st);
-		}
-		else if (st.empty() || (st.top() == '-'||st.top() == '*'||st.top() == '/'||st.top() == '+'))
-		{
-			for (int i = 0; i < str.size(); ++i)
-			{
-				if (str[i] >= '0'&&str[i] <= '9')
-				{
-					st.push(str[i]);
-				}
-				else
-				{
-					while (!st.empty() && !(st.top() == '-' || st.top() == '*' || st.top() == '/' || st.top() == '+'))
-					{
-						st.pop();
-					}
-					break;
-				}
-			}
-		}
-		else
-		{
-			stack<char> temp;
-			swap(temp, st);
-		}
-	}
-
-	return 0;
-}
+//int main()
+//{
+//	string str;
+//	stack<char> st;
+//	while (cin >> str)
+//	{
+//		//cout << str << endl;
+//		if (str == "=")
+//		{
+//			string strnum1;
+//			string strnum2;
+//			char ch = '+';
+//			while (!st.empty()&&st.top()<='9'&&st.top()>='0')
+//			{
+//				strnum1 += st.top();
+//				st.pop();
+//			}
+//			if (!st.empty())
+//			{
+//				ch = st.top();
+//				st.pop();
+//			}
+//			while (!st.empty())
+//			{
+//				strnum2 += st.top();
+//				st.pop();
+//			}
+//			if (strnum1.size() && strnum2.size())
+//			{
+//				reverseString(strnum1);
+//				reverseString(strnum2);
+//				int num1 = atoi(strnum2.c_str());
+//				int num2 = atoi(strnum1.c_str());
+//				if (ch == '+')
+//					cout << num1 + num2 << endl;
+//				else if (ch == '-')
+//					cout << num1 - num2 << endl;
+//				else if (ch == '*')
+//					cout << num1 * num2 << endl;
+//				else if (ch == '/')
+//				{
+//					if (num2 == 0)
+//						cout << "err" << endl;
+//					else
+//						cout << num1 / num2 << endl;
+//				}
+//				else
+//					cout << "err" << endl;
+//			}
+//		}
+//		else if (!st.empty()&&(str == "+" || str == "-" || str == "*" || str == "/"))
+//		{
+//			st.push(str[0]);
+//		}
+//		else if (!st.empty()&&str == "<-")
+//		{
+//			st.pop();
+//		}
+//		else if (str == "ce")
+//		{
+//			stack<char> temp;
+//			swap(temp, st);
+//		}
+//		else if (st.empty() || (st.top() == '-'||st.top() == '*'||st.top() == '/'||st.top() == '+'))
+//		{
+//			for (int i = 0; i < str.size(); ++i)
+//			{
+//				if (str[i] >= '0'&&str[i] <= '9')
+//				{
+//					st.push(str[i]);
+//				}
+//				else
+//				{
+//					while (!st.empty() && !(st.top() == '-' || st.top() == '*' || st.top() == '/' || st.top() == '+'))
+//					{
+//						st.pop();
+//					}
+//					break;
+//				}
+//			}
+//		}
+//		else
+//		{
+//			stack<char> temp;
+//			swap(temp, st);
+//		}
+//	}
+//
+//	return 0;
+//}
 
 class Solution_longestPalindrome {
 public:
@@ -523,3 +524,126 @@ public:
 		return right;
 	}
 };
+
+class Solution_reverseWords {
+public:
+	void Reverse(string& str, int i, int j)
+	{
+		while (i<j)
+		{
+			swap(str[i++], str[j--]);
+		}
+	}
+	string reverseWords(string s) {
+		int i = 0;
+		int j = 0;
+		while (i<s.size())
+		{
+			while (i<s.size() && s[i] != ' ')
+				++i;
+			Reverse(s, j, i - 1);
+			while (i<s.size() && s[i] == ' ')
+				++i;
+			j = i;
+		}
+		return s;
+	}
+};
+class Solution_CheckPermutation {
+public:
+	bool CheckPermutation(string s1, string s2) {
+		unordered_map<char, int> mp;
+		for (int i = 0; i<s1.size(); ++i)
+			++mp[s1[i]];
+
+		for (int i = 0; i<s2.size(); ++i)
+		{
+			if (mp.count(s2[i]))
+				--mp[s2[i]];
+			else
+				return false;
+		}
+		for (auto& e : mp)
+		{
+			if (e.second)
+				return false;
+		}
+		return true;
+	}
+};
+
+class Base
+{
+public:
+	Base() {}
+	~Base() {}
+	virtual void fun(int a) {
+		cout << "Base::fun" << endl;
+	}
+	int a;
+	int b;
+private:
+
+};
+class B
+{
+public:
+	B() {}
+	~B() {}
+	virtual void get()
+	{
+
+	}
+	int c;
+private:
+
+};
+
+
+class A:public Base,public B
+{
+public:
+	A() {}
+	~A() {}
+	void fun(char a) {
+		cout << "A::fun(char)" << endl;
+	}
+	void fun(int a)
+	{
+		cout << "A::fun(int)" << endl;
+	}
+	int d;
+private:
+
+};
+struct C
+{
+	int a;
+	char b;
+	int c;
+};
+union K
+{
+	int a;
+	double b;
+	char c;
+};
+struct M
+{
+	K a;
+	//C a;
+	int b;
+	int c;
+};
+int main()
+{
+	//A* p = new A;
+	//Base* b = new A;
+	//b->fun(' ');
+	cout << sizeof(C) << endl;
+	cout << sizeof(M) << endl;
+	cout << sizeof(K) << endl;
+
+	system("pause");
+	return 0;
+}
