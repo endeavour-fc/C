@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<stack>
 #include<unordered_map>
+#include<queue>
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable:4996)
 using namespace std;
@@ -634,6 +635,98 @@ struct M
 	//C a;
 	int b;
 	int c;
+};
+
+vector<string> findCommonString(string** values, int valuesRowLen, int* valuesColLen) {
+	// write code here
+	unordered_map<string, int> mp;
+	for (int i = 0; i<valuesRowLen; ++i)
+	{
+		for (int j = 0; j<valuesColLen[i]; ++j)
+		{
+			++mp[values[i][j]];
+		}
+	}
+	vector<string> ret;
+	for (auto&e : mp)
+	{
+		if (e.second>1)
+			ret.push_back(e.first);
+	}
+	return ret;
+}
+int get(int num)
+{
+	int ret = 1;
+	for (int i = 1; i<num; ++i)
+		ret *= i;
+	return ret;
+}
+int translateNum(int num) {
+	// write code here
+	string s = to_string(num);
+	int flag = 10000;
+	int ret = 0;
+	for (int i = s.size() - 1; i >= 0; --i)
+	{
+		if (s[i]<'3'&&flag<'6')
+		{
+			ret += 1;
+		}
+		flag = s[i];
+	}
+
+	return get(ret) - 1;
+}
+void get(string s, int* num)
+{
+	if (s.size() == 0)
+	{
+		*num += 1;
+		return;
+	}
+	char temp = s.back();
+	s.pop_back();
+	get(s, num);
+	if (s.size() && temp<'6'&&s[s.size() - 1]<'3')
+	{
+		s.pop_back();
+		get(s, num);
+	}
+}
+int translateNum(int num) {
+	// write code here
+	string s = to_string(num);
+	int num1 = 0;
+	get(s, &num1);
+
+	return num1;
+}
+class Solution_canVisitAllRooms {
+public:
+	bool canVisitAllRooms(vector<vector<int>>& rooms) {
+		queue<int> que;
+		for (int i = 0; i<rooms[0].size(); ++i)
+			que.push(rooms[0][i]);
+
+		vector<bool> v(rooms.size(), false);
+		v[0] = true;
+		int count = 1;
+		while (!que.empty())
+		{
+			int temp = que.front();
+			que.pop();
+			if (v[temp])
+				continue;
+			++count;
+			v[temp] = true;
+			for (int i = 0; i<rooms[temp].size(); ++i)
+				que.push(rooms[temp][i]);
+		}
+		if (count == rooms.size())
+			return true;
+		return false;
+	}
 };
 int main()
 {
