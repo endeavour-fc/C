@@ -728,6 +728,28 @@ public:
 		return false;
 	}
 };
+
+class Solution_PredictTheWinner {
+public:
+	bool PredictTheWinner(vector<int>& nums) {
+		int length = nums.size();
+		auto dp = vector<vector<int>>(length, vector<int>(length));
+		for (int i = 0; i < length; i++) {
+			dp[i][i] = nums[i];
+		}
+		for (int i = length - 2; i >= 0; i--) {
+			for (int j = i + 1; j < length; j++) {
+				dp[i][j] = max(nums[i] - dp[i + 1][j], nums[j] - dp[i][j - 1]);
+			}
+		}
+		return dp[0][length - 1] >= 0;
+	}
+};
+
+作者：LeetCode - Solution
+链接：https ://leetcode-cn.com/problems/predict-the-winner/solution/yu-ce-ying-jia-by-leetcode-solution/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 int main()
 {
 	//A* p = new A;
