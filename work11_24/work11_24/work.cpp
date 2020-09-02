@@ -745,11 +745,22 @@ public:
 		return dp[0][length - 1] >= 0;
 	}
 };
-
-作者：LeetCode - Solution
-链接：https ://leetcode-cn.com/problems/predict-the-winner/solution/yu-ce-ying-jia-by-leetcode-solution/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+class Solution_exchange {
+public:
+	vector<int> exchange(vector<int>& nums) {
+		int i = 0;
+		int j = nums.size() - 1;
+		while (i<j)
+		{
+			while (i<j&&nums[i] % 2)
+				++i;
+			while (i<j&&nums[j] % 2 == 0)
+				--j;
+			swap(nums[i], nums[j]);
+		}
+		return nums;
+	}
+};
 int main()
 {
 	//A* p = new A;
