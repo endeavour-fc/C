@@ -1,5 +1,3 @@
 ﻿  main.cpp
-  stack.h
-  work.cpp
-  正在生成代码...
-  work_10_16.vcxproj -> G:\Code\C\work_10_16\Debug\work_10_16.exe
+g:\code\c++\work_10_16\work_10_16\main.cpp(18): warning C4018: “<”: 有符号/无符号不匹配
+  work_10_16.vcxproj -> G:\Code\C++\work_10_16\Debug\work_10_16.exe
