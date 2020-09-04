@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
 typedef struct Node
 {
 	int a;
@@ -44,7 +47,38 @@ void print_node(Node* head)
 		printf("%d->", p->a);
 	}
 }
+ struct TreeNode
+ {
+     int val;
+     TreeNode *left;
+     TreeNode *right;
+     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ };
 
+class Solution {
+public:
+	vector<string> ret;
+	void get(TreeNode* root, string str)
+	{
+		if (root == NULL)
+			return;
+		str += to_string(root->val);
+		if (root->left || root->right)
+			str += "->";
+		else
+		{
+			ret.push_back(str);
+			return;
+		}
+		get(root->left, str);
+		get(root->right, str);
+	}
+	vector<string> binaryTreePaths(TreeNode* root) {
+		string str;
+		get(root, str);
+		return ret;
+	}
+};
 int main()
 {
 	Node* head = NULL;
