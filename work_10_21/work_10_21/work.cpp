@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<iostream>
+#include<string>
+#include<vector>
+#include<queue>
+using namespace std;
 typedef struct {
 	int* data;
 	int first;
@@ -131,19 +136,60 @@ void myStackFree(MyStack* obj) {
 	free(obj->s2);
 	free(obj);
 }
-int main()
-{
-	int val = 0;
-	MyStack* temp = myStackCreate();
-	myStackPush(temp, 1);
-	myStackPush(temp, 2);
-	val=myStackTop(temp);
-	printf("%d ", val);
-	val=myStackPop(temp);
-	printf("%d ", val);
-	val=myStackEmpty(temp);
-	printf("%d ", val);
+//int main()
+//{
+//	int val = 0;
+//	MyStack* temp = myStackCreate();
+//	myStackPush(temp, 1);
+//	myStackPush(temp, 2);
+//	val=myStackTop(temp);
+//	printf("%d ", val);
+//	val=myStackPop(temp);
+//	printf("%d ", val);
+//	val=myStackEmpty(temp);
+//	printf("%d ", val);
+//
+//	system("pause");
+//	return 0;
+//}
 
-	system("pause");
-	return 0;
+struct TreeNode
+{
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode(int a) :val(a), left(NULL), right(NULL) {};
+};
+bool isfullTree(TreeNode* p)
+{
+	if (p == NULL)return true;
+	
+	queue<TreeNode*>help;
+	help.push(p);
+	TreeNode *end = p;
+	TreeNode *next = NULL;
+	int numNodes = 0;
+	int numLayers = 0;
+	while (!help.empty()) {
+		p = help.front();
+		help.pop();
+		numNodes++;
+		if (p->left != NULL) {
+			help.push(p->left);
+			next = p->left;
+		}
+		if (p->right != NULL) {
+			help.push(p->right);
+			next = p->right;
+		}
+		if (p == end) {
+			end = next;
+			next = NULL;
+			numLayers++;
+		}
+	}
+	if (numNodes == pow(2, numLayers) - 1)
+		return true;
+	else
+		return false;
 }
