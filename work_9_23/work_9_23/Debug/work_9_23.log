@@ -1,2 +1,32 @@
 ﻿  work.cpp
-  work_9_23.vcxproj -> G:\Code\C\work_9_23\Debug\work_9_23.exe
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(24): error C2825: '_Container': 当后面跟“::”时必须为类或命名空间
+  g:\code\c++\work_9_23\work_9_23\work.cpp(29): note: 参见对正在编译的 类 模板 实例化 "std::queue<int,int>" 的引用
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(24): error C2510: “_Container”:“::”的左边必须是类/结构/联合
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(24): error C3646: “value_type”: 未知重写说明符
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(24): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(25): error C2825: '_Container': 当后面跟“::”时必须为类或命名空间
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(25): error C2510: “_Container”:“::”的左边必须是类/结构/联合
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(25): error C3646: “size_type”: 未知重写说明符
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(25): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(26): error C2825: '_Container': 当后面跟“::”时必须为类或命名空间
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(26): error C2510: “_Container”:“::”的左边必须是类/结构/联合
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(26): error C3646: “reference”: 未知重写说明符
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(26): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(27): error C2825: '_Container': 当后面跟“::”时必须为类或命名空间
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(27): error C2510: “_Container”:“::”的左边必须是类/结构/联合
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(27): error C3646: “const_reference”: 未知重写说明符
+f:\vc\vc\tools\msvc\14.14.26428\include\queue(27): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+g:\code\c++\work_9_23\work_9_23\work.cpp(30): error C2664: “void std::queue<int,int>::push(const int &)”: 无法将参数 1 从“initializer list”转换为“int &&”
+  g:\code\c++\work_9_23\work_9_23\work.cpp(30): note: 原因如下: 无法从“initializer list”转换为“int”
+  g:\code\c++\work_9_23\work_9_23\work.cpp(30): note: 初始值设定项包含过多元素
+g:\code\c++\work_9_23\work_9_23\work.cpp(36): error C2228: “.first”的左边必须有类/结构/联合
+  g:\code\c++\work_9_23\work_9_23\work.cpp(36): note: 类型是“int”
+g:\code\c++\work_9_23\work_9_23\work.cpp(37): error C2228: “.second”的左边必须有类/结构/联合
+  g:\code\c++\work_9_23\work_9_23\work.cpp(37): note: 类型是“int”
+g:\code\c++\work_9_23\work_9_23\work.cpp(43): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_23\work_9_23\work.cpp(43): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\work_9_23\work_9_23\work.cpp(47): error C2664: “void std::queue<int,int>::push(const int &)”: 无法将参数 1 从“initializer list”转换为“int &&”
+  g:\code\c++\work_9_23\work_9_23\work.cpp(47): note: 原因如下: 无法从“initializer list”转换为“int”
+  g:\code\c++\work_9_23\work_9_23\work.cpp(47): note: 初始值设定项包含过多元素
+g:\code\c++\work_9_23\work_9_23\work.cpp(63): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_23\work_9_23\work.cpp(65): warning C4018: “<”: 有符号/无符号不匹配
