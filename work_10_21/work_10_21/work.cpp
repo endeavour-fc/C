@@ -193,3 +193,28 @@ bool isfullTree(TreeNode* p)
 	else
 		return false;
 }
+
+bool CompleteBinaryTree(TreeNode* root)
+{
+	if (root == NULL)
+		return true;
+	queue<TreeNode*> que;
+	bool leaf = false;
+	que.push(root);
+	while (!que.empty())
+	{
+		TreeNode* temp = que.front();
+		que.pop();
+		if (leaf && (temp->left != NULL || temp->right != NULL || (temp->left == NULL && temp->right != NULL)))
+		{
+			return false;
+		}
+		if (temp->left)
+			que.push(temp->left);
+		if (temp->right)
+			que.push(temp->right);
+		if (temp->left == NULL || temp->right == NULL)
+			leaf = true;
+	}
+	return true;
+}
