@@ -6,6 +6,7 @@
 #include<string>
 #include<vector>
 #include<queue>
+#include<algorithm>
 using namespace std;
 typedef struct {
 	int* data;
@@ -218,3 +219,53 @@ bool CompleteBinaryTree(TreeNode* root)
 	}
 	return true;
 }
+
+bool cmp(string s1, string s2)
+{
+	return s1.size()>s2.size();
+}
+int main()
+{
+	int n = 0;
+	while (cin >> n)
+	{
+		vector<string> v(n, "");
+		for (int i = 0; i<n; ++i)
+			cin >> v[i];
+		sort(v.begin(), v.end());
+		for (auto& e : v)
+		{
+			cout << e << endl;
+		}
+		sort(v.begin(), v.end(), cmp);
+		for (auto& e : v)
+		{
+			cout << e << endl;
+		}
+	}
+
+	return 0;
+}
+
+//int main()
+//{
+//	int V = 0;
+//	int n = 0;
+//	while (cin >> V >> n)
+//	{
+//		vector<int> v(n, 0);
+//		for (int i = 0; i<n; ++i)
+//			cin >> v[i];
+//		vector<int> dp(V + 1, 0);
+//		for (int i = 0; i<n; ++i)
+//		{
+//			for (int j = V; j >= v[i]; --j)
+//			{
+//				dp[j] = max(dp[j], dp[j - v[i]] + v[i]);
+//			}
+//		}
+//		cout << V - dp[V] << endl;
+//	}
+//
+//	return 0;
+//}
