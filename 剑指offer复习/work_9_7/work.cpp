@@ -68,4 +68,36 @@ string replaceSpace(string s) {
 	return s;
 }
 
-//
+//旋转数组的最小数字
+int MinInOrder(vector<int>& numbers, int index1, int index2)
+{
+	int ret = numbers[index1];
+	for (int i = index1; i <= index2; ++i)
+		ret = min(ret, numbers[i]);
+	return ret;
+}
+int minArray(vector<int>& numbers) {
+	if (numbers.size() == 0)
+		return -1;
+
+	int index1 = 0;
+	int index2 = numbers.size() - 1;
+	int indexMid = index1;
+	while (numbers[index1] >= numbers[index2])
+	{
+		if (index2 - index1 == 1)
+		{
+			indexMid = index2;
+			break;
+		}
+		indexMid = (index2 - index1) / 2 + index1;
+		if (numbers[index1] == numbers[index2] && numbers[index1] == numbers[indexMid])
+			return MinInOrder(numbers, index1, index2);
+
+		if (numbers[indexMid] >= numbers[index1])
+			index1 = indexMid;
+		else if (numbers[indexMid] <= numbers[index2])
+			index2 = indexMid;
+	}
+	return numbers[indexMid];
+}
