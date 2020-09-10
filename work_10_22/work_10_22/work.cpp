@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include<iostream>
 #include<string>
+#include<vector>
+#include<cmath>
 using namespace std;
 
 typedef struct {
@@ -114,12 +116,143 @@ string reverseWords(string s) {
 	}
 	return s;
 }
+//int main()
+//{
+//	cout << reverseWords("the sky is blue") << endl;
+//	system("pause");
+//	return 0;
+//}
+
+void swap(int& a, int& b)
+{
+	int temp = a;
+	a = b;
+	b = temp;
+}
+void change(vector<int>& v, int pos)
+{
+	int left = pos * 2 + 1;
+	int right = pos * 2 + 2;
+	if (right<v.size())
+	{
+		if (v[pos]<v[left])
+			swap(v[pos], v[left]);
+		if (v[pos]<v[right])
+			swap(v[pos], v[right]);
+	}
+	else if (left<v.size())
+	{
+		if (v[pos]<v[left])
+			swap(v[pos], v[left]);
+	}
+	else
+	{
+		return;
+	}
+}
+int transform(char c)
+{
+	if (c >= '0' || c <= '9')
+		return c - '0';
+	else
+		return c - 'A' + 10;
+}
+string addStrings(string num1, string num2)
+{
+	int a1 = num1.size() - 1;
+	int a2 = num2.size() - 1;
+	int step = 0;
+	string ret;
+	int sum = 0;
+	while (a1 >= 0 || a2 >= 0)
+	{
+		sum = 0;
+		sum += step;
+		if (a1 >= 0)
+		{
+			sum += num1[a1] - '0';
+		}
+		if (a2 >= 0)
+		{
+			sum += num2[a2] - '0';
+		}
+		if (sum >= 10)
+		{
+			sum -= 10;
+			step = 1;
+		}
+		else
+		{
+			step = 0;
+		}
+		ret.insert(0, 1, sum + '0');
+		a1--;
+		a2--;
+
+	}
+	if (step == 1)
+	{
+		ret.insert(0, 1, '1');
+	}
+	return ret;
+}
 int main()
 {
-	cout << reverseWords("the sky is blue") << endl;
-	system("pause");
+	string str;
+	while (cin >> str)
+	{
+		int flag = 1;
+		int i = 0;
+		if (str[0] == '-')
+		{
+			flag = -1;
+			i = 1;
+		}
+		//long long ret = 0;
+		string ret("0");
+		for (; i<str.size(); ++i)
+		{
+			ret = addStrings(ret, to_string(pow(36, str.size() - i)*(transform(str[i]))));
+			//ret=ret*36+transform(str[i]);
+		}
+		if (flag == -1)
+			cout << "-" << ret << endl;
+		else
+			cout << ret << endl;
+	}
+
 	return 0;
 }
+//int main()
+//{
+//	int n, m;
+//	while (cin >> n >> m)
+//	{
+//		vector<int> v(n, 0);
+//		for (int i = 0; i<n; ++i)
+//			cin >> v[i];
+//		int a = 0;
+//		for (int i = 0; i<m; ++i)
+//		{
+//			int temp = 0;
+//			cin >> temp;
+//			if (temp == 1)
+//			{
+//				cin >> a;
+//				change(v, a - 1);
+//			}
+//			else
+//			{
+//				cin >> a;
+//				for (int i = a - 1; i<v.size(); ++i)
+//					cout << v[i] << " ";
+//				cout << endl;
+//			}
+//		}
+//	}
+//
+//	return 0;
+//}
 
 //int main()
 //{
