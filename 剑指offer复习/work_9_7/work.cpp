@@ -101,3 +101,43 @@ int minArray(vector<int>& numbers) {
 	}
 	return numbers[indexMid];
 }
+
+//二进制中1的个数
+int hammingWeight(uint32_t n) {
+	int ret = 0;
+	while (n)
+	{
+		n &= n - 1;
+		++ret;
+	}
+	return ret;
+}
+//数值的整数次方
+double PowerWithUnsignedExponent(double base, long exponent)
+{
+	if (exponent == 0)
+		return 1;
+	if (exponent == 1)
+		return base;
+	double result = PowerWithUnsignedExponent(base, exponent >> 1);
+	result *= result;
+	if (exponent & 1)
+		result *= base;
+
+	return result;
+}
+double myPow(double x, int n) {
+	if (x == 1)
+		return 1;
+	if (x == 0 && n<0)
+		return 0;
+	long flag = n;
+	if (flag<0)
+		flag = -flag;
+
+	double result = PowerWithUnsignedExponent(x, flag);
+	if (n<0)
+		result = 1.0 / result;
+
+	return result;
+}
