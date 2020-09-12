@@ -141,3 +141,53 @@ double myPow(double x, int n) {
 
 	return result;
 }
+
+//打印1到最大的n位数
+void PrintNumber(string& num)
+{
+	for (int i = 0; i < num.size(); ++i)
+	{
+		//if (num[i] == '0')
+		//	continue;
+		cout << num[i];
+	}
+	cout << endl;
+}
+void PrintToMaxDigitsRecursively(string& num, int len)
+{
+	if (len == num.size())
+	{
+		PrintNumber(num);
+		return;
+	}
+	for (int i = 0; i < 10; ++i)
+	{
+		num += ('0' + i);
+		PrintToMaxDigitsRecursively(num, len);
+		num.pop_back();
+	}
+}
+
+//int main()
+//{
+//	string str;
+//	PrintToMaxDigitsRecursively(str, 2);
+//
+//	system("pause");
+//
+//	return 0;
+//}
+//调整数组顺序使奇数位于偶数前面 
+vector<int> exchange(vector<int>& nums) {
+	int i = 0;
+	int j = nums.size() - 1;
+	while (i<j)
+	{
+		while (i<j&&nums[i] % 2)
+			++i;
+		while (i<j&&nums[j] % 2 == 0)
+			--j;
+		swap(nums[i], nums[j]);
+	}
+	return nums;
+}
