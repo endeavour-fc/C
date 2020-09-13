@@ -191,3 +191,46 @@ vector<int> exchange(vector<int>& nums) {
 	}
 	return nums;
 }
+
+//链表中倒数第 k 个节点
+struct ListNode {
+    int val;
+    ListNode *next;
+	ListNode(int x) : val(x), next(NULL) {}
+ };
+
+ListNode* getKthFromEnd(ListNode* head, int k) {
+	ListNode* pPre = head;
+	while (pPre&&k)
+	{
+		pPre = pPre->next;
+		k--;
+	}
+	while (pPre)
+	{
+		head = head->next;
+		pPre = pPre->next;
+	}
+	return head;
+}
+
+//反转链表
+struct ListNode* reverseList(struct ListNode* head) {
+
+	if (head == NULL || head->next == NULL)
+		return head;
+	struct ListNode* pPre = NULL;
+	struct ListNode* pCur = head;
+	struct ListNode* temp = head->next;
+	while (pCur != NULL)
+	{
+		pCur->next = pPre;
+
+		pPre = pCur;
+		pCur = temp;
+		if (temp == NULL)
+			return pPre;
+		temp = temp->next;
+	}
+	return pPre;
+}
