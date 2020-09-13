@@ -1,52 +1,102 @@
-#include"work.h"
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//void reverse(string& str, int begin, int end)
+//{
+//	if (end >= str.size())
+//		end = str.size() - 1;
+//
+//	while (begin<end)
+//	{
+//		char temp = str[begin];
+//		str[begin] = str[end];
+//		str[end] = temp;
+//		++begin;
+//		--end;
+//	}
+//}
+//
+//int main()
+//{
+//	string str;
+//	int n = 0;
+//	while (cin >> n)
+//	{
+//		getchar();
+//		getline(cin, str);
+//
+//		if (n >= 1)
+//		{
+//			int begin = 0;
+//			int end = n-1;
+//			if (end >= str.size())
+//				end = str.size() - 1;
+//			while (end<str.size())
+//			{
+//				reverse(str, begin, end);
+//				begin = end + 1;
+//				end += n;
+//			}
+//		}
+//		cout << str << endl;
+//	}
+//
+//	return 0;
+//}
 
 
-
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
 
 int main()
 {
-	int input = 7;
-	pcon *pe = (pcon*)calloc(1, sizeof(pcon));
-	init(pe);
-	do {
-		menu();
-		printf("请输入你的选择\n");
-		scanf("%d", &input);
-		switch (input)
+	int T;
+	while (cin >> T)
+	{
+		for (int t = 0; t<T; ++t)
 		{
-		case ADD:
-			add(pe);
-			break;
-		case DELE:
-			dele(pe);
-			break;
-		case SEARCH:
-			search(pe);
-			break;
-		case MOD:
-			mod(pe);
-			break;
-		case SHOW:
-			show(pe);
-			break;
-		case SORT:
-			sort(pe);
-			break;
-		case EXIT:
-			printf("退出通讯录\n");
-			free(pe->date);
-			free(pe);
-			pe->date = NULL;
-			pe = NULL;
-			break;
-		default:
-			printf("输入错误,请重新输入\n");
-			Sleep(1000);
-			break;
+			int n, m, k;
+			cin >> n >> m >> k;
+			vector<vector<int>> v(m, vector<int>(m, 0));
+			for (int i = 0; i<m; ++i)
+			{
+				int n1, n2, p;
+				cin >> n1 >> n2 >> p;
+				if (p<k)
+				{
+					v[n1 - 1][n2 - 1] = 1;
+					v[n2 - 1][n1 - 1] = 1;
+				}
+			}
+			int flag = 0;
+			for (int i = 0; i<v.size(); ++i)
+			{
+				int count = 0;
+				for (int j = 0; j<v[0].size(); ++j)
+				{
+					if (i == j)
+					{
+						++count;
+						continue;
+					}
+					if (v[i][j] == 0)
+						break;
+					++count;
+				}
+				if (count == m)
+				{
+					flag = 1;
+					break;
+				}
+			}
+			if (flag)
+				cout << "Yes" << endl;
+			else
+				cout << "No" << endl;
 		}
+	}
 
-	} while (input);
-	
-	system("pause");
 	return 0;
 }
