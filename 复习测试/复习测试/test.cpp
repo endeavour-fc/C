@@ -1867,7 +1867,44 @@ public:
 		return mp[head];
 	}
 };
+class Solution_exist {
+public:
+	int arr[4][2] = { { 1,0 },{ 0,1 },{ -1,0 },{ 0,-1 } };
+	bool chack(vector<vector<char>>& board, string& word, vector<vector<bool>>& bl, int i, int j, int k)
+	{
+		if (board[i][j] != word[k])
+			return false;
+		if (k == word.size() - 1)
+			return true;
+		bl[i][j] = true;
+		for (int m = 0; m<4; ++m)
+		{
+			int m_i = i + arr[m][0];
+			int m_j = j + arr[m][1];
+			if (m_i >= 0 && m_j >= 0 && m_i<board.size() && m_j<board[0].size() && !bl[m_i][m_j])
+			{
+				if (chack(board, word, bl, m_i, m_j, k + 1))
+					return true;
+			}
+		}
 
+		bl[i][j] = false;
+		return false;
+
+	}
+	bool exist(vector<vector<char>>& board, string word) {
+		vector<vector<bool>> bl(board.size(), vector<bool>(board[0].size(), false));
+		for (int i = 0; i<board.size(); ++i)
+		{
+			for (int j = 0; j<board[i].size(); ++j)
+			{
+				if (chack(board, word, bl, i, j, 0))
+					return true;
+			}
+		}
+		return false;
+	}
+};
 int main(int argc, char* argv[])
 {
 	AbstractFactory* cf1 = new ConcreteFactory1();
