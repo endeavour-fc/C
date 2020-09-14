@@ -196,7 +196,7 @@ vector<int> exchange(vector<int>& nums) {
 struct ListNode {
     int val;
     ListNode *next;
-	ListNode(int x) : val(x), next(NULL) {}
+	ListNode(int x=0) : val(x), next(NULL) {}
  };
 
 ListNode* getKthFromEnd(ListNode* head, int k) {
@@ -233,4 +233,38 @@ struct ListNode* reverseList(struct ListNode* head) {
 		temp = temp->next;
 	}
 	return pPre;
+}
+//合并两个排序的链表
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+	ListNode* head = new ListNode;
+	ListNode* temp = head;
+	while (l1&&l2)
+	{
+		if (l1->val<l2->val)
+		{
+			head->next = l1;
+			l1 = l1->next;
+		}
+		else
+		{
+			head->next = l2;
+			l2 = l2->next;
+		}
+		head = head->next;
+	}
+	while (l1)
+	{
+		head->next = l1;
+		l1 = l1->next;
+		head = head->next;
+	}
+	while (l2)
+	{
+		head->next = l2;
+		l2 = l2->next;
+		head = head->next;
+	}
+	head = temp->next;
+	delete temp;
+	return head;
 }
