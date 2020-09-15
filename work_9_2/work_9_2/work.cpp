@@ -1,57 +1,79 @@
-#define  _CRT_SECURE_NO_WARNINGS 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-int main()
+#include<iostream>
+#include<string>
+using namespace std;
+string addStrings(string num1, string num2)
 {
-	char arr[20] = "We are happy.";
-	int len = strlen(arr) + 1;
-	char* p = &arr[len];
-	int len2 = 0;
-	int count = 0;
-	for (int i = 0; i < len; i++)
+	int end1 = num1.size() - 1;
+	int end2 = num2.size() - 1;
+	int value1 = 0;
+	int value2 = 0;
+	int next = 0;
+	string addret;
+	while (end1 >= 0 || end2 >= 0)//只要有一个串没走完就不会终止循环
 	{
-		if (arr[i] == ' ')
-			count++;
-	}
-	len2 = len + 2 * count;
-	char* p2 = &arr[len2];
-	while (p2 != p)
-	{
-		if (*p == ' ')
+		if (end1 >= 0)
 		{
-			(*p2--) = '0';
-			(*p2--) = '2';
-			(*p2--) = '%';
-			p--;
+			value1 = num1[end1--] - '0';//把ASCLL码转换成数值
 		}
 		else
 		{
-			*p2 = *p;
-			p2--;
-			p--;
+			value1 = 0;
 		}
-
+		if (end2 >= 0)
+		{
+			value2 = num2[end2--] - '0';
+		}
+		else
+		{
+			value2 = 0;
+		}
+		int valueaddret = value1 + value2 + next;
+		if (valueaddret > 9)
+		{
+			next = 1;
+			valueaddret -= 10;
+		}
+		else
+		{
+			next = 0;
+		}
+		addret += valueaddret + '0';
+	}
+	if (next == 1)//走到头部如果next等于1，就要向前进位
+	{
+		addret += '1';
+	}
+	//逆置
+	reverse(addret.begin(), addret.end());
+	return addret;
+}
+int main()
+{
+	string str;
+	string s;
+	while (cin >> str >> s)
+	{
+		int i = 0;
+		int num = 0;
+		string sum = "0";
+		while (i<s.size())
+		{
+			char count = 0;
+			char len = 0;
+			count = s[i];
+			len = s[i + 1];
+			i += 2;
+			count -= '0';
+			len -= '0';
+			for (int j = 0; j<count; ++j)
+			{
+				sum = addStrings(sum, str.substr(num, len));
+				num += len;
+			}
+		}
+		cout << sum << endl;
 	}
 
 
-	/*while (*p != '\0')
-	{
-		if (*p == ' ')
-		{
-			for (int i = len; p != &arr[i]; i--)
-			{
-				arr[i + 2] = arr[i];
-			}
-			len += 2;
-			(*p++) = '%';
-			(*p++) = '2';
-			*p = '0';
-		}
-		p++;
-	}*/
-	printf("%s\n", arr);
-	system("pause");
 	return 0;
 }
