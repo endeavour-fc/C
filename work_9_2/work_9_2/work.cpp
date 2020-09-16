@@ -1,5 +1,7 @@
 #include<iostream>
 #include<string>
+#include<stack>
+#include<algorithm>
 using namespace std;
 string addStrings(string num1, string num2)
 {
@@ -47,33 +49,78 @@ string addStrings(string num1, string num2)
 	reverse(addret.begin(), addret.end());
 	return addret;
 }
-int main()
+
+
+/*请完成下面这个函数，实现题目要求的功能
+当然，你也可以不按照下面这个模板来作答，完全按照自己的想法来 ^-^
+******************************开始写代码******************************/
+string Typing()
 {
 	string str;
-	string s;
-	while (cin >> str >> s)
+	cin >> str;
+	stack<char> sta;
+	for (int i = 0; i<str.size(); ++i)
 	{
-		int i = 0;
-		int num = 0;
-		string sum = "0";
-		while (i<s.size())
+		if (str[i] == '<')
 		{
-			char count = 0;
-			char len = 0;
-			count = s[i];
-			len = s[i + 1];
-			i += 2;
-			count -= '0';
-			len -= '0';
-			for (int j = 0; j<count; ++j)
-			{
-				sum = addStrings(sum, str.substr(num, len));
-				num += len;
-			}
+			if (!sta.empty())
+				sta.pop();
 		}
-		cout << sum << endl;
+		else
+		{
+			sta.push(str[i]);
+		}
 	}
-
-
-	return 0;
+	string temp;
+	while (!sta.empty())
+	{
+		temp += sta.top();
+		sta.pop();
+	}
+	reverse(temp.begin(), temp.end());
+	return temp;
 }
+/******************************结束写代码******************************/
+
+
+int main() {
+	string res;
+
+
+	res = Typing();
+	cout << res << endl;
+
+	system("pause");
+	return 0;
+
+}
+//int main()
+//{
+//	string str;
+//	string s;
+//	while (cin >> str >> s)
+//	{
+//		int i = 0;
+//		int num = 0;
+//		string sum = "0";
+//		while (i<s.size())
+//		{
+//			char count = 0;
+//			char len = 0;
+//			count = s[i];
+//			len = s[i + 1];
+//			i += 2;
+//			count -= '0';
+//			len -= '0';
+//			for (int j = 0; j<count; ++j)
+//			{
+//				sum = addStrings(sum, str.substr(num, len));
+//				num += len;
+//			}
+//		}
+//		cout << sum << endl;
+//	}
+//
+//
+//	return 0;
+//}
