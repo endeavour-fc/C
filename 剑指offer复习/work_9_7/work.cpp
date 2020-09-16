@@ -268,3 +268,72 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
 	delete temp;
 	return head;
 }
+//斐波那契数列
+int fib(int n) {
+	if (n == 0)
+		return 0;
+	if (n == 1 || n == 2)
+		return 1;
+	int n1 = 1;
+	int n2 = 1;
+	for (int i = 2; i<n; ++i)
+	{
+		swap(n1, n2);
+		n2 += n1;
+		n2 %= 1000000007;
+	}
+	return n2;
+}
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ };
+
+//二叉树的镜像
+TreeNode* mirrorTree(TreeNode* root) {
+	if (root == NULL)
+		return NULL;
+	swap(root->right, root->left);
+	mirrorTree(root->right);
+	mirrorTree(root->left);
+	return root;
+}
+//顺时针打印矩阵
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+	if (matrix.size() == 0)
+	{
+		vector<int> v;
+		return v;
+	}
+	vector<int> v(matrix.size()*matrix[0].size(), 0);
+	int index = 0;
+	int right = matrix[0].size() - 1;
+	int left = 0;
+	int front = 0;
+	int back = matrix.size() - 1;
+
+	while (left <= right && front <= back)
+	{
+		for (int col = left; col <= right; ++col)
+			v[index++] = matrix[front][col];
+		for (int row = front + 1; row <= back; ++row)
+			v[index++] = matrix[row][right];
+
+		if (left<right&&front<back)
+		{
+			for (int col = right - 1; col >= left; --col)
+				v[index++] = matrix[back][col];
+			for (int row = back - 1; row>front; --row)
+				v[index++] = matrix[row][left];
+		}
+		++left;
+		--right;
+		++front;
+		--back;
+	}
+	return v;
+
+}
