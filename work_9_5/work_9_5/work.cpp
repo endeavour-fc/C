@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<iostream>
+#include<string>
+#include<vector>
+
+using namespace std;
 
 int find_num(int arr[], int num,int len)
 {
@@ -70,19 +75,74 @@ int min(int arr[], int len)
 	}
 	return arr[middle];
 }
-
+int max(int a, int b)
+{
+	return a > b ? a : b;
+}
+int backPackII(int m, vector<int> A, vector<int> V) {
+	if (A.empty() || V.empty() || m < 1)
+	{
+		return 0;
+	}
+	const int N = A.size();
+	const int M = m + 1;
+	vector<int> result;
+	result.resize(M, 0);
+		for (int i = 0; i != N; ++i) {
+			for (int j = M - 1; j > 0; --j) {
+				if (A[i] > j) {
+					result[j] = result[j];
+				}
+				else 
+				{
+					int newValue = result[j - A[i]] + V[i];
+					result[j] = max(newValue, result[j]);
+				}
+			}
+		}
+	return result[m];
+}
+void Put(vector<vector<bool>>& v, int n1, int n2)
+{
+	for (int i = 0; i < v.size(); ++i)
+	{
+		if (v[i][n1])
+		{
+			v[i][n2] = true;
+		}
+		if (v[i][n2])
+			v[i][n1] = true;
+	}
+}
 int main()
 {
-	int arr[] = { 1,0,1,1,1 };
-	int len = sizeof(arr) / sizeof(arr[0]);
-	/*int ret = 0;
-	if ((ret = find_num(arr, 10, len)) > 0)
+	int n, m, q;
+	while (cin >> n >> m >> q)
 	{
-		printf("%d\n", ret);
+		vector<vector<bool>> v(n, vector<bool>(n, false));
+		int n1, n2;
+		for (int i = 0; i<m; ++i)
+		{
+			cin >> n1 >> n2;
+			v[n2 - 1][n1 - 1] = true;
+			v[n1 - 1][n2 - 1] = true;
+			Put(v, n1 - 1, n2 - 1);
+		}
+		for (int i = 0; i<q; ++i)
+		{
+			cin >> n1 >> n2;
+			if (n1 == n2)
+			{
+				cout << "YES" << endl;
+				continue;
+			}
+			if (v[n1 - 1][n2 - 1] || v[n2 - 1][n1 - 1])
+				cout << "YES" << endl;
+			else
+				cout << "NO" << endl;
+		}
 	}
-	else*/
-		printf("%d\n",min(arr,len));
 
-	system("pause");
+
 	return 0;
 }
