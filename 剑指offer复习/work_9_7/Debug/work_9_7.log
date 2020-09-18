@@ -1,1 +1,7 @@
-﻿  work_9_7.vcxproj -> G:\Code\C++\剑指offer复习\Debug\work_9_7.exe
+﻿  work.cpp
+g:\code\c++\剑指offer复习\work_9_7\work.cpp(22): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\剑指offer复习\work_9_7\work.cpp(45): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\剑指offer复习\work_9_7\work.cpp(148): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\剑指offer复习\work_9_7\work.cpp(368): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\剑指offer复习\work_9_7\work.cpp(414): warning C4018: “<”: 有符号/无符号不匹配
+  work_9_7.vcxproj -> G:\Code\C++\剑指offer复习\Debug\work_9_7.exe

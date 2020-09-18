@@ -337,3 +337,122 @@ vector<int> spiralOrder(vector<vector<int>>& matrix) {
 	return v;
 
 }
+//øÏ≈≈
+
+void QuickSort(vector<int>& v,int left,int right)
+{
+	if (left < right)
+	{
+		int temp = v[left];
+		int i = left;
+		int j = right;
+		while (i < j)
+		{
+			while (i < j&&temp < v[j])
+				--j;
+			if (i < j)
+				v[i++] = v[j];
+			while (i<j&&temp>v[i])
+				++i;
+			if (i < j)
+				v[j--] = v[i];
+		}
+		v[i] = temp;
+		QuickSort(v, left, i - 1);
+		QuickSort(v, i + 1, right);
+	}
+}
+//∂—≈≈
+void MakeHeap(vector<int>& v)
+{
+	for (int i = 0; i < v.size(); ++i)
+	{
+		int index = i;
+		int father = (index - 1) / 2;
+		while (v[index] > v[father])
+		{
+			swap(v[index], v[father]);
+			index = father;
+			father = (index - 1) / 2;
+		}
+	}
+}
+void Heapily(vector<int>& v, int len)
+{
+	int index = 0;
+	int left = index * 2 + 1;
+	int right = index * 2 + 2;
+	int Max = 0;
+	while (right < len)
+	{
+		if (right < len&&v[right]>v[left])
+			Max = right;
+		else
+			Max = left;
+		if (v[index] >= v[Max])
+			return;
+		swap(v[index], v[Max]);
+		index = Max;
+		left = index * 2 + 1;
+		right = index * 2 + 2;
+	}
+}
+void HeapSort(vector<int>& v)
+{
+	MakeHeap(v);
+	int len = v.size()-1;
+	while (len > 0)
+	{
+		swap(v[0], v[len]);
+		Heapily(v, len);
+		--len;
+	}
+}
+//≤Â»Î≈≈–Ú
+void InsertSort(vector<int>& v)
+{
+	for (int i = 1; i < v.size(); ++i)
+	{
+		int temp = v[i];
+		int j = 0;
+		for (j = i - 1; j >= 0 && temp < v[j]; --j)
+			v[j + 1] = v[j];
+		v[j + 1] = temp;
+	}
+}
+class Solution_pathSum {
+public:
+	vector<vector<int>> ret;
+	void get(TreeNode* root, vector<int>& v, int sum)
+	{
+		if (root == NULL)
+			return;
+		v.push_back(root->val);
+		if (root->val == sum && root->left == NULL && root->right == NULL)
+		{
+			ret.push_back(v);
+			v.pop_back();
+			return;
+		}
+		get(root->left, v, sum - root->val);
+		get(root->right, v, sum - root->val);
+		v.pop_back();
+	}
+	vector<vector<int>> pathSum(TreeNode* root, int sum) {
+		vector<int> v;
+		get(root, v, sum);
+		return ret;
+	}
+};
+int main()
+{
+	vector<int> v = { 2,1,4,3,6,7,5,9,8 };
+	InsertSort(v);
+	//HeapSort(v);
+	//QuickSort(v, 0, v.size() - 1);
+	for (const auto& e : v)
+		cout << e << " ";
+	cout << endl;
+
+	return 0;
+}
