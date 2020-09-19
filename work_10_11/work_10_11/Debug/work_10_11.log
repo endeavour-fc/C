@@ -1,10 +1,5 @@
 ﻿  work.cpp
-g:\code\c++\work_10_11\work_10_11\work.cpp(44): error C2143: 语法错误: 缺少“;”(在“}”的前面)
-  g:\code\c++\work_10_11\work_10_11\work.cpp(44): note: 参见对正在编译的 类 模板 实例化 "RBTreeNode<T>" 的引用
-g:\code\c++\work_10_11\work_10_11\work.cpp(55): error C2590: “BuyNode”: 只有构造函数可以有基/成员初始值列表
-  g:\code\c++\work_10_11\work_10_11\work.cpp(59): note: 参见对正在编译的 类 模板 实例化 "RBTree<T>" 的引用
-g:\code\c++\work_10_11\work_10_11\work.cpp(55): error C2533: “RBTree<T>”: 构造函数不能有返回类型
-g:\code\c++\work_10_11\work_10_11\work.cpp(56): error C2760: 语法错误: 意外的令牌“private”，预期的令牌为“ID 表达式”
-g:\code\c++\work_10_11\work_10_11\work.cpp(56): error C2059: 语法错误:“:”
-g:\code\c++\work_10_11\work_10_11\work.cpp(56): error C2334: “:”的前面有意外标记；跳过明显的函数体
-g:\code\c++\work_10_11\work_10_11\work.cpp(59): fatal error C1903: 无法从以前的错误中恢复；正在停止编译
+g:\code\c++\work_10_11\work_10_11\work.cpp(253): warning C4018: “<=”: 有符号/无符号不匹配
+g:\code\c++\work_10_11\work_10_11\work.cpp(320): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_10_11\work_10_11\work.cpp(322): warning C4018: “<”: 有符号/无符号不匹配
+  work_10_11.vcxproj -> G:\Code\C++\work_10_11\Debug\work_10_11.exe
