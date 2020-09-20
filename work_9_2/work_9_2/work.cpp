@@ -2,6 +2,8 @@
 #include<string>
 #include<stack>
 #include<algorithm>
+#include<map>
+#include<vector>
 using namespace std;
 string addStrings(string num1, string num2)
 {
@@ -83,17 +85,64 @@ string Typing()
 /******************************½áÊøÐ´´úÂë******************************/
 
 
-int main() {
-	string res;
-
-
-	res = Typing();
-	cout << res << endl;
-
-	system("pause");
-	return 0;
-
-}
+//int main() {
+//	string res;
+//
+//
+//	res = Typing();
+//	cout << res << endl;
+//
+//	system("pause");
+//	return 0;
+//
+//}
+//int main()
+//{
+//	int n = 0;
+//	while (cin >> n)
+//	{
+//		for (int i = 0; i<n; ++i)
+//		{
+//			string str;
+//			cin >> str;
+//			if (str.size() % 3)
+//			{
+//				cout << "No" << endl;
+//			}
+//			else
+//			{
+//				map<string, int> mp;
+//				string temp = str.substr(0, 3);
+//				//vector<string> v(str.size()/3);
+//				for (int j = 0; j<3; ++j)
+//				{
+//					for (int k = 0; k<26; ++k)
+//					{
+//						string s = temp;
+//						s[j] = k + 'A';
+//						++mp[s];
+//					}
+//				}
+//				int flag = 0;
+//				for (int j = 0; j<str.size(); j += 3)
+//				{
+//					string p = str.substr(j, 3);
+//					if (mp.find(p)==mp.end())
+//					{
+//						flag = 1;
+//						break;
+//					}
+//				}
+//				if (flag)
+//					cout << "No" << endl;
+//				else
+//					cout << "Yes" << endl;
+//			}
+//		}
+//	}
+//
+//	return 0;
+//}
 //int main()
 //{
 //	string str;
@@ -124,3 +173,56 @@ int main() {
 //
 //	return 0;
 //}
+
+int arr[4][2] = { { 1,0 },{ 0,1 },{ -1,0 },{ 0,-1 } };
+int min(int&a, int&b)
+{
+	return a>b ? b : a;
+}
+int get(vector<string>& v, int i, int j, int num, vector<vector<bool>>& bl)
+{
+	if (i == v.size() - 1 && j == v[0].size() - 1)
+		return num;
+	bl[i][j] = true;
+	int m = 99999;
+	for (int k = 0; k<4; ++k)
+	{
+		int m_i = i + arr[k][0];
+		int m_j = j + arr[k][1];
+		if (m_j >= 0 && m_i >= 0 && m_j<v[0].size() && m_i<v.size() && !bl[m_i][m_j])
+		{
+			if (v[m_i][m_j] == '.')
+				m = min(get(v, m_i, m_j, num, bl), m);
+			else if (v[m_i][m_j] == '*')
+				m = min(get(v, m_i, m_j, num + 1, bl), m);
+		}
+	}
+}
+
+int main()
+{
+	int T;
+	while (cin >> T)
+	{
+		for (int i = 0; i<T; ++i)
+		{
+			int n1, n2;
+			cin >> n1 >> n2;
+			vector<string> v(n1);
+			for (int j = 0; j<n2; ++j)
+				cin >> v[j];
+			vector<vector<bool>> bl(n1, vector<bool>(n2, false));
+			for (int j = 0; j < n1; ++j)
+			{
+				for (int k = 0; k < n2; ++k)
+				{
+					if (v[j][k] == '@')
+						cout << get(v, j, k, 0, bl) << endl;
+				}
+			}
+
+		}
+	}
+
+	return 0;
+}

@@ -1,3 +1,5 @@
 ﻿  work.cpp
-g:\code\c++\work_9_2\work_9_2\work.cpp(62): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_2\work_9_2\work.cpp(64): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_2\work_9_2\work.cpp(192): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_9_2\work_9_2\work.cpp(200): warning C4715: “get”: 不是所有的控件路径都返回值
   work_9_2.vcxproj -> G:\Code\C++\work_9_2\Debug\work_9_2.exe
