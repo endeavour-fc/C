@@ -1,83 +1,119 @@
-#define  _CRT_SECURE_NO_WARNINGS 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include<math.h>
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//string longestPalindrome(string s)
+//{
+//	if (s == " ")
+//		return s;
+//	string temp(s.rbegin(), s.rend());
+//	vector<vector<int>> v(s.size(), vector<int>(s.size(), 0));
+//	int MaxLen = 0;
+//	int pos = 0;
+//	for (size_t i = 0; i<s.size(); ++i)
+//	{
+//		for (size_t j = 0; j<s.size(); ++j)
+//		{
+//			if (s[i] == temp[j])
+//			{
+//				if (i == 0 || j == 0)
+//					v[i][j] = 1;
+//				else
+//					v[i][j] = v[i - 1][j - 1] + 1;
+//			}
+//			if (v[i][j]>MaxLen)
+//			{
+//				int thispos = s.size() - 1 - j;
+//				if (thispos + v[i][j] - 1 == i)
+//				{
+//					pos = i - v[i][j] + 1;
+//					MaxLen = v[i][j];
+//				}
+//			}
+//		}
+//	}
+//	return s.substr(pos, MaxLen);
+//
+//}
+//int main()
+//{
+//	string str;
+//	while (cin >> str)
+//	{
+//		cout << longestPalindrome(str) << endl;
+//	}
+//
+//	return 0;
+//}
+
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+int max(int& a, int& b)
+{
+	return a > b ? a : b;
+}
+
+bool isMatch(string s, string p)
+{
+	vector<vector<int>> v(s.size() + 1, vector<int>(p.size() + 1, 0));
+	v[0][0] = 1;
+	for (int i = 1; i <= p.size(); i++)
+	{
+		if (i == 1)
+			continue;
+		v[0][i] = v[0][i - 2] && (p[i - 1] == '*');
+	}
+	for (int i = 1; i <= s.size(); i++)
+		for (int j = 1; j <= p.size(); j++)
+		{
+			if (s[i - 1] == p[j - 1] || p[j - 1] == '.')
+				v[i][j] = v[i - 1][j - 1];
+			else if (p[j - 1] == '*')
+			{
+				if (j<2)
+					continue;
+				if (p[j - 2] == '.' || p[j - 2] == s[i - 1])
+				{
+					v[i][j] = v[i - 1][j] || v[i][j - 1] || v[i][j - 2];
+				}
+				else if (p[j - 2] != '.'&&p[j - 2] != s[i - 1])
+				{
+					v[i][j] = v[i][j - 2];
+				}
+			}
+		}
+	return v[s.size()][p.size()];
+}
+string lengthOfLongestSubstring(string s)
+{
+	vector<int> m(128, -1);
+	int res = 0, left = -1;
+	string str;
+	for (int i = 0; i < s.size(); ++i) {
+		left = max(left, m[s[i]]);
+		m[s[i]] = i;
+		if (res<i - left)
+		{
+			res = i - left;
+			str = s.substr(left + 1, res);
+		}
+	}
+	return str;
+
+}
 int main()
 {
-	int num = 0;
-	char arr[50] = { 0 };
-	printf("请输入你想要的菱形（为奇数最大不超过50）\n");
-	scanf("%d", &num);
-	int m = num / 2;
-	for (int i = 0; i<=m; i++)
+	string s1,s2;
+	while (cin >> s1 >> s2)
 	{
-		if ( 0 == i )
-		{
-			arr[m] = '*';
-			for(int i=0;i<50;i++)
-			printf("%c", arr[i]);
-			printf("\n");
-		}
+		if (isMatch(s1, s2))
+			cout << "true" << endl;
 		else
-		{
-			arr[m - i] = '*';
-			arr[m + i] = '*';
-			for (int i = 0; i<50; i++)
-				printf("%c", arr[i]);
-			printf("\n");
-		}
-	}
-	for (int i = 0; i < m; i++)
-	{
-		arr[i] = ' ';
-		arr[num - i-1] = ' ';
-		for (int i = 0; i<50; i++)
-			printf("%c", arr[i]);
-		printf("\n");
+			cout << "false" << endl;
 	}
 
-	system("pause");
-	return 0;
-}
-
-
-int main02()
-{
-	int q = 0;
-	int s = 0;
-	int g = 0;
-	for (int i = 0; i < 1000; i++)
-	{
-		q = i / 100;
-		s = (i /10 )%10;
-		g = i % 10;
-		if ((q*q*q + s*s*s + g*g*g) == i)
-			printf("%d  ", i);
-	}
-
-//	system("pause");
-	return 0;
-}
-
-
-int main03()
-{
-	int k = 0;
-	int sum = 0;
-	int num = 0;
-	int b = 0;
-	printf("请输入一个0~10的整数\n");
-	scanf("%d", &num);
-	b = num;
-	for (int i = 0; i < 5; i++)
-	{
-		k = num;
-		sum += num;
-		num =b*pow(10,i+1);
-		num += k;
-	}
-	printf("%d", sum);
-	system("pause");
 	return 0;
 }
