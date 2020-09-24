@@ -1905,6 +1905,41 @@ public:
 		return false;
 	}
 };
+class Solution_maxAreaOfIsland {
+public:
+	int arr[4][2] = { { 1,0 },{ 0,1 },{ -1,0 },{ 0,-1 } };
+	void get(vector<vector<int>>& grid, vector<vector<bool>>& bl, int& n, int i, int j)
+	{
+		bl[i][j] = true;
+		++n;
+		for (int c = 0; c<4; ++c)
+		{
+			int m_i = i + arr[c][0];
+			int m_j = j + arr[c][1];
+			if (m_i >= 0 && m_i<grid.size() && m_j >= 0 && m_j<grid[0].size() && !bl[m_i][m_j] && grid[m_i][m_j])
+			{
+				get(grid, bl, n, m_i, m_j);
+			}
+		}
+	}
+	int maxAreaOfIsland(vector<vector<int>>& grid) {
+		int n = 0;
+		vector<vector<bool>> bl(grid.size(), vector<bool>(grid[0].size(), false));
+		for (int i = 0; i<grid.size(); ++i)
+		{
+			for (int j = 0; j<grid[0].size(); ++j)
+			{
+				if (grid[i][j] && !bl[i][j])
+				{
+					int m = 0;
+					get(grid, bl, m, i, j);
+					n = max(n, m);
+				}
+			}
+		}
+		return n;
+	}
+};
 int main(int argc, char* argv[])
 {
 	AbstractFactory* cf1 = new ConcreteFactory1();
