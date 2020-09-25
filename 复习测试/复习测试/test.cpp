@@ -1940,6 +1940,44 @@ public:
 		return n;
 	}
 };
+class Solution_zigzagLevelOrder {
+public:
+	vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+		vector<vector<int>> ret;
+		if (root == NULL)
+			return ret;
+		queue<TreeNode*> que;
+		que.push(root);
+		int flag = 0;
+		while (!que.empty())
+		{
+			int n = que.size();
+			vector<int> v;
+			for (int i = 0; i<n; ++i)
+			{
+				TreeNode* temp = que.front();
+				que.pop();
+				v.push_back(temp->val);
+				if (temp->left)
+					que.push(temp->left);
+				if (temp->right)
+					que.push(temp->right);
+			}
+
+			if (flag % 2 == 1)
+			{
+				vector<int> arr(v.rbegin(), v.rend());
+				ret.push_back(arr);
+			}
+			else
+			{
+				ret.push_back(v);
+			}
+			++flag;
+		}
+		return ret;
+	}
+};
 int main(int argc, char* argv[])
 {
 	AbstractFactory* cf1 = new ConcreteFactory1();
