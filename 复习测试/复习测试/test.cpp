@@ -7,6 +7,7 @@
 #include<string>
 #include<list>
 #include<unordered_map>
+#include<stack>
 using namespace std;
 
 
@@ -1976,6 +1977,37 @@ public:
 			++flag;
 		}
 		return ret;
+	}
+};
+class Solution_sumNumbers {
+public:
+	int sumNumbers(TreeNode* root) {
+		if (root == NULL)
+			return 0;
+		int sum = 0;
+		stack<pair<TreeNode*, int>> sta;
+		sta.push({ root,root->val });
+		while (!sta.empty())
+		{
+			auto temp = sta.top();
+			sta.pop();
+			if (temp.first->left == NULL && temp.first->right == NULL)
+			{
+				sum += temp.second;
+			}
+			else
+			{
+				if (temp.first->left)
+				{
+					sta.push({ temp.first->left,temp.second * 10 + temp.first->left->val });
+				}
+				if (temp.first->right)
+				{
+					sta.push({ temp.first->right,temp.second * 10 + temp.first->right->val });
+				}
+			}
+		}
+		return sum;
 	}
 };
 int main(int argc, char* argv[])
