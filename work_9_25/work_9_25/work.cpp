@@ -1,68 +1,34 @@
-#define  _CRT_SECURE_NO_WARNINGS 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-enum Status{K1=0,K2};
-int g_status = K1;
-
-long long Strcore(const char* digit, bool minus)
+#include<iostream>
+#include<vector>
+using namespace std;
+void adjustment(vector<int>& v,int pos, int count)
 {
-	long long num = 0;
-	while (*digit != '\0')
+	while (count--)
 	{
-		if (*digit >= '0'&&*digit <= '9')
-		{
-			int flag = minus ? -1 : 1;
-			num = num * 10 + flag * (*digit - '0');
-			if ((!minus&&num > 0x7FFFFFFF) || (minus&&num < (signed int)0x80000000))
-			{
-				num = 0;
-				break;
-			}
-			digit++;
-		}
-		else
-		{
-			num = 0;
-			break;
-		}
+		pos = (pos + v.size()) % v.size();
+		++v[pos++];
 	}
-	if (*digit == '\0')
-	{
-		g_status = K1;
-	}
-	return num;
 }
-
-int Str(const char* str)
-{
-	g_status = K2;
-	long long num = 0;
-	if (str != NULL && *str != '\0')
-	{
-		bool minus = false;
-		if (*str == '+')
-			str++;
-		else if (*str == '-')
-		{
-			str++;
-			minus = true;
-		}
-		if (*str != '\0')
-		{
-			num = Strcore(str, minus);
-		}
-	}
-	return num;
-}
-
-
-
 int main()
 {
-	printf("%d\n", Str("13456567"));
-	
+	int n, k = 0;
+	while (cin >> n >> k)
+	{
+		vector<int> v(n, k);
+		int i = 1;
+		int count = v[i];
+		while (v[i] != 0)
+		{
+			int count = v[i];
+			v[i] = 0;
+			adjustment(v, (i + 1)%v.size(), count);
+			i = (i + count+1) % v.size();
+		}
+		for (auto& e : v)
+			cout << e << " ";
+		cout << endl;
+	}
+
 	system("pause");
 	return 0;
 }

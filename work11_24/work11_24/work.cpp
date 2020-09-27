@@ -694,14 +694,14 @@ void get(string s, int* num)
 		get(s, num);
 	}
 }
-int translateNum(int num) {
-	// write code here
-	string s = to_string(num);
-	int num1 = 0;
-	get(s, &num1);
-
-	return num1;
-}
+//int translateNum(int num) {
+//	// write code here
+//	string s = to_string(num);
+//	int num1 = 0;
+//	get(s, &num1);
+//
+//	return num1;
+//}
 class Solution_canVisitAllRooms {
 public:
 	bool canVisitAllRooms(vector<vector<int>>& rooms) {
@@ -761,14 +761,135 @@ public:
 		return nums;
 	}
 };
+int fib(int n) {
+	if (n == 0)
+		return 0;
+	if (n == 1 || n == 2)
+		return 1;
+	int n1 = 1;
+	int n2 = 1;
+	for (int i = 2; i<n; ++i)
+	{
+		swap(n1, n2);
+		n2 += n1;
+		n2 %= 1000000007;
+	}
+	return n2;
+}
+int getstringlen(string s) {
+	vector<int> dict(256, -1);
+	int maxLen = 0;
+	int begin = -1;
+	for (int i = 0; i != s.length(); i++) {
+		if (dict[s[i]] > begin)
+			begin = dict[s[i]];
+		dict[s[i]] = i;
+		maxLen = max(maxLen, i - begin);
+	}
+	return maxLen;
+}
+int FindMaxNum(vector<int> v)
+{
+	int len = v.size();
+	if (0 == len)
+		return -1;
+	int left = 0;
+	int right = len - 1;
+	int mid = (right - left) / 2 + left;
+	while (mid > 0 && mid < len - 1)
+	{
+		if (v[mid] > v[mid - 1] && v[mid] > v[mid + 1])
+			return v[mid];
+		else if (v[mid] > v[mid - 1])
+		{
+			left = mid + 1;
+			mid = (left + right) >> 1;
+		}
+		else
+		{
+			right = mid - 1;
+			mid = (left + right) >> 1;
+		}
+	}
+	return -1;
+}
+int getmaxlen(string s)
+{
+	int left = 0;
+	int ret = 0;
+	while (left < s.size())
+	{
+		int right = s.size() - 1;
+		while (left < right&&s[left] != s[right])
+			--right;
+		ret = max(ret, right - left - 1);
+		++left;
+	}
+	return ret;
+}
+int CalculatingDamage(int t, int k, int d)
+{
+	int time = 0;
+	int ret = 0;
+	while (time <= t)
+	{
+		ret += d;
+		time += k;
+	}
+	return ret;
+}
+
+bool backspaceCompare(string S, string T) {
+	stack<char> st;
+	stack<char> p;
+	for (int i = 0; i<S.size(); ++i)
+	{
+		if (S[i] == '#')
+		{
+			if (!st.empty())
+			{
+				st.pop();
+			}
+		}
+		else
+		{
+			st.push(S[i]);
+		}
+	}
+	for (int i = 0; i<T.size(); ++i)
+	{
+		if (T[i] == '#')
+		{
+			if (!p.empty())
+			{
+				p.pop();
+			}
+		}
+		else
+		{
+			p.push(T[i]);
+		}
+	}
+	while (!st.empty() && !p.empty())
+	{
+		if (st.top() != p.top())
+			return false;
+		st.pop();
+		p.pop();
+	}
+	if (st.empty() && p.empty())
+		return true;
+	return false;
+}
 int main()
 {
+	cout << backspaceCompare("xywrrmp","xywrrmu#p") << endl;
 	//A* p = new A;
 	//Base* b = new A;
 	//b->fun(' ');
-	cout << sizeof(C) << endl;
-	cout << sizeof(M) << endl;
-	cout << sizeof(K) << endl;
+	//cout << sizeof(C) << endl;
+	//cout << sizeof(M) << endl;
+	//cout << sizeof(K) << endl;
 
 	system("pause");
 	return 0;
