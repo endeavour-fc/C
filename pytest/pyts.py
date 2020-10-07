@@ -355,7 +355,7 @@ def QuickSort(arr,low,high):
     pos=partition(arr,low,high)
     QuickSort(arr,low,pos-1)
     QuickSort(arr,pos+1,high)
-'''
+
 def quickSort(arr,low,high):
   i=low
   j=high
@@ -385,3 +385,113 @@ quickSort(arr,0,n-1)
 print ("排序后的数组:") 
 for i in range(n): 
   print ("%d " %arr[i],end='')
+'''
+
+#文件 IO
+'''
+with open("test.txt","wt") as out_file:
+  out_file.write("Hello,World!\nPython")
+
+with open("test.txt","rt") as in_file:
+  text=in_file.read()
+
+print(text)
+'''
+'''
+#字符串判断
+print("测试实例一")
+str = "runoob.com"
+print(str.isalnum()) # 判断所有字符都是数字或者字母
+print(str.isalpha()) # 判断所有字符都是字母
+print(str.isdigit()) # 判断所有字符都是数字
+print(str.islower()) # 判断所有字符都是小写
+print(str.isupper()) # 判断所有字符都是大写
+print(str.istitle()) # 判断所有单词都是首字母大写，像标题
+print(str.isspace()) # 判断所有字符都是空白字符、\t、\n、\r
+
+print("------------------------")
+
+# 测试实例二
+print("测试实例二")
+str = "runoob"
+print(str.isalnum())
+print(str.isalpha())
+print(str.isdigit())
+print(str.islower())
+print(str.isupper())
+print(str.istitle())
+print(str.isspace())
+'''
+'''
+#字符串大小写转换
+str = "www.runoob.com"
+print(str.upper())          # 把所有字符中的小写字母转换成大写字母
+print(str.lower())          # 把所有字符中的大写字母转换成小写字母
+print(str.capitalize())     # 把第一个字母转化为大写字母，其余小写
+print(str.title())          # 把每个单词的第一个字母转化为大写，其余小写
+'''
+'''
+#计算每个月天数
+import calendar
+
+monthRange=calendar.monthrange(2016,9)
+print(monthRange)
+'''
+'''
+#获取昨天日期
+import datetime
+
+def getYesterday():
+  today=datetime.date.today()
+  oneday=datetime.timedelta(days=1)
+  yesterday=today-oneday
+  return yesterday
+
+print(getYesterday())
+'''
+
+#约瑟夫生者死者小游戏
+'''
+def ysfdg(sum,value,n):
+  if(n==1):
+    return (sum+value-1)%sum
+  else:
+    return (ysfdg(sum-1,value,n-1)+value)%sum
+
+print(ysfdg(10,3,10))
+'''
+#五人分鱼
+'''
+def main():
+  fish=1
+  while True:
+      total, enough=fish,True
+      for _ in range(5):
+          if( (total-1) % 5 == 0):
+              total=((total-1)//5)*4
+          else:
+              enough=False
+              break
+      if(enough):
+          print("共有",fish,"条鱼")
+          break
+      fish+=1
+
+if __name__ == '__main__':
+    main()
+'''
+import time
+print('按下回车开始计时，按下 Ctrl + C 停止计时。')
+while(True):
+  input("")
+  starttime=time.time()
+  print("start")
+  try:
+    while(1):
+      print('计时: ', round(time.time() - starttime, 0), '秒', end="\r")
+      time.sleep(1)
+  except KeyboardInterrupt:
+    print("end")
+    endtime=time.time()
+    print('总共的时间为:', round(endtime - starttime, 2),'secs')
+    break
