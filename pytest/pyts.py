@@ -480,6 +480,7 @@ def main():
 if __name__ == '__main__':
     main()
 '''
+'''
 import time
 print('按下回车开始计时，按下 Ctrl + C 停止计时。')
 while(True):
@@ -495,3 +496,243 @@ while(True):
     endtime=time.time()
     print('总共的时间为:', round(endtime - starttime, 2),'secs')
     break
+'''
+'''
+#计算 n 个自然数的立方和
+def sumofseries(n):
+  sum=0
+  for i in range(1,n+1):
+    sum+=(i*i*i)
+  return sum
+
+n=5
+print(sumofseries(n)) 
+'''
+'''
+#计算数组元素之和
+def _sum(arr,n):
+  return (sum(arr))
+
+#arr=[]
+arr=[12,3,4,15]
+n=len(arr)
+ans=_sum(arr,n)
+print ('数组元素之和为',ans)
+'''
+'''
+#数组翻转指定个数的元素
+def ReverseArray(arr,start,end):
+  while(start<end):
+    arr[start],arr[end]=arr[end],arr[start]
+    start+=1
+    end-=1
+
+def leftRotate(arr,d):
+  n=len(arr)
+  d%=n
+  ReverseArray(arr,0,d-1)
+  ReverseArray(arr,d,n-1)
+  ReverseArray(arr,0,n-1)
+
+def PrintArr(arr):
+  for i in range(0,len(arr)):
+    print(arr[i],end=' ')
+
+arr=[1,2,3,4,5,6,7]
+num=int(input('输入一个数：'))
+
+leftRotate(arr,num)
+PrintArr(arr)
+'''
+'''
+#将列表中的头尾两个元素对调
+def SwapList(newList):
+  size=len(newList)
+  newList[0],newList[size-1]=newList[size-1],newList[0]
+  return newList
+
+newList = [1,2,3]
+print(SwapList(newList))
+'''
+'''
+#将列表中的指定位置的两个元素对调
+def swapPositions(list,pos1,pos2):
+  list[pos1],list[pos2]=list[pos2],list[pos1]
+  return list
+
+def swapPositions2(list,pos1,pos2):
+  first_ele=list.pop(pos1)
+  second_ele=list.pop(pos2-1)
+  list.insert(pos1,first_ele)
+  list.insert(pos2,second_ele)
+  return list
+
+list=[23,65,19,90]
+pos1,pos2=1,3
+
+print(swapPositions2(list,pos1-1,pos2-1))
+'''
+'''
+#翻转列表
+def Reverse(list):
+  return [ele for ele in reversed(list)]
+
+def Reverse2(list):
+  list.reverse()
+  return list
+
+def Reverse3(list):
+  new_list=list[::-1]
+  return new_list
+
+list = [10,11,12,13,14,15]
+print(Reverse3(list))
+'''
+'''
+#判断元素是否在列表中存在
+test_list=[1,6,3,5,3,4]
+for i in test_list:
+  if(i==4):
+    print("存在")
+  
+if(4 in test_list):
+  print("存在")
+
+test_list_bitset=test_list[:]
+test_list=set(test_list)
+if(test_list_bitset.count(4)>0):
+  print("存在")
+'''
+
+#类
+'''
+class MyClass:
+  i=12345
+  def f(self):
+    return "hello,world"
+
+x=MyClass()
+print("MyClass 类的属性 i 为：", x.i)
+print("MyClass 类的方法 f 输出为：", x.f())
+'''
+'''
+class Complex:
+  def __init__(self,realpart,imagpart):
+    self.r=realpart
+    self.i=imagpart
+x=Complex(3.0,-4.5)
+print(x.r,x.i)
+'''
+'''
+class Test:
+  def prt(self):
+      print(self)
+      print(self.__class__)
+
+t=Test()
+t.prt()
+'''
+'''
+class people:
+  name=''
+  age=0
+  __weight=0
+  def __init__(self,n,a,w):
+    self.name=n
+    self.age=a
+    self.__weight=w
+  def speak(self):
+    print("%s 说: 我 %d 岁。" %(self.name,self.age))
+
+class student(people):
+  grade=""
+  def __init__(self,n,a,w,g):
+    people.__init__(self,n,a,w)
+    self.grade=g
+  def speak(self):
+    print("%s 说: 我 %d 岁了，我在读 %d 年级"%(self.name,self.age,self.grade))
+
+#s=student('ken',10,60,3)
+#s.speak()
+class speaker():
+  topic = ''
+  name = ''
+  def __init__(self,n,t):
+    self.name=n
+    self.topic=t
+  def speak(self):
+    print("我叫 %s，我是一个演说家，我演讲的主题是 %s"%(self.name,self.topic))
+
+class sample(speaker,student):
+  a=''
+  def __init__(self,n,a,w,g,t):
+    student.__init__(self,n,a,w,g)
+    speaker.__init__(self,n,t)
+
+test=sample("Tim",25,80,4,"Python")
+test.speak()
+'''
+'''
+class Parent:
+  def myMethod(self):
+    print('调用父类方法')
+
+class Child(Parent):
+  def myMethod(self):
+    print("调用子类方法")
+
+c=Child()
+c.myMethod()
+super(Child,c).myMethod()
+'''
+'''
+class JustCounter:
+  __secretCout=0
+  publicCount=0
+  def count(self):
+    self.__secretCout+=1
+    self.publicCount+=1
+    print(self.__secretCout)
+
+counter = JustCounter()
+counter.count()
+counter.count()
+print(counter.publicCount)
+print(counter.__secretCount)
+'''
+'''
+class Site:
+  def __init__(self,name,url):
+    self.name=name
+    self.__url=url
+
+  def who(self):
+    print("name : ", self.name)
+    print("url",self.__url)
+
+  def __foo(self):
+    print("这是私有方法")
+  def foo(self):
+    print("这是公有方法")
+    self.__foo()
+
+x=Site('菜鸟教程', 'www.runoob.com')
+x.who()
+x.foo()
+x.__foo()
+'''
+'''
+class Vector:
+  def __init__(self,a,b):
+    self.a=a
+    self.b=b
+  def __str__(self):
+    return 'Vector (%d, %d)' % (self.a, self.b)
+  def __add__(self,other):
+    return Vector(self.a+other.a,self.b+other.b)    
+
+v1=Vector(2,10)
+v2=Vector(5,-2)
+print(v1+v2)
+'''
+
