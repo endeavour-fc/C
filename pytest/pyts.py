@@ -735,4 +735,241 @@ v1=Vector(2,10)
 v2=Vector(5,-2)
 print(v1+v2)
 '''
+'''
+#计算列表元素之和
+total=0
+list1=[11,5,17,18,23]
+
+for ele in range(0,len(list1)):
+  total+=list1[ele]
+
+def sumoflist(list,size):
+  if(size==0):
+    return 0
+  else:
+    return list[size-1]+sumoflist(list,size-1)
+
+print("列表元素之和为：",sumoflist(list1,len(list1)))
+print("最小元素为：",min(list1))
+print("最大元素为：",max(list1))
+'''
+'''
+#判断字符串是否存在子字符串
+def check(string,sub_str):
+  if(string.find(sub_str)==-1):
+    print("不存在！")
+  else:
+    print("存在！",string.find(sub_str))
+
+string ="www.runoob.com"
+sub_str="runoob"
+check(string,sub_str)
+'''
+'''
+#使用正则表达式提取字符串中的 URL
+import re
+
+def Find(string):
+  url = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', string)
+  return url
+
+string = 'Runoob 的网页地址为：https://www.runoob.com，Google 的网页地址为：https://www.google.com'
+print("Urls: ", Find(string))
+'''
+'''
+def exec_code():
+  LOC = """
+def factorial(num):
+  fact=1
+  for i in range(1,num+1):
+    fact*=i
+  return fact
+print(factorial(5))
+"""
+  exec(LOC)
+
+exec_code()  
+'''
+'''
+str='Runoob'
+print(str[::-1])
+print(''.join(reversed(str)))
+'''
+#按键(key)或值(value)对字典进行排序
+'''
+def dictionairy():
+  key_value={}
+  key_value[2] = 56       
+  key_value[1] = 2 
+  key_value[5] = 12 
+  key_value[4] = 24
+  key_value[6] = 18      
+  key_value[3] = 323 
+ 
+  print ("按键(key)排序:")
+  for i in sorted (key_value):
+    print((i,key_value[i]),end="")
+
+def main():
+  dictionairy()
+
+if __name__ == "__main__":
+  main()
+'''
+'''
+def dictionairy():  
+ 
+    # 声明字典
+    key_value ={}     
+ 
+    # 初始化
+    key_value[2] = 56       
+    key_value[1] = 2 
+    key_value[5] = 12 
+    key_value[4] = 24
+    key_value[6] = 18      
+    key_value[3] = 323 
+ 
+ 
+    print ("按值(value)排序:")   
+    print(sorted(key_value.items(), key = lambda kv:(kv[0], kv[1])))     
+   
+def main(): 
+    dictionairy()             
+      
+if __name__=="__main__":       
+    main()
+'''
+'''
+lis = [{ "name" : "Taobao", "age" : 100},  
+{ "name" : "Runoob", "age" : 7 }, 
+{ "name" : "Google", "age" : 100 }, 
+{ "name" : "Wiki" , "age" : 200 }] 
+  
+# 通过 age 升序排序
+print ("列表通过 age 升序排序: ")
+print (sorted(lis, key = lambda i: i['age']) )
+  
+print ("\r") 
+  
+# 先按 age 排序，再按 name 排序
+print ("列表通过 age 和 name 排序: ")
+print (sorted(lis, key = lambda i: (i['age'], i['name'])) )
+  
+print ("\r") 
+  
+# 按 age 降序排序
+print ("列表通过 age 降序排序: ")
+print (sorted(lis, key = lambda i: i['age'],reverse=True) )
+'''
+#二分查找
+'''
+def binarySearch(arr,left,right,x):
+  while(left<=right):
+    mid=int((right-left)/2 +left)
+    if(arr[mid]==x):
+      return mid
+    elif(arr[mid]>x):
+      right=mid-1
+    else:
+      left=mid+1
+  return -1
+
+arr=[2,3,4,10,40]
+if(binarySearch(arr,0,len(arr)-1,4)==-1):
+  print("不在此数组中")
+else:
+  print ("元素在数组中的索引为 :",binarySearch(arr,0,len(arr)-1,10))
+'''
+#插入排序
+'''
+def InsertSort(arr):
+  size=len(arr)
+  for i in range(1,size):
+    temp=arr[i]
+    if(arr[i-1]>temp):
+      j=i-1
+      while(j>=0 and arr[j]>temp):
+        arr[j+1]=arr[j]
+        j-=1
+      arr[j+1]=temp
+
+arr = [12, 11, 13, 5, 6] 
+InsertSort(arr) 
+print ("排序后的数组:") 
+for i in range(len(arr)): 
+    print ("%d" %arr[i])
+'''
+#选择排序
+def SelectSort(arr):
+  size=len(arr)
+  for i in range(0,size-1):
+    for j in range(i+1,size):
+      if(arr[i]>arr[j]):
+        arr[i],arr[j]=arr[j],arr[i]
+
+#冒泡排序
+def BubbleSort(arr):
+  size=len(arr)
+  for i in range(0,size-1):
+    for j in range(0,size-i-1):
+      if(arr[j]>arr[j+1]):
+        arr[j],arr[j+1]=arr[j+1],arr[j]
+
+
+#堆排
+def MakeBigHeap(arr):
+  size=len(arr)
+  for i in range(0,size):
+    father=abs(i-1)//2
+    index=i
+    while(arr[father]<arr[index]):
+      arr[father],arr[index]=arr[index],arr[father]
+      index=father
+      father=abs(index-1)//2
+def Heapliy(arr,size):
+    index=0
+    left=index*2+1
+    right=index*2+2
+    Max=0
+    while(left<size):
+      if(right<size and arr[left]<arr[right]):
+        Max=right
+      else:
+        Max=left
+      if(arr[index]>=arr[Max]):
+        return
+      arr[index],arr[Max]=arr[Max],arr[index]
+      index=Max
+      left=index*2+1
+      right=index*2+2
+
+def HeapSort(arr):
+  size=len(arr)-1
+  MakeBigHeap(arr)
+  while(size):
+    arr[0],arr[size]=arr[size],arr[0]
+    size-=1
+    Heapliy(arr,size)
+    
+def ShellSort(arr):
+  size=len(arr)
+  statement=size//2
+  while(statement>0):
+    for i in range(statement,size):
+      j=i-statement
+      temp=arr[i]
+      while(j>=0 and arr[j]>temp):
+        arr[j+statement]=arr[j]
+        j-=statement
+      arr[j+statement]=temp
+    statement//=2
+
+
+arr = [12, 11, 13, 5, 6] 
+ShellSort(arr) 
+print ("排序后的数组:") 
+for i in range(len(arr)): 
+    print ("%d" %arr[i])
+
 
