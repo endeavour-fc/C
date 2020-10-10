@@ -966,10 +966,55 @@ def ShellSort(arr):
     statement//=2
 
 
+def Merge(arr,l,m,r,temp):
+  n=0
+  i_left=l
+  i_right=m
+  j_left=m+1
+  j_right=r
+  while(i_left<=i_right and j_left<=j_right):
+    if(arr[i_left]<arr[j_left]):
+      temp[n]=arr[i_left]
+      i_left+=1
+    else:
+      temp[n]=arr[j_left]
+      j_left+=1
+    n+=1
+  while(i_left<=i_right):
+      temp[n]=arr[i_left]
+      i_left+=1
+      n+=1
+  while(j_left<=j_right):
+      temp[n]=arr[j_left]
+      j_left+=1
+      n+=1
+  for i in range(0,n):
+    arr[l+i]=temp[i]
+
+def MergeSort(arr,l,r,temp):
+  if(l>=r):
+    return
+  mid=(r-l)//2+l
+  MergeSort(arr,l,mid,temp)
+  MergeSort(arr,mid+1,r,temp)
+  Merge(arr,l,mid,r,temp)
+'''
 arr = [12, 11, 13, 5, 6] 
-ShellSort(arr) 
+temp=[0]*(len(arr))
+n=len(arr)
+MergeSort(arr,0,n-1,temp) 
 print ("排序后的数组:") 
 for i in range(len(arr)): 
     print ("%d" %arr[i])
+'''
+'''
+import pprint
+message ='It was a bright cold day in April, and the clocks were striking thirteen.'
+count ={}
+for charactor in message:
+  count.setdefault(charactor,0)
+  count[charactor]=count[charactor]+1
+pprint.pprint(count)
+'''
 
 
