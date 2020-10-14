@@ -1016,5 +1016,58 @@ for charactor in message:
   count[charactor]=count[charactor]+1
 pprint.pprint(count)
 '''
+'''
+#lambada表达式
+def newton(f,df,init):
+  def improve(x1):
+    return x1-f(x1)/df(x1)
+  def diff(x1):
+    return lambda x:(f(x+epsilon)-f(x))/epsilon
+  epsilon=0.001
+  df=diff(f)
+  x1=init
+  while abs(f(x1))> 1e-6:
+    x1=improve(x1)
+  return x1
+#列表的操作
+arr=[0]*10#申请空间为10的表，并将每个元素初始化0
+arr.append(0)#向后追加一个0
+for i in range(0,len(arr)):
+  arr[i]=i
 
+#del arr[1]#删除列表中的元素
+arr.append(0)
+print(arr.count(0))#统计某个元素在列表中出现的次数
+v=[1,2,3]
+arr.extend(v)#在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）
+arr.insert(0,99)
+arr.pop(0)#pos
+arr.remove(0)#val
+arr.reverse()
+arr.sort()
+arr=v.copy()
+arr.clear()
+print(arr,end=' ')
+print(len(arr),end='')
 
+arr=[[1,2,3],[4,5,6],[7,8,9]]
+print(arr)
+print(arr[1])
+print(arr[1][1])
+'''
+b1=b'this IS a bytes'
+b2=B"Beijing is the capital of China.\n"
+b3=b"""You can write multi-line bytess too, using this  form."""
+ba1=bytearray()
+ba2=bytearray(b1)
+ba3=bytearray(10)
+ba4=bytearray(range(45,60))
+print(ba1)
+print(ba2)
+print(ba3)
+print(ba4)
+s="I am a student."
+mp=s.split(' ')
+print(mp)
+st=' '.join(mp)
+print(st)
