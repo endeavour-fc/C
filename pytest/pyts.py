@@ -1055,6 +1055,7 @@ print(arr)
 print(arr[1])
 print(arr[1][1])
 '''
+'''
 b1=b'this IS a bytes'
 b2=B"Beijing is the capital of China.\n"
 b3=b"""You can write multi-line bytess too, using this  form."""
@@ -1071,3 +1072,4 @@ mp=s.split(' ')
 print(mp)
 st=' '.join(mp)
 print(st)
+'''
