@@ -32,7 +32,7 @@ def convert_integer():
   print("original: %s => short host byte oder:%s, network byte order:%s"%(data,socket.ntohs(data),socket.htons(data)))
 
 
-def main():
+def mainpar():
 
   parser=argparse.ArgumentParser(description='Socket Error Examples')
   parser.add_argument('--host',action="store",dest="host",required=False)
@@ -132,3 +132,4 @@ def sntp_client():
   t=struct.unpack('!12I',data)[10]
   t-=TIME1970
   print(time.ctime(t))
+
