@@ -1158,7 +1158,7 @@
     </script>
   </body>
 </html>
--->
+
 <!DOCTYPE html>
 <html>
 <head> 
@@ -1175,4 +1175,85 @@ document.write("Hello World!")
 <p>不支持 JavaScript 的浏览器会使用 &lt;noscript&gt; 元素中定义的内容（文本）来替代。</p>
  
 </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>fc</title>
+    <script>document.createElement("myHero")</script>
+    <style>
+      myHero {
+        display: block;
+        background-color: #ddd;
+        padding: 50px;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <myHero>
+      fc
+    </myHero>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>fc</title>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="200" height="100" style="border: 1px solid #0f0808;">
+    </canvas>
+    <script>
+      var c=document.getElementById("myCanvas");
+      var ctx=c.getContext("2d")
+      //ctx.fillStyle="#ff0000";
+     // ctx.fillRect(0,0,150,75);
+     //ctx.moveTo(0,0);
+     //ctx.lineTo(200,100);
+     //ctx.beginPath();
+     //ctx.arc(95,50,40,0,2*Math.PI)
+     //ctx.stroke();
+     ctx.font="30px Arial";
+     //ctx.fillText("Hello Wrold",10,50)
+     ctx.strokeText("Hello Wrold",10,50)
+    </script>
+  </body>
+</html>
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> fc </title>
+    <style>
+      #div1, #div2
+      {float: left;width: 100px;height: 35px;margin: 10px;padding: 10px;border: 1px solid#000000;}
+    </style>
+    <script>
+      function allowDrop(ev)
+      {
+        ev.preventDefault();
+      }
+      function drag(ev)
+      {
+        ev.dataTransfer.setData("Text",ev.target.id);
+      }
+      function drop(ev)
+      {
+        ev.preventDefault();
+        var data=ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <img src="logo.png" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31"></div>
+    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  </body>
 </html>
