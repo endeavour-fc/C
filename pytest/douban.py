@@ -78,6 +78,49 @@ def SaveData(datalist,savepath):
   book.save(savepath)
   return
 
+def init_db(dbpath):
+  sql='''
+  create table movie250(
+    id integer primary key autoincrement,
+    info_link text,
+    pic_link text,
+    cname varchar,
+    ename varchar,
+    score numeric,
+    rated numeric,
+    instroduction text,
+    info text
+  )
+  '''
+  conn=sqlite3.connect(dbpath)
+  cursor=conn.cursor()
+  cursor.execute(sql)
+  conn.commit()
+  conn.close()
+
+def saveDataDB(datalist,dbpath):
+  init_db(dbpath)
+  conn=sqlite3.connect(dbpath)
+  cur=conn.cursor()
+
+  for data in datalist:
+    for index in range(len(data)):
+      if(index==5 or index==4):
+        continue
+      data[index]='"'+data[index]+'"'
+    sql='''
+    insert into movie250(
+      info_link,pic_link,cname,ename,score,rated,instroduction,info
+    )
+    values(%s)
+    '''%",".join(data)
+    cur.execute(sql)
+    conn.commit()
+  cur.close()
+  conn.close()
+
+  return
+
 def main():
   baseurl="https://movie.douban.com/top250?start="
   savepath="豆瓣电影Top250.xls"
@@ -85,6 +128,8 @@ def main():
   print("爬取完毕")
   SaveData(datalist,savepath)
   print("存储完毕")
+  dbpath="movie250.db"
+  saveDataDB(datalist,dbpath)
   
 
 def askURL(url):
@@ -112,4 +157,5 @@ def askURL(url):
 # m=re.findall("a","Abdsakjcaa")
 # print(m)
 if __name__ == "__main__":
+  #init_db("movietest.db")
   main()
