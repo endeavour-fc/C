@@ -5,283 +5,90 @@
 #include<functional>
 #include <algorithm>
 #include<stack>
+#include<assert.h>
 using namespace std;
-int count1=0;
-void getstring(string::iterator it1, string::iterator it2)
-{
-	while (it1<it2)
-	{
-		char temp = *it1;
-		*it1 = *it2;
-		*it2 = temp;
-		++it1;
-		--it2;
-	}
-}
-int StrToInt(string str) {
-	long long sum = 0;
-	int flag = 0;
-	string::iterator it1 = str.begin();
-	if (*it1 == '-')
-		flag = 1;
-	else if (*it1 == '+')
-		flag = 0;
-	else
-		return 0;
-	it1++;
-	while (it1 != str.end())
-	{
-		if (*it1<'0' || *it1>'9')
-			return 0;
-		sum = sum * 10 + (*it1 - '0');
-		if (sum>2147483648 && flag)
-			return 0;
-		else if (sum>2147483647 && !flag)
-			return 0;
-		it1++;
 
-	}
-	if (flag)
-		return 0 - sum;
-	return sum;
-}
-bool chkParenthesis(string A, int n) {
-	// write code here
-	stack<char> sta;
-	if (n % 2)
-		return false;
-	string::iterator it1 = A.begin();
-	while (it1 != A.end())
+template<class V,class W, bool IsDirect = false>
+class Graph
+{
+private:
+	vector<V> _v;
+	vector<vector<W>> _edges;
+public:
+	Graph(V* _array,size_t size):_v(_array,_array+size)
 	{
-		if (*it1 != '}' && *it1 != ']' && *it1 != ')'&&*it1 != '{' && *it1 != '[' && *it1 != '(')
-			return false;
-		if (sta.empty())
+		_edges.resize(size);
+		for (int i = 0; i < size; ++i)
 		{
-			if (*it1 == '}' || *it1 == ']' || *it1 == ')')
-			{
-				return false;
-			}
-			sta.push(*it1++);
-		}
-		else
-		{
-			if (sta.top() == '('&&*it1 == ')')
-			{
-				sta.pop();
-				it1++;
-			}
-			else if (sta.top() == '{'&&*it1 == '}')
-			{
-				sta.pop();
-				it1++;
-			}
-			else if (sta.top() == '['&&*it1 == ']')
-			{
-				sta.pop();
-				it1++;
-			}
-			else
-			{
-				sta.push(*it1++);
-			}
+			_edges[i].resize(size);
 		}
 	}
-	if (sta.empty())
-		return true;
-	else
-		return false;
-}
+	size_t GetIndexOfV(const V& v)
+	{
+		for (int i = 0; i < _v.size(); ++i)
+		{
+			if (v == _v[i])
+				return i;
+		}
+		assert(false);
+		return -1;
+	}
+	size_t GetDevOfV(const V& v)
+	{
+		size_t count = 0;
+		size_t index = GetIndexOfV(v);
+		for (int i = 0; i < _v.size(); ++i)
+		{
+			if (_edges[index][i])
+				++count;
+		}
+		if (IsDirect)
+		{
+			for (int i = 0; i < _v.size(); ++i)
+			{
+				if (_edges[i][index])
+					++count;
+			}
+		}
+		return count;
+	}
+	void AddEdge(const V& v1, const V& v2, const W& weight)
+	{
+		size_t index1 = GetIndexOfV(v1);
+		size_t index2 = GetIndexOfV(v2);
+		_edges[index1][index2] = weight;
+		if (!IsDirect)
+			_edges[index2][index1] = weight;
+	}	void PrintGraph()
+	{
+		size_t N = _v.size();
+		for (size_t i = 0; i < N; ++i)
+			cout << _v[i] << " ";
+		cout << endl;
+		for (size_t i = 0; i < N; ++i)
+		{
+			for (size_t j = 0; j < N; ++j)
+			{
+				printf("%2d ", _edges[i][j]);
+			}
+			cout << endl;
+		}
+	}
+};
+
 int main()
 {
-	//int a = 0123;
-	//int b = 123;
-	//printf("%o %o\n", a, b);
-	//printf("%d\n", StrToInt("-2147483648"));
-	//system("pause");
-	chkParenthesis("()()()()", 6);
+	char s[] = "ABCDE";
+	Graph<char,int> g(s,strlen(s));
+	g.AddEdge('A', 'D', 10);
+	g.AddEdge('A', 'E', 20);
+	g.AddEdge('B', 'C', 10);
+	g.AddEdge('B', 'D', 20);
+	g.AddEdge('B', 'E', 30);
+	g.AddEdge('C', 'E', 40);
+
+	g.PrintGraph();
+
+	system("pause");
 	return 0;
 }
-//int main()
-//{
-//	vector<int> arr;
-//	string s1;
-//	getline(std::cin, s1);
-//	getstring(s1.begin(), --s1.end());
-//	string::iterator pPre = s1.begin();
-//	string::iterator pCur = s1.begin();
-//	while (pPre != s1.end())
-//	{
-//		while (*pCur == ' '&&pCur != s1.end())
-//		{
-//			++pCur;
-//		}
-//		if (pCur == s1.end())
-//		{
-//			break;
-//		}
-//		pPre = pCur;
-//		while (*pCur != ' '&&pCur != s1.end())
-//		{
-//			++pCur;
-//		}
-//		getstring(pPre, pCur - 1);
-//
-//	}
-//	cout << s1 << endl;
-//	return 0;
-//}
-//char min(char a, char b)
-//{
-//	if (a < b)
-//		return a;
-//	return b;
-//}
-//int MoreThanHalfNum_Solution(vector<int> numbers) {
-//	sort(numbers.begin(), numbers.end());
-//	int temp = numbers[(numbers.size() / 2)];
-//	vector<int>::iterator it1 = numbers.begin();
-//	vector<int>::iterator it2 = numbers.end() - 1;
-//	while (*it1 != temp)
-//	{
-//		++it1;
-//	}
-//	while (*it2 != temp)
-//	{
-//		--it2;
-//	}
-//	if (it2 - it1 < (numbers.size()) / 2)
-//		return 0;
-//	return temp;
-//}
-//
-//int fib(int n)
-//{
-//	count1++;
-//	if (n == 0)
-//		return 1;
-//	if (n == 1)
-//		return 2;
-//	return fib(n - 1) + fib(n - 2);
-//}
-//int main()
-//{
-//	string s1, s2;
-//	getline(std::cin, s1);
-//	getline(std::cin, s2);
-//	int sum = 0;
-//	string::iterator it1 = s1.begin();
-//
-//	while (it1 <= s1.end())
-//	{
-//		s1.insert(it1, s2.begin(), s2.end());
-//		string::iterator right = s1.end() - 1;
-//		string::iterator left = s1.begin();
-//		while (left<right&&*left == *right)
-//		{
-//			left++;
-//			right--;
-//		}
-//		if (left >= right)
-//			++sum;
-//		it1 = s1.erase(it1, it1 + s2.size());
-//		if (it1 == s1.end())
-//			break;
-//		++it1;
-//	}
-//	cout << sum << endl;
-//	system("pause");
-//	return 0;
-//}
-//int main()
-//{
-//	int x = 1;
-//	do
-//	{
-//		printf("%2d\n", x++);
-//	} while (x--);
-//
-//	system("pause");
-//	return 0;
-//}
-
-//int main()
-//{
-//	int v1 = 0;
-//	int n = 0;
-//	char temp = 0;
-//	int flag = 0;
-//	cin >> v1;
-//	cin >> n;
-//	string s1;
-//	if (v1 < 0)
-//	{
-//		flag = 1;
-//		v1 = -v1;
-//	}
-//	while (v1)
-//	{
-//		if (v1%n<10)
-//			temp = v1 % n + '0';
-//		else
-//		{
-//			temp = (v1%n - 10) + 'A';
-//		}
-//		v1 /= n;
-//		s1.insert(s1.begin(), temp);
-//	}
-//	if (flag)
-//	{
-//		cout << "-" << s1 << endl;
-//	}
-//	else
-//		cout << s1 << endl;
-//	system("pause");
-//	return 0;
-//}
-
-//int main()
-//{
-//	//vector<int> arr = { 1,2,3,4,2,2,2, };
-//	//cout << MoreThanHalfNum_Solution(arr) << endl;
-//	fib(8);
-//	cout << count1 << endl;
-//
-//	system("pause");
-//	return 0;
-//}
-//int main()
-//{
-//	string s1;
-//	string s2;
-//	getline(std::cin, s1);
-//	string::iterator it1 = s1.begin();
-//	string::iterator it2 = s1.begin();
-//	while (it2 != s1.end())
-//	{
-//		while (it2 != s1.end() &&((*it2>'9') || (*it2<'0')))
-//		{
-//			it2++;
-//		}
-//		if (it2 == s1.end())
-//		{
-//			cout << s2 << endl;
-//			return 0;
-//		}
-//		else
-//		{
-//			it1 = it2;
-//			while (it2 != s1.end() && *it2 <= '9'&&*it2 >= '0')
-//			{
-//				it2++;
-//			}
-//			string s3(it1, it2);
-//			if (s3.size()>s2.size())
-//			{
-//				s2 = s3;
-//			}
-//		}
-//	}
-//	cout << s2 << endl;
-//	system("pause");
-//	return 0;
-//}
