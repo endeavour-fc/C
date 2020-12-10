@@ -1,0 +1,25 @@
+﻿  work.cpp
+g:\code\c++\work_3_3\work_3_3\work.cpp(21): warning C4018: “<”: 有符号/无符号不匹配
+  g:\code\c++\work_3_3\work_3_3\work.cpp(18): note: 编译 类 模板 成员函数 "Graph<char,int,false>::Graph(V *,size_t)" 时
+          with
+          [
+              V=char
+          ]
+  g:\code\c++\work_3_3\work_3_3\work.cpp(82): note: 参见对正在编译的函数 模板 实例化“Graph<char,int,false>::Graph(V *,size_t)”的引用
+          with
+          [
+              V=char
+          ]
+  g:\code\c++\work_3_3\work_3_3\work.cpp(82): note: 参见对正在编译的 类 模板 实例化 "Graph<char,int,false>" 的引用
+g:\code\c++\work_3_3\work_3_3\work.cpp(28): warning C4018: “<”: 有符号/无符号不匹配
+  g:\code\c++\work_3_3\work_3_3\work.cpp(27): note: 编译 类 模板 成员函数 "size_t Graph<char,int,false>::GetIndexOfV(const V &)" 时
+          with
+          [
+              V=char
+          ]
+  g:\code\c++\work_3_3\work_3_3\work.cpp(57): note: 参见对正在编译的函数 模板 实例化“size_t Graph<char,int,false>::GetIndexOfV(const V &)”的引用
+          with
+          [
+              V=char
+          ]
+  work_3_3.vcxproj -> G:\Code\C++\work_3_3\Debug\work_3_3.exe
