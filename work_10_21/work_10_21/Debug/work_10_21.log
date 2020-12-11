@@ -1,3 +1,6 @@
 ﻿  work.cpp
-  LINK : 没有找到 G:\Code\C++\work_10_21\Debug\work_10_21.exe 或上一个增量链接没有生成它；正在执行完全链接
+g:\code\c++\work_10_21\work_10_21\work.cpp(279): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_10_21\work_10_21\work.cpp(281): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_10_21\work_10_21\work.cpp(312): warning C4018: “<”: 有符号/无符号不匹配
+g:\code\c++\work_10_21\work_10_21\work.cpp(339): warning C4018: “<”: 有符号/无符号不匹配
   work_10_21.vcxproj -> G:\Code\C++\work_10_21\Debug\work_10_21.exe

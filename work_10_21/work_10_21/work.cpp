@@ -224,28 +224,28 @@ bool cmp(string s1, string s2)
 {
 	return s1.size()>s2.size();
 }
-int main()
-{
-	int n = 0;
-	while (cin >> n)
-	{
-		vector<string> v(n, "");
-		for (int i = 0; i<n; ++i)
-			cin >> v[i];
-		sort(v.begin(), v.end());
-		for (auto& e : v)
-		{
-			cout << e << endl;
-		}
-		sort(v.begin(), v.end(), cmp);
-		for (auto& e : v)
-		{
-			cout << e << endl;
-		}
-	}
-
-	return 0;
-}
+//int main()
+//{
+//	int n = 0;
+//	while (cin >> n)
+//	{
+//		vector<string> v(n, "");
+//		for (int i = 0; i<n; ++i)
+//			cin >> v[i];
+//		sort(v.begin(), v.end());
+//		for (auto& e : v)
+//		{
+//			cout << e << endl;
+//		}
+//		sort(v.begin(), v.end(), cmp);
+//		for (auto& e : v)
+//		{
+//			cout << e << endl;
+//		}
+//	}
+//
+//	return 0;
+//}
 
 //int main()
 //{
@@ -269,3 +269,91 @@ int main()
 //
 //	return 0;
 //}
+
+class Solution_pondSizes {
+public:
+	vector<int> pondSizes(vector<vector<int>>& land) {
+		vector<vector<bool>> bl(land.size(), vector<bool>(land[0].size()));
+		queue<pair<int, int>> que;
+		vector<int> ret;
+		for (int i = 0; i<land.size(); ++i)
+		{
+			for (int j = 0; j<land[i].size(); ++j)
+			{
+				if (land[i][j] == 0)
+				{
+					que.push({ i,j });
+				}
+			}
+		}
+		while (!que.empty())
+		{
+			pair<int, int> temp = que.front();
+			que.pop();
+			if (bl[temp.first][temp.second])
+				continue;
+			//bl[temp.first][temp.second] = true;
+			queue<pair<int, int>> q;
+			q.push(temp);
+			int count = 1;
+			while (!q.empty())
+			{
+				pair<int, int> t = q.front();
+				q.pop();
+				bl[t.first][t.second] = true;
+				int x = t.first;
+				int y = t.second;
+				for (int i = -1; i <= 1; ++i)
+				{
+					for (int j = -1; j <= 1; ++j)
+					{
+						if (i == 0 && j == 0)
+							continue;
+						if (i + x >= 0 && j + y >= 0 && i + x < land.size() && j + y < land[0].size() && bl[x + i][j + y] == false && land[x + i][y + j] == 0)
+						{
+							bl[i + x][j + y] = true;
+							++count;
+							q.push({ i + x,j + y });
+						}
+					}
+				}
+
+			}
+			ret.push_back(count);
+		}
+		sort(ret.begin(), ret.end());
+		return ret;
+	}
+};
+int findTargetSumWays(vector<int>& nums, int S) {
+	int sum = 0;
+	for (auto e : nums)
+	{
+		sum += e;
+	}
+	int len = (S + sum) / 2;
+	if ((S + sum)%2 == 1 || sum<S)
+		return 0;
+	vector<int> v(len + 1, 0);
+	v[0] = 1;
+	for (int i = 0; i<nums.size(); ++i)
+	{
+		for (int j = len; j >= 0; --j)
+		{
+			if (j - nums[i] >= 0)
+			{
+				v[j] += v[j - nums[i]];
+			}
+		}
+	}
+	return v[len];
+}
+
+int main()
+{
+	vector<int> v(1, 1);
+	cout << findTargetSumWays(v, 1) << endl;
+
+	system("pause");
+	return 0;
+}
