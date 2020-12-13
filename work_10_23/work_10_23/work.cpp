@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
 
 
  struct ListNode 
@@ -57,10 +61,44 @@ bool isPalindrome(struct ListNode* head) {
 	}
 	return true;
 }
+
+int max(int a, int b)
+{
+	return a > b ? a : b;
+}
+
+int maxSumDivThree(vector<int>& nums) {
+	vector<vector<int>> v(nums.size() + 1, vector<int>(3, 0));
+	v[0][1] = v[0][2] = INT_MIN;
+	for (int i = 1; i <= nums.size(); ++i)
+	{
+		if (nums[i - 1] % 3 == 0)
+		{
+			v[i][0] = max(v[i - 1][0] + nums[i - 1], v[i - 1][0]);
+			v[i][1] = max(v[i - 1][1] + nums[i - 1], v[i - 1][1]);
+			v[i][2] = max(v[i - 1][2] + nums[i - 1], v[i - 1][2]);
+		}
+		else if (nums[i - 1] % 3 == 1)
+		{
+			v[i][0] = max(v[i - 1][2] + nums[i - 1], v[i - 1][0]);
+			v[i][1] = max(v[i - 1][0] + nums[i - 1], v[i - 1][1]);
+			v[i][2] = max(v[i - 1][1] + nums[i - 1], v[i - 1][2]);
+		}
+		else
+		{
+			v[i][0] = max(v[i - 1][1] + nums[i - 1], v[i - 1][0]);
+			v[i][1] = max(v[i - 1][2] + nums[i - 1], v[i - 1][1]);
+			v[i][2] = max(v[i - 1][0] + nums[i - 1], v[i - 1][2]);
+		}
+	}
+	return v[nums.size()][0];
+}
+
 int main()
 {
-	
-	
+	vector<int> v = { 3,6,5,1,8 };
+	cout << maxSumDivThree(v) << endl;
+
 	system("pause");
 	return 0;
 }
