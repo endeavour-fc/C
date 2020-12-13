@@ -44,7 +44,11 @@ int order(int arr[], int start, int end)
 	}
 	return temp;
 }
-
+//
+//
+//
+//
+//
 
 int min(int arr[], int len)
 {
