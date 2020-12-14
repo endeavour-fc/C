@@ -6,6 +6,7 @@
 #include<list>
 #include<vector>
 #include<string>
+#include<unordered_map>
 using namespace std;
 
 typedef struct {
@@ -362,6 +363,40 @@ int match_str_in_sentence(string s, string x) {
 	}
 	return -1;
 }
+
+int max(int a, int b)
+{
+	return a > b ? a : b;
+}
+
+class Solution {
+public:
+	int lenLongestFibSubseq(vector<int>& A) {
+		unordered_map<int, int> mp;
+		int len = A.size();
+		for (int i = 0; i<A.size(); ++i)
+		{
+			mp[A[i]] = i;
+		}
+		int ret = 0;
+		unordered_map<int, int> longest;
+		for (int i = 2; i<len; ++i)
+		{
+			for (int j = 0; j<i; ++j)
+			{
+				if (A[i] - A[j]<A[j] && mp.count(A[i] - A[j]))
+				{
+					int temp = mp[A[i] - A[j]];
+					longest[j*len + i] = longest[temp*len + j] + 1;
+					ret = max(ret, longest[j*len + i] + 2);
+				}
+			}
+		}
+		return ret >= 3 ? ret : 0;
+
+	}
+};
+
 int main()
 {
 	int a[] = { 1,2,3 };
