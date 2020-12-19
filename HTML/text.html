@@ -1695,7 +1695,7 @@ x=document.getElementById("intro");
 
 </body>
 </html>
--->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -1708,4 +1708,22 @@ onclick="alert('/xss/');"
 value="修改背景颜色">
 
 </body>
+</html>
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <a name="html">HTML 教程</a><br>
+    <a name="css">CSS 教程</a><br>
+    <a name="xml">XML 教程</a>
+    
+    <p>文档中第一个锚:
+    <script>
+    document.write(document.anchors[0].innerHTML);
+    </script>
+    </p>
+  </body>
 </html>
