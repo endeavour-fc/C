@@ -1709,7 +1709,7 @@ value="修改背景颜色">
 
 </body>
 </html>
--->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -1726,4 +1726,51 @@ value="修改背景颜色">
     </script>
     </p>
   </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+
+<p>注意write()方法不会在每个语句后面新增一行：</p>
+<pre>
+<script>
+document.write("<h1>Hello World!</h1>");
+document.write("Have a nice day!");
+</script>
+</pre>
+<p>注意writeln()方法在每个语句后面新增一行：</p>
+<pre>
+<script>
+document.writeln("Hello World!");
+document.writeln("Have a nice day!");
+</script>
+</pre>
+
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<head>
+<script>
+function getValue(){
+  var x=document.getElementById("myHeader");
+  alert(x.innerHTML);
+}
+</script>
+</head>
+<body>
+
+<h1 id="myHeader" onclick="getValue()">点击我!</h1>
+
+</body>
 </html>
